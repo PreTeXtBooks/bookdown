@@ -64,6 +64,7 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
   )
 
   expect_match(intro, "<section xml:id=\"motivation\">", fixed = TRUE)
+  expect_match(intro, "<section xml:id=\"get-started\">", fixed = TRUE)
   expect_match(intro, "<section xml:id=\"usage\">", fixed = TRUE)
   expect_match(intro, "<section xml:id=\"new-session\">", fixed = TRUE)
   expect_match(intro, "<section xml:id=\"some-tips\">", fixed = TRUE)
