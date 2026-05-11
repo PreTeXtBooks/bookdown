@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-publishing" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Publishing</title>
+
+  <p>
+    This is an empty sample chapter file corresponding to the Publishing
+    chapter in the Rmd version of the book.
+  </p>
+</chapter>

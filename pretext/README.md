@@ -1,6 +1,7 @@
 # PreTeXt Book Version
 
-This directory contains the PreTeXt version of *Learning Statistics with R*.
+This directory contains the PreTeXt skeleton for *bookdown: Authoring Books and
+Technical Documents with R Markdown*.
 
 ## Building the Book
 
@@ -44,7 +45,8 @@ Images should be placed in the `source/images/` directory or the `assets/` direc
 
 - `source/` - PreTeXt source files (.ptx)
 - `source/main.ptx` - Main book file
-- `source/ch_*.ptx` - Chapter files
+- `source/meta_*.ptx` - Front matter, back matter, and document metadata
+- `source/ch_*.ptx` - Sample chapter files mirroring the Rmd book structure
 - `source/images/` - Image source files
 - `assets/` - Static assets (images, data files, etc.)
 - `publication/` - Publication configuration

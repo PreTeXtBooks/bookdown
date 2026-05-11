@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-front">
-  <bibinfo>
-    <author>
-      <personname>NAME</personname>
-      <website>
-      </website>
-    </author>
-    <author>
-      <personname>NAME</personname>
-      <website>
-      </website>
-    </author>
-    <date>
-      <today/>
-    </date>
-  </bibinfo>
-
   <titlepage>
-    <titlepage-items/>
+    <author>
+      <personname>Primary Author</personname>
+      <institution>Author affiliation</institution>
+    </author>
+    <author>
+      <personname>Co-author</personname>
+      <institution>Author affiliation</institution>
+    </author>
   </titlepage>
 
   <abstract>
     <p>
-      ABSTRACT
+      Replace this abstract with a short summary of the book, matching the
+      abstract and front-matter material from the original Rmd source.
     </p>
   </abstract>
+
+  <preface xml:id="preface">
+    <title>Preface</title>
+    <p>
+      Use the front matter for prefaces, acknowledgments, and other opening
+      material before the main numbered chapters.
+    </p>
+  </preface>
+
+  <acknowledgement xml:id="acknowledgements">
+    <title>Acknowledgments</title>
+    <p>
+      Add acknowledgments, contributor notes, or other introductory material
+      here as the PreTeXt version is populated.
+    </p>
+  </acknowledgement>
 </frontmatter>
