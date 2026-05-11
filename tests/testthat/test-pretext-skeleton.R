@@ -5,7 +5,8 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     test_path("..", "..", "..", "bookdown", "pretext", "source")
   )
   source_dir <- candidates[dir.exists(candidates)][1]
-  expect_true(!is.na(source_dir) && length(source_dir) == 1)
+  expect_false(is.na(source_dir))
+  expect_length(source_dir, 1)
 
   expected_files <- c(
     "meta_docinfo.ptx",
