@@ -5,7 +5,7 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     test_path("..", "..", "..", "bookdown", "pretext", "source")
   )
   source_dir <- candidates[dir.exists(candidates)][1]
-  expect_true(length(source_dir) == 1)
+  expect_true(!is.na(source_dir) && length(source_dir) == 1)
 
   expected_files <- c(
     "meta_docinfo.ptx",
@@ -22,11 +22,12 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "ch_usage.ptx",
     "ch_faq.ptx"
   )
+  chapter_files <- grep("^ch_.*[.]ptx$", expected_files, value = TRUE)
 
   expect_true(all(file.exists(file.path(source_dir, expected_files))))
 
   main_ptx <- paste(xfun::read_utf8(file.path(source_dir, "main.ptx")), collapse = "\n")
-  for (file in c("meta_frontmatter.ptx", expected_files[4:13], "meta_backmatter.ptx")) {
+  for (file in c("meta_frontmatter.ptx", chapter_files, "meta_backmatter.ptx")) {
     expect_match(main_ptx, sprintf('href="./%s"', file), fixed = TRUE)
   }
 
