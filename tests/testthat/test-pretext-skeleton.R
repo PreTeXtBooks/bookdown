@@ -1,12 +1,22 @@
-test_that("PreTeXt skeleton mirrors the Rmd book layout", {
+pretext_source_dir <- function() {
   candidates <- c(
     test_path("..", "..", "pretext", "source"),
     test_path("..", "..", "..", "pretext", "source"),
     test_path("..", "..", "..", "bookdown", "pretext", "source")
   )
-  source_dir <- candidates[dir.exists(candidates)][1]
-  expect_false(is.na(source_dir))
-  expect_length(source_dir, 1)
+  exists <- dir.exists(candidates)
+  expect_true(
+    any(exists),
+    info = paste(
+      "No PreTeXt source directory found. Checked:",
+      paste(candidates, collapse = ", ")
+    )
+  )
+  candidates[exists][1]
+}
+
+test_that("PreTeXt skeleton mirrors the Rmd book layout", {
+  source_dir <- pretext_source_dir()
 
   expected_files <- c(
     "meta_docinfo.ptx",
@@ -49,14 +59,7 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
 })
 
 test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
-  candidates <- c(
-    test_path("..", "..", "pretext", "source"),
-    test_path("..", "..", "..", "pretext", "source"),
-    test_path("..", "..", "..", "bookdown", "pretext", "source")
-  )
-  source_dir <- candidates[dir.exists(candidates)][1]
-  expect_false(is.na(source_dir))
-  expect_length(source_dir, 1)
+  source_dir <- pretext_source_dir()
 
   intro <- paste(
     xfun::read_utf8(file.path(source_dir, "ch_intro.ptx")),
@@ -75,14 +78,7 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
 })
 
 test_that("PreTeXt components chapter mirrors the Rmd structure", {
-  candidates <- c(
-    test_path("..", "..", "pretext", "source"),
-    test_path("..", "..", "..", "pretext", "source"),
-    test_path("..", "..", "..", "bookdown", "pretext", "source")
-  )
-  source_dir <- candidates[dir.exists(candidates)][1]
-  expect_false(is.na(source_dir))
-  expect_length(source_dir, 1)
+  source_dir <- pretext_source_dir()
 
   components <- paste(
     xfun::read_utf8(file.path(source_dir, "ch_components.ptx")),
