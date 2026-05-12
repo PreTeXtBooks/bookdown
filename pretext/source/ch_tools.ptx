@@ -110,11 +110,11 @@ devtools::install_github('rstudio/bookdown')</input>
     </program>
 
     <p>
-      The Rmd source includes a representative LaTeX failure to show the kind of
-      missing-package error that TinyTeX can help avoid.
+      The Rmd source includes the following verbatim error output to show the
+      kind of missing-package failure that TinyTeX can help avoid.
     </p>
 
-    <program language="latex">
+    <program language="text">
       <input>! LaTeX Error: File `titling.sty' not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
@@ -138,7 +138,9 @@ Execution halted</input>
     </p>
 
     <p>
-      It also shows how to inspect the installed LaTeX version from R.
+      It also shows how to inspect the installed LaTeX version from R. The first
+      snippet captures <c>pdflatex --version</c> and reformats the result so it
+      can be inserted back into the rendered document as display text.
     </p>
 
     <program language="r">
