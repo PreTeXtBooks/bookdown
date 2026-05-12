@@ -159,3 +159,25 @@ test_that("PreTeXt editing chapter mirrors the Rmd structure", {
   expect_match(editing, "images/disqus.png", fixed = TRUE)
   expect_no_match(editing, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt publishing chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  publishing <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_publishing.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(publishing, "<section xml:id=\"rstudio-connect\">", fixed = TRUE)
+  expect_match(publishing, "<section xml:id=\"netlify-drop\">", fixed = TRUE)
+  expect_match(publishing, "<section xml:id=\"github\">", fixed = TRUE)
+  expect_match(publishing, "<section xml:id=\"features-for-html-publishing\">", fixed = TRUE)
+  expect_match(publishing, "<section xml:id=\"publishers\">", fixed = TRUE)
+  expect_match(publishing, "bookdown::publish_book(render = 'local')", fixed = TRUE)
+  expect_match(publishing, "output_dir: \"docs\"", fixed = TRUE)
+  expect_match(publishing, "bookdown::pdf_book:", fixed = TRUE)
+  expect_match(publishing, "images/netlify-drag-drop-update.png", fixed = TRUE)
+  expect_match(publishing, "images/404.png", fixed = TRUE)
+  expect_match(publishing, "images/social-twitter.png", fixed = TRUE)
+  expect_no_match(publishing, "This is an empty sample chapter file", fixed = TRUE)
+})

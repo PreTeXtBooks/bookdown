@@ -2,8 +2,404 @@
 <chapter xml:id="ch-publishing" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Publishing</title>
 
-  <p>
-    This is an empty sample chapter file corresponding to the Publishing
-    chapter in the Rmd version of the book.
-  </p>
+  <introduction>
+    <p>
+      As you develop a book, you may want to make draft output available online
+      so readers can give early feedback. After the writing is finished, you may
+      also need to think about more formal publishing options such as printed
+      copies or e-books.
+    </p>
+  </introduction>
+
+  <section xml:id="rstudio-connect">
+    <title>RStudio Connect</title>
+
+    <p>
+      The Rmd chapter begins with a simple publishing route: render the book and
+      deploy the output. It highlights <c>publish_book()</c> in
+      <c>bookdown</c> as a convenience wrapper for publishing to
+      <url href="https://bookdown.org" visual="bookdown.org"/>, the hosting
+      service described there as being built on top of RStudio Connect.
+    </p>
+
+    <program language="r">
+      <input>publish_book(name = NULL, ...)</input>
+    </program>
+
+    <p>
+      The first time you try to publish, the service asks you to authorize
+      <c>bookdown</c> to publish to your account. After that, you can publish
+      again without repeating the authorization step.
+    </p>
+
+    <program language="r">
+      <input>bookdown::publish_book(render = 'local')</input>
+    </program>
+
+    <p>
+      The chapter notes that the <c>render</c> argument is the main setting most
+      readers may want to change, and that a self-hosted RStudio Connect server
+      can be used as an alternative destination.
+    </p>
+  </section>
+
+  <section xml:id="netlify-drop">
+    <title>Netlify Drop</title>
+
+    <p>
+      Netlify Drop is presented as a quick way to publish a static HTML book
+      without first placing the project under version control. All you need is a
+      local <c>bookdown</c> project that can be built to an output directory.
+    </p>
+
+    <subsection xml:id="build-and-deploy-pipeline-sequence">
+      <title>The build-and-deploy pipeline sequence</title>
+
+      <p>The chapter describes the flow as:</p>
+
+      <ol>
+        <li><p>start with a local <c>bookdown</c> project;</p></li>
+        <li><p>build the book locally, usually into <c>_book/</c>;</p></li>
+        <li><p>drag the output directory into the Netlify Drop interface;</p></li>
+        <li><p>repeat the local build and upload process whenever the book changes.</p></li>
+      </ol>
+    </subsection>
+
+    <subsection xml:id="before-you-begin">
+      <title>Before you begin</title>
+
+      <p>
+        The project does not need to live on GitHub or in any other
+        version-controlled repository. If you need a practice project, the Rmd
+        source suggests creating a simple HTML book with
+        <c>bookdown::create_gitbook()</c> or <c>bookdown::create_bs4_book()</c>.
+      </p>
+    </subsection>
+
+    <subsection xml:id="build-your-book">
+      <title>Build your book</title>
+
+      <p>
+        Build the book locally using whichever method from the editing chapter
+        you prefer.
+      </p>
+    </subsection>
+
+    <subsection xml:id="deploy-your-site">
+      <title>Deploy your site</title>
+
+      <p>
+        Go to <url href="https://app.netlify.com/drop" visual="netlify.com/drop"/>
+        and drop the output directory from your project into the upload area.
+        By default this will usually be <c>_book/</c>, unless you changed the
+        output directory in <c>_bookdown.yml</c>.
+      </p>
+
+      <p>
+        The chapter notes that deployment is fast and that Netlify initially
+        assigns a random subdomain such as
+        <c>https://random-word-12345.netlify.com</c>. Unclaimed sites are deleted
+        after 24 hours, but signing up for a Netlify account lets you keep the
+        site online permanently.
+      </p>
+    </subsection>
+
+    <subsection xml:id="optional-update-your-site">
+      <title>Optional: Update your site</title>
+
+      <p>
+        After signing up for Netlify, you can manually update the site from the
+        Deploys page by dragging and dropping the folder again.
+      </p>
+
+      <figure xml:id="fig-netlify-drag-drop-pretext">
+        <title>Screenshot of drag and drop deploy update box on Netlify.</title>
+        <image source="../assets/images/netlify-drag-drop-update.png" width="100%">
+          <description>
+            <p>A screenshot of Netlify's drag-and-drop deployment update area.</p>
+          </description>
+        </image>
+      </figure>
+    </subsection>
+
+    <subsection xml:id="netlify-subdomain">
+      <title>Optional: change the default subdomain</title>
+
+      <p>
+        The chapter explains how to change the generated Netlify subdomain from
+        the site settings page, and points readers to Netlify's custom-domain
+        documentation if they want to use their own domain instead.
+      </p>
+    </subsection>
+
+    <subsection xml:id="drawbacks-and-alternatives">
+      <title>Drawbacks and alternatives</title>
+
+      <p>
+        This workflow is convenient for quickly sharing a prototype, but it is a
+        manual process and does not make much use of version control. For books
+        under active collaboration, the chapter recommends more automated,
+        repository-based workflows.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="github">
+    <title>GitHub</title>
+
+    <p>
+      GitHub Pages can host the HTML output of a <c>bookdown</c> project for
+      free. Because the output is already a complete static site, the important
+      detail is to add a hidden <c>.nojekyll</c> file so GitHub does not try to
+      rebuild the site with Jekyll.
+    </p>
+
+    <program language="bash">
+      <input># assume you have initialized the git repository,
+# and are under the directory of the book repository now
+
+# create a hidden file .nojekyll
+touch .nojekyll
+# add to git here because will not show up in RStudio
+git add .nojekyll</input>
+    </program>
+
+    <p>
+      The chapter also mentions a <c>/docs</c>-based GitHub Pages workflow on
+      the main branch by setting <c>output_dir: "docs"</c> in
+      <c>_bookdown.yml</c> and configuring the repository settings accordingly.
+    </p>
+
+    <p>
+      Another option is to publish from a dedicated <c>gh-pages</c> branch. The
+      Rmd source provides these setup commands.
+    </p>
+
+    <program language="bash">
+      <input># assume you have initialized the git repository,
+# and are under the directory of the book repository now
+
+# create a branch named gh-pages and clean up everything
+git checkout --orphan gh-pages
+git rm -rf .
+
+# create a hidden file .nojekyll
+touch .nojekyll
+git add .nojekyll
+
+git commit -m"Initial commit"
+git push origin gh-pages</input>
+    </program>
+
+    <p>
+      Once that groundwork is done, the rest can be automated in scripts and run
+      from the cloud. The chapter uses Travis CI as its main example of a server
+      that can rebuild and redeploy the book whenever new commits are pushed.
+    </p>
+
+    <program language="bash">
+      <input># configure your name and email if you have not done so
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# clone the repository to the book-output directory
+git clone -b gh-pages \
+  https://${GITHUB_PAT}@github.com/${TRAVIS_REPO_SLUG}.git \
+  book-output
+cd book-output
+git rm -rf *
+cp -r ../_book/* ./
+git add --all *
+git commit -m "Update the book"
+git push -q origin gh-pages</input>
+    </program>
+
+    <program language="yaml">
+      <input>language: r
+pandoc_version: 1.19.2.1
+
+env:
+  global:
+    - secure: A_LONG_ENCRYPTED_STRING
+
+before_script:
+  - chmod +x ./_build.sh
+  - chmod +x ./_deploy.sh
+
+script:
+  - ./_build.sh
+  - ./_deploy.sh</input>
+    </program>
+
+    <program language="dcf">
+      <input>Package: placeholder
+Type: Book
+Title: Does not matter.
+Version: 0.0.1
+Imports: bookdown, ggplot2
+Remotes: rstudio/bookdown</input>
+    </program>
+
+    <program language="yaml">
+      <input>sudo: false
+
+cache:
+  packages: yes
+  directories:
+    - $TRAVIS_BUILD_DIR/_bookdown_files</input>
+    </program>
+
+    <p>
+      The Rmd chapter closes this section by noting that GitHub Pages and Travis
+      CI are only examples, not requirements, and that any server capable of
+      hosting static output can be used.
+    </p>
+  </section>
+
+  <section xml:id="features-for-html-publishing">
+    <title>Features for HTML publishing</title>
+
+    <subsection xml:id="html-404">
+      <title>HTML 404 pages</title>
+
+      <p>
+        For HTML books, <c>bookdown</c> creates a custom <c>404.html</c> page in
+        the output directory. Hosting platforms such as Netlify, GitHub Pages,
+        and GitLab Pages can use this file as the site's custom not-found page.
+      </p>
+
+      <figure xml:id="fig-404-page-pretext">
+        <title>Screenshot of an example 404 page.</title>
+        <image source="../assets/images/404.png" width="100%">
+          <description>
+            <p>A screenshot of the example 404 page embedded within a rendered HTML book.</p>
+          </description>
+        </image>
+      </figure>
+
+      <p>
+        The chapter explains that the 404 page remains embedded within the book
+        layout so readers can still use the overall navigation and styling. To
+        customize it, add either <c>_404.Rmd</c> or <c>_404.md</c> to the project
+        root. If a root-level <c>404.html</c> file already exists,
+        <c>bookdown</c> leaves it untouched.
+      </p>
+    </subsection>
+
+    <subsection xml:id="metadata-for-sharing">
+      <title>Metadata for sharing</title>
+
+      <p>
+        HTML books can also expose metadata for social sharing on platforms such
+        as Twitter, Facebook, and LinkedIn. The key inputs come from the
+        <c>index.Rmd</c> YAML, especially the book <c>url</c>, the
+        <c>cover-image</c>, the <c>title</c>, and the <c>description</c>.
+      </p>
+
+      <figure xml:id="fig-social-og-pretext">
+        <title>Sharing preview on Facebook and LinkedIn.</title>
+        <image source="../assets/images/social-og.png" width="100%">
+          <description>
+            <p>A screenshot of the social-sharing card preview shown on Facebook and LinkedIn.</p>
+          </description>
+        </image>
+      </figure>
+
+      <figure xml:id="fig-social-twitter-pretext">
+        <title>Sharing preview on Twitter.</title>
+        <image source="../assets/images/social-twitter.png" width="100%">
+          <description>
+            <p>A screenshot of the social-sharing card preview shown on Twitter.</p>
+          </description>
+        </image>
+      </figure>
+
+      <p>
+        The chapter recommends validating this metadata with
+        <url href="https://www.opengraph.xyz" visual="opengraph.xyz"/> or with
+        platform-specific tools for Facebook, LinkedIn, and Twitter.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="publishers">
+    <title>Publishers</title>
+
+    <p>
+      Beyond online publishing, the chapter discusses working with a traditional
+      publisher or self-publishing. It emphasizes that publishers who support
+      LaTeX make it much easier to publish a book written with <c>bookdown</c>.
+    </p>
+
+    <p>
+      The book's example uses the Chapman &amp; Hall/CRC class
+      <c>krantz.cls</c>, but the same general approach also applies to other
+      publisher classes such as Springer's <c>svmono.cls</c>.
+    </p>
+
+    <program language="yaml">
+      <input>documentclass: krantz
+lot: yes
+lof: yes
+fontsize: 12pt
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"</input>
+    </program>
+
+    <p>
+      The Rmd source then shows a set of LaTeX preamble tweaks for fonts,
+      floating environments, quotations, and hyperlink handling.
+    </p>
+
+    <program language="latex">
+      <input>\setmainfont[
+  UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}
+]{Alegreya}</input>
+    </program>
+
+    <program language="latex">
+      <input>\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}</input>
+    </program>
+
+    <program language="latex">
+      <input>\renewenvironment{quote}{\begin{VF}}{\end{VF}}</input>
+    </program>
+
+    <program language="latex">
+      <input>\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}</input>
+    </program>
+
+    <program language="yaml">
+      <input>bookdown::pdf_book:
+  includes:
+    in_header: latex/preamble.tex
+    before_body: latex/before_body.tex
+    after_body: latex/after_body.tex
+  keep_tex: yes
+  dev: "cairo_pdf"
+  latex_engine: xelatex
+  citation_package: natbib
+  template: null
+  pandoc_args: --top-level-division=chapter
+  toc_unnumbered: no
+  toc_appendix: yes
+  quote_footer: ["\\VA{", "}{}"]
+  highlight_bw: yes</input>
+    </program>
+
+    <program language="latex">
+      <input>\frontmatter
+\mainmatter</input>
+    </program>
+
+    <p>
+      The chapter explains why <c>cairo_pdf</c> is used to embed fonts, why
+      <c>highlight_bw</c> is useful for black-and-white printing, and why
+      <c>xelatex</c> was chosen to simplify custom-font support.
+    </p>
+  </section>
 </chapter>
