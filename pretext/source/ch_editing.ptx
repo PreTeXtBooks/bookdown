@@ -2,8 +2,241 @@
 <chapter xml:id="ch-editing" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Editing</title>
 
-  <p>
-    This is an empty sample chapter file corresponding to the Editing chapter
-    in the Rmd version of the book.
-  </p>
+  <introduction>
+    <p>
+      This chapter explains how to edit, build, preview, and serve a book
+      locally. You can use any text editor to work on a <c>bookdown</c> project,
+      but the chapter also includes tips for the RStudio IDE and for
+      collaborating through version-control and web-based review tools.
+    </p>
+  </introduction>
+
+  <section xml:id="build-the-book">
+    <title>Build the book</title>
+
+    <p>
+      To build all Rmd files into a book, the Rmd source calls
+      <c>render_book()</c> from <c>bookdown</c>. It highlights
+      <c>output_format</c> as the most important argument, noting that it may be
+      omitted when the default output format is already declared in the YAML of
+      the first Rmd file or in <c>_output.yml</c>.
+    </p>
+
+    <program language="r">
+      <input>```{r eval=FALSE, code=formatR::usage(bookdown::render_book, output=FALSE)}
+```</input>
+    </program>
+
+    <p>
+      When multiple output formats are configured in <c>_output.yml</c>, a
+      simple script can render them one after another. The chapter gives this
+      shell-script example for HTML and PDF output.
+    </p>
+
+    <program language="bash">
+      <input>#!/usr/bin/env Rscript
+
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
+    </program>
+
+    <p>
+      The chapter also discusses <c>output_dir</c>, <c>new_session</c>, and
+      <c>preview</c>, and explains that generated output can be cleaned up with
+      <c>bookdown::clean_book(TRUE)</c>. Because deleting files can be risky, it
+      recommends keeping the project under version control such as GIT.
+    </p>
+  </section>
+
+  <section xml:id="preview-a-chapter">
+    <title>Preview a chapter</title>
+
+    <p>
+      Rendering the whole book can be slow when there is a lot of computation or
+      when Pandoc conversion takes time. For quicker iteration,
+      <c>preview_chapter()</c> can render only the current chapter.
+    </p>
+
+    <p>
+      Previewing a single chapter is useful while revising that chapter, and the
+      chapter recommends previewing HTML output in particular. The trade-off is
+      that cross-references to other chapters will not work, because only the
+      selected chapter is rebuilt.
+    </p>
+  </section>
+
+  <section xml:id="serve-the-book">
+    <title>Serve the book</title>
+
+    <p>
+      Instead of repeatedly calling <c>render_book()</c> or
+      <c>preview_chapter()</c>, the Rmd chapter explains how to live-preview the
+      book in a browser with <c>serve_book()</c>, which serves HTML output using
+      the <c>servr</c> package.
+    </p>
+
+    <program language="r">
+      <input>```{r serve-book-usage, eval=FALSE, code=formatR::usage(bookdown::serve_book, output=FALSE)}
+```</input>
+    </program>
+
+    <p>
+      The root book directory is passed through the <c>dir</c> argument, and the
+      default preview URL is <url href="http://127.0.0.1:4321" visual="127.0.0.1:4321"/>.
+      In an interactive session this address is opened automatically, and in the
+      RStudio IDE it is typically shown in the Viewer pane.
+    </p>
+
+    <p>
+      The server listens for file changes and automatically recompiles Rmd files
+      or refreshes the browser when supporting assets such as CSS files change.
+      If recompiling the whole book is fast enough, the chapter suggests setting
+      <c>preview = FALSE</c>; otherwise only modified chapters are rebuilt via
+      <c>preview_chapter()</c>.
+    </p>
+
+    <p>
+      The chapter closes by comparing <c>in_session = TRUE</c> and
+      <c>in_session = FALSE</c>.
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          With <c>in_session = TRUE</c>, you can inspect objects created while
+          previewing, which is useful for interactive exploration, but the
+          output may differ from a clean rebuild.
+        </p>
+      </li>
+      <li>
+        <p>
+          With <c>in_session = FALSE</c>, you do not get access to those
+          objects, but the output is more likely to be reproducible because it
+          comes from fresh R sessions.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      For a reliable final copy of the book, it recommends running
+      <c>render_book()</c> from a fresh R session.
+    </p>
+  </section>
+
+  <section xml:id="rstudio-ide">
+    <title>RStudio IDE</title>
+
+    <p>
+      The chapter recommends using an up-to-date RStudio IDE and saving all R
+      Markdown files with UTF-8 encoding, especially when files contain
+      multibyte characters.
+    </p>
+
+    <p>
+      Because RStudio's default Knit action uses <c>rmarkdown::render()</c>, the
+      chapter shows how to switch a book project to <c>bookdown</c> by setting
+      the <c>site</c> field in <c>index.Rmd</c>.
+    </p>
+
+    <program language="yaml">
+      <input>---
+title: "A Nice Book"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
+---</input>
+    </program>
+
+    <p>
+      Once <c>site: bookdown::bookdown_site</c> is set in <c>index.Rmd</c> and
+      the directory is an RStudio project, RStudio can recognize it as a book
+      source directory. The <q>Build Book</q> button becomes available in the
+      Build pane, and the Knit button previews the current chapter.
+    </p>
+
+    <p>
+      The chapter also discusses RStudio addins provided by <c>bookdown</c>,
+      including <q>Preview Book</q> and <q>Input LaTeX Math</q>. The Preview Book
+      addin calls <c>bookdown::serve_book()</c>; to avoid blocking the current R
+      session, the chapter recommends <c>bookdown::serve_book(daemon = TRUE)</c>.
+    </p>
+
+    <figure xml:id="fig-mathquill-pretext">
+      <title>The RStudio addin to help input LaTeX math.</title>
+      <image source="../assets/images/mathquill.png" width="100%">
+        <description>
+          <p>A screenshot of the RStudio addin used to preview LaTeX math input.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      Another example in the chapter is the <c>citr</c> addin for inserting
+      citations by browsing a bibliography database instead of remembering keys.
+    </p>
+
+    <figure xml:id="fig-citr-pretext">
+      <title>The RStudio addin to help insert citations.</title>
+      <image source="../assets/images/citr.png" width="100%">
+        <description>
+          <p>A screenshot of the citation-insertion addin shown in the editing chapter.</p>
+        </description>
+      </image>
+    </figure>
+  </section>
+
+  <section xml:id="collaboration">
+    <title>Collaboration</title>
+
+    <p>
+      Writing a book will almost surely involve more than one person. Since the
+      chapters are plain-text files, the chapter recommends collaboration
+      through version control, especially GIT and GitHub.
+    </p>
+
+    <p>
+      Readers can contribute content directly through GitHub pull requests when
+      the book source is hosted online. They can also leave feedback through
+      email, GitHub issues, or page comments.
+    </p>
+
+    <p>
+      The chapter uses Disqus as its example of embedded HTML page comments and
+      shows the JavaScript snippet that can be saved to <c>disqus.html</c> and
+      then inserted on every page via <c>after_body</c>.
+    </p>
+
+    <program language="html">
+      <input>&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script&gt;
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//yihui.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the
+&lt;a href="https://disqus.com/?ref_noscript"&gt;
+  comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</input>
+    </program>
+
+    <program language="yaml">
+      <input>---
+output:
+  bookdown::gitbook:
+    includes:
+      after_body: disqus.html
+---</input>
+    </program>
+
+    <figure xml:id="fig-disqus-pretext">
+      <title>A book page with a discussion area.</title>
+      <image source="../assets/images/disqus.png" width="100%">
+        <description>
+          <p>A screenshot showing a discussion area embedded at the bottom of a book page.</p>
+        </description>
+      </image>
+    </figure>
+  </section>
 </chapter>

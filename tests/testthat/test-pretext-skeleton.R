@@ -138,3 +138,24 @@ test_that("PreTeXt customization chapter mirrors the Rmd structure", {
   expect_match(customization, "bookdown:::label_names", fixed = TRUE)
   expect_no_match(customization, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt editing chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  editing <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_editing.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(editing, "<section xml:id=\"build-the-book\">", fixed = TRUE)
+  expect_match(editing, "<section xml:id=\"preview-a-chapter\">", fixed = TRUE)
+  expect_match(editing, "<section xml:id=\"serve-the-book\">", fixed = TRUE)
+  expect_match(editing, "<section xml:id=\"rstudio-ide\">", fixed = TRUE)
+  expect_match(editing, "<section xml:id=\"collaboration\">", fixed = TRUE)
+  expect_match(editing, "bookdown::render_book(\"index.Rmd\", \"bookdown::gitbook\")", fixed = TRUE)
+  expect_match(editing, "bookdown::serve_book(daemon = TRUE)", fixed = TRUE)
+  expect_match(editing, "bookdown::bookdown_site", fixed = TRUE)
+  expect_match(editing, "images/mathquill.png", fixed = TRUE)
+  expect_match(editing, "images/disqus.png", fixed = TRUE)
+  expect_no_match(editing, "This is an empty sample chapter file", fixed = TRUE)
+})
