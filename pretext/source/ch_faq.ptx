@@ -17,8 +17,9 @@
       <p>
         A: The short answer is no, but if you have asked yourself three times
         "do I really need them" and the answer is still "yes", please feel free
-        to file a feature request to
-        https://github.com/rstudio/bookdown/issues.
+        to file a feature request to <url
+        href="https://github.com/rstudio/bookdown/issues"
+        visual="github.com/rstudio/bookdown/issues"/>.
       </p>
 
       <p>
