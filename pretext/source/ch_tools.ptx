@@ -114,7 +114,7 @@ devtools::install_github('rstudio/bookdown')</input>
       kind of missing-package failure that TinyTeX can help avoid.
     </p>
 
-    <program language="text">
+    <program language="latex-error">
       <input>! LaTeX Error: File `titling.sty' not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
