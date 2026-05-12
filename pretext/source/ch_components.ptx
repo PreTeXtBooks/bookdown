@@ -156,20 +156,20 @@ Or indent by four spaces:
 
       <program language="latex">
         <input>$$\begin{array}{ccc}
-x_{11} &amp; x_{12} &amp; x_{13}\
+x_{11} &amp; x_{12} &amp; x_{13}\\
 x_{21} &amp; x_{22} &amp; x_{23}
 \end{array}$$</input>
       </program>
 
       <program language="latex">
-        <input>$$X = \begin{bmatrix}1 &amp; x_{1}\
-1 &amp; x_{2}\
+        <input>$$X = \begin{bmatrix}1 &amp; x_{1}\\
+1 &amp; x_{2}\\
 1 &amp; x_{3}
 \end{bmatrix}$$</input>
       </program>
 
       <program language="latex">
-        <input>$$\Theta = \begin{pmatrix}\alpha &amp; \beta\
+        <input>$$\Theta = \begin{pmatrix}\alpha &amp; \beta\\
 \gamma &amp; \delta
 \end{pmatrix}$$</input>
       </program>
@@ -227,7 +227,7 @@ x_{21} &amp; x_{22} &amp; x_{23}
 
       <program language="latex">
         <input>\begin{align}
-g(X_{n}) &amp;= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \
+g(X_{n}) &amp;= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
 \sqrt{n}[g(X_{n})-g(\theta)] &amp;= g'\left({\tilde{\theta}}\right)
   \sqrt{n}[X_{n}-\theta ] (#eq:align)
 \end{align}</input>
