@@ -96,3 +96,25 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "knitr::include_app('https://yihui.shinyapps.io/miniUI/'", fixed = TRUE)
   expect_no_match(components, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  formats <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_formats.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(formats, "<section xml:id=\"html\">", fixed = TRUE)
+  expect_match(formats, "<subsection xml:id=\"gitbook-style\">", fixed = TRUE)
+  expect_match(formats, "<subsection xml:id=\"bs4-book\">", fixed = TRUE)
+  expect_match(formats, "<subsection xml:id=\"bootstrap-style\">", fixed = TRUE)
+  expect_match(formats, "<section xml:id=\"latex-pdf\">", fixed = TRUE)
+  expect_match(formats, "<section xml:id=\"e-books\">", fixed = TRUE)
+  expect_match(formats, "<section xml:id=\"a-single-document\">", fixed = TRUE)
+  expect_match(formats, "images/gitbook.png", fixed = TRUE)
+  expect_match(formats, "images/bs4-book.png", fixed = TRUE)
+  expect_match(formats, "bookdown::bs4_book", fixed = TRUE)
+  expect_match(formats, "bookdown::word_document2", fixed = TRUE)
+  expect_no_match(formats, "This is an empty sample chapter file", fixed = TRUE)
+})
