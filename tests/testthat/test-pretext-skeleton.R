@@ -73,3 +73,30 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
   expect_match(intro, "bookdown::render_book('foo.Rmd', 'bookdown::gitbook')", fixed = TRUE)
   expect_no_match(intro, "Replace this placeholder text", fixed = TRUE)
 })
+
+test_that("PreTeXt components chapter mirrors the Rmd structure", {
+  candidates <- c(
+    test_path("..", "..", "pretext", "source"),
+    test_path("..", "..", "..", "pretext", "source"),
+    test_path("..", "..", "..", "bookdown", "pretext", "source")
+  )
+  source_dir <- candidates[dir.exists(candidates)][1]
+  expect_false(is.na(source_dir))
+  expect_length(source_dir, 1)
+
+  components <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_components.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(components, "<section xml:id=\"markdown-syntax\">", fixed = TRUE)
+  expect_match(components, "<subsection xml:id=\"equations\">", fixed = TRUE)
+  expect_match(components, "<subsection xml:id=\"theorems\">", fixed = TRUE)
+  expect_match(components, "<section xml:id=\"figures\">", fixed = TRUE)
+  expect_match(components, "<section xml:id=\"tables\">", fixed = TRUE)
+  expect_match(components, "<section xml:id=\"citations\">", fixed = TRUE)
+  expect_match(components, "images/knit-logo.png", fixed = TRUE)
+  expect_match(components, "DT::datatable(iris)", fixed = TRUE)
+  expect_match(components, "knitr::include_app('https://yihui.shinyapps.io/miniUI/'", fixed = TRUE)
+  expect_no_match(components, "This is an empty sample chapter file", fixed = TRUE)
+})
