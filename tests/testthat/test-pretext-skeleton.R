@@ -201,3 +201,22 @@ test_that("PreTeXt tools chapter mirrors the Rmd structure", {
   expect_match(tools, "tinytex::reinstall_tinytex()", fixed = TRUE)
   expect_no_match(tools, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt usage chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  usage <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_usage.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(usage, "<section xml:id=\"knitr\">", fixed = TRUE)
+  expect_match(usage, "<section xml:id=\"r-markdown\">", fixed = TRUE)
+  expect_match(usage, "knitr::knit()", fixed = TRUE)
+  expect_match(usage, "# a literal code chunk", fixed = TRUE)
+  expect_match(usage, "output: [\"html_document\", \"word_document\"]", fixed = TRUE)
+  expect_match(usage, "bookdown::gitbook", fixed = TRUE)
+  expect_match(usage, "?rmarkdown::html_document", fixed = TRUE)
+  expect_match(usage, "knitr::combine_words(", fixed = TRUE)
+  expect_no_match(usage, "This is an empty sample chapter file", fixed = TRUE)
+})
