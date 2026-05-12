@@ -118,3 +118,23 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
   expect_no_match(formats, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt customization chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  customization <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_customization.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(customization, "<section xml:id=\"yaml-options\">", fixed = TRUE)
+  expect_match(customization, "<section xml:id=\"theming\">", fixed = TRUE)
+  expect_match(customization, "<section xml:id=\"templates\">", fixed = TRUE)
+  expect_match(customization, "<section xml:id=\"configuration\">", fixed = TRUE)
+  expect_match(customization, "<section xml:id=\"internationalization\">", fixed = TRUE)
+  expect_match(customization, "bookdown::gitbook", fixed = TRUE)
+  expect_match(customization, "bookdown::pdf_book", fixed = TRUE)
+  expect_match(customization, "before_chapter_script", fixed = TRUE)
+  expect_match(customization, "bookdown:::label_names", fixed = TRUE)
+  expect_no_match(customization, "This is an empty sample chapter file", fixed = TRUE)
+})
