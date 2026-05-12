@@ -181,3 +181,23 @@ test_that("PreTeXt publishing chapter mirrors the Rmd structure", {
   expect_match(publishing, "images/social-twitter.png", fixed = TRUE)
   expect_no_match(publishing, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt tools chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  tools <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_tools.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(tools, "<section xml:id=\"r-and-r-packages\">", fixed = TRUE)
+  expect_match(tools, "<section xml:id=\"pandoc\">", fixed = TRUE)
+  expect_match(tools, "<section xml:id=\"latex\">", fixed = TRUE)
+  expect_match(tools, "install.packages(\"bookdown\")", fixed = TRUE)
+  expect_match(tools, "devtools::install_github('rstudio/bookdown')", fixed = TRUE)
+  expect_match(tools, "rmarkdown::pandoc_version()", fixed = TRUE)
+  expect_match(tools, "tinytex::install_tinytex()", fixed = TRUE)
+  expect_match(tools, "tinytex::tlmgr_update()", fixed = TRUE)
+  expect_match(tools, "tinytex::reinstall_tinytex()", fixed = TRUE)
+  expect_no_match(tools, "This is an empty sample chapter file", fixed = TRUE)
+})

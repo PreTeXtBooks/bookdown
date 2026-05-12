@@ -1,9 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-tools" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Tools</title>
+  <title>Software Tools</title>
 
-  <p>
-    This is an empty sample chapter file corresponding to the Tools chapter in
-    the Rmd version of the book.
-  </p>
+  <introduction>
+    <p>
+      This appendix gives a brief introduction to the software packages required
+      for working with R Markdown and <c>bookdown</c>, with an emphasis on how
+      to install and maintain the core tools.
+    </p>
+  </introduction>
+
+  <section xml:id="r-and-r-packages">
+    <title>R and R packages</title>
+
+    <p>
+      R can be downloaded from a CRAN mirror such as
+      <url href="https://cran.rstudio.com" visual="cran.rstudio.com"/>. Since R
+      has several releases each year, the chapter notes that you may want to
+      upgrade it occasionally.
+    </p>
+
+    <p>
+      To install <c>bookdown</c>, the Rmd source first gives the simplest
+      package-installation command.
+    </p>
+
+    <program language="r">
+      <input>install.packages("bookdown")</input>
+    </program>
+
+    <p>
+      It then shows how to install optional dependencies as well, which can be
+      convenient if you do not mind installing packages that may not be used in
+      a given project.
+    </p>
+
+    <program language="r">
+      <input>install.packages("bookdown", dependencies = TRUE)</input>
+    </program>
+
+    <p>
+      To test the development version from GitHub, the chapter recommends
+      installing <c>devtools</c> first if necessary and then installing
+      <c>bookdown</c> from the repository.
+    </p>
+
+    <program language="r">
+      <input>if (!requireNamespace('devtools')) install.packages('devtools')
+devtools::install_github('rstudio/bookdown')</input>
+    </program>
+
+    <p>
+      Since packages on CRAN and GitHub are updated regularly, the chapter also
+      suggests updating your installed packages from time to time.
+    </p>
+
+    <program language="r">
+      <input>update.packages(ask = FALSE)</input>
+    </program>
+
+    <p>
+      Although it is not required, the chapter also recommends the RStudio IDE
+      as a convenient environment for R-related work.
+    </p>
+  </section>
+
+  <section xml:id="pandoc">
+    <title>Pandoc</title>
+
+    <p>
+      The chapter explains that an <c>*.Rmd</c> file is first compiled to
+      Markdown through <c>knitr</c>, then converted to formats such as HTML or
+      LaTeX through Pandoc, with <c>rmarkdown</c> automating that workflow.
+    </p>
+
+    <p>
+      Because <c>knitr</c> and <c>rmarkdown</c> are required by <c>bookdown</c>,
+      they are installed automatically with the package. Pandoc is different:
+      it is not an R package, so it must be installed separately unless you are
+      using the copy bundled with the RStudio IDE.
+    </p>
+
+    <p>
+      The Rmd chapter shows how to query the Pandoc version available to
+      <c>rmarkdown</c>.
+    </p>
+
+    <program language="r">
+      <input>rmarkdown::pandoc_version()</input>
+    </program>
+
+    <p>
+      If that version is too old for a needed feature, the chapter notes that a
+      newer system installation of Pandoc can override the bundled version.
+    </p>
+  </section>
+
+  <section xml:id="latex">
+    <title>LaTeX</title>
+
+    <p>
+      LaTeX is only required when you want PDF output. The chapter strongly
+      recommends the lightweight, cross-platform TinyTeX distribution based on
+      TeX Live, which can be installed through the <c>tinytex</c> R package.
+    </p>
+
+    <program language="r">
+      <input>tinytex::install_tinytex()</input>
+    </program>
+
+    <p>
+      The Rmd source includes a representative LaTeX failure to show the kind of
+      missing-package error that TinyTeX can help avoid.
+    </p>
+
+    <program language="latex">
+      <input>! LaTeX Error: File `titling.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name:
+! Emergency stop.
+&lt;read *&gt;
+
+l.107 ^^M
+
+pandoc: Error producing PDF
+Error: pandoc document conversion failed with error 43
+Execution halted</input>
+    </program>
+
+    <p>
+      The chapter explains that this error means a required LaTeX package was
+      missing. With TinyTeX and R Markdown, such missing packages are installed
+      automatically, so readers generally do not need to resolve them by hand.
+    </p>
+
+    <p>
+      It also shows how to inspect the installed LaTeX version from R.
+    </p>
+
+    <program language="r">
+      <input>res &lt;- base::system('pdflatex --version', intern = TRUE)
+res &lt;- paste("## ", res)
+res &lt;- paste0(res, collapse = "\n")</input>
+    </program>
+
+    <program language="r">
+      <input>system('pdflatex --version')</input>
+    </program>
+
+    <p>
+      For maintenance, the chapter recommends updating TinyTeX packages when you
+      run into LaTeX problems and reinstalling TinyTeX entirely if an annual
+      upgrade becomes necessary.
+    </p>
+
+    <program language="r">
+      <input>tinytex::tlmgr_update()</input>
+    </program>
+
+    <program language="r">
+      <input>tinytex::reinstall_tinytex()</input>
+    </program>
+  </section>
 </chapter>
