@@ -220,3 +220,20 @@ test_that("PreTeXt usage chapter mirrors the Rmd structure", {
   expect_match(usage, "knitr::combine_words(", fixed = TRUE)
   expect_no_match(usage, "This is an empty sample chapter file", fixed = TRUE)
 })
+
+test_that("PreTeXt FAQ chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  faq <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_faq.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(faq, "<title>FAQ</title>", fixed = TRUE)
+  expect_match(faq, "Will <c>bookdown</c> have the features X, Y, and Z?", fixed = TRUE)
+  expect_match(faq, "https://github.com/rstudio/bookdown/issues", fixed = TRUE)
+  expect_match(faq, "Pandoc's Markdown supports raw LaTeX code", fixed = TRUE)
+  expect_match(faq, "Markdown should be kept as simple as possible", fixed = TRUE)
+  expect_match(faq, "control your own wild heart", fixed = TRUE)
+  expect_no_match(faq, "This is an empty sample chapter file", fixed = TRUE)
+})
