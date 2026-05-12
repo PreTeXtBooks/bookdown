@@ -23,8 +23,12 @@
     </p>
 
     <program language="r">
-      <input>```{r eval=FALSE, code=formatR::usage(bookdown::render_book, output=FALSE)}
-```</input>
+      <input>render_book(
+  input = ".", output_format = NULL, ..., clean = TRUE,
+  envir = parent.frame(), clean_envir = !interactive(),
+  output_dir = NULL, new_session = NA, preview = FALSE,
+  config_file = "_bookdown.yml"
+)</input>
     </program>
 
     <p>
@@ -76,8 +80,10 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
     </p>
 
     <program language="r">
-      <input>```{r serve-book-usage, eval=FALSE, code=formatR::usage(bookdown::serve_book, output=FALSE)}
-```</input>
+      <input>serve_book(
+  dir = ".", output_dir = "_book", preview = TRUE,
+  in_session = TRUE, quiet = FALSE, ...
+)</input>
     </program>
 
     <p>
