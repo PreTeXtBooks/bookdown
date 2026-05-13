@@ -20,8 +20,8 @@
       programming: program code can be intermingled with prose in a source
       document, then extracted, executed, and displayed together with the text
       in the rendered output. The Rmd source explicitly attributes this idea to
-      Donald Knuth's <q>Literate Programming</q> (1984). Its basic syntax is
-      introduced in <xref ref="r-code"/>.
+      <xref ref="knuth1984-reference"/>. Its basic syntax is introduced in
+      <xref ref="r-code"/>.
     </p>
 
     <p>

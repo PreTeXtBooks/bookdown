@@ -22,11 +22,11 @@
       <c>knitr</c> package, on top of which <c>bookdown</c> was built. To learn
       more about R Markdown, please check out the online documentation at
       <url href="http://rmarkdown.rstudio.com" visual="rmarkdown.rstudio.com"/>.
-      For <c>knitr</c>, the Rmd source points readers to Yihui Xie's
-      <em>Dynamic Documents with R and knitr</em> (2015). You do not have to be
-      an expert in the R language to read this book, but you are expected to
-      have some basic knowledge about R Markdown and <c>knitr</c>. For
-      beginners, you may get started with the cheatsheets at
+      For <c>knitr</c>, the Rmd source points readers to
+      <xref ref="xie2015-reference"/>. You do not have to be an expert in the R
+      language to read this book, but you are expected to have some basic
+      knowledge about R Markdown and <c>knitr</c>. For beginners, you may get
+      started with the cheatsheets at
       <url
         href="https://www.rstudio.com/resources/cheatsheets/"
         visual="rstudio.com/resources/cheatsheets/"
