@@ -34,26 +34,44 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "ch_faq.ptx"
   )
   chapter_files <- grep("^ch_.*[.]ptx$", expected_files, value = TRUE)
-  chapter_ids <- c(
-    ch_about_author.ptx = "ch-about-author",
-    ch_intro.ptx = "ch-intro",
-    ch_components.ptx = "ch-components",
-    ch_formats.ptx = "ch-formats",
-    ch_customization.ptx = "ch-customization",
-    ch_editing.ptx = "ch-editing",
-    ch_publishing.ptx = "ch-publishing",
-    ch_tools.ptx = "ch-tools",
-    ch_usage.ptx = "ch-usage",
-    ch_faq.ptx = "ch-faq"
+  chapter_ids <- data.frame(
+    file = c(
+      "ch_about_author.ptx",
+      "ch_intro.ptx",
+      "ch_components.ptx",
+      "ch_formats.ptx",
+      "ch_customization.ptx",
+      "ch_editing.ptx",
+      "ch_publishing.ptx",
+      "ch_tools.ptx",
+      "ch_usage.ptx",
+      "ch_faq.ptx"
+    ),
+    id = c(
+      "ch-about-author",
+      "ch-intro",
+      "ch-components",
+      "ch-formats",
+      "ch-customization",
+      "ch-editing",
+      "ch-publishing",
+      "ch-tools",
+      "ch-usage",
+      "ch-faq"
+    ),
+    stringsAsFactors = FALSE
   )
 
   expect_true(all(file.exists(file.path(source_dir, expected_files))))
 
-  for (file in names(chapter_ids)) {
-    chapter <- paste(xfun::read_utf8(file.path(source_dir, file)), collapse = "\n")
+  for (i in seq_len(nrow(chapter_ids))) {
+    chapter <- paste(
+      xfun::read_utf8(file.path(source_dir, chapter_ids$file[[i]])),
+      collapse = "\n"
+    )
     expect_match(
       chapter,
-      sprintf('<chapter xml:id="%s"', chapter_ids[[file]]),
+      sprintf('<chapter xml:id="%s"', chapter_ids$id[[i]]),
       fixed = TRUE
     )
   }
@@ -128,7 +146,9 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
     "<xref ref=\"rstudio-ide\" text=\"title\"/>",
     "<xref ref=\"ch-usage\" text=\"title\"/>",
     "<xref ref=\"ch-tools\" text=\"title\"/>"
-  )) expect_match(frontmatter, text, fixed = TRUE)
+  )) {
+    expect_match(frontmatter, text, fixed = TRUE)
+  }
   expect_match(frontmatter, "sessionInfo()", fixed = TRUE)
   expect_match(frontmatter, "github.com/rstudio/bookdown/graphs/contributors", fixed = TRUE)
   expect_match(frontmatter, "Lastly I want to thank my family", fixed = TRUE)
@@ -153,7 +173,9 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
     "<xref ref=\"ch-tools\" text=\"title\"/>",
     "<xref ref=\"ch-usage\" text=\"title\"/>",
     "<xref ref=\"configuration\"/>"
-  )) expect_match(intro, text, fixed = TRUE)
+  )) {
+    expect_match(intro, text, fixed = TRUE)
+  }
   expect_match(intro, "<aside>", fixed = TRUE)
   expect_match(intro, "<program language=\"r\">", fixed = TRUE)
   expect_match(intro, "bookdown::render_book('foo.Rmd', 'bookdown::gitbook')", fixed = TRUE)
