@@ -168,16 +168,16 @@ Execution halted</input>
       <input>res &lt;- base::system('pdflatex --version', intern = TRUE)
 res &lt;- paste("## ", res)
 res &lt;- paste0(res, collapse = "\n")</input>
-      <output>## pdfTeX ...
-## kpathsea version ...
-## Copyright ...</output>
+      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+## kpathsea version 6.3.4
+## Copyright 2022 Han The Thanh</output>
     </program>
 
     <program language="r">
       <input>system('pdflatex --version')</input>
-      <output>## pdfTeX ...
-## kpathsea version ...
-## Copyright ...</output>
+      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+## kpathsea version 6.3.4
+## Copyright 2022 Han The Thanh</output>
     </program>
 
     <p>

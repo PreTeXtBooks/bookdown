@@ -20,6 +20,20 @@ pretext_root_dir <- function() {
   normalizePath(file.path(pretext_source_dir(), ".."), mustWork = TRUE)
 }
 
+pretext_program_input <- function(text, prefix_regex) {
+  match <- regexec(
+    sprintf("<input>(%s[\\s\\S]*?)</input>", prefix_regex),
+    text,
+    perl = TRUE
+  )
+  captured <- regmatches(text, match)[[1]]
+  expect_true(
+    length(captured) == 2,
+    info = sprintf("No <input> block found for pattern: %s", prefix_regex)
+  )
+  captured[[2]]
+}
+
 test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   source_dir <- pretext_source_dir()
   assets_dir <- file.path(pretext_root_dir(), "assets", "images")
@@ -256,6 +270,16 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::epub_book(", fixed = TRUE)
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
   expect_no_match(formats, "code=formatR::usage", fixed = TRUE)
+  for (expr in list(
+    pretext_program_input(formats, "bookdown::gitbook\\("),
+    pretext_program_input(formats, "bookdown::bs4_book\\("),
+    pretext_program_input(formats, "bookdown::html_chapters\\("),
+    pretext_program_input(formats, "bookdown::html_book\\(\\.\\.\\.\\)"),
+    pretext_program_input(formats, "bookdown::pdf_book\\("),
+    pretext_program_input(formats, "bookdown::epub_book\\(")
+  )) {
+    expect_no_error(parse(text = expr))
+  }
   expect_no_match(formats, "This is an empty sample chapter file", fixed = TRUE)
 })
 
@@ -365,7 +389,7 @@ test_that("PreTeXt tools chapter mirrors the Rmd structure", {
   expect_match(tools, "<c>titling</c> package", fixed = TRUE)
   expect_match(tools, "tinytex::tlmgr_update()", fixed = TRUE)
   expect_match(tools, "tinytex::reinstall_tinytex()", fixed = TRUE)
-  expect_match(tools, "## pdfTeX ...", fixed = TRUE)
+  expect_match(tools, "## pdfTeX 3.141592653-2.6-1.40.24", fixed = TRUE)
   expect_no_match(tools, "This is an empty sample chapter file", fixed = TRUE)
 })
 

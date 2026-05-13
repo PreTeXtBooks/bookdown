@@ -203,7 +203,7 @@
 
       <program language="r">
         <input>sessionInfo()</input>
-        <output>## R version ...
+        <output>## R version 4.3.0 (2023-04-21)
 ## other attached packages:
 ## [1] bookdown knitr rmarkdown shiny htmltools tools miniUI
 ## loaded via a namespace (and not attached):
