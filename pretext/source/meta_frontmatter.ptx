@@ -22,78 +22,81 @@
   <preface xml:id="preface">
     <title>Preface</title>
 
-    <figure xml:id="fig-cover-pretext">
-      <title>The cover image for the bookdown book.</title>
-      <image source="../assets/images/cover.jpg" width="70%">
-        <description>
-          <p>The cover image for the bookdown book.</p>
-        </description>
-      </image>
-    </figure>
+    <introduction>
+      <figure xml:id="fig-cover-pretext">
+        <title>The cover image for the bookdown book.</title>
+        <image source="../assets/images/cover.jpg" width="70%">
+          <description>
+            <p>The cover image for the bookdown book.</p>
+          </description>
+        </image>
+      </figure>
 
-    <p>
-      This short book introduces an R package, <em>bookdown</em>, to change
-      your workflow of writing books. It should be technically easy to write a
-      book, visually pleasant to view the book, fun to interact with the book,
-      convenient to navigate through the book, straightforward for readers to
-      contribute or leave feedback to the book author(s), and more importantly,
-      authors should not always be distracted by typesetting details.
-    </p>
+      <p>
+        This short book introduces an R package, <em>bookdown</em>, to change
+        your workflow of writing books. It should be technically easy to write a
+        book, visually pleasant to view the book, fun to interact with the
+        book, convenient to navigate through the book, straightforward for
+        readers to contribute or leave feedback to the book author(s), and more
+        importantly, authors should not always be distracted by typesetting
+        details.
+      </p>
 
-    <p>
-      The <em>bookdown</em> package is built on top of R Markdown
-      (<url href="http://rmarkdown.rstudio.com" visual="rmarkdown.rstudio.com"/>),
-      and inherits the simplicity of the Markdown syntax (see
-      <xref ref="markdown-syntax"/>), as well as the possibility of multiple
-      types of output formats (PDF/HTML/Word/...). It has also added features
-      like multi-page HTML output, numbering and cross-referencing
-      figures/tables/sections/equations, inserting parts/appendices, and
-      imported the GitBook style
-      (<url href="https://www.gitbook.com" visual="gitbook.com"/>) to create
-      elegant and appealing HTML book pages. This book itself is an example of
-      how you can produce a book from a series of R Markdown documents, and both
-      the printed version and the online version can look professional. You can
-      find more examples at <url href="https://bookdown.org"
-      visual="bookdown.org"/>.
-    </p>
+      <p>
+        The <em>bookdown</em> package is built on top of R Markdown
+        (<url href="http://rmarkdown.rstudio.com" visual="rmarkdown.rstudio.com"/>),
+        and inherits the simplicity of the Markdown syntax (see
+        <xref ref="markdown-syntax"/>), as well as the possibility of multiple
+        types of output formats (PDF/HTML/Word/...). It has also added features
+        like multi-page HTML output, numbering and cross-referencing
+        figures/tables/sections/equations, inserting parts/appendices, and
+        imported the GitBook style
+        (<url href="https://www.gitbook.com" visual="gitbook.com"/>) to create
+        elegant and appealing HTML book pages. This book itself is an example of
+        how you can produce a book from a series of R Markdown documents, and
+        both the printed version and the online version can look professional.
+        You can find more examples at <url href="https://bookdown.org"
+        visual="bookdown.org"/>.
+      </p>
 
-    <figure xml:id="fig-logo-pretext">
-      <title>The bookdown hex logo.</title>
-      <image source="../assets/images/logo.png" width="40%">
-        <description>
-          <p>The hex logo for the bookdown package.</p>
-        </description>
-      </image>
-    </figure>
+      <figure xml:id="fig-logo-pretext">
+        <title>The bookdown hex logo.</title>
+        <image source="../assets/images/logo.png" width="40%">
+          <description>
+            <p>The hex logo for the bookdown package.</p>
+          </description>
+        </image>
+      </figure>
 
-    <p>
-      Despite the package name containing the word <q>book</q>,
-      <em>bookdown</em> is not only for books. The <q>book</q> can be anything
-      that consists of multiple R Markdown documents meant to be read in a
-      linear sequence, such as course handouts, study notes, a software manual,
-      a thesis, or even a diary. In fact, many <em>bookdown</em> features apply
-      to single R Markdown documents as well (see
-      <xref ref="a-single-document"/>).
-    </p>
+      <p>
+        Despite the package name containing the word <q>book</q>,
+        <em>bookdown</em> is not only for books. The <q>book</q> can be anything
+        that consists of multiple R Markdown documents meant to be read in a
+        linear sequence, such as course handouts, study notes, a software
+        manual, a thesis, or even a diary. In fact, many <em>bookdown</em>
+        features apply to single R Markdown documents as well (see
+        <xref ref="a-single-document"/>).
+      </p>
 
-    <figure xml:id="fig-license-pretext">
-      <title>Creative Commons license badge.</title>
-      <image source="../assets/images/by-nc-sa.png" width="25%">
-        <description>
-          <p>The Creative Commons Attribution-NonCommercial-ShareAlike badge.</p>
-        </description>
-      </image>
-    </figure>
+      <figure xml:id="fig-license-pretext">
+        <title>Creative Commons license badge.</title>
+        <image source="../assets/images/by-nc-sa.png" width="25%">
+          <description>
+            <p>The Creative Commons Attribution-NonCommercial-ShareAlike badge.</p>
+          </description>
+        </image>
+      </figure>
 
-    <p>
-      The online version of this book is licensed under the Creative Commons
-      Attribution-NonCommercial-ShareAlike 4.0 International License
-      (<url href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-      visual="creativecommons.org/licenses/by-nc-sa/4.0"/>). You can purchase a
-      hardcopy from <url
-      href="https://www.crcpress.com/product/isbn/9781138700109"
-      visual="crcpress.com/product/isbn/9781138700109"/> or Amazon.
-    </p>
+      <p>
+        The online version of this book is licensed under the Creative Commons
+        Attribution-NonCommercial-ShareAlike 4.0 International License
+        (<url href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        visual="creativecommons.org/licenses/by-nc-sa/4.0"/>). You can purchase
+        a hardcopy from <url
+        href="https://www.crcpress.com/product/isbn/9781138700109"
+        visual="crcpress.com/product/isbn/9781138700109"/> or Amazon.
+      </p>
+    </introduction>
 
     <section xml:id="why-read-this-book">
       <title>Why read this book</title>

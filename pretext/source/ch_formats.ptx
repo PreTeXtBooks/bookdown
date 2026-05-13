@@ -162,11 +162,11 @@ it to `introduction`.</input>
       <program language="yaml">
         <input>toc:
   before: |
-    <li><a href="...">My Awesome Book</a></li>
-    <li><a href="...">John Smith</a></li>
+    &lt;li&gt;&lt;a href="..."&gt;My Awesome Book&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="..."&gt;John Smith&lt;/a&gt;&lt;/li&gt;
   after: |
-    <li><a href="https://github.com/rstudio/bookdown">
-    Proudly published with bookdown</a></li></input>
+    &lt;li&gt;&lt;a href="https://github.com/rstudio/bookdown"&gt;
+    Proudly published with bookdown&lt;/a&gt;&lt;/li&gt;</input>
       </program>
 
       <program language="r">
