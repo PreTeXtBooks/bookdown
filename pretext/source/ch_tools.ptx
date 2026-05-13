@@ -61,7 +61,9 @@ devtools::install_github('rstudio/bookdown')</input>
 
     <p>
       Although it is not required, the chapter also recommends the RStudio IDE
-      as a convenient environment for R-related work.
+      as a convenient environment for R-related work. The RStudio IDE can be
+      downloaded from <url href="https://www.posit.co"
+      visual="posit.co"/>.
     </p>
   </section>
 
@@ -94,6 +96,12 @@ devtools::install_github('rstudio/bookdown')</input>
       If that version is too old for a needed feature, the chapter notes that a
       newer system installation of Pandoc can override the bundled version.
     </p>
+
+    <p>
+      Readers can follow the installation instructions on the Pandoc homepage
+      (<url href="http://pandoc.org" visual="pandoc.org"/>) if they need to
+      install Pandoc separately.
+    </p>
   </section>
 
   <section xml:id="latex">
@@ -103,6 +111,12 @@ devtools::install_github('rstudio/bookdown')</input>
       LaTeX is only required when you want PDF output. The chapter strongly
       recommends the lightweight, cross-platform TinyTeX distribution based on
       TeX Live, which can be installed through the <c>tinytex</c> R package.
+    </p>
+
+    <p>
+      It also points readers to <url href="https://www.latex-project.org/get/"
+      visual="latex-project.org/get"/> for more information about LaTeX
+      distributions and installation.
     </p>
 
     <program language="r">
@@ -135,6 +149,12 @@ Execution halted</input>
       The chapter explains that this error means a required LaTeX package was
       missing. With TinyTeX and R Markdown, such missing packages are installed
       automatically, so readers generally do not need to resolve them by hand.
+    </p>
+
+    <p>
+      It also notes that LaTeX package names are often the same as the
+      <c>*.sty</c> filenames, so in this case you could try to install the
+      <c>titling</c> package directly.
     </p>
 
     <p>
