@@ -2,35 +2,236 @@
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-front">
   <titlepage>
     <author>
-      <personname>Primary Author</personname>
-      <institution>Author affiliation</institution>
-    </author>
-    <author>
-      <personname>Co-author</personname>
-      <institution>Author affiliation</institution>
+      <personname>Yihui Xie</personname>
     </author>
   </titlepage>
 
   <abstract>
     <p>
-      Replace this abstract with a short summary of the book, matching the
-      abstract and front-matter material from the original Rmd source.
+      A guide to authoring books with R Markdown, including how to generate
+      figures and tables, and insert cross-references, citations, HTML widgets,
+      and Shiny apps in R Markdown. The book can be exported to HTML, PDF, and
+      e-books (e.g. EPUB). The book style is customizable. You can easily write
+      and preview the book in RStudio IDE or other editors, and host the book
+      wherever you want (e.g.
+      <url href="https://bookdown.org/yihui/bookdown/"
+      visual="bookdown.org/yihui/bookdown" />).
     </p>
   </abstract>
 
   <preface xml:id="preface">
     <title>Preface</title>
+
+    <figure xml:id="fig-cover-pretext">
+      <title>The cover image for the bookdown book.</title>
+      <image source="../assets/images/cover.jpg" width="70%">
+        <description>
+          <p>The cover image for the bookdown book.</p>
+        </description>
+      </image>
+    </figure>
+
     <p>
-      Use the front matter for prefaces, acknowledgments, and other opening
-      material before the main numbered chapters.
+      This short book introduces an R package, <em>bookdown</em>, to change
+      your workflow of writing books. It should be technically easy to write a
+      book, visually pleasant to view the book, fun to interact with the book,
+      convenient to navigate through the book, straightforward for readers to
+      contribute or leave feedback to the book author(s), and more importantly,
+      authors should not always be distracted by typesetting details.
     </p>
+
+    <p>
+      The <em>bookdown</em> package is built on top of R Markdown
+      (<url href="http://rmarkdown.rstudio.com" visual="rmarkdown.rstudio.com"/>),
+      and inherits the simplicity of the Markdown syntax, as well as the
+      possibility of multiple types of output formats (PDF/HTML/Word/...). It
+      has also added features like multi-page HTML output, numbering and
+      cross-referencing figures/tables/sections/equations, inserting
+      parts/appendices, and imported the GitBook style
+      (<url href="https://www.gitbook.com" visual="gitbook.com"/>) to create
+      elegant and appealing HTML book pages. This book itself is an example of
+      how you can produce a book from a series of R Markdown documents, and both
+      the printed version and the online version can look professional. You can
+      find more examples at <url href="https://bookdown.org"
+      visual="bookdown.org"/>.
+    </p>
+
+    <figure xml:id="fig-logo-pretext">
+      <title>The bookdown hex logo.</title>
+      <image source="../assets/images/logo.png" width="40%">
+        <description>
+          <p>The hex logo for the bookdown package.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      Despite the package name containing the word <q>book</q>,
+      <em>bookdown</em> is not only for books. The <q>book</q> can be anything
+      that consists of multiple R Markdown documents meant to be read in a
+      linear sequence, such as course handouts, study notes, a software manual,
+      a thesis, or even a diary. In fact, many <em>bookdown</em> features apply
+      to single R Markdown documents as well.
+    </p>
+
+    <figure xml:id="fig-license-pretext">
+      <title>Creative Commons license badge.</title>
+      <image source="../assets/images/by-nc-sa.png" width="25%">
+        <description>
+          <p>The Creative Commons Attribution-NonCommercial-ShareAlike badge.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      The online version of this book is licensed under the Creative Commons
+      Attribution-NonCommercial-ShareAlike 4.0 International License
+      (<url href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+      visual="creativecommons.org/licenses/by-nc-sa/4.0"/>). You can purchase a
+      hardcopy from <url
+      href="https://www.crcpress.com/product/isbn/9781138700109"
+      visual="crcpress.com/product/isbn/9781138700109"/> or Amazon.
+    </p>
+
+    <section xml:id="why-read-this-book">
+      <title>Why read this book</title>
+
+      <p>
+        Can we write a book in one source format, and generate the output to
+        multiple formats? Traditionally books are often written with LaTeX or
+        Microsoft Word. Either of these tools will make writing books a one-way
+        trip and you cannot turn back: if you choose LaTeX, you typically end
+        up only with a PDF document; if you work with Word, you are likely to
+        have to stay in Word forever, and may also miss the many useful
+        features and beautiful PDF output from LaTeX.
+      </p>
+
+      <p>
+        Can we focus on writing the content without worrying too much about
+        typesetting? We want our book to look reasonably pretty, and we also
+        want to focus on the content. One possibility is to give up PDF
+        temporarily, and what you may have in return is a pretty preview of your
+        book as HTML web pages. The fact that the Markdown syntax is simpler and
+        has fewer features than LaTeX also helps you focus on the content.
+      </p>
+
+      <p>
+        Can readers interact with examples in our book as they read it? The
+        answer is certainly no if the book is printed on paper, but it is
+        possible if your book has an HTML version that contains live examples,
+        such as Shiny applications (<url href="https://shiny.rstudio.com"
+        visual="shiny.rstudio.com"/>) or HTML widgets
+        (<url href="https://htmlwidgets.org" visual="htmlwidgets.org"/>).
+      </p>
+
+      <p>
+        Can we get feedback and even contributions from readers as we develop
+        the book? GitHub (<url href="https://github.com"
+        visual="github.com"/>) is one prominent example. If anyone finds a typo
+        in your book, they can simply correct it online and submit the change
+        back to you for your approval.
+      </p>
+
+      <p>
+        The combination of R (<url href="https://www.r-project.org"
+        visual="r-project.org"/>), Markdown, and Pandoc
+        (<url href="http://pandoc.org" visual="pandoc.org"/>) makes it possible
+        to go from one simple source format (R Markdown) to multiple possible
+        output formats (PDF, HTML, EPUB, and Word, etc.). In short, you just
+        prepare a few R Markdown book chapters, and <em>bookdown</em> can help
+        you turn them into a beautiful book.
+      </p>
+    </section>
+
+    <section xml:id="structure-of-the-book">
+      <title>Structure of the book</title>
+
+      <p>
+        Chapters on introduction and components introduce the basic usage and
+        syntax, which should be sufficient to get most readers started in
+        writing a book. The output-format and customization chapters are for
+        those who want to fine-tune the appearance of their books. The editing
+        and publishing chapters include more technical details for readers who
+        want to go beyond the default RStudio IDE workflows.
+      </p>
+
+      <p>
+        To sum it up, this book is a comprehensive reference of the
+        <em>bookdown</em> package. You can follow the 80/20 rule when reading
+        it: some sections are there for the sake of completeness, and not all
+        sections are equally useful to every book project.
+      </p>
+    </section>
+
+    <section xml:id="software-information-and-conventions">
+      <title>Software information and conventions</title>
+
+      <p>
+        This book is primarily about the R package <em>bookdown</em>, so you
+        need to at least install R and the <em>bookdown</em> package. However,
+        your book does not have to be related to the R language at all. It can
+        use other computing languages (C++, SQL, Python, and so on), and it can
+        even be totally irrelevant to computing.
+      </p>
+
+      <p>The R session information when compiling this book is shown below:</p>
+
+      <program language="r">
+        <input>sessionInfo()</input>
+      </program>
+
+      <p>
+        We do not add prompts (<c>&gt;</c> and <c>+</c>) to R source code in
+        this book, and we comment out the text output with two hashes
+        <c>##</c> by default. Package names are in bold text, inline code and
+        filenames are formatted in a typewriter font, and function names are
+        followed by parentheses.
+      </p>
+    </section>
   </preface>
 
   <acknowledgement xml:id="acknowledgments">
     <title>Acknowledgments</title>
+
     <p>
-      Add acknowledgments, contributor notes, or other introductory material
-      here as the PreTeXt version is populated.
+      First I'd like to thank my employer, RStudio, for providing me the
+      opportunity to work on this exciting project. I was hoping to work on it
+      when I first saw the GitBook project in 2013, because I immediately
+      realized it was a beautiful book style and there was a lot more power we
+      could add to it, judging from my experience of writing the
+      <em>knitr</em> book and reading other books.
+    </p>
+
+    <p>
+      This project is certainly not a single person's effort. Several
+      colleagues at RStudio have helped me along the way. Hadley Wickham
+      provided a huge amount of feedback during the development of
+      <em>bookdown</em>, and JJ Allaire and Jonathan McPherson provided a lot of
+      technical help directly to this package as well as support in the RStudio
+      IDE.
+    </p>
+
+    <p>
+      I also received a lot of feedback from book authors outside RStudio, and
+      some users contributed code to the project and helped revise the book.
+      Here is a list of all contributors:
+      <url href="https://github.com/rstudio/bookdown/graphs/contributors"
+      visual="github.com/rstudio/bookdown/graphs/contributors"/>. You can also
+      see how many typo-fixing pull requests have been merged at
+      <url href="https://github.com/rstudio/bookdown/pulls"
+      visual="github.com/rstudio/bookdown/pulls"/>.
+    </p>
+
+    <p>
+      The <em>bookdown</em> package is not possible without a few open-source
+      software packages. In particular, Pandoc, GitBook, jQuery, and the
+      dependent R packages, not to mention R itself. I thank the developers of
+      these packages.
+    </p>
+
+    <p>
+      Lastly I want to thank my family, in particular, my wife and son, for
+      their support.
     </p>
   </acknowledgement>
 </frontmatter>

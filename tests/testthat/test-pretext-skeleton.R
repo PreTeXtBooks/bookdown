@@ -49,6 +49,10 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   expect_match(frontmatter, "<titlepage>", fixed = TRUE)
   expect_match(frontmatter, "<abstract>", fixed = TRUE)
   expect_match(frontmatter, "<preface", fixed = TRUE)
+  expect_match(frontmatter, "<title>Acknowledgments</title>", fixed = TRUE)
+  expect_no_match(frontmatter, "Replace this abstract", fixed = TRUE)
+  expect_no_match(frontmatter, "Use the front matter for prefaces", fixed = TRUE)
+  expect_no_match(frontmatter, "Add acknowledgments, contributor notes", fixed = TRUE)
 
   backmatter <- paste(
     xfun::read_utf8(file.path(source_dir, "meta_backmatter.ptx")),
@@ -78,6 +82,28 @@ test_that("PreTeXt about-author chapter mirrors the Rmd structure", {
   expect_match(about_author, "https://github.com/yihui", fixed = TRUE)
   expect_match(about_author, "classical Chinese literature", fixed = TRUE)
   expect_no_match(about_author, "Use this sample file for author biographies", fixed = TRUE)
+})
+
+test_that("PreTeXt frontmatter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  frontmatter <- paste(
+    xfun::read_utf8(file.path(source_dir, "meta_frontmatter.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(frontmatter, "<personname>Yihui Xie</personname>", fixed = TRUE)
+  expect_match(frontmatter, "bookdown.org/yihui/bookdown", fixed = TRUE)
+  expect_match(frontmatter, "../assets/images/cover.jpg", fixed = TRUE)
+  expect_match(frontmatter, "../assets/images/logo.png", fixed = TRUE)
+  expect_match(frontmatter, "../assets/images/by-nc-sa.png", fixed = TRUE)
+  expect_match(frontmatter, "<section xml:id=\"why-read-this-book\">", fixed = TRUE)
+  expect_match(frontmatter, "<section xml:id=\"structure-of-the-book\">", fixed = TRUE)
+  expect_match(frontmatter, "<section xml:id=\"software-information-and-conventions\">", fixed = TRUE)
+  expect_match(frontmatter, "sessionInfo()", fixed = TRUE)
+  expect_match(frontmatter, "github.com/rstudio/bookdown/graphs/contributors", fixed = TRUE)
+  expect_match(frontmatter, "Lastly I want to thank my family", fixed = TRUE)
+  expect_no_match(frontmatter, "Replace this abstract", fixed = TRUE)
 })
 
 test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
