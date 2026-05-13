@@ -34,8 +34,29 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "ch_faq.ptx"
   )
   chapter_files <- grep("^ch_.*[.]ptx$", expected_files, value = TRUE)
+  chapter_ids <- c(
+    ch_about_author.ptx = "ch-about-author",
+    ch_intro.ptx = "ch-intro",
+    ch_components.ptx = "ch-components",
+    ch_formats.ptx = "ch-formats",
+    ch_customization.ptx = "ch-customization",
+    ch_editing.ptx = "ch-editing",
+    ch_publishing.ptx = "ch-publishing",
+    ch_tools.ptx = "ch-tools",
+    ch_usage.ptx = "ch-usage",
+    ch_faq.ptx = "ch-faq"
+  )
 
   expect_true(all(file.exists(file.path(source_dir, expected_files))))
+
+  for (file in names(chapter_ids)) {
+    chapter <- paste(xfun::read_utf8(file.path(source_dir, file)), collapse = "\n")
+    expect_match(
+      chapter,
+      sprintf('<chapter xml:id="%s"', chapter_ids[[file]]),
+      fixed = TRUE
+    )
+  }
 
   main_ptx <- paste(xfun::read_utf8(file.path(source_dir, "main.ptx")), collapse = "\n")
   for (file in c("meta_frontmatter.ptx", chapter_files, "meta_backmatter.ptx")) {
