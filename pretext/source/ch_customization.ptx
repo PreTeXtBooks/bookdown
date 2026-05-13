@@ -15,13 +15,12 @@
     <title>YAML options</title>
 
     <p>
-      For most output formats, the syntax-highlighting style can be customized
-      with the <c>highlight</c> option. The Rmd source shows choosing the
-      <c>tango</c> style for the <c>gitbook</c> format. The inline output in the
-      original Rmd source enumerates the available styles as <c>default</c>,
-      <c>tango</c>, <c>pygments</c>, <c>kate</c>, <c>monochrome</c>,
-      <c>espresso</c>, <c>zenburn</c>, <c>haddock</c>, and
-      <c>breezedark</c>.
+      For most types of output formats, you can customize the syntax
+      highlighting styles using the <c>highlight</c> option of the specific
+      format. Currently, the possible styles are <c>default</c>, <c>tango</c>,
+      <c>pygments</c>, <c>kate</c>, <c>monochrome</c>, <c>espresso</c>,
+      <c>zenburn</c>, <c>haddock</c>, and <c>breezedark</c>. For example, you
+      can choose the <c>tango</c> style for the <c>gitbook</c> format:
     </p>
 
     <program language="yaml">
@@ -148,14 +147,14 @@ output:
     </p>
 
     <p>
-      For <c>html_book()</c>, the default style is Bootstrap as described in
-      <xref ref="bootstrap-style"/>, and one of the built-in Bootstrap themes
-      can be selected with the <c>theme</c> option. The inline output in the
-      original Rmd source lists the built-in themes as <c>default</c>,
-      <c>bootstrap</c>, <c>cerulean</c>, <c>cosmo</c>, <c>darkly</c>,
-      <c>flatly</c>, <c>journal</c>, <c>lumen</c>, <c>paper</c>,
-      <c>readable</c>, <c>sandstone</c>, <c>simplex</c>, <c>spacelab</c>,
-      <c>united</c>, and <c>yeti</c>.
+      As mentioned in Section <xref ref="bootstrap-style"/>, the default style
+      for <c>html_book()</c> is the Bootstrap style. The Bootstrap style
+      actually has several built-in themes that you can use, including
+      <c>default</c>, <c>bootstrap</c>, <c>cerulean</c>, <c>cosmo</c>,
+      <c>darkly</c>, <c>flatly</c>, <c>journal</c>, <c>lumen</c>,
+      <c>paper</c>, <c>readable</c>, <c>sandstone</c>, <c>simplex</c>,
+      <c>spacelab</c>, <c>united</c>, and <c>yeti</c>. You can set the theme
+      via the <c>theme</c> option, e.g.,
     </p>
 
     <program language="yaml">

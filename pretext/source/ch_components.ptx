@@ -261,14 +261,35 @@ $$a^2 + b^2 = c^2$$
       </program>
 
       <p>
-        The original Rmd chapter continues with definition, example, lemma,
-        theorem, proposition, proof, remark, corollary, exercise, solution,
-        and hypothesis examples to demonstrate the default theorem styles. Its
-        inline output also notes that the proof environments currently supported
-        are <c>proof</c>, <c>remark</c>, and <c>solution</c>; for LaTeX output,
-        the <c>definition</c> theorem style is used for <c>definition</c>,
-        <c>example</c>, <c>exercise</c>, and <c>hypothesis</c>, while the
-        <c>remark</c> style is used for <c>proof</c> and <c>remark</c>.
+        The proof environments currently supported are <c>proof</c>,
+        <c>remark</c>, and <c>solution</c>. The syntax is similar to theorem
+        environments, and proof environments can also be named using the
+        <c>name</c> attribute. The only difference is that since they are
+        unnumbered, you cannot reference them, even if you provide an ID to a
+        proof environment.
+      </p>
+
+      <p>
+        We have tried to make all these theorem and proof environments work out
+        of the box, no matter if your output is PDF or HTML. If you are a
+        LaTeX or HTML expert, you may want to customize the style of these
+        environments anyway (see Chapter <xref ref="customization"/>).
+        Customization in HTML is easy with CSS, and each environment is
+        enclosed in <c>&lt;div&gt;&lt;/div&gt;</c> with the CSS class being the
+        environment name, e.g., <c>&lt;div class="lemma"&gt;&lt;/div&gt;</c>.
+        For LaTeX output, we have predefined the style to be
+        <c>definition</c> for environments <c>definition</c>, <c>example</c>,
+        <c>exercise</c>, and <c>hypothesis</c>, and <c>remark</c> for
+        environments <c>proof</c> and <c>remark</c>. All other environments use
+        the <c>plain</c> style. The style definition is done through the
+        <c>\theoremstyle{}</c> command of the <c>amsthm</c> package. If you do
+        not want the default theorem definitions to be automatically added by
+        <c>bookdown</c>, you can set
+        <c>options(bookdown.theorem.preamble = FALSE)</c>. This can be useful,
+        for example, to avoid conflicts in single documents (Section
+        <xref ref="a-single-document"/>) using the output format
+        <c>bookdown::pdf_book</c> with a <c>base_format</c> that has already
+        included <c>amsmath</c> definitions.
       </p>
 
       <subsubsection xml:id="theorem-engine">

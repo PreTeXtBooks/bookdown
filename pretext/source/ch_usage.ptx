@@ -169,15 +169,15 @@ toc: yes</input>
     </program>
 
     <p>
-      The chapter explains that the output format is specified in the
-      <c>output</c> field of the YAML metadata, and that users should consult R
-      help pages such as <c>?rmarkdown::html_document</c> and
-      <c>?bookdown::gitbook</c> for available options.
+      The R Markdown output format is specified in the <c>output</c> field of
+      the YAML metadata, and you need to consult the R help pages for the
+      possible options, e.g., <c>?rmarkdown::html_document</c>, or
+      <c>?bookdown::gitbook</c>. The meanings of most other fields in YAML can
+      be found in the Pandoc documentation.
     </p>
 
     <p>
-      It also includes an inline R expression that enumerates the R Markdown
-      output formats currently exported by <c>rmarkdown</c>.
+      The <c>rmarkdown</c> package has provided these R Markdown output formats:
     </p>
 
     <program language="r">

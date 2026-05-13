@@ -71,21 +71,19 @@ devtools::install_github('rstudio/bookdown')</input>
     <title>Pandoc</title>
 
     <p>
-      The chapter explains that an <c>*.Rmd</c> file is first compiled to
-      Markdown through <c>knitr</c>, then converted to formats such as HTML or
-      LaTeX through Pandoc, with <c>rmarkdown</c> automating that workflow.
-    </p>
-
-    <p>
-      Because <c>knitr</c> and <c>rmarkdown</c> are required by <c>bookdown</c>,
-      they are installed automatically with the package. Pandoc is different:
-      it is not an R package, so it must be installed separately unless you are
-      using the copy bundled with the RStudio IDE.
-    </p>
-
-    <p>
-      The Rmd chapter shows how to query the Pandoc version available to
-      <c>rmarkdown</c>.
+      An R Markdown document (<c>*.Rmd</c>) is first compiled to Markdown
+      (<c>*.md</c>) through the <c>knitr</c> package, and then Markdown is
+      compiled to other output formats (such as LaTeX or HTML) through Pandoc.
+      This process is automated by the <c>rmarkdown</c> package. You do not
+      need to install <c>knitr</c> or <c>rmarkdown</c> separately, because they
+      are the required packages of <c>bookdown</c> and will be automatically
+      installed when you install <c>bookdown</c>. However, Pandoc is not an R
+      package, so it will not be automatically installed when you install
+      <c>bookdown</c>. You can follow the installation instructions on the
+      Pandoc homepage (<url href="http://pandoc.org" visual="pandoc.org"/>) to
+      install Pandoc, but if you use the RStudio IDE, you do not really need to
+      install Pandoc separately, because RStudio includes a copy of Pandoc. The
+      Pandoc version number can be obtained via:
     </p>
 
     <program language="r">
@@ -94,40 +92,34 @@ devtools::install_github('rstudio/bookdown')</input>
     </program>
 
     <p>
-      If that version is too old for a needed feature, the chapter notes that a
-      newer system installation of Pandoc can override the bundled version.
+      If you find this version too low and there are Pandoc features only in a
+      later version, you can install the later version of Pandoc, and
+      <c>rmarkdown</c> will call the newer version instead of its built-in
+      version.
     </p>
 
-    <p>
-      Readers can follow the installation instructions on the Pandoc homepage
-      (<url href="http://pandoc.org" visual="pandoc.org"/>) if they need to
-      install Pandoc separately.
-    </p>
   </section>
 
   <section xml:id="latex">
     <title>LaTeX</title>
 
     <p>
-      LaTeX is only required when you want PDF output. The chapter strongly
-      recommends the lightweight, cross-platform TinyTeX distribution based on
-      TeX Live, which can be installed through the <c>tinytex</c> R package.
-    </p>
-
-    <p>
-      It also points readers to <url href="https://www.latex-project.org/get/"
-      visual="latex-project.org/get"/> for more information about LaTeX
-      distributions and installation.
+      LaTeX is required only if you want to convert your book to PDF. You may
+      see <url href="https://www.latex-project.org/get/"
+      visual="latex-project.org/get/"/> for more information about LaTeX and
+      its installation, but we strongly recommend that you install the
+      lightweight and cross-platform LaTeX distribution named
+      <url href="https://yihui.org/tinytex/" visual="TinyTeX"/> and based on
+      TeX Live. TinyTeX can be easily installed through the R package
+      <c>tinytex</c> (which should be automatically installed when you install
+      <c>bookdown</c>):
     </p>
 
     <program language="r">
       <input>tinytex::install_tinytex()</input>
     </program>
 
-    <p>
-      The Rmd source includes the following verbatim error output to show the
-      kind of missing-package failure that TinyTeX can help avoid.
-    </p>
+    <p>With TinyTeX, you should never see error messages like this:</p>
 
     <program language="latex-error">
       <input>! LaTeX Error: File `titling.sty' not found.
@@ -147,21 +139,18 @@ Execution halted</input>
     </program>
 
     <p>
-      The chapter explains that this error means a required LaTeX package was
-      missing. With TinyTeX and R Markdown, such missing packages are installed
-      automatically, so readers generally do not need to resolve them by hand.
+      The above error means you used a package that contains
+      <c>titling.sty</c>, but it was not installed. LaTeX package names are
+      often the same as the <c>*.sty</c> filenames, so in this case, you can
+      try to install the <c>titling</c> package. If you use TinyTeX with R
+      Markdown, missing LaTeX packages will be installed automatically, so you
+      never need to worry about such problems.
     </p>
 
     <p>
-      It also notes that LaTeX package names are often the same as the
-      <c>*.sty</c> filenames, so in this case you could try to install the
-      <c>titling</c> package directly.
-    </p>
-
-    <p>
-      It also shows how to inspect the installed LaTeX version from R. The first
-      snippet captures <c>pdflatex --version</c> and reformats the result so it
-      can be inserted back into the rendered document as display text.
+      LaTeX distributions and packages are also updated from time to time, and
+      you may consider updating them especially when you run into LaTeX
+      problems. You can find out the version of your LaTeX distribution by:
     </p>
 
     <program language="r">
