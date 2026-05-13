@@ -186,6 +186,16 @@ toc: yes</input>
        value = TRUE),
   sep = '\n', and = '', before = '- `', after = '`'
 )</input>
+      <output>- `beamer_presentation`
+- `github_document`
+- `html_document`
+- `ioslides_presentation`
+- `md_document`
+- `odt_document`
+- `pdf_document`
+- `powerpoint_presentation`
+- `slidy_presentation`
+- `word_document`</output>
     </program>
 
     <p>

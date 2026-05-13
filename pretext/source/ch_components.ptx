@@ -263,7 +263,12 @@ $$a^2 + b^2 = c^2$$
       <p>
         The original Rmd chapter continues with definition, example, lemma,
         theorem, proposition, proof, remark, corollary, exercise, solution,
-        and hypothesis examples to demonstrate the default theorem styles.
+        and hypothesis examples to demonstrate the default theorem styles. Its
+        inline output also notes that the proof environments currently supported
+        are <c>proof</c>, <c>remark</c>, and <c>solution</c>; for LaTeX output,
+        the <c>definition</c> theorem style is used for <c>definition</c>,
+        <c>example</c>, <c>exercise</c>, and <c>hypothesis</c>, while the
+        <c>remark</c> style is used for <c>proof</c> and <c>remark</c>.
       </p>
 
       <subsubsection xml:id="theorem-engine">

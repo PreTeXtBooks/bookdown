@@ -86,8 +86,18 @@ bookdown::html_book:
       </p>
 
       <program language="r">
-        <input>```{r gitbook-args, code=formatR::usage(bookdown::gitbook, output=FALSE, fail='none'), eval=FALSE, R.options=list(width=50)}
-```</input>
+        <input>bookdown::gitbook(
+  fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE,
+  anchor_sections = TRUE, lib_dir = "libs",
+  global_numbering = !number_sections, pandoc_args = NULL,
+  extra_dependencies = list(), ..., template = "default",
+  split_by = c("chapter", "section", "0", "1", "2", "3", "4", "5",
+               "6", "chapter+number", "section+number", "0+number",
+               "1+number", "2+number", "3+number", "4+number",
+               "5+number", "6+number", "rmd", "none"),
+  split_bib = TRUE, config = list(), table_css = TRUE,
+  code_folding = c("none", "show", "hide")
+)</input>
       </program>
 
       <p>
@@ -253,8 +263,11 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
       </ul>
 
       <program language="r">
-        <input>```{r bs4-book-args, code=formatR::usage(bookdown::bs4_book, output=FALSE, fail='none'), eval=FALSE, R.options=list(width=50)}
-```</input>
+        <input>bookdown::bs4_book(
+  theme = bs4_book_theme(), repo = NULL, ..., lib_dir = "libs",
+  pandoc_args = NULL, extra_dependencies = NULL, template = "default",
+  split_bib = FALSE, footnotes_inline = TRUE
+)</input>
       </program>
 
       <subsubsection xml:id="writing-a-bs4-book">
@@ -484,13 +497,21 @@ csl: chicago-fullnote-bibliography.csl</input>
       </p>
 
       <program language="r">
-        <input>```{r html-chapters-usage, eval=FALSE, code=formatR::usage(bookdown::html_chapters, output=FALSE, fail='none')}
-```</input>
+        <input>bookdown::html_chapters(
+  toc = TRUE, number_sections = TRUE, fig_caption = TRUE, lib_dir = "libs",
+  template = bookdown_file("templates/default.html"),
+  global_numbering = !number_sections, pandoc_args = NULL, ...,
+  base_format = rmarkdown::html_document, split_bib = TRUE,
+  page_builder = build_chapter,
+  split_by = c("chapter", "section", "0", "1", "2", "3", "4", "5",
+               "6", "chapter+number", "section+number", "0+number",
+               "1+number", "2+number", "3+number", "4+number",
+               "5+number", "6+number", "rmd", "none")
+)</input>
       </program>
 
       <program language="r">
-        <input>```{r html-book-usage, eval=FALSE, code=formatR::usage(bookdown::html_book, output=FALSE)}
-```</input>
+        <input>bookdown::html_book(...)</input>
       </program>
 
       <p>
@@ -604,8 +625,12 @@ biblio-style: apalike
     </program>
 
     <program language="r">
-      <input>```{r pdf-book-usage, eval=FALSE, code=formatR::usage(bookdown::pdf_book, output=FALSE)}
-```</input>
+      <input>bookdown::pdf_book(
+  toc = TRUE, number_sections = TRUE, fig_caption = TRUE, pandoc_args = NULL,
+  ..., base_format = rmarkdown::pdf_document, toc_unnumbered = TRUE,
+  toc_appendix = FALSE, toc_bib = FALSE, quote_footer = NULL,
+  highlight_bw = FALSE
+)</input>
     </program>
 
     <p>
@@ -633,8 +658,14 @@ biblio-style: apalike
       </p>
 
       <program language="r">
-        <input>```{r epub-book, eval=FALSE, code=formatR::usage(bookdown::epub_book, output=FALSE), R.options=list(width=50)}
-```</input>
+        <input>bookdown::epub_book(
+  fig_width = 5, fig_height = 4, dev = "png", fig_caption = TRUE,
+  number_sections = TRUE, toc = FALSE, toc_depth = 3, stylesheet = NULL,
+  cover_image = NULL, metadata = NULL, chapter_level = 1,
+  epub_version = c("epub3", "epub", "epub2"), md_extensions = NULL,
+  global_numbering = !number_sections, pandoc_args = NULL,
+  template = "default"
+)</input>
       </program>
 
       <p>

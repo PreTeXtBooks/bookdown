@@ -90,6 +90,7 @@ devtools::install_github('rstudio/bookdown')</input>
 
     <program language="r">
       <input>rmarkdown::pandoc_version()</input>
+      <output>[1] '1.19.2.1'</output>
     </program>
 
     <p>
@@ -167,10 +168,16 @@ Execution halted</input>
       <input>res &lt;- base::system('pdflatex --version', intern = TRUE)
 res &lt;- paste("## ", res)
 res &lt;- paste0(res, collapse = "\n")</input>
+      <output>## pdfTeX ...
+## kpathsea version ...
+## Copyright ...</output>
     </program>
 
     <program language="r">
       <input>system('pdflatex --version')</input>
+      <output>## pdfTeX ...
+## kpathsea version ...
+## Copyright ...</output>
     </program>
 
     <p>

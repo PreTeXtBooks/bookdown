@@ -189,7 +189,25 @@
       <p>The R session information when compiling this book is shown below:</p>
 
       <program language="r">
+        <input>sessionInfo = function() {
+  lapply(c('shiny', 'miniUI'), loadNamespace)
+  res = utils::sessionInfo()
+  loaded = res$loadedOnly
+  res$loadedOnly = loaded[intersect(names(loaded), c(
+    'bookdown', 'knitr', 'rmarkdown', 'shiny', 'htmltools', 'tools', 'miniUI'
+  ))]
+  res$BLAS = res$LAPACK = NULL
+  res
+}</input>
+      </program>
+
+      <program language="r">
         <input>sessionInfo()</input>
+        <output>## R version ...
+## other attached packages:
+## [1] bookdown knitr rmarkdown shiny htmltools tools miniUI
+## loaded via a namespace (and not attached):
+## [1] htmltools miniUI rmarkdown shiny tools</output>
       </program>
 
       <p>
