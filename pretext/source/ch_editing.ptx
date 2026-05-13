@@ -49,16 +49,13 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
       The chapter also discusses <c>output_dir</c>, <c>new_session</c>, and
       <c>preview</c>, and explains that generated output can be cleaned up with
       <c>bookdown::clean_book(TRUE)</c>. Because deleting files can be risky, it
-      recommends keeping the project under version control such as GIT.
+      recommends keeping the project under version control such as GIT. The
+      <c>new_session</c> behavior is described in <xref ref="new-session"/>.
     </p>
   </section>
 
   <section xml:id="preview-a-chapter">
     <title>Preview a chapter</title>
-
-    <p>
-      The <c>new_session</c> behavior is described in <xref ref="new-session"/>.
-    </p>
 
     <p>
       Rendering the whole book can be slow when there is a lot of computation or
@@ -208,12 +205,9 @@ output:
     <p>
       Readers can contribute content directly through GitHub pull requests when
       the book source is hosted online. They can also leave feedback through
-      email, GitHub issues, or page comments.
-    </p>
-
-    <p>
-      The edit button mentioned in <xref ref="gitbook-style"/> links each page
-      back to its Rmd source so those pull-request workflows are easier to use.
+      email, GitHub issues, or page comments. The edit button mentioned in
+      <xref ref="gitbook-style"/> links each page back to its Rmd source so
+      those pull-request workflows are easier to use.
     </p>
 
     <p>
