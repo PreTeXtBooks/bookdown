@@ -177,13 +177,13 @@
         need to at least install R and the <em>bookdown</em> package. However,
         your book does not have to be related to the R language at all. It can
         use other computing languages (C++, SQL, Python, and so on; see
-        <xref ref="ch-usage"/>), and it can even be totally irrelevant to
-        computing.
+        <xref ref="ch-usage" text="title"/>), and it can even be totally
+        irrelevant to computing.
       </p>
 
       <p>
         The software tools required to build a book are introduced in
-        <xref ref="ch-tools"/>.
+        <xref ref="ch-tools" text="title"/>.
       </p>
 
       <p>The R session information when compiling this book is shown below:</p>

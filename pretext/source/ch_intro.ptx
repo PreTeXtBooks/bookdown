@@ -28,10 +28,10 @@
       <url
         href="https://www.rstudio.com/resources/cheatsheets/"
         visual="rstudio.com/resources/cheatsheets/"
-      />. The appendices <xref ref="ch-tools"/> and <xref ref="ch-usage"/>
-      contain brief introductions to these software packages. To be able to
-      customize the book templates and themes, you should be familiar with
-      <latex/>, HTML, and CSS.
+      />. The appendices <xref ref="ch-tools" text="title"/> and
+      <xref ref="ch-usage" text="title"/> contain brief introductions to these
+      software packages. To be able to customize the book templates and themes,
+      you should be familiar with <latex/>, HTML, and CSS.
     </p>
   </introduction>
 
