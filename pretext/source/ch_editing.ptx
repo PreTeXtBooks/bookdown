@@ -167,6 +167,9 @@ output:
       including <q>Preview Book</q> and <q>Input LaTeX Math</q>. The Preview Book
       addin calls <c>bookdown::serve_book()</c>; to avoid blocking the current R
       session, the chapter recommends <c>bookdown::serve_book(daemon = TRUE)</c>.
+      If you are not familiar with addins, the original chapter points readers
+      to <url href="http://rstudio.github.io/rstudioaddins/"
+      visual="rstudio.github.io/rstudioaddins/"/>.
     </p>
 
     <figure xml:id="fig-mathquill-pretext">
@@ -207,7 +210,12 @@ output:
       the book source is hosted online. They can also leave feedback through
       email, GitHub issues, or page comments. The edit button mentioned in
       <xref ref="gitbook-style"/> links each page back to its Rmd source so
-      those pull-request workflows are easier to use.
+      those pull-request workflows are easier to use. The Rmd source links to
+      GitHub's pull-request help page at
+      <url
+        href="https://help.github.com/articles/about-pull-requests/"
+        visual="help.github.com/articles/about-pull-requests/"
+      />.
     </p>
 
     <p>

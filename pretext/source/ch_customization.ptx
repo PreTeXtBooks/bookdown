@@ -92,7 +92,9 @@ output:
 
     <p>
       The chapter also notes that comment systems such as Disqus or Hypothesis
-      can be embedded in the same way through <c>includes</c> (see
+      (<url href="https://disqus.com" visual="disqus.com"/>,
+      <url href="https://hypothes.is" visual="hypothes.is"/>) can be embedded
+      in the same way through <c>includes</c> (see
       <xref ref="collaboration"/>).
     </p>
 

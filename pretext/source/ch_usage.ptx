@@ -7,7 +7,8 @@
       As mentioned in <xref ref="ch-intro"/>, this book is not intended to be a
       comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. This chapter
       briefly explains some basic concepts and syntax in both packages and
-      points readers to further help resources such as StackOverflow.
+      points readers to further help resources such as
+      <url href="https://stackoverflow.com" visual="stackoverflow.com"/>.
     </p>
   </introduction>
 
@@ -18,15 +19,21 @@
       The <c>knitr</c> package was designed around the idea of literate
       programming: program code can be intermingled with prose in a source
       document, then extracted, executed, and displayed together with the text
-      in the rendered output. Its basic syntax is introduced in
-      <xref ref="r-code"/>.
+      in the rendered output. The Rmd source explicitly attributes this idea to
+      Donald Knuth's <q>Literate Programming</q> (1984). Its basic syntax is
+      introduced in <xref ref="r-code"/>.
     </p>
 
     <p>
       R Markdown is not the only source format supported by <c>knitr</c>. The
       same idea also applies to combinations such as R with LaTeX or HTML, and
       <c>knitr</c> can work with other computing languages such as Python, C++,
-      or SQL. The Rmd chapter includes this simple Python-engine example.
+      or SQL. The Rmd chapter includes this simple Python-engine example and
+      links to the engine documentation at
+      <url
+        href="http://rmarkdown.rstudio.com/authoring_knitr_engines.html"
+        visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"
+      />.
     </p>
 
     <program language="markdown">
@@ -38,8 +45,11 @@ print(x.split(' '))
 
     <p>
       The chapter also notes that Python users may be familiar with IPython or
-      Jupyter notebooks, and that R Markdown notebooks provide a related
-      workflow with additional benefits.
+      Jupyter notebooks (<url href="https://jupyter.org"
+      visual="jupyter.org"/>), and that R Markdown notebooks provide a related
+      workflow with additional benefits. It also points to the R Notebooks blog
+      post at <url href="https://blog.rstudio.org/2016/10/05/r-notebooks/"
+      visual="blog.rstudio.org/2016/10/05/r-notebooks/"/>.
     </p>
 
     <p>

@@ -19,7 +19,9 @@
       deploy the output. It highlights <c>publish_book()</c> in
       <c>bookdown</c> as a convenience wrapper for publishing to
       <url href="https://bookdown.org" visual="bookdown.org"/>, the hosting
-      service described there as being built on top of RStudio Connect.
+      service described there as being built on top of
+      <url href="https://posit.co/products/enterprise/connect/"
+      visual="posit.co/products/enterprise/connect/"/>.
     </p>
 
     <program language="r">
@@ -29,7 +31,9 @@
     <p>
       The first time you try to publish, the service asks you to authorize
       <c>bookdown</c> to publish to your account. After that, you can publish
-      again without repeating the authorization step.
+      again without repeating the authorization step. The original instructions
+      point readers to <url href="https://bookdown.org/connect/"
+      visual="bookdown.org/connect/"/> for the initial sign-in flow.
     </p>
 
     <program language="r">
@@ -148,10 +152,11 @@
     <title>GitHub</title>
 
     <p>
-      GitHub Pages can host the HTML output of a <c>bookdown</c> project for
-      free. Because the output is already a complete static site, the important
-      detail is to add a hidden <c>.nojekyll</c> file so GitHub does not try to
-      rebuild the site with Jekyll.
+      <url href="https://pages.github.com" visual="pages.github.com"/> can host
+      the HTML output of a <c>bookdown</c> project for free. Because the output
+      is already a complete static site, the important detail is to add a
+      hidden <c>.nojekyll</c> file so GitHub does not try to rebuild the site
+      with <url href="http://jekyllrb.com" visual="jekyllrb.com"/>.
     </p>
 
     <program language="bash">
@@ -167,7 +172,9 @@ git add .nojekyll</input>
     <p>
       The chapter also mentions a <c>/docs</c>-based GitHub Pages workflow on
       the main branch by setting <c>output_dir: "docs"</c> in
-      <c>_bookdown.yml</c> and configuring the repository settings accordingly.
+      <c>_bookdown.yml</c> and configuring the repository settings accordingly,
+      following the linked GitHub Help page at
+      <url href="http://bit.ly/2cvloKV" visual="bit.ly/2cvloKV"/>.
     </p>
 
     <p>
@@ -193,8 +200,10 @@ git push origin gh-pages</input>
 
     <p>
       Once that groundwork is done, the rest can be automated in scripts and run
-      from the cloud. The chapter uses Travis CI as its main example of a server
-      that can rebuild and redeploy the book whenever new commits are pushed.
+      from the cloud. The chapter uses
+      <url href="https://travis-ci.com" visual="travis-ci.com"/> as its main
+      example of a server that can rebuild and redeploy the book whenever new
+      commits are pushed.
     </p>
 
     <program language="bash">
