@@ -149,14 +149,16 @@
       <title>Structure of the book</title>
 
       <p>
-        Chapters <xref ref="ch-intro"/> and <xref ref="ch-components"/>
-        introduce the basic usage and syntax, which should be sufficient to get
-        most readers started in writing a book. Chapters
-        <xref ref="ch-formats"/> and <xref ref="ch-customization"/> are for
-        those who want to fine-tune the appearance of their books. The
-        <xref ref="ch-editing"/> and <xref ref="ch-publishing"/> chapters
-        include more technical details for readers who want to go beyond the
-        default <xref ref="rstudio-ide"/> workflows.
+        Chapters <xref ref="ch-intro" text="title"/> and
+        <xref ref="ch-components" text="title"/> introduce the basic usage and
+        syntax, which should be sufficient to get most readers started in
+        writing a book. Chapters <xref ref="ch-formats" text="title"/> and
+        <xref ref="ch-customization" text="title"/> are for those who want to
+        fine-tune the appearance of their books. The
+        <xref ref="ch-editing" text="title"/> and
+        <xref ref="ch-publishing" text="title"/> chapters include more
+        technical details for readers who want to go beyond the default
+        <xref ref="rstudio-ide" text="title"/> workflows.
       </p>
 
       <p>
