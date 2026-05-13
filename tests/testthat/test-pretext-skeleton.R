@@ -118,15 +118,17 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   expect_match(frontmatter, "../assets/images/cover.jpg", fixed = TRUE)
   expect_match(frontmatter, "../assets/images/logo.png", fixed = TRUE)
   expect_match(frontmatter, "../assets/images/by-nc-sa.png", fixed = TRUE)
-  expect_match(frontmatter, "<section xml:id=\"why-read-this-book\">", fixed = TRUE)
-  expect_match(frontmatter, "<section xml:id=\"structure-of-the-book\">", fixed = TRUE)
-  expect_match(frontmatter, "<section xml:id=\"software-information-and-conventions\">", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"markdown-syntax\"/>", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"a-single-document\"/>", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"ch-intro\" text=\"title\"/>", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"rstudio-ide\" text=\"title\"/>", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"ch-usage\" text=\"title\"/>", fixed = TRUE)
-  expect_match(frontmatter, "<xref ref=\"ch-tools\" text=\"title\"/>", fixed = TRUE)
+  for (text in c(
+    "<section xml:id=\"why-read-this-book\">",
+    "<section xml:id=\"structure-of-the-book\">",
+    "<section xml:id=\"software-information-and-conventions\">",
+    "<xref ref=\"markdown-syntax\"/>",
+    "<xref ref=\"a-single-document\"/>",
+    "<xref ref=\"ch-intro\" text=\"title\"/>",
+    "<xref ref=\"rstudio-ide\" text=\"title\"/>",
+    "<xref ref=\"ch-usage\" text=\"title\"/>",
+    "<xref ref=\"ch-tools\" text=\"title\"/>"
+  )) expect_match(frontmatter, text, fixed = TRUE)
   expect_match(frontmatter, "sessionInfo()", fixed = TRUE)
   expect_match(frontmatter, "github.com/rstudio/bookdown/graphs/contributors", fixed = TRUE)
   expect_match(frontmatter, "Lastly I want to thank my family", fixed = TRUE)
@@ -142,16 +144,18 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
     collapse = "\n"
   )
 
-  expect_match(intro, "<section xml:id=\"motivation\">", fixed = TRUE)
-  expect_match(intro, "<section xml:id=\"get-started\">", fixed = TRUE)
-  expect_match(intro, "<section xml:id=\"usage\">", fixed = TRUE)
-  expect_match(intro, "<section xml:id=\"new-session\">", fixed = TRUE)
-  expect_match(intro, "<section xml:id=\"some-tips\">", fixed = TRUE)
+  for (text in c(
+    "<section xml:id=\"motivation\">",
+    "<section xml:id=\"get-started\">",
+    "<section xml:id=\"usage\">",
+    "<section xml:id=\"new-session\">",
+    "<section xml:id=\"some-tips\">",
+    "<xref ref=\"ch-tools\" text=\"title\"/>",
+    "<xref ref=\"ch-usage\" text=\"title\"/>",
+    "<xref ref=\"configuration\"/>"
+  )) expect_match(intro, text, fixed = TRUE)
   expect_match(intro, "<aside>", fixed = TRUE)
   expect_match(intro, "<program language=\"r\">", fixed = TRUE)
-  expect_match(intro, "<xref ref=\"ch-tools\" text=\"title\"/>", fixed = TRUE)
-  expect_match(intro, "<xref ref=\"ch-usage\" text=\"title\"/>", fixed = TRUE)
-  expect_match(intro, "<xref ref=\"configuration\"/>", fixed = TRUE)
   expect_match(intro, "bookdown::render_book('foo.Rmd', 'bookdown::gitbook')", fixed = TRUE)
   expect_no_match(intro, "Replace this placeholder text", fixed = TRUE)
 })
