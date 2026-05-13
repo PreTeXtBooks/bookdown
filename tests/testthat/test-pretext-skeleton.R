@@ -62,6 +62,24 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   expect_match(backmatter, "<index>", fixed = TRUE)
 })
 
+test_that("PreTeXt about-author chapter mirrors the Rmd structure", {
+  source_dir <- pretext_source_dir()
+
+  about_author <- paste(
+    xfun::read_utf8(file.path(source_dir, "ch_about_author.ptx")),
+    collapse = "\n"
+  )
+
+  expect_match(about_author, "<title>About the Author</title>", fixed = TRUE)
+  expect_match(about_author, "Yihui Xie", fixed = TRUE)
+  expect_match(about_author, "href=\"http://yihui.org\" visual=\"yihui.org\"", fixed = TRUE)
+  expect_match(about_author, "<em>bookdown</em>", fixed = TRUE)
+  expect_match(about_author, "Capital of Statistics", fixed = TRUE)
+  expect_match(about_author, "https://github.com/yihui", fixed = TRUE)
+  expect_match(about_author, "classical Chinese literature", fixed = TRUE)
+  expect_no_match(about_author, "Use this sample file for author biographies", fixed = TRUE)
+})
+
 test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
   source_dir <- pretext_source_dir()
 

@@ -3,7 +3,39 @@
   <title>About the Author</title>
 
   <p>
-    Use this sample file for author biographies or introductory author notes
-    from the original Rmd book.
+    Yihui Xie (<url href="http://yihui.org" visual="yihui.org" />) is a
+    software engineer at Posit Software, PBC
+    (<url href="https://posit.co" visual="posit.co" />). He earned his PhD
+    from the Department of Statistics, Iowa State University. He is interested
+    in interactive statistical graphics and statistical computing. As an active
+    R user, he has authored several R packages, such as <em>knitr</em>,
+    <em>bookdown</em>, <em>blogdown</em>, <em>animation</em>, <em>DT</em>,
+    <em>tinytex</em>, <em>tufte</em>, <em>formatR</em>, <em>fun</em>,
+    <em>mime</em>, <em>highr</em>, <em>servr</em>, and
+    <em>Rd2roxygen</em>, among which the <em>animation</em> package won the
+    2009 John M. Chambers Statistical Software Award (ASA). He also co-authored
+    a few other R packages, including <em>shiny</em>, <em>rmarkdown</em>, and
+    <em>leaflet</em>.
+  </p>
+
+  <p>
+    In 2006, he founded the Capital of Statistics
+    (<url href="https://cosx.org" visual="cosx.org" />), which has grown into a
+    large online community on statistics in China. He initiated the Chinese R
+    conference in 2008, and has been involved in organizing R conferences in
+    China since then. During his PhD training at Iowa State University, he won
+    the Vince Sposito Statistical Computing Award (2011) and the Snedecor Award
+    (2012) in the Department of Statistics.
+  </p>
+
+  <p>
+    He occasionally rants on Twitter
+    (<url href="https://twitter.com/xieyihui" visual="twitter.com/xieyihui" />),
+    and most of the time you can find him on GitHub
+    (<url href="https://github.com/yihui" visual="github.com/yihui" />).
+  </p>
+
+  <p>
+    He enjoys spicy food as much as classical Chinese literature.
   </p>
 </chapter>
