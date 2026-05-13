@@ -55,6 +55,10 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     collapse = "\n"
   )
   expect_match(backmatter, "<references>", fixed = TRUE)
+  expect_match(backmatter, "<title>References</title>", fixed = TRUE)
+  expect_match(backmatter, "<c>book.bib</c>", fixed = TRUE)
+  expect_match(backmatter, "<c>packages.bib</c>", fixed = TRUE)
+  expect_no_match(backmatter, "Add bibliography entries or generated references here.", fixed = TRUE)
   expect_match(backmatter, "<index>", fixed = TRUE)
 })
 

@@ -3,7 +3,8 @@
   <references>
     <title>References</title>
     <biblio type="raw" xml:id="placeholder-reference">
-      Add bibliography entries or generated references here.
+      Generated references from <c>book.bib</c> and <c>packages.bib</c>
+      belong here.
     </biblio>
   </references>
 
