@@ -29,11 +29,9 @@
       same idea also applies to combinations such as R with LaTeX or HTML, and
       <c>knitr</c> can work with other computing languages such as Python, C++,
       or SQL. The Rmd chapter includes this simple Python-engine example and
-      links to the engine documentation at
-      <url
-        href="http://rmarkdown.rstudio.com/authoring_knitr_engines.html"
-        visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"
-      />.
+      links to the engine documentation at <url
+      href="http://rmarkdown.rstudio.com/authoring_knitr_engines.html"
+      visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"/>.
     </p>
 
     <program language="markdown">

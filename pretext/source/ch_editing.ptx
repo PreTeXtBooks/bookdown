@@ -211,11 +211,9 @@ output:
       email, GitHub issues, or page comments. The edit button mentioned in
       <xref ref="gitbook-style"/> links each page back to its Rmd source so
       those pull-request workflows are easier to use. The Rmd source links to
-      GitHub's pull-request help page at
-      <url
-        href="https://help.github.com/articles/about-pull-requests/"
-        visual="help.github.com/articles/about-pull-requests/"
-      />.
+      GitHub's pull-request help page at <url
+      href="https://help.github.com/articles/about-pull-requests/"
+      visual="help.github.com/articles/about-pull-requests/"/>.
     </p>
 
     <p>
