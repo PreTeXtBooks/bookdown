@@ -15,6 +15,7 @@ pretext_source_dir <- function() {
   candidates[exists][1]
 }
 
+# Returns the normalized path to the PreTeXt root directory.
 pretext_root_dir <- function() {
   normalizePath(file.path(pretext_source_dir(), ".."), mustWork = TRUE)
 }
