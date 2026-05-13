@@ -80,8 +80,8 @@
       <title>Build your book</title>
 
       <p>
-        Build the book locally using whichever method from the editing chapter
-        you prefer.
+        Build the book locally using whichever method from
+        <xref ref="build-the-book"/> you prefer.
       </p>
     </subsection>
 

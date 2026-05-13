@@ -92,7 +92,8 @@ output:
 
     <p>
       The chapter also notes that comment systems such as Disqus or Hypothesis
-      can be embedded in the same way through <c>includes</c>.
+      can be embedded in the same way through <c>includes</c> (see
+      <xref ref="collaboration"/>).
     </p>
 
     <p>
@@ -141,8 +142,9 @@ output:
     </p>
 
     <p>
-      For <c>html_book()</c>, the default style is Bootstrap, and one of the
-      built-in Bootstrap themes can be selected with the <c>theme</c> option.
+      For <c>html_book()</c>, the default style is Bootstrap as described in
+      <xref ref="bootstrap-style"/>, and one of the built-in Bootstrap themes
+      can be selected with the <c>theme</c> option.
     </p>
 
     <program language="yaml">

@@ -28,9 +28,10 @@
       <url
         href="https://www.rstudio.com/resources/cheatsheets/"
         visual="rstudio.com/resources/cheatsheets/"
-      />. The appendix of this book contains brief introductions to these
-      software packages. To be able to customize the book templates and themes,
-      you should be familiar with <latex/>, HTML, and CSS.
+      />. The appendices <xref ref="ch-tools"/> and <xref ref="ch-usage"/>
+      contain brief introductions to these software packages. To be able to
+      customize the book templates and themes, you should be familiar with
+      <latex/>, HTML, and CSS.
     </p>
   </introduction>
 
@@ -335,10 +336,10 @@ output:
 
     <p>
       More <c>bookdown</c> configuration options in <c>_bookdown.yml</c> are
-      explained in the customization chapter. Besides these configurations, you
-      can also specify some Pandoc-related configurations in the YAML metadata
-      of the first Rmd file of the book, such as the title, author, and date
-      of the book. For example:
+      explained in <xref ref="configuration"/>. Besides these configurations,
+      you can also specify some Pandoc-related configurations in the YAML
+      metadata of the first Rmd file of the book, such as the title, author,
+      and date of the book. For example:
     </p>
 
     <program language="yaml">

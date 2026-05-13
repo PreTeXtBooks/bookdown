@@ -19,7 +19,8 @@
       <c>render_book()</c> from <c>bookdown</c>. It highlights
       <c>output_format</c> as the most important argument, noting that it may be
       omitted when the default output format is already declared in the YAML of
-      the first Rmd file or in <c>_output.yml</c>.
+      the first Rmd file or in <c>_output.yml</c>, as discussed in
+      <xref ref="configuration"/>.
     </p>
 
     <program language="r">
@@ -54,6 +55,10 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
 
   <section xml:id="preview-a-chapter">
     <title>Preview a chapter</title>
+
+    <p>
+      The <c>new_session</c> behavior is described in <xref ref="new-session"/>.
+    </p>
 
     <p>
       Rendering the whole book can be slow when there is a lot of computation or
@@ -135,7 +140,7 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
     <p>
       The chapter recommends using an up-to-date RStudio IDE and saving all R
       Markdown files with UTF-8 encoding, especially when files contain
-      multibyte characters.
+      multibyte characters, as noted in <xref ref="usage"/>.
     </p>
 
     <p>
@@ -207,9 +212,15 @@ output:
     </p>
 
     <p>
+      The edit button mentioned in <xref ref="gitbook-style"/> links each page
+      back to its Rmd source so those pull-request workflows are easier to use.
+    </p>
+
+    <p>
       The chapter uses Disqus as its example of embedded HTML page comments and
       shows the JavaScript snippet that can be saved to <c>disqus.html</c> and
-      then inserted on every page via <c>after_body</c>.
+      then inserted on every page via <c>after_body</c> as in
+      <xref ref="yaml-options"/>.
     </p>
 
     <program language="html">

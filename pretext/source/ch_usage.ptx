@@ -4,8 +4,8 @@
 
   <introduction>
     <p>
-      As mentioned in the introduction chapter, this book is not intended to be
-      a comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. This chapter
+      As mentioned in <xref ref="ch-intro"/>, this book is not intended to be a
+      comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. This chapter
       briefly explains some basic concepts and syntax in both packages and
       points readers to further help resources such as StackOverflow.
     </p>
@@ -18,7 +18,8 @@
       The <c>knitr</c> package was designed around the idea of literate
       programming: program code can be intermingled with prose in a source
       document, then extracted, executed, and displayed together with the text
-      in the rendered output.
+      in the rendered output. Its basic syntax is introduced in
+      <xref ref="r-code"/>.
     </p>
 
     <p>
@@ -83,7 +84,8 @@ print(x.split(' '))
       conversion to a variety of output formats, including HTML, PDF, Word,
       slides, dashboards, and websites. The chapter explains that an R Markdown
       document typically consists of optional YAML metadata followed by the
-      document body.
+      document body. The syntax for the document body is introduced in
+      <xref ref="ch-components"/>.
     </p>
 
     <p>
