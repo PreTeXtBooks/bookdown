@@ -34,44 +34,29 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "ch_faq.ptx"
   )
   chapter_files <- grep("^ch_.*[.]ptx$", expected_files, value = TRUE)
-  chapter_ids <- data.frame(
-    file = c(
-      "ch_about_author.ptx",
-      "ch_intro.ptx",
-      "ch_components.ptx",
-      "ch_formats.ptx",
-      "ch_customization.ptx",
-      "ch_editing.ptx",
-      "ch_publishing.ptx",
-      "ch_tools.ptx",
-      "ch_usage.ptx",
-      "ch_faq.ptx"
-    ),
-    id = c(
-      "ch-about-author",
-      "ch-intro",
-      "ch-components",
-      "ch-formats",
-      "ch-customization",
-      "ch-editing",
-      "ch-publishing",
-      "ch-tools",
-      "ch-usage",
-      "ch-faq"
-    ),
-    stringsAsFactors = FALSE
+  chapter_ids <- c(
+    ch_about_author = "ch-about-author",
+    ch_intro = "ch-intro",
+    ch_components = "ch-components",
+    ch_formats = "ch-formats",
+    ch_customization = "ch-customization",
+    ch_editing = "ch-editing",
+    ch_publishing = "ch-publishing",
+    ch_tools = "ch-tools",
+    ch_usage = "ch-usage",
+    ch_faq = "ch-faq"
   )
 
   expect_true(all(file.exists(file.path(source_dir, expected_files))))
 
-  for (i in seq_len(nrow(chapter_ids))) {
+  for (stem in names(chapter_ids)) {
     chapter <- paste(
-      xfun::read_utf8(file.path(source_dir, chapter_ids$file[[i]])),
+      xfun::read_utf8(file.path(source_dir, paste0(stem, ".ptx"))),
       collapse = "\n"
     )
     expect_match(
       chapter,
-      sprintf('<chapter xml:id="%s"', chapter_ids$id[[i]]),
+      sprintf('<chapter xml:id="%s"', chapter_ids[[stem]]),
       fixed = TRUE
     )
   }
