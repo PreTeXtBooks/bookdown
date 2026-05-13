@@ -17,6 +17,10 @@ pretext_source_dir <- function() {
 
 test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   source_dir <- pretext_source_dir()
+  assets_dir <- normalizePath(
+    file.path(source_dir, "..", "assets", "images"),
+    mustWork = TRUE
+  )
 
   expected_files <- c(
     "meta_docinfo.ptx",
@@ -90,6 +94,31 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   expect_match(backmatter, "<c>packages.bib</c>", fixed = TRUE)
   expect_no_match(backmatter, "Add bibliography entries or generated references here.", fixed = TRUE)
   expect_match(backmatter, "<index>", fixed = TRUE)
+
+  expected_assets <- c(
+    "404.png",
+    "bs4-book.png",
+    "by-nc-sa.png",
+    "caution.png",
+    "citr.png",
+    "cover.jpg",
+    "dedication.pdf",
+    "disqus.png",
+    "gitbook.png",
+    "important.png",
+    "knit-logo.png",
+    "logo.png",
+    "mathquill.png",
+    "netlify-drag-drop-update.png",
+    "new-bs4-book.png",
+    "note.png",
+    "rmd-note.png",
+    "social-og.png",
+    "social-twitter.png",
+    "tip.png",
+    "warning.png"
+  )
+  expect_true(all(file.exists(file.path(assets_dir, expected_assets))))
 })
 
 test_that("PreTeXt about-author chapter mirrors the Rmd structure", {
