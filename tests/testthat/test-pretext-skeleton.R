@@ -15,12 +15,13 @@ pretext_source_dir <- function() {
   candidates[exists][1]
 }
 
+pretext_root_dir <- function() {
+  normalizePath(file.path(pretext_source_dir(), ".."), mustWork = TRUE)
+}
+
 test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   source_dir <- pretext_source_dir()
-  assets_dir <- normalizePath(
-    file.path(source_dir, "..", "assets", "images"),
-    mustWork = TRUE
-  )
+  assets_dir <- file.path(pretext_root_dir(), "assets", "images")
 
   expected_files <- c(
     "meta_docinfo.ptx",
@@ -118,7 +119,12 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "tip.png",
     "warning.png"
   )
-  expect_true(all(file.exists(file.path(assets_dir, expected_assets))))
+  for (asset in expected_assets) {
+    expect_true(
+      file.exists(file.path(assets_dir, asset)),
+      info = sprintf("Missing carried-over image asset: %s", asset)
+    )
+  }
 })
 
 test_that("PreTeXt about-author chapter mirrors the Rmd structure", {
