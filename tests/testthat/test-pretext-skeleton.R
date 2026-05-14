@@ -173,7 +173,7 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   expect_match(frontmatter, "../assets/images/cover.jpg", fixed = TRUE)
   expect_match(frontmatter, "../assets/images/logo.png", fixed = TRUE)
   expect_match(frontmatter, "../assets/images/by-nc-sa.png", fixed = TRUE)
-  for (text in c(
+  frontmatter_blocks <- c(
     "<paragraphs xml:id=\"why-read-this-book\">",
     "<paragraphs xml:id=\"structure-of-the-book\">",
     "<paragraphs xml:id=\"software-information-and-conventions\">",
@@ -183,12 +183,13 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
     "<xref ref=\"rstudio-ide\" text=\"title\"/>",
     "<xref ref=\"ch-usage\" text=\"title\"/>",
     "<xref ref=\"ch-tools\" text=\"title\"/>"
-  )) {
+  )
+  for (text in frontmatter_blocks) {
     expect_match(frontmatter, text, fixed = TRUE)
   }
   expect_equal(
     length(regmatches(frontmatter, gregexpr("</paragraphs>", frontmatter, fixed = TRUE))[[1]]),
-    3
+    sum(grepl("^<paragraphs ", frontmatter_blocks))
   )
   expect_match(frontmatter, "sessionInfo()", fixed = TRUE)
   expect_match(frontmatter, "sessionInfo = function()", fixed = TRUE)
