@@ -108,6 +108,10 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   expect_match(backmatter, "Literate Programming", fixed = TRUE)
   expect_match(backmatter, "<c>book.bib</c>", fixed = TRUE)
   expect_match(backmatter, "<c>packages.bib</c>", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-bookdown-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-rmarkdown-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-knitr-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-base-reference\"", fixed = TRUE)
   expect_no_match(backmatter, "Add bibliography entries or generated references here.", fixed = TRUE)
   expect_match(backmatter, "<index>", fixed = TRUE)
 
@@ -218,7 +222,14 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
     "<xref ref=\"ch-usage\" text=\"title\"/>",
     "<xref ref=\"configuration\"/>",
     "<xref ref=\"r-markdown\"/>",
-    "<xref ref=\"ch-editing\"/>"
+    "<xref ref=\"ch-editing\"/>",
+    "<xref ref=\"R-rmarkdown-reference\"/>",
+    "<xref ref=\"R-bookdown-reference\"/>",
+    "<xref ref=\"R-knitr-reference\"/>",
+    "<xref ref=\"R-base-reference\"/>",
+    "alignment of images using the Markdown syntax",
+    "bit.ly/tbrLtx",
+    "The differences between them may seem subtle"
   )) {
     expect_match(intro, text, fixed = TRUE)
   }

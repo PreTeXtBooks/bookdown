@@ -11,9 +11,30 @@
       Donald E. Knuth. <q>Literate Programming</q>. <em>The Computer
       Journal</em> 27(2):97--111, 1984.
     </biblio>
+    <biblio type="raw" xml:id="R-bookdown-reference">
+      Yihui Xie (2016). <em>bookdown: Authoring Books and Technical Documents
+      with R Markdown</em>. Chapman and Hall/CRC, Boca Raton, Florida.
+      <url href="https://bookdown.org/yihui/bookdown"
+      visual="bookdown.org/yihui/bookdown"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-rmarkdown-reference">
+      JJ Allaire, Yihui Xie, et al. <em>rmarkdown: Dynamic Documents for R</em>.
+      R package. <url href="https://rmarkdown.rstudio.com"
+      visual="rmarkdown.rstudio.com"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-knitr-reference">
+      Yihui Xie. <em>knitr: A General-Purpose Package for Dynamic Report
+      Generation in R</em>. R package.
+      <url href="https://yihui.org/knitr/" visual="yihui.org/knitr/"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-base-reference">
+      R Core Team. <em>R: A Language and Environment for Statistical
+      Computing</em>. R Foundation for Statistical Computing, Vienna, Austria.
+      <url href="https://www.R-project.org/" visual="R-project.org"/>.
+    </biblio>
     <biblio type="raw" xml:id="placeholder-reference">
-      Generated references from <c>book.bib</c> and <c>packages.bib</c>
-      belong here.
+      Additional generated references from <c>book.bib</c> and
+      <c>packages.bib</c> belong here.
     </biblio>
   </references>
 
