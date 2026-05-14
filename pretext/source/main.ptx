@@ -8,7 +8,6 @@
 
     <xi:include href="./meta_frontmatter.ptx" />
 
-    <xi:include href="./ch_about_author.ptx" />
     <xi:include href="./ch_intro.ptx" />
     <xi:include href="./ch_components.ptx" />
     <xi:include href="./ch_formats.ptx" />
