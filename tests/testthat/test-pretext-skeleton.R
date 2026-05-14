@@ -216,7 +216,9 @@ test_that("PreTeXt introduction chapter mirrors the Rmd structure", {
     "<section xml:id=\"some-tips\">",
     "<xref ref=\"ch-tools\" text=\"title\"/>",
     "<xref ref=\"ch-usage\" text=\"title\"/>",
-    "<xref ref=\"configuration\"/>"
+    "<xref ref=\"configuration\"/>",
+    "<xref ref=\"r-markdown\"/>",
+    "<xref ref=\"ch-editing\"/>"
   )) {
     expect_match(intro, text, fixed = TRUE)
   }
@@ -248,6 +250,18 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "<c>proof</c>, <c>remark</c>, and <c>solution</c>", fixed = TRUE)
   expect_match(components, "The only difference is that since they are", fixed = TRUE)
   expect_match(components, "The style definition is done through the", fixed = TRUE)
+  for (text in c(
+    "<xref ref=\"citations\"/>",
+    "<xref ref=\"figures\"/>",
+    "<xref ref=\"tables\"/>",
+    "<xref ref=\"equations\"/>",
+    "<xref ref=\"theorems\"/>",
+    "<xref ref=\"bs4-book\"/>",
+    "<xref ref=\"yaml-options\"/>",
+    "<xref ref=\"configuration\"/>"
+  )) {
+    expect_match(components, text, fixed = TRUE)
+  }
   expect_no_match(components, "This is an empty sample chapter file", fixed = TRUE)
 })
 
@@ -274,6 +288,20 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::pdf_book(", fixed = TRUE)
   expect_match(formats, "bookdown::epub_book(", fixed = TRUE)
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
+  for (text in c(
+    "<xref ref=\"gitbook-style\"/>",
+    "<xref ref=\"bs4-book\"/>",
+    "<xref ref=\"bootstrap-style\"/>",
+    "<xref ref=\"tufte-style\"/>",
+    "<xref ref=\"configuration\"/>",
+    "<xref ref=\"ch-components\"/>",
+    "<xref ref=\"metadata-for-sharing\"/>",
+    "<xref ref=\"figures\"/>",
+    "<xref ref=\"tables\"/>",
+    "<xref ref=\"cross-references\"/>"
+  )) {
+    expect_match(formats, text, fixed = TRUE)
+  }
   expect_no_match(formats, "code=formatR::usage", fixed = TRUE)
   for (expr in list(
     pretext_program_input(formats, "bookdown::gitbook\\("),
@@ -303,6 +331,8 @@ test_that("PreTeXt customization chapter mirrors the Rmd structure", {
   expect_match(customization, "<section xml:id=\"internationalization\">", fixed = TRUE)
   expect_match(customization, "<xref ref=\"collaboration\"/>", fixed = TRUE)
   expect_match(customization, "<xref ref=\"bootstrap-style\"/>", fixed = TRUE)
+  expect_match(customization, "<xref ref=\"usage\"/>", fixed = TRUE)
+  expect_match(customization, "<xref ref=\"configuration\"/>", fixed = TRUE)
   expect_match(customization, "https://disqus.com", fixed = TRUE)
   expect_match(customization, "https://hypothes.is", fixed = TRUE)
   expect_match(customization, "<c>breezedark</c>", fixed = TRUE)
@@ -357,6 +387,9 @@ test_that("PreTeXt publishing chapter mirrors the Rmd structure", {
   expect_match(publishing, "<section xml:id=\"features-for-html-publishing\">", fixed = TRUE)
   expect_match(publishing, "<section xml:id=\"publishers\">", fixed = TRUE)
   expect_match(publishing, "<xref ref=\"build-the-book\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"yaml-options\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"markdown-syntax\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"latex-index\"/>", fixed = TRUE)
   expect_match(publishing, "posit.co/products/enterprise/connect", fixed = TRUE)
   expect_match(publishing, "bookdown.org/connect", fixed = TRUE)
   expect_match(publishing, "pages.github.com", fixed = TRUE)
