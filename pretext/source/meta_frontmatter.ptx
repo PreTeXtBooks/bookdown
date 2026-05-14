@@ -98,7 +98,7 @@
       </p>
     </introduction>
 
-    <subsection xml:id="why-read-this-book">
+    <paragraphs xml:id="why-read-this-book">
       <title>Why read this book</title>
 
       <p>
@@ -146,9 +146,9 @@
         prepare a few R Markdown book chapters, and <em>bookdown</em> can help
         you turn them into a beautiful book.
       </p>
-    </subsection>
+    </paragraphs>
 
-    <subsection xml:id="structure-of-the-book">
+    <paragraphs xml:id="structure-of-the-book">
       <title>Structure of the book</title>
 
       <p>
@@ -170,9 +170,9 @@
         it: some sections are there for the sake of completeness, and not all
         sections are equally useful to every book project.
       </p>
-    </subsection>
+    </paragraphs>
 
-    <subsection xml:id="software-information-and-conventions">
+    <paragraphs xml:id="software-information-and-conventions">
       <title>Software information and conventions</title>
 
       <p>
@@ -220,7 +220,7 @@
         filenames are formatted in a typewriter font, and function names are
         followed by parentheses.
       </p>
-    </subsection>
+    </paragraphs>
   </preface>
 
   <acknowledgement xml:id="acknowledgments">

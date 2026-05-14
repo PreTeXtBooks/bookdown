@@ -174,9 +174,9 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   expect_match(frontmatter, "../assets/images/logo.png", fixed = TRUE)
   expect_match(frontmatter, "../assets/images/by-nc-sa.png", fixed = TRUE)
   for (text in c(
-    "<section xml:id=\"why-read-this-book\">",
-    "<section xml:id=\"structure-of-the-book\">",
-    "<section xml:id=\"software-information-and-conventions\">",
+    "<paragraphs xml:id=\"why-read-this-book\">",
+    "<paragraphs xml:id=\"structure-of-the-book\">",
+    "<paragraphs xml:id=\"software-information-and-conventions\">",
     "<xref ref=\"markdown-syntax\"/>",
     "<xref ref=\"a-single-document\"/>",
     "<xref ref=\"ch-intro\" text=\"title\"/>",
