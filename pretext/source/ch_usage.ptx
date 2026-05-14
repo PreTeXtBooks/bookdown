@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xml:id="ch-usage" xmlns:xi="http://www.w3.org/2001/XInclude">
+<appendix xml:id="ch-usage" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Software Usage</title>
 
   <introduction>
@@ -204,4 +204,4 @@ toc: yes</input>
       <c>flexdashboard</c>, <c>revealjs</c>, and <c>rmdformats</c>.
     </p>
   </section>
-</chapter>
+</appendix>

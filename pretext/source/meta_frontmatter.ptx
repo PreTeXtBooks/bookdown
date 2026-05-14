@@ -271,4 +271,6 @@
 
     <p>Elkhorn, Nebraska</p>
   </acknowledgement>
+
+  <xi:include href="./ch_about_author.ptx" />
 </frontmatter>

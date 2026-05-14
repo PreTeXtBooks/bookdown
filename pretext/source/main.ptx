@@ -8,16 +8,12 @@
 
     <xi:include href="./meta_frontmatter.ptx" />
 
-    <xi:include href="./ch_about_author.ptx" />
     <xi:include href="./ch_intro.ptx" />
     <xi:include href="./ch_components.ptx" />
     <xi:include href="./ch_formats.ptx" />
     <xi:include href="./ch_customization.ptx" />
     <xi:include href="./ch_editing.ptx" />
     <xi:include href="./ch_publishing.ptx" />
-    <xi:include href="./ch_tools.ptx" />
-    <xi:include href="./ch_usage.ptx" />
-    <xi:include href="./ch_faq.ptx" />
 
     <xi:include href="./meta_backmatter.ptx" />
   </book>
