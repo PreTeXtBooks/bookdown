@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-faq" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>FAQ</title>
+
+  <p>
+    Below is the <em>complete</em> list of frequently asked questions (FAQ).
+    Yes, there is only one question here. Personally I do not like FAQs. They
+    often mean surprises, and surprises are not good for software users.
+  </p>
+
+  <ol>
+    <li>
+      <p>
+        Q: Will <c>bookdown</c> have the features X, Y, and Z?
+      </p>
+
+      <p>
+        A: The short answer is no, but if you have asked yourself three times
+        "do I really need them" and the answer is still "yes", please feel free
+        to file a feature request to <url
+        href="https://github.com/rstudio/bookdown/issues"
+        visual="github.com/rstudio/bookdown/issues"/>.
+      </p>
+
+      <p>
+        Users asking for more features often come from the LaTeX world. If that
+        is the case for you, the answer to this question is yes, because
+        Pandoc's Markdown supports raw LaTeX code. Whenever you feel Markdown
+        cannot do the job for you, you always have the option to apply some raw
+        LaTeX code in your Markdown document. For example, you can create
+        glossaries using the <c>glossaries</c> package, or embed a complicated
+        LaTeX table, as long as you know the LaTeX syntax. However, please keep
+        in mind that the LaTeX content is not portable. It will only work for
+        LaTeX/PDF output, and will be ignored in other types of output.
+        Depending on the request, we may port a few more LaTeX features into
+        <c>bookdown</c> in the future, but our general philosophy is that
+        Markdown should be kept as simple as possible.
+      </p>
+    </li>
+  </ol>
+
+  <p>
+    The most challenging thing in the world is not to learn fancy
+    technologies, but control your own wild heart.
+  </p>
+</chapter>

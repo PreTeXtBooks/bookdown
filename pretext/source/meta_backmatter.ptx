@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-back">
+  <references>
+    <title>References</title>
+    <biblio type="raw" xml:id="xie2015-reference">
+      Yihui Xie. <em>Dynamic Documents with R and knitr</em>. Chapman and
+      Hall/CRC, 2nd edition, 2015. <url href="http://yihui.org/knitr/"
+      visual="yihui.org/knitr/"/>.
+    </biblio>
+    <biblio type="raw" xml:id="knuth1984-reference">
+      Donald E. Knuth. <q>Literate Programming</q>. <em>The Computer
+      Journal</em> 27(2):97--111, 1984.
+    </biblio>
+    <biblio type="raw" xml:id="placeholder-reference">
+      Generated references from <c>book.bib</c> and <c>packages.bib</c>
+      belong here.
+    </biblio>
+  </references>
+
   <index>
     <title>Index</title>
     <index-list/>

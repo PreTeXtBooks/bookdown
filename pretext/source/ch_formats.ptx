@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-formats" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Output Formats</title>
+
+  <introduction>
+    <p>
+      The <c>bookdown</c> package primarily supports three types of output
+      formats: HTML, LaTeX/PDF, and e-books. In this chapter, we introduce the
+      possible options for these formats. Output formats can be specified
+      either in the YAML metadata of the first Rmd file of the book, or in a
+      separate YAML file named <c>_output.yml</c> under the root directory of
+      the book.
+    </p>
+
+    <p>Here is a brief example of YAML metadata in a book source file:</p>
+
+    <program language="yaml">
+      <input>---
+title: "An Impressive Book"
+author: "Li Lei and Han Meimei"
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: true
+  bookdown::html_book:
+    css: toc.css
+documentclass: book
+---</input>
+    </program>
+
+    <p>Here is an example of <c>_output.yml</c>:</p>
+
+    <program language="yaml">
+      <input>bookdown::gitbook:
+  lib_dir: assets
+  split_by: section
+  config:
+    toolbar:
+      position: static
+bookdown::pdf_book:
+  keep_tex: true
+bookdown::html_book:
+  css: toc.css</input>
+    </program>
+  </introduction>
+
+  <section xml:id="html">
+    <title>HTML</title>
+
+    <p>
+      The main difference between rendering a book with <c>bookdown</c> and
+      rendering a single R Markdown document to HTML is that a book will
+      generate multiple HTML pages by default—normally one HTML file per
+      chapter. This makes it easier to bookmark certain chapters, share URLs,
+      and load the book more quickly in the browser.
+    </p>
+
+    <p>The chapter introduces four HTML styles:</p>
+
+    <ul>
+      <li><p>the GitBook style</p></li>
+      <li><p>the three-column Bootstrap style</p></li>
+      <li><p>the default Bootstrap style</p></li>
+      <li><p>the Tufte style</p></li>
+    </ul>
+
+    <subsection xml:id="gitbook-style">
+      <title>GitBook style</title>
+
+      <p>
+        The GitBook style was borrowed from GitBook and provides a layout with
+        a sidebar showing the table of contents on the left and the main body
+        of the book on the right. The design is responsive to the window size,
+        so navigation buttons and the sidebar adapt on narrower screens.
+      </p>
+
+      <p>
+        The easiest way to get started writing a new <c>gitbook</c> is to use
+        the RStudio Project Wizard, or create the same template with
+        <c>bookdown::create_gitbook()</c> from the R console.
+      </p>
+
+      <program language="r">
+        <input>bookdown::gitbook(
+  fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE,
+  anchor_sections = TRUE, lib_dir = "libs",
+  global_numbering = !number_sections, pandoc_args = NULL,
+  extra_dependencies = list(), ..., template = "default",
+  split_by = c("chapter", "section", "0", "1", "2", "3", "4", "5",
+               "6", "chapter+number", "section+number", "0+number",
+               "1+number", "2+number", "3+number", "4+number",
+               "5+number", "6+number", "rmd", "none"),
+  split_bib = TRUE, config = list(), table_css = TRUE,
+  code_folding = c("none", "show", "hide")
+)</input>
+      </program>
+
+      <p>
+        Most arguments are passed to <c>rmarkdown::html_document()</c>,
+        including <c>fig_caption</c>, <c>lib_dir</c>, and <c>...</c>. The
+        chapter strongly recommends using <c>fig_caption = TRUE</c> so figures
+        are properly captioned and can float correctly in LaTeX output.
+      </p>
+
+      <p>
+        Beyond the inherited HTML-document options, <c>gitbook()</c> adds
+        <c>split_by</c>, <c>split_bib</c>, and <c>config</c>. The
+        <c>split_by</c> argument controls how the HTML output is split into
+        pages.
+      </p>
+
+      <program language="markdown">
+        <input># An Introduction {#introduction}
+
+The default identifier is `an-introduction` but we changed
+it to `introduction`.</input>
+      </program>
+
+      <p>
+        The <c>config</c> option contains many user-interface settings,
+        including the TOC, toolbar, search, font settings, sharing buttons, and
+        information button. The Rmd chapter shows these defaults as YAML.
+      </p>
+
+      <program language="yaml">
+        <input>bookdown::gitbook:
+  config:
+    toc:
+      collapse: subsection
+      scroll_highlight: true
+      before: null
+      after: null
+    toolbar:
+      position: fixed
+    edit : null
+    download: null
+    search:
+      engine: lunr
+      options: null
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
+    sharing:
+      facebook: true
+      github: false
+      twitter: true
+      linkedin: false
+      weibo: false
+      instapaper: false
+      vk: false
+      whatsapp: false
+      all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+    info: true</input>
+      </program>
+
+      <program language="yaml">
+        <input>toc:
+  before: |
+    &lt;li&gt;&lt;a href="..."&gt;My Awesome Book&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="..."&gt;John Smith&lt;/a&gt;&lt;/li&gt;
+  after: |
+    &lt;li&gt;&lt;a href="https://github.com/rstudio/bookdown"&gt;
+    Proudly published with bookdown&lt;/a&gt;&lt;/li&gt;</input>
+      </program>
+
+      <program language="r">
+        <input>```{r gitbook-toolbar, echo=FALSE, fig.cap='The GitBook toolbar.', out.width='100%'}
+knitr::include_graphics('images/gitbook.png', dpi = NA)
+```</input>
+      </program>
+
+      <figure xml:id="fig-gitbook-toolbar-pretext">
+        <title>The GitBook toolbar.</title>
+        <image source="../assets/images/gitbook.png" width="100%">
+          <description>
+            <p>A screenshot of the GitBook toolbar used in the output formats chapter.</p>
+          </description>
+        </image>
+      </figure>
+
+      <p>
+        The toolbar lets readers toggle the sidebar, search the book, change
+        font and theme settings, use edit/history/view links, download other
+        formats, share links on social networks, and open the keyboard-shortcut
+        information panel.
+      </p>
+
+      <program language="yaml">
+        <input>fontsettings:
+  theme: night
+  family: serif
+  size: 3</input>
+      </program>
+
+      <program language="yaml">
+        <input>download: ["book.pdf", "book.epub"]
+download: ["pdf", "epub", "mobi"]</input>
+      </program>
+
+      <program language="yaml">
+        <input>download:
+  - ["book.pdf", "PDF"]
+  - ["book.epub", "EPUB"]</input>
+      </program>
+
+      <program language="yaml">
+        <input>---
+title: "An Awesome Book"
+author: "John Smith"
+description: "This book introduces the ABC theory, and ..."
+url: 'https\://bookdown.org/john/awesome/'
+github-repo: "john/awesome"
+cover-image: "images/cover.png"
+apple-touch-icon: "touch-icon.png"
+apple-touch-icon-size: 120
+favicon: "favicon.ico"
+---</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="bs4-book">
+      <title>Three-column Bootstrap style</title>
+
+      <p>
+        The <c>bs4_book()</c> output format is built with Bootstrap and is
+        designed to provide a clean reading experience on phones, tablets, and
+        desktop screens. On wide screens, the layout includes three columns for
+        chapters, chapter content, and within-chapter navigation.
+      </p>
+
+      <program language="r">
+        <input>```{r fig.align='center', echo=FALSE, fig.link='https://mastering-shiny.org', fig.cap="Home page of a book with the three-column Bootstrap style.", out.width=if(knitr::is_latex_output()) '100%'}
+knitr::include_graphics('images/bs4-book.png', dpi = NA)
+```</input>
+      </program>
+
+      <figure xml:id="fig-bs4-book-pretext">
+        <title>Home page of a book with the three-column Bootstrap style.</title>
+        <image source="../assets/images/bs4-book.png" width="100%">
+          <description>
+            <p>A screenshot of a book home page rendered with the bs4_book style.</p>
+          </description>
+        </image>
+      </figure>
+
+      <p>The chapter highlights these main features of <c>bs4_book</c>:</p>
+
+      <ul>
+        <li><p>customizable colors and fonts with the <c>bslib</c> package</p></li>
+        <li><p>built-in search broken down by section</p></li>
+        <li><p>a within-chapter sidebar table of contents</p></li>
+        <li><p>typography tuned for different device sizes</p></li>
+        <li><p>inline footnotes</p></li>
+        <li><p>syntax highlighting and autolinking via <c>downlit</c></p></li>
+        <li><p>enhanced metadata for social sharing</p></li>
+        <li><p>repository links for source viewing or suggesting edits</p></li>
+      </ul>
+
+      <program language="r">
+        <input>bookdown::bs4_book(
+  theme = bs4_book_theme(), repo = NULL, ..., lib_dir = "libs",
+  pandoc_args = NULL, extra_dependencies = NULL, template = "default",
+  split_bib = FALSE, footnotes_inline = TRUE
+)</input>
+      </program>
+
+      <subsubsection xml:id="writing-a-bs4-book">
+        <title>Writing a bs4_book</title>
+
+        <p>
+          The easiest way to start a <c>bs4_book</c> is the RStudio Project
+          Wizard, or <c>bookdown::create_bs4_book()</c> from the R console.
+        </p>
+
+        <program language="r">
+          <input>```{r new-bs4-book, fig.align='center', echo=FALSE, fig.cap="Screenshot of the RStudio Project Wizard for creating a new bookdown project."}
+knitr::include_graphics('images/new-bs4-book.png', dpi = NA)
+```</input>
+        </program>
+
+        <figure xml:id="fig-new-bs4-book-pretext">
+          <title>Screenshot of the RStudio Project Wizard for creating a new bookdown project.</title>
+          <image source="../assets/images/new-bs4-book.png" width="90%">
+            <description>
+              <p>The RStudio Project Wizard with the bs4_book option selected.</p>
+            </description>
+          </image>
+        </figure>
+
+        <p>
+          This style is designed for books that use one chapter per page, which
+          means each <c>.Rmd</c> file should contain a single chapter and start
+          with one first-level heading.
+        </p>
+
+        <program language="markdown">
+          <input>#   A chapter
+
+##  A section
+
+### A subsection</input>
+        </program>
+
+        <p>The chapter also gives this example <c>index.Rmd</c> YAML header:</p>
+
+        <program language="yaml">
+          <input>---
+title: "A Minimal Book Example"
+author: "Jane Doe"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::bs4_book
+url: https://bookdown.org/janedoe/bookdown-demo
+cover-image: cover.png
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The output format for this example is bookdown::bs4_book.
+---</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="styling-customization">
+        <title>Styling &amp; customization</title>
+
+        <p>
+          The <c>bs4_book()</c> format builds on Bootstrap and uses the
+          <c>bslib</c> package for easy customization of colors and fonts.
+        </p>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  theme:
+    primary: "#0d6efd"</input>
+        </program>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  theme:
+    primary: "#0d6efd"
+    base_font:
+      google: Sen
+    heading_font:
+      google:
+        family: Bitter
+        wght: 200
+    code_font:
+      google:
+        family: DM Mono
+        local: false</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="callout-blocks">
+        <title>Callout blocks</title>
+
+        <p>
+          Callout blocks can make important parts of the narrative stand out.
+          The <c>bs4_book</c> style includes predefined callout blocks such as
+          <c>.rmdnote</c>, <c>.rmdcaution</c>, <c>.rmdimportant</c>,
+          <c>.rmdtip</c>, and <c>.rmdwarning</c>.
+        </p>
+
+        <program language="markdown">
+          <input>::: {.rmdnote}
+The `bs4_book` style also includes an `.rmdnote` callout block
+like this one.
+
+```{r collapse=TRUE}`r ''``
+head(beaver1, n = 5)
+```
+:::</input>
+        </program>
+
+        <program language="r">
+          <input>```{r bs4-note, fig.align='center', echo=FALSE, fig.cap="A special callout block."}
+knitr::include_graphics('images/rmd-note.png', dpi = NA)
+```</input>
+        </program>
+
+        <figure xml:id="fig-bs4-note-pretext">
+          <title>A special callout block.</title>
+          <image source="../assets/images/rmd-note.png" width="85%">
+            <description>
+              <p>An example of a styled callout block in the bs4_book theme.</p>
+            </description>
+          </image>
+        </figure>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  theme:
+    primary: "#0d6efd"
+    danger:  "#dc3545"
+    success: "#198754"
+    info:    "#0dcaf0"
+    warning: "#ffc107"</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="html-metadata">
+        <title>HTML metadata</title>
+
+        <p>
+          <c>bs4_book()</c> uses Pandoc variables from <c>index.Rmd</c> to
+          generate HTML <c>meta</c> tags, and it also creates unique chapter
+          descriptions automatically from chapter content.
+        </p>
+      </subsubsection>
+
+      <subsubsection xml:id="bs4-book-footnotes">
+        <title>Inline Footnotes</title>
+
+        <p>
+          The <c>bs4_book</c> format makes footnotes show inline on hover. You
+          can opt out and keep footnotes at the bottom by setting
+          <c>footnotes_inline = FALSE</c>.
+        </p>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  footnotes_inline: false</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="references-bibliography">
+        <title>References/Bibliography</title>
+
+        <p>
+          If you use a footnote citation style, readers can view references near
+          the text where they are cited. The chapter recommends downloading a
+          footnote-style CSL file, for example from Zotero.
+        </p>
+
+        <program language="yaml">
+          <input>bibliography: refs.bib
+csl: chicago-fullnote-bibliography.csl</input>
+        </program>
+
+        <program language="yaml">
+          <input>suppress-bibliography: true</input>
+        </program>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  split_bib: true</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="specifying-the-repository">
+        <title>Specifying the repository</title>
+
+        <p>
+          You can specify a source repository so readers can view chapter source
+          files or suggest edits.
+        </p>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  repo:
+    base: https://github.com/hadley/ggplot2-book
+    branch: main</input>
+        </program>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  repo:
+    base: https://github.com/hadley/ggplot2-book
+    branch: main
+    subdir: book</input>
+        </program>
+
+        <program language="yaml">
+          <input>bookdown::bs4_book:
+  repo:
+    base: https://github.com/hadley/ggplot2-book
+    branch: main
+    subdir: book
+    icon: "fas fa-air-freshener"</input>
+        </program>
+      </subsubsection>
+    </subsection>
+
+    <subsection xml:id="bootstrap-style">
+      <title>The default Bootstrap style</title>
+
+      <p>
+        The default Bootstrap style in <c>bookdown</c> uses
+        <c>html_book()</c>, which in turn is a special case of
+        <c>html_chapters()</c>. Most options from
+        <c>rmarkdown::html_document()</c> still apply.
+      </p>
+
+      <program language="r">
+        <input>bookdown::html_chapters(
+  toc = TRUE, number_sections = TRUE, fig_caption = TRUE, lib_dir = "libs",
+  template = bookdown_file("templates/default.html"),
+  global_numbering = !number_sections, pandoc_args = NULL, ...,
+  base_format = rmarkdown::html_document, split_bib = TRUE,
+  page_builder = build_chapter,
+  split_by = c("chapter", "section", "0", "1", "2", "3", "4", "5",
+               "6", "chapter+number", "section+number", "0+number",
+               "1+number", "2+number", "3+number", "4+number",
+               "5+number", "6+number", "rmd", "none")
+)</input>
+      </program>
+
+      <program language="r">
+        <input>bookdown::html_book(...)</input>
+      </program>
+
+      <p>
+        The chapter explains that custom HTML templates must contain three pairs
+        of special HTML comments marking the title, TOC, and body sections.
+      </p>
+
+      <program language="html">
+        <input>&lt;!--bookdown:title:start--&gt;
+&lt;!--bookdown:title:end--&gt;
+&lt;!--bookdown:toc:start--&gt;
+&lt;!--bookdown:toc:end--&gt;
+&lt;!--bookdown:body:start--&gt;
+&lt;!--bookdown:body:end--&gt;</input>
+      </program>
+
+      <program language="r">
+        <input>```{r results='hide'}
+bookdown:::bookdown_file('templates/default.html')
+# you may use file.edit() to open this file
+```</input>
+      </program>
+
+      <program language="r">
+        <input>```{r include=FALSE}
+extract_fun = function(name, script) {
+  x = readLines(script)
+  def = paste(name, '= ')
+  i = which(substr(x, 1, nchar(def)) == def)
+  if (length(i) == 0) stop('Cannot find ', def, ' from ', script)
+  i = i[1]
+  j = which(x == '}')
+  j = min(j[j > i])
+  x[i:j]
+}
+```
+```{r eval=FALSE, tidy=FALSE, code=extract_fun('build_chapter', '../../R/html.R')}
+```</input>
+      </program>
+
+      <program language="html">
+        <input>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;A Nice Book&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="row"&gt;TOC&lt;/div&gt;
+    &lt;div class="row"&gt;
+      CHAPTER BODY
+      &lt;p&gt;
+        &lt;button&gt;PREVIOUS&lt;/button&gt;
+        &lt;button&gt;NEXT&lt;/button&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</input>
+      </program>
+
+      <program language="yaml">
+        <input>---
+output:
+  bookdown::html_book:
+    toc: true
+    css: toc.css
+---</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="tufte-style">
+      <title>Tufte style</title>
+
+      <p>
+        Like the Bootstrap style, the Tufte style is provided by
+        <c>tufte_html_book()</c>, a special case of <c>html_chapters()</c>
+        using <c>tufte::tufte_html()</c> as the base format.
+      </p>
+
+      <p>
+        It uses a main text column on the left and a margin column on the
+        right, where footnotes, margin notes, references, and margin figures
+        can appear.
+      </p>
+
+      <program language="yaml">
+        <input>---
+output:
+  bookdown::tufte_html_book:
+    toc: true
+    css: toc.css
+---</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="latex-pdf">
+    <title>LaTeX/PDF</title>
+
+    <p>
+      The chapter recommends developing a book primarily in HTML and leaving
+      the fine points of LaTeX typesetting until later. The LaTeX/PDF output
+      format is provided by <c>pdf_book()</c>, whose main purpose is to resolve
+      labels and cross-references in book output.
+    </p>
+
+    <program language="yaml">
+      <input>---
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+---</input>
+    </program>
+
+    <program language="r">
+      <input>bookdown::pdf_book(
+  toc = TRUE, number_sections = TRUE, fig_caption = TRUE, pandoc_args = NULL,
+  ..., base_format = rmarkdown::pdf_document, toc_unnumbered = TRUE,
+  toc_appendix = FALSE, toc_bib = FALSE, quote_footer = NULL,
+  highlight_bw = FALSE
+)</input>
+    </program>
+
+    <p>
+      The chapter also notes that <c>tufte_book2()</c> is essentially
+      <c>pdf_book(base_format = tufte::tufte_book)</c>.
+    </p>
+  </section>
+
+  <section xml:id="e-books">
+    <title>E-Books</title>
+
+    <p>
+      <c>bookdown</c> provides two e-book formats: EPUB and MOBI. These can be
+      read on smartphones, tablets, or dedicated e-readers.
+    </p>
+
+    <subsection xml:id="epub">
+      <title>EPUB</title>
+
+      <p>
+        To create an EPUB book, use <c>epub_book()</c>. It shares some options
+        with <c>rmarkdown::html_document()</c>, and also adds EPUB-specific
+        options such as <c>stylesheet</c>, <c>cover_image</c>,
+        <c>metadata</c>, <c>chapter_level</c>, and <c>epub_version</c>.
+      </p>
+
+      <program language="r">
+        <input>bookdown::epub_book(
+  fig_width = 5, fig_height = 4, dev = "png", fig_caption = TRUE,
+  number_sections = TRUE, toc = FALSE, toc_depth = 3, stylesheet = NULL,
+  cover_image = NULL, metadata = NULL, chapter_level = 1,
+  epub_version = c("epub3", "epub", "epub2"), md_extensions = NULL,
+  global_numbering = !number_sections, pandoc_args = NULL,
+  template = "default"
+)</input>
+      </program>
+
+      <p>
+        The chapter explains that an EPUB book is essentially a collection of
+        HTML pages bundled into one file, so many familiar bookdown features
+        still work there.
+      </p>
+    </subsection>
+
+    <subsection xml:id="mobi">
+      <title>MOBI</title>
+
+      <p>
+        MOBI e-books can be read on Kindle devices. Because Pandoc does not
+        support MOBI output directly, the chapter recommends third-party tools
+        such as Calibre. The <c>bookdown::calibre()</c> helper wraps the
+        <c>ebook-convert</c> command-line utility.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="a-single-document">
+    <title>A single document</title>
+
+    <p>
+      Sometimes you may want automatic numbering and cross-references without
+      building a full multi-file book. For that use case, <c>bookdown</c>
+      provides formats such as <c>html_document2()</c>, <c>tufte_html2()</c>,
+      <c>pdf_document2()</c>, <c>word_document2()</c>,
+      <c>tufte_handout2()</c>, and <c>tufte_book2()</c>.
+    </p>
+
+    <program language="yaml">
+      <input>output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2:
+    keep_tex: true
+  bookdown::word_document2:
+    toc: true</input>
+    </program>
+
+    <program language="r">
+      <input>```{r}
+bookdown::pdf_document2
+```</input>
+    </program>
+
+    <program language="yaml">
+      <input>output:
+  bookdown::pdf_book:
+    base_format: rticles::jss_article</input>
+    </program>
+
+    <p>
+      The chapter closes by noting that the <c>gitbook()</c> format can also
+      be used for a single R Markdown document, especially when
+      <c>split_by = 'none'</c> and optionally <c>self_contained = TRUE</c>.
+    </p>
+  </section>
+</chapter>

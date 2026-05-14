@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-components" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Components</title>
+
+  <introduction>
+    <p>
+      This chapter demonstrates the syntax of common components of a book
+      written in <c>bookdown</c>, including code chunks, figures, tables,
+      citations, math theorems, and equations. The approach is based on
+      Pandoc, so we start with the syntax of Pandoc's flavor of Markdown.
+    </p>
+  </introduction>
+
+  <section xml:id="markdown-syntax">
+    <title>Markdown syntax</title>
+
+    <p>
+      In this section, we give a very brief introduction to Pandoc's Markdown.
+      Readers who are familiar with Markdown can skip this section. The
+      comprehensive syntax of Pandoc's Markdown can be found on the Pandoc
+      website <url href="http://pandoc.org" visual="pandoc.org"/>.
+    </p>
+
+    <subsection xml:id="inline-formatting">
+      <title>Inline formatting</title>
+
+      <p>
+        You can make text <em>italic</em> by surrounding it with underscores or
+        asterisks, for example, <c>_text_</c> or <c>*text*</c>. For
+        <em>bold</em> text, use two underscores (<c>__text__</c>) or asterisks
+        (<c>**text**</c>). Text surrounded by <c>~</c> will be converted to a
+        subscript, and similarly, two carets (<c>^</c>) produce a superscript.
+        To mark text as <c>inline code</c>, use a pair of backticks, for
+        example, <c>`code`</c>. Small caps can be produced by the HTML tag
+        <c>span</c>, links are created using <c>[text](link)</c>, and the
+        syntax for images is similar: just add an exclamation mark. Footnotes
+        are put inside the square brackets after a caret, for example,
+        <c>^[This is a footnote.]</c>. We will talk about citations later in
+        this chapter.
+      </p>
+    </subsection>
+
+    <subsection xml:id="block-level-elements">
+      <title>Block-level elements</title>
+
+      <p>Section headers can be written after a number of pound signs, for example,</p>
+
+      <program language="markdown">
+        <input># First-level header
+
+## Second-level header
+
+### Third-level header</input>
+      </program>
+
+      <p>
+        If you do not want a certain heading to be numbered, you can add
+        <c>{-}</c> after the heading.
+      </p>
+
+      <program language="markdown">
+        <input># Preface {-}</input>
+      </program>
+
+      <p>
+        Unordered list items start with <c>*</c>, <c>-</c>, or <c>+</c>, and
+        you can nest one list within another list by indenting the sub-list by
+        four spaces.
+      </p>
+
+      <program language="markdown">
+        <input>- one item
+- one item
+- one item
+    - one item
+    - one item</input>
+      </program>
+
+      <p>The output is:</p>
+
+      <ul>
+        <li><p>one item</p></li>
+        <li><p>one item</p></li>
+        <li>
+          <p>one item</p>
+          <ul>
+            <li><p>one item</p></li>
+            <li><p>one item</p></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>
+        Ordered list items start with numbers (the rule for nested lists is the
+        same as above).
+      </p>
+
+      <program language="markdown">
+        <input>1. the first item
+2. the second item
+3. the third item</input>
+      </program>
+
+      <p>The output does not look too much different with the Markdown source:</p>
+
+      <ol>
+        <li><p>the first item</p></li>
+        <li><p>the second item</p></li>
+        <li><p>the third item</p></li>
+      </ol>
+
+      <p>Blockquotes are written after <c>&gt;</c>, and the Rmd source uses a Mark Twain quotation as its example.</p>
+
+      <program language="markdown">
+        <input>&gt; A blockquote example
+&gt;
+&gt; --- Mark Twain</input>
+      </program>
+
+      <blockquote>
+        <p>A blockquote example.</p>
+        <p>— Mark Twain</p>
+      </blockquote>
+
+      <p>
+        Plain code blocks can be written after three or more backticks, and you
+        can also indent the blocks by four spaces.
+      </p>
+
+      <program language="markdown">
+        <input>```
+This text is displayed verbatim / preformatted
+```
+
+Or indent by four spaces:
+
+    This text is displayed verbatim / preformatted</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="math-expressions">
+      <title>Math expressions</title>
+
+      <p>
+        Inline LaTeX equations can be written in a pair of dollar signs using
+        the LaTeX syntax, for example,
+        <c>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</c>; math expressions of
+        the display style can be written in a pair of double dollar signs.
+      </p>
+
+      <md>
+        f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}
+      </md>
+
+      <p>You can also use math environments inside dollar pairs, for example,</p>
+
+      <program language="latex">
+        <input>$$\begin{array}{ccc}
+x_{11} &amp; x_{12} &amp; x_{13}\\
+x_{21} &amp; x_{22} &amp; x_{23}
+\end{array}$$</input>
+      </program>
+
+      <program language="latex">
+        <input>$$X = \begin{bmatrix}1 &amp; x_{1}\\
+1 &amp; x_{2}\\
+1 &amp; x_{3}
+\end{bmatrix}$$</input>
+      </program>
+
+      <program language="latex">
+        <input>$$\Theta = \begin{pmatrix}\alpha &amp; \beta\\
+\gamma &amp; \delta
+\end{pmatrix}$$</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="markdown-extensions">
+    <title>Markdown extensions by bookdown</title>
+
+    <p>
+      Although Pandoc's Markdown is much richer than the original Markdown
+      syntax, it still lacks a number of things that we may need for academic
+      writing. For example, it supports math equations, but you cannot number
+      and reference equations in multi-page HTML or EPUB output. We have
+      provided a few Markdown extensions in <c>bookdown</c> to fill the gaps.
+    </p>
+
+    <subsection xml:id="equations">
+      <title>Number and reference equations</title>
+
+      <p>
+        To number and refer to equations, put them in equation environments and
+        assign labels to them using the syntax <c>(#eq:label)</c>.
+      </p>
+
+      <program language="latex">
+        <input>\begin{equation}
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (#eq:binom)
+\end{equation}</input>
+      </program>
+
+      <p>It renders the equation below:</p>
+
+      <md>
+        f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}
+      </md>
+
+      <aside>
+        <title>Caution</title>
+        <p>
+          All labels in <c>bookdown</c> must only contain alphanumeric
+          characters, <c>:</c>, <c>-</c>, and/or <c>/</c>. Equation references
+          work best for LaTeX/PDF output, and they are not well supported in
+          Word output or e-books. For HTML output, <c>bookdown</c> can only
+          number the equations with labels.
+        </p>
+      </aside>
+
+      <program language="latex">
+        <input>\begin{equation*}
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*}</input>
+      </program>
+
+      <program language="latex">
+        <input>\begin{align}
+g(X_{n}) &amp;= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
+\sqrt{n}[g(X_{n})-g(\theta)] &amp;= g'\left({\tilde{\theta}}\right)
+  \sqrt{n}[X_{n}-\theta ] (#eq:align)
+\end{align}</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="theorems">
+      <title>Theorems and proofs</title>
+
+      <p>
+        Theorems and proofs are commonly used in articles and books in
+        mathematics. However, please do not be misled by the names: a theorem
+        is just a numbered or labeled environment, and it does not have to be a
+        mathematical theorem. Similarly, a proof is an unnumbered environment.
+      </p>
+
+      <program language="markdown">
+        <input>::: {.theorem}
+This is a `theorem` environment that can contain **any**
+_Markdown_ syntax.
+:::</input>
+      </program>
+
+      <program language="markdown">
+        <input>::: {.theorem #pyth name="Pythagorean theorem"}
+For a right triangle, if $c$ denotes the length of the hypotenuse
+and $a$ and $b$ denote the lengths of the other two sides, we have
+
+$$a^2 + b^2 = c^2$$
+:::</input>
+      </program>
+
+      <p>
+        The proof environments currently supported are <c>proof</c>,
+        <c>remark</c>, and <c>solution</c>. The syntax is similar to theorem
+        environments, and proof environments can also be named using the
+        <c>name</c> attribute. The only difference is that since they are
+        unnumbered, you cannot reference them, even if you provide an ID to a
+        proof environment.
+      </p>
+
+      <p>
+        We have tried to make all these theorem and proof environments work out
+        of the box, no matter if your output is PDF or HTML. If you are a
+        LaTeX or HTML expert, you may want to customize the style of these
+        environments anyway (see Chapter <xref ref="ch-customization"/>).
+        Customization in HTML is easy with CSS, and each environment is
+        enclosed in <c>&lt;div&gt;&lt;/div&gt;</c> with the CSS class being the
+        environment name, e.g., <c>&lt;div class="lemma"&gt;&lt;/div&gt;</c>.
+        For LaTeX output, we have predefined the style to be
+        <c>definition</c> for environments <c>definition</c>, <c>example</c>,
+        <c>exercise</c>, and <c>hypothesis</c>, and <c>remark</c> for
+        environments <c>proof</c> and <c>remark</c>. All other environments use
+        the <c>plain</c> style. The style definition is done through the
+        <c>\theoremstyle{}</c> command of the <c>amsthm</c> package. If you do
+        not want the default theorem definitions to be automatically added by
+        <c>bookdown</c>, you can set
+        <c>options(bookdown.theorem.preamble = FALSE)</c>. This can be useful,
+        for example, to avoid conflicts in single documents (Section
+        <xref ref="a-single-document"/>) using the output format
+        <c>bookdown::pdf_book</c> with a <c>base_format</c> that has already
+        included <c>amsmath</c> definitions.
+      </p>
+
+      <subsubsection xml:id="theorem-engine">
+        <title>A note on the old syntax</title>
+
+        <p>
+          For older versions of <c>bookdown</c> (before v0.21), a theorem
+          environment could be written with an older fenced-code syntax. This
+          still works, but the newer fenced-Div syntax is recommended.
+        </p>
+
+        <program language="r">
+          <input>bookdown::fence_theorems("01-intro.Rmd", output = "01-intro-new.Rmd")</input>
+        </program>
+      </subsubsection>
+    </subsection>
+
+    <subsection xml:id="special-headers">
+      <title>Special headers</title>
+
+      <p>
+        There are a few special types of first-level headers that will be
+        processed differently in <c>bookdown</c>, including <c>(PART)</c>
+        headers for parts and <c>(APPENDIX)</c> headers for appendices.
+      </p>
+
+      <program language="markdown">
+        <input># (PART) Part I {-}
+
+# Chapter One
+
+# Chapter Two
+
+# (PART) Part II {-}
+
+# Chapter Three</input>
+      </program>
+
+      <program language="markdown">
+        <input># Chapter One
+
+# Chapter Two
+
+# (APPENDIX) Appendix {-}
+
+# Appendix A
+
+# Appendix B</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="text-references">
+      <title>Text references</title>
+
+      <p>
+        You can assign some text to a label and reference the text using the
+        label elsewhere in your document. This can be particularly useful for
+        long figure and table captions.
+      </p>
+
+      <program language="markdown">
+        <input>(ref:foo) Define a text reference **here**.</input>
+      </program>
+
+      <program language="markdown">
+        <input>A normal paragraph.
+
+(ref:foo) A scatterplot of the data `cars` using **base** R graphics.
+
+```{r foo, fig.cap='(ref:foo)'}
+plot(cars)  # a scatterplot
+```</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="r-code">
+    <title>R code</title>
+
+    <p>
+      There are two types of R code in R Markdown and <c>knitr</c> documents:
+      R code chunks, and inline R code.
+    </p>
+
+    <program language="markdown">
+      <input>```{r chunk-label, echo = FALSE, fig.cap = 'A figure caption.'}
+1 + 1
+rnorm(10)  # 10 random numbers
+plot(dist ~ speed, cars)  # a scatterplot
+```</input>
+    </program>
+  </section>
+
+  <section xml:id="figures">
+    <title>Figures</title>
+
+    <p>
+      By default, figures have no captions in the output generated by
+      <c>knitr</c>. If we assign a figure caption to a code chunk via the chunk
+      option <c>fig.cap</c>, R plots will be put into figure environments,
+      automatically labeled and numbered, and can also be cross-referenced.
+    </p>
+
+    <aside>
+      <title>Important</title>
+      <p>
+        If you want to cross-reference figures or tables generated from a code
+        chunk, please make sure the chunk label only contains alphanumeric
+        characters, slashes, or dashes.
+      </p>
+    </aside>
+
+    <program language="r">
+      <input>```{r pressure-plot, fig.asp=.7, fig.width=6, fig.cap='A figure example with the specified aspect ratio, width, and alignment.', fig.align='center', out.width='90%'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+```</input>
+    </program>
+
+    <program language="r">
+      <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\%.'}
+par(mar = c(4, 4, .1, .1))
+plot(cars, pch = 19)
+```</input>
+    </program>
+
+    <program language="r">
+      <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+plot(cars, pch = 19)
+```</input>
+    </program>
+
+    <program language="r">
+      <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
+knitr::include_graphics(rep('images/knit-logo.png', 3))
+```</input>
+    </program>
+
+    <figure xml:id="fig-knitr-logo-pretext">
+      <title>Three knitr logos included in the document from an external PNG image file.</title>
+      <image source="../assets/images/knit-logo.png" width="35%">
+        <description>
+          <p>The knitr logo image reused from the Rmd example assets.</p>
+        </description>
+      </image>
+    </figure>
+  </section>
+
+  <section xml:id="tables">
+    <title>Tables</title>
+
+    <p>
+      For now, the most convenient way to generate a table is the function
+      <c>knitr::kable()</c>, because there are some internal tricks in
+      <c>knitr</c> to make it work with <c>bookdown</c>.
+    </p>
+
+    <program language="r">
+      <input>```{r table-single, tidy=FALSE}
+knitr::kable(
+  head(mtcars[, 1:8], 10), booktabs = TRUE,
+  caption = 'A table of the first 10 rows of the mtcars data.'
+)
+```</input>
+    </program>
+
+    <program language="r">
+      <input>```{r table-multi, tidy=FALSE}
+knitr::kable(
+  list(
+    head(iris[, 1:2], 3),
+    head(mtcars[, 1:3], 5)
+  ),
+  caption = 'A Tale of Two Tables.', booktabs = TRUE
+)
+```</input>
+    </program>
+
+    <program language="markdown">
+      <input>Table: A simple table in Markdown.
+
+ Sepal.Length   Sepal.Width   Petal.Length   Petal.Width
+-------------  ------------  -------------  ------------
+          5.1           3.5            1.4           0.2
+          4.9           3.0            1.4           0.2
+          4.7           3.2            1.3           0.2</input>
+    </program>
+  </section>
+
+  <section xml:id="cross-references">
+    <title>Cross-references</title>
+
+    <p>
+      You can reference sections using the same syntax <c>\@ref(label)</c>,
+      where <c>label</c> is the section ID. By default, Pandoc will generate an
+      ID for all section headers, but it is safer to assign IDs manually.
+    </p>
+  </section>
+
+  <section xml:id="custom-blocks">
+    <title>Custom blocks</title>
+
+    <p>
+      Custom blocks are often used in technical books to create salient boxes
+      of code and/or narrative that call the reader's attention, such as notes
+      and warnings.
+    </p>
+  </section>
+
+  <section xml:id="citations">
+    <title>Citations</title>
+
+    <p>
+      Pandoc offers two methods for managing citations and bibliographic
+      references in a document: <c>pandoc-citeproc</c>, or a PDF-only citation
+      package such as <c>natbib</c> or <c>biblatex</c>.
+    </p>
+
+    <program language="yaml">
+      <input>output:
+  pdf_document:
+    citation_package: natbib
+  bookdown::pdf_book:
+    citation_package: biblatex</input>
+    </program>
+
+    <program language="bibtex">
+      <input>@Manual{R-base,
+  title = {R: A Language and Environment for Statistical
+    Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2016},
+  url = {https://www.R-project.org/},
+}</input>
+    </program>
+
+    <program language="r">
+      <input>```{r write-bib, comment='', warning=FALSE}
+# the second argument can be a .bib file
+knitr::write_bib(c('knitr', 'stringr'), '', width = 60)
+```</input>
+    </program>
+  </section>
+
+  <section xml:id="latex-index">
+    <title>Index</title>
+
+    <p>
+      Currently the index is only supported for LaTeX/PDF output. To print an
+      index after the book, you can use the LaTeX package <c>makeidx</c> in
+      the preamble.
+    </p>
+
+    <program language="latex">
+      <input>\usepackage{makeidx}
+\makeindex</input>
+    </program>
+
+    <subsection xml:id="inserting-index-entries">
+      <title>Inserting Entries</title>
+
+      <program language="latex">
+        <input>Version Control\index{Version Control} is an
+important component of the SDLC.</input>
+      </program>
+
+      <program language="latex">
+        <input>Git\index{Version Control!Git} is a
+popular version control system.</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="building-the-index">
+      <title>Building the Index</title>
+
+      <p>
+        To build the index, insert <c>\printindex</c> at the end of your book
+        through the YAML option <c>includes -&gt; after_body</c>.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="html-widgets">
+    <title>HTML widgets</title>
+
+    <p>
+      HTML widgets were originally designed for HTML output only, and they
+      require the availability of JavaScript, so they will not work in
+      non-HTML output formats, such as LaTeX/PDF.
+    </p>
+
+    <program language="r">
+      <input>```{r eval=FALSE}
+install.packages('webshot')
+webshot::install_phantomjs()
+```</input>
+    </program>
+
+    <program language="r">
+      <input>```{r DT-demo, fig.cap='A table widget rendered via the DT package.', dev='png', cache=TRUE, cache.extra=packageVersion('DT'), screenshot.opts=list(zoom=2), out.width=if(knitr::is_latex_output()) '100%'}
+DT::datatable(iris)
+```</input>
+    </program>
+  </section>
+
+  <section xml:id="web-pages-and-shiny-apps">
+    <title>Web pages and Shiny apps</title>
+
+    <p>
+      Similar to HTML widgets, arbitrary web pages can be embedded in the book
+      with <c>knitr::include_url()</c>. The related function
+      <c>knitr::include_app()</c> was designed for embedding Shiny apps.
+    </p>
+
+    <program language="r">
+      <input>```{r miniUI, fig.cap='A Shiny app created via the miniUI package; you can see a live version at https://yihui.shinyapps.io/miniUI/.', screenshot.opts=list(delay=20,zoom=2), dev='png', cache=TRUE, fig.align='center', fig.width=8, fig.height=6, out.width=if(knitr::is_latex_output()) '100%'}
+knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
+```</input>
+    </program>
+  </section>
+</chapter>

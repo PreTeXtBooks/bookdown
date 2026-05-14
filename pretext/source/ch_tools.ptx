@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-tools" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Software Tools</title>
+
+  <introduction>
+    <p>
+      This appendix gives a brief introduction to the software packages required
+      for working with R Markdown and <c>bookdown</c>, with an emphasis on how
+      to install and maintain the core tools.
+    </p>
+  </introduction>
+
+  <section xml:id="r-and-r-packages">
+    <title>R and R packages</title>
+
+    <p>
+      R can be downloaded from a CRAN mirror such as
+      <url href="https://cran.rstudio.com" visual="cran.rstudio.com"/>. Since R
+      has several releases each year, the chapter notes that you may want to
+      upgrade it occasionally.
+    </p>
+
+    <p>
+      To install <c>bookdown</c>, the Rmd source first gives the simplest
+      package-installation command.
+    </p>
+
+    <program language="r">
+      <input>install.packages("bookdown")</input>
+    </program>
+
+    <p>
+      It then shows how to install optional dependencies as well, which can be
+      convenient if you do not mind installing packages that may not be used in
+      a given project.
+    </p>
+
+    <program language="r">
+      <input>install.packages("bookdown", dependencies = TRUE)</input>
+    </program>
+
+    <p>
+      To test the development version from GitHub, the chapter recommends
+      installing <c>devtools</c> first if necessary and then installing
+      <c>bookdown</c> from the repository.
+    </p>
+
+    <program language="r">
+      <input>if (!requireNamespace('devtools')) install.packages('devtools')
+devtools::install_github('rstudio/bookdown')</input>
+    </program>
+
+    <p>
+      Since packages on CRAN and GitHub are updated regularly, the chapter also
+      suggests updating your installed packages from time to time.
+    </p>
+
+    <program language="r">
+      <input>update.packages(ask = FALSE)</input>
+    </program>
+
+    <p>
+      Although it is not required, the chapter also recommends the RStudio IDE
+      as a convenient environment for R-related work. The RStudio IDE can be
+      downloaded from <url href="https://www.posit.co"
+      visual="posit.co"/>.
+    </p>
+  </section>
+
+  <section xml:id="pandoc">
+    <title>Pandoc</title>
+
+    <p>
+      An R Markdown document (<c>*.Rmd</c>) is first compiled to Markdown
+      (<c>*.md</c>) through the <c>knitr</c> package, and then Markdown is
+      compiled to other output formats (such as LaTeX or HTML) through Pandoc.
+      This process is automated by the <c>rmarkdown</c> package. You do not
+      need to install <c>knitr</c> or <c>rmarkdown</c> separately, because they
+      are the required packages of <c>bookdown</c> and will be automatically
+      installed when you install <c>bookdown</c>. However, Pandoc is not an R
+      package, so it will not be automatically installed when you install
+      <c>bookdown</c>. You can follow the installation instructions on the
+      Pandoc homepage (<url href="http://pandoc.org" visual="pandoc.org"/>) to
+      install Pandoc, but if you use the RStudio IDE, you do not really need to
+      install Pandoc separately, because RStudio includes a copy of Pandoc. The
+      Pandoc version number can be obtained via:
+    </p>
+
+    <program language="r">
+      <input>rmarkdown::pandoc_version()</input>
+      <output>[1] '1.19.2.1'</output>
+    </program>
+
+    <p>
+      If you find this version too low and there are Pandoc features only in a
+      later version, you can install the later version of Pandoc, and
+      <c>rmarkdown</c> will call the newer version instead of its built-in
+      version.
+    </p>
+
+  </section>
+
+  <section xml:id="latex">
+    <title>LaTeX</title>
+
+    <p>
+      LaTeX is required only if you want to convert your book to PDF. You may
+      see <url href="https://www.latex-project.org/get/"
+      visual="latex-project.org/get/"/> for more information about LaTeX and
+      its installation, but we strongly recommend that you install the
+      lightweight and cross-platform LaTeX distribution named
+      <url href="https://yihui.org/tinytex/" visual="TinyTeX"/> and based on
+      TeX Live. TinyTeX can be easily installed through the R package
+      <c>tinytex</c> (which should be automatically installed when you install
+      <c>bookdown</c>):
+    </p>
+
+    <program language="r">
+      <input>tinytex::install_tinytex()</input>
+    </program>
+
+    <p>With TinyTeX, you should never see error messages like this:</p>
+
+    <program language="latex-error">
+      <input>! LaTeX Error: File `titling.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name:
+! Emergency stop.
+&lt;read *&gt;
+
+l.107 ^^M
+
+pandoc: Error producing PDF
+Error: pandoc document conversion failed with error 43
+Execution halted</input>
+    </program>
+
+    <p>
+      The above error means you used a package that contains
+      <c>titling.sty</c>, but it was not installed. LaTeX package names are
+      often the same as the <c>*.sty</c> filenames, so in this case, you can
+      try to install the <c>titling</c> package. If you use TinyTeX with R
+      Markdown, missing LaTeX packages will be installed automatically, so you
+      never need to worry about such problems.
+    </p>
+
+    <p>
+      LaTeX distributions and packages are also updated from time to time, and
+      you may consider updating them especially when you run into LaTeX
+      problems. You can find out the version of your LaTeX distribution by:
+    </p>
+
+    <program language="r">
+      <input>res &lt;- base::system('pdflatex --version', intern = TRUE)
+res &lt;- paste("## ", res)
+res &lt;- paste0(res, collapse = "\n")</input>
+      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+## kpathsea version 6.3.4
+## Copyright 2022 Han The Thanh</output>
+    </program>
+
+    <program language="r">
+      <input>system('pdflatex --version')</input>
+      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+## kpathsea version 6.3.4
+## Copyright 2022 Han The Thanh</output>
+    </program>
+
+    <p>
+      For maintenance, the chapter recommends updating TinyTeX packages when you
+      run into LaTeX problems and reinstalling TinyTeX entirely if an annual
+      upgrade becomes necessary.
+    </p>
+
+    <program language="r">
+      <input>tinytex::tlmgr_update()</input>
+    </program>
+
+    <program language="r">
+      <input>tinytex::reinstall_tinytex()</input>
+    </program>
+  </section>
+</chapter>

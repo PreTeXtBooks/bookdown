@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-usage" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Software Usage</title>
+
+  <introduction>
+    <p>
+      As mentioned in <xref ref="ch-intro"/>, this book is not intended to be a
+      comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. This chapter
+      briefly explains some basic concepts and syntax in both packages and
+      points readers to further help resources such as
+      <url href="https://stackoverflow.com" visual="stackoverflow.com"/>.
+    </p>
+  </introduction>
+
+  <section xml:id="knitr">
+    <title>knitr</title>
+
+    <p>
+      The <c>knitr</c> package was designed around the idea of literate
+      programming: program code can be intermingled with prose in a source
+      document, then extracted, executed, and displayed together with the text
+      in the rendered output. The Rmd source explicitly attributes this idea to
+      <xref ref="knuth1984-reference"/>. Its basic syntax is introduced in
+      <xref ref="r-code"/>.
+    </p>
+
+    <p>
+      R Markdown is not the only source format supported by <c>knitr</c>. The
+      same idea also applies to combinations such as R with LaTeX or HTML, and
+      <c>knitr</c> can work with other computing languages such as Python, C++,
+      or SQL. The Rmd chapter includes this simple Python-engine example and
+      links to the engine documentation at <url
+      href="http://rmarkdown.rstudio.com/authoring_knitr_engines.html"
+      visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"/>.
+    </p>
+
+    <program language="markdown">
+      <input>`r ''````{python}
+x = 'Hello, Python World!'
+print(x.split(' '))
+```</input>
+    </program>
+
+    <p>
+      The chapter also notes that Python users may be familiar with IPython or
+      Jupyter notebooks (<url href="https://jupyter.org"
+      visual="jupyter.org"/>), and that R Markdown notebooks provide a related
+      workflow with additional benefits. It also points to the R Notebooks blog
+      post at <url href="https://blog.rstudio.org/2016/10/05/r-notebooks/"
+      visual="blog.rstudio.org/2016/10/05/r-notebooks/"/>.
+    </p>
+
+    <p>
+      To show a literal code chunk in a document, the Rmd source demonstrates a
+      small inline expression that produces an empty string before the chunk
+      header, while wrapping the whole example in four backticks.
+    </p>
+
+    <program language="markdown">
+      <input>````
+`r "\x60r ''\x60"````{r}
+# a literal code chunk
+```
+````</input>
+    </program>
+
+    <p>
+      After compilation, the inline expression disappears and the visible result
+      looks like this.
+    </p>
+
+    <program language="markdown">
+      <input>`r ""````{r}
+# a literal code chunk
+```
+````</input>
+    </program>
+
+    <p>
+      Normally you do not need to call <c>knitr</c> functions directly when
+      compiling a document because <c>rmarkdown</c> calls <c>knitr</c> for you.
+      If you only want to knit a source document without converting it further,
+      the chapter points readers to <c>knitr::knit()</c>.
+    </p>
+  </section>
+
+  <section xml:id="r-markdown">
+    <title>R Markdown</title>
+
+    <p>
+      Thanks to R and Pandoc, R Markdown documents can combine computation with
+      conversion to a variety of output formats, including HTML, PDF, Word,
+      slides, dashboards, and websites. The chapter explains that an R Markdown
+      document typically consists of optional YAML metadata followed by the
+      document body. The syntax for the document body is introduced in
+      <xref ref="ch-components"/>.
+    </p>
+
+    <p>
+      Metadata is written at the very beginning of the document and is delimited
+      by lines containing three dashes.
+    </p>
+
+    <program language="yaml">
+      <input>---
+title: "An R Markdown Document"
+author: "Yihui Xie"
+---</input>
+    </program>
+
+    <p>
+      Character values are often quoted for safety, and logical values can be
+      written with forms such as <c>yes</c>/<c>true</c> and
+      <c>no</c>/<c>false</c>.
+    </p>
+
+    <program language="yaml">
+      <input>link-citations: yes</input>
+    </program>
+
+    <p>
+      The chapter also shows two equivalent ways to write vector values.
+    </p>
+
+    <program language="yaml">
+      <input>output: ["html_document", "word_document"]</input>
+    </program>
+
+    <program language="yaml">
+      <input>output:
+  - "html_document"
+  - "word_document"</input>
+    </program>
+
+    <p>
+      List values are written by indenting nested fields two more spaces, as in
+      this output-format example.
+    </p>
+
+    <program language="yaml">
+      <input>output:
+  bookdown::gitbook:
+    split_by: "section"
+    split_bib: no</input>
+    </program>
+
+    <p>
+      A common mistake is forgetting that indentation. The Rmd chapter contrasts
+      the malformed structure below with the correctly indented version that most
+      users intend.
+    </p>
+
+    <program language="yaml">
+      <input>output:
+html_document:
+toc: yes</input>
+    </program>
+
+    <program language="yaml">
+      <input>output: null
+html_document: null
+toc: yes</input>
+    </program>
+
+    <program language="yaml">
+      <input>output:
+  html_document:
+    toc: yes</input>
+    </program>
+
+    <p>
+      The R Markdown output format is specified in the <c>output</c> field of
+      the YAML metadata, and you need to consult the R help pages for the
+      possible options, e.g., <c>?rmarkdown::html_document</c>, or
+      <c>?bookdown::gitbook</c>. The meanings of most other fields in YAML can
+      be found in the Pandoc documentation.
+    </p>
+
+    <p>
+      The <c>rmarkdown</c> package has provided these R Markdown output formats:
+    </p>
+
+    <program language="r">
+      <input>knitr::combine_words(
+  grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')),
+       value = TRUE),
+  sep = '\n', and = '', before = '- `', after = '`'
+)</input>
+      <output>- `beamer_presentation`
+- `github_document`
+- `html_document`
+- `ioslides_presentation`
+- `md_document`
+- `odt_document`
+- `pdf_document`
+- `powerpoint_presentation`
+- `slidy_presentation`
+- `word_document`</output>
+    </program>
+
+    <p>
+      Finally, the chapter notes that many more output formats are available in
+      other packages, including <c>bookdown</c>, <c>tufte</c>, <c>rticles</c>,
+      <c>flexdashboard</c>, <c>revealjs</c>, and <c>rmdformats</c>.
+    </p>
+  </section>
+</chapter>

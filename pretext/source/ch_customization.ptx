@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-customization" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Customization</title>
+
+  <introduction>
+    <p>
+      As mentioned at the beginning of this book, readers are expected to have
+      some basic knowledge of R Markdown. This chapter focuses on how
+      <c>bookdown</c> output can be customized, either with simple YAML
+      metadata options or by replacing larger pieces of the Pandoc template.
+    </p>
+  </introduction>
+
+  <section xml:id="yaml-options">
+    <title>YAML options</title>
+
+    <p>
+      For most types of output formats, you can customize the syntax
+      highlighting styles using the <c>highlight</c> option of the specific
+      format. Currently, the possible styles are <c>default</c>, <c>tango</c>,
+      <c>pygments</c>, <c>kate</c>, <c>monochrome</c>, <c>espresso</c>,
+      <c>zenburn</c>, <c>haddock</c>, and <c>breezedark</c>. For example, you
+      can choose the <c>tango</c> style for the <c>gitbook</c> format:
+    </p>
+
+    <program language="yaml">
+      <input>---
+output:
+  bookdown::gitbook:
+    highlight: tango
+---</input>
+    </program>
+
+    <p>
+      For HTML output, the most common customization point is the <c>css</c>
+      option. A more general option is <c>includes</c>, which works for both
+      HTML and LaTeX and provides the <c>in_header</c>, <c>before_body</c>, and
+      <c>after_body</c> sub-options.
+    </p>
+
+    <p>The Rmd chapter illustrates the basic structure of an HTML document:</p>
+
+    <program language="html">
+      <input>&lt;html&gt;
+
+  &lt;head&gt;
+  &lt;!-- head content here, e.g. CSS and JS --&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+  &lt;!-- body content here --&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;</input>
+    </program>
+
+    <p>It also shows the corresponding high-level LaTeX document structure:</p>
+
+    <program language="latex">
+      <input>\documentclass{book}
+
+% LaTeX preamble
+% insert in_header here
+
+\begin{document}
+% insert before_body here
+
+% body content here
+
+% insert after_body here
+\end{document}</input>
+    </program>
+
+    <p>
+      One HTML example inserts a MathJax configuration file into the page head
+      so displayed equation numbers appear on the left instead of the right.
+    </p>
+
+    <program language="html">
+      <input>&lt;script type="text/x-mathjax-config"&gt;
+MathJax.Hub.Config({
+  TeX: { TagSide: "left" }
+});
+&lt;/script&gt;</input>
+    </program>
+
+    <program language="yaml">
+      <input>---
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: mathjax-number.html
+---</input>
+    </program>
+
+    <p>
+      The chapter also notes that comment systems such as Disqus or Hypothesis
+      (<url href="https://disqus.com" visual="disqus.com"/>,
+      <url href="https://hypothes.is" visual="hypothes.is"/>) can be embedded
+      in the same way through <c>includes</c> (see
+      <xref ref="collaboration"/>).
+    </p>
+
+    <p>
+      For LaTeX output, the same mechanism can be used to add packages or
+      preamble fixes. The Rmd source gives this example preamble file.
+    </p>
+
+    <program language="latex">
+      <input>\usepackage{booktabs}
+\usepackage{longtable}
+
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi</input>
+    </program>
+
+    <program language="yaml">
+      <input>---
+output:
+  bookdown::pdf_book:
+    includes:
+      in_header: preamble.tex
+---</input>
+    </program>
+  </section>
+
+  <section xml:id="theming">
+    <title>Theming</title>
+
+    <p>
+      Sometimes the goal is to change the overall look and feel rather than add
+      a single snippet. The chapter explains that formats such as
+      <c>gitbook</c>, <c>tufte_html_book</c>, and <c>tufte_book2</c> already
+      have stronger built-in themes, while <c>html_book()</c> and
+      <c>pdf_book()</c> are more open to customization.
+    </p>
+
+    <p>
+      As mentioned in Section <xref ref="bootstrap-style"/>, the default style
+      for <c>html_book()</c> is the Bootstrap style. The Bootstrap style
+      actually has several built-in themes that you can use, including
+      <c>default</c>, <c>bootstrap</c>, <c>cerulean</c>, <c>cosmo</c>,
+      <c>darkly</c>, <c>flatly</c>, <c>journal</c>, <c>lumen</c>,
+      <c>paper</c>, <c>readable</c>, <c>sandstone</c>, <c>simplex</c>,
+      <c>spacelab</c>, <c>united</c>, and <c>yeti</c>. You can set the theme
+      via the <c>theme</c> option, e.g.,
+    </p>
+
+    <program language="yaml">
+      <input>---
+output:
+  bookdown::html_book:
+    theme: united
+---</input>
+    </program>
+
+    <p>
+      If none of the built-in Bootstrap styles are suitable, the chapter
+      recommends setting <c>theme</c> to <c>null</c> and using custom CSS or
+      HTML includes instead.
+    </p>
+
+    <p>
+      For <c>pdf_book()</c>, one common customization is changing the document
+      class. The Rmd source gives the KOMA-Script <c>scrbook</c> class as an
+      example.
+    </p>
+
+    <program language="yaml">
+      <input>---
+documentclass: scrbook
+output:
+  bookdown::pdf_book:
+    template: null
+---</input>
+    </program>
+
+    <p>
+      When changing document classes, an additional Pandoc argument may be
+      needed so top-level headings are treated as chapters.
+    </p>
+
+    <program language="yaml">
+      <input>documentclass: krantz
+output:
+  bookdown::pdf_book:
+    pandoc_args: --top-level-division=chapter</input>
+    </program>
+  </section>
+
+  <section xml:id="templates">
+    <title>Templates</title>
+
+    <p>
+      Pandoc uses templates when converting Markdown to other output formats.
+      These templates are plain-text files containing variables such as
+      <c>$title$</c> and <c>$body$</c> that Pandoc later substitutes.
+    </p>
+
+    <program language="html">
+      <input>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;$title$&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+  $body$
+  &lt;/body&gt;
+&lt;/html&gt;</input>
+    </program>
+
+    <p>The chapter then gives this simple Markdown input document:</p>
+
+    <program language="markdown">
+      <input>---
+title: A Nice Book
+---
+
+# Introduction
+
+This is a **nice** book!</input>
+    </program>
+
+    <p>Applying the template yields HTML like the following:</p>
+
+    <program language="html">
+      <input>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;A Nice Book&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+  &lt;h1&gt;Introduction&lt;/h1&gt;
+
+  &lt;p&gt;This is a &lt;strong&gt;nice&lt;/strong&gt; book!&lt;/p&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</input>
+    </program>
+
+    <p>
+      The chapter explains that HTML, LaTeX, and EPUB templates are more
+      complex in practice, but they follow the same idea. It also points readers
+      to Pandoc's documentation and template repository for the full list of
+      available variables.
+    </p>
+  </section>
+
+  <section xml:id="configuration">
+    <title>Configuration</title>
+
+    <p>
+      In addition to chapter files and output formats, a book can be configured
+      through <c>_bookdown.yml</c>. The Rmd chapter lists optional settings such
+      as the merged-book filename, pre/post chapter scripts, edit/history/view
+      links, output directory, and clean-up targets.
+    </p>
+
+    <ul>
+      <li><p><c>book_filename</c></p></li>
+      <li><p><c>delete_merged_file</c></p></li>
+      <li><p><c>before_chapter_script</c></p></li>
+      <li><p><c>after_chapter_script</c></p></li>
+      <li><p><c>edit</c>, <c>history</c>, and <c>view</c></p></li>
+      <li><p><c>rmd_subdir</c> and <c>include_md</c></p></li>
+      <li><p><c>output_dir</c></p></li>
+      <li><p><c>clean</c></p></li>
+    </ul>
+
+    <program language="yaml">
+      <input>book_filename: "my-book.Rmd"
+delete_merged_file: true
+before_chapter_script: ["script1.R", "script2.R"]
+after_chapter_script: "script3.R"
+view: https://github.com/rstudio/bookdown-demo/blob/master/%s
+edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+output_dir: "book-output"
+clean: ["my-book.bbl", "R-packages.bib"]</input>
+    </program>
+  </section>
+
+  <section xml:id="internationalization">
+    <title>Internationalization</title>
+
+    <p>
+      If the language of a book is not English, certain automatically generated
+      labels and interface strings may need translation. For non-LaTeX output,
+      these values can be configured in the <c>language</c> field of
+      <c>_bookdown.yml</c>.
+    </p>
+
+    <p>
+      The Rmd chapter shows an R snippet that prints the default language
+      settings from internal <c>bookdown</c> objects.
+    </p>
+
+    <program language="r">
+      <input>```{r echo=FALSE, comment='', results='asis'}
+cat('```yaml\n')
+cat(yaml::as.yaml(list(language = list(
+    label = c(bookdown:::label_names, bookdown:::label_names_math2),
+    ui = bookdown:::ui_names
+  ))
+))
+cat('```')
+```</input>
+    </program>
+
+    <p>
+      A simple label customization example changes the figure prefix to
+      uppercase.
+    </p>
+
+    <program language="yaml">
+      <input>language:
+  label:
+    fig: "FIGURE "</input>
+    </program>
+
+    <p>
+      The chapter also gives an example of using expressions for both labels and
+      UI terms, here in Hungarian.
+    </p>
+
+    <program language="yaml">
+      <input>language:
+  label:
+    fig: !expr function(i) paste(i, 'ábra')
+  ui:
+    chapter_name: !expr function(i) paste0(i, '. fejezet')</input>
+    </program>
+
+    <p>
+      Finally, the chapter notes an important caveat for languages using pure
+      CJK headings: Pandoc may not generate identifiers automatically, so manual
+      identifiers may need to be appended to section headings for
+      cross-references.
+    </p>
+  </section>
+</chapter>
