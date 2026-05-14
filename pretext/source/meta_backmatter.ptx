@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-back">
+  <xi:include href="./ch_tools.ptx" />
+  <xi:include href="./ch_usage.ptx" />
+  <xi:include href="./ch_faq.ptx" />
+
   <references>
     <title>References</title>
     <biblio type="raw" xml:id="xie2015-reference">

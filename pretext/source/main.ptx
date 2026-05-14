@@ -14,9 +14,6 @@
     <xi:include href="./ch_customization.ptx" />
     <xi:include href="./ch_editing.ptx" />
     <xi:include href="./ch_publishing.ptx" />
-    <xi:include href="./ch_tools.ptx" />
-    <xi:include href="./ch_usage.ptx" />
-    <xi:include href="./ch_faq.ptx" />
 
     <xi:include href="./meta_backmatter.ptx" />
   </book>

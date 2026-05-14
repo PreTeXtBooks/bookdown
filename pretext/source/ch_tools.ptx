@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xml:id="ch-tools" xmlns:xi="http://www.w3.org/2001/XInclude">
+<appendix xml:id="ch-tools" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Software Tools</title>
 
   <introduction>
@@ -183,4 +183,4 @@ res &lt;- paste0(res, collapse = "\n")</input>
       <input>tinytex::reinstall_tinytex()</input>
     </program>
   </section>
-</chapter>
+</appendix>
