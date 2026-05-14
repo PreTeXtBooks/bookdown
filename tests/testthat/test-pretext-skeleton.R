@@ -186,6 +186,10 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   )) {
     expect_match(frontmatter, text, fixed = TRUE)
   }
+  expect_equal(
+    length(regmatches(frontmatter, gregexpr("</paragraphs>", frontmatter, fixed = TRUE))[[1]]),
+    3
+  )
   expect_match(frontmatter, "sessionInfo()", fixed = TRUE)
   expect_match(frontmatter, "sessionInfo = function()", fixed = TRUE)
   expect_match(frontmatter, "## R version", fixed = TRUE)
