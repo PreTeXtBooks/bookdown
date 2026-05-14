@@ -264,8 +264,9 @@ We have finished a nice book.</input>
       You can override the above behavior by including a configuration file
       named <c>_bookdown.yml</c> in the book directory. It is a YAML file, and
       R Markdown users should be familiar with this format since it is also
-      used to write the metadata in the beginning of R Markdown documents. You
-      can use a field named <c>rmd_files</c> to define your own list and order
+      used to write the metadata in the beginning of R Markdown documents
+      (you can learn more about YAML in <xref ref="r-markdown"/>). You can use
+      a field named <c>rmd_files</c> to define your own list and order
       of Rmd files for the book. For example,
     </p>
 

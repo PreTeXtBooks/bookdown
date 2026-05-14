@@ -63,10 +63,10 @@ bookdown::html_book:
     <p>The chapter introduces four HTML styles:</p>
 
     <ul>
-      <li><p>the GitBook style</p></li>
-      <li><p>the three-column Bootstrap style</p></li>
-      <li><p>the default Bootstrap style</p></li>
-      <li><p>the Tufte style</p></li>
+      <li><p>the GitBook style (<xref ref="gitbook-style"/>)</p></li>
+      <li><p>the three-column Bootstrap style (<xref ref="bs4-book"/>)</p></li>
+      <li><p>the default Bootstrap style (<xref ref="bootstrap-style"/>)</p></li>
+      <li><p>the Tufte style (<xref ref="tufte-style"/>)</p></li>
     </ul>
 
     <subsection xml:id="gitbook-style">
@@ -186,9 +186,9 @@ knitr::include_graphics('images/gitbook.png', dpi = NA)
 
       <p>
         The toolbar lets readers toggle the sidebar, search the book, change
-        font and theme settings, use edit/history/view links, download other
-        formats, share links on social networks, and open the keyboard-shortcut
-        information panel.
+        font and theme settings, use edit/history/view links (see
+        <xref ref="configuration"/>), download other formats, share links on
+        social networks, and open the keyboard-shortcut information panel.
       </p>
 
       <program language="yaml">
@@ -249,7 +249,10 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
         </image>
       </figure>
 
-      <p>The chapter highlights these main features of <c>bs4_book</c>:</p>
+      <p>
+        In addition to the basic bookdown components (<xref ref="ch-components"/>),
+        the main features of <c>bs4_book</c> are:
+      </p>
 
       <ul>
         <li><p>customizable colors and fonts with the <c>bslib</c> package</p></li>
@@ -408,8 +411,9 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
 
         <p>
           <c>bs4_book()</c> uses Pandoc variables from <c>index.Rmd</c> to
-          generate HTML <c>meta</c> tags, and it also creates unique chapter
-          descriptions automatically from chapter content.
+          generate HTML <c>meta</c> tags (see <xref ref="metadata-for-sharing"/>),
+          and it also creates unique chapter descriptions automatically from
+          chapter content.
         </p>
       </subsubsection>
 
@@ -613,7 +617,9 @@ output:
       The chapter recommends developing a book primarily in HTML and leaving
       the fine points of LaTeX typesetting until later. The LaTeX/PDF output
       format is provided by <c>pdf_book()</c>, whose main purpose is to resolve
-      labels and cross-references in book output.
+      labels and cross-references written using the syntax described in
+      <xref ref="figures"/>, <xref ref="tables"/>, and
+      <xref ref="cross-references"/>.
     </p>
 
     <program language="yaml">
@@ -670,8 +676,9 @@ biblio-style: apalike
 
       <p>
         The chapter explains that an EPUB book is essentially a collection of
-        HTML pages bundled into one file, so many familiar bookdown features
-        still work there.
+        HTML pages bundled into one file, so features from
+        <xref ref="ch-components"/> such as figure and table captions,
+        cross-references, custom blocks, and citations still work in EPUB.
       </p>
     </subsection>
 
@@ -723,6 +730,8 @@ bookdown::pdf_document2
       The chapter closes by noting that the <c>gitbook()</c> format can also
       be used for a single R Markdown document, especially when
       <c>split_by = 'none'</c> and optionally <c>self_contained = TRUE</c>.
+      All features introduced in <xref ref="ch-components"/> are available in
+      these single-document formats.
     </p>
   </section>
 </chapter>

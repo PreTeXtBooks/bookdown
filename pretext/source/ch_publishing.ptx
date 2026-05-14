@@ -356,8 +356,9 @@ monofontoptions: "Scale=0.7"</input>
     </program>
 
     <p>
-      The Rmd source then shows a set of LaTeX preamble tweaks for fonts,
-      floating environments, quotations, and hyperlink handling.
+      In the LaTeX preamble (see <xref ref="yaml-options"/>), the Rmd source
+      shows a set of tweaks for fonts, floating environments, quotations, and
+      hyperlink handling.
     </p>
 
     <program language="latex">
@@ -376,6 +377,10 @@ monofontoptions: "Scale=0.7"</input>
     <program language="latex">
       <input>\renewenvironment{quote}{\begin{VF}}{\end{VF}}</input>
     </program>
+
+    <p>
+      The quote environment style can be seen in <xref ref="markdown-syntax"/>.
+    </p>
 
     <program language="latex">
       <input>\let\oldhref\href
@@ -408,7 +413,9 @@ monofontoptions: "Scale=0.7"</input>
     <p>
       The chapter explains why <c>cairo_pdf</c> is used to embed fonts, why
       <c>highlight_bw</c> is useful for black-and-white printing, and why
-      <c>xelatex</c> was chosen to simplify custom-font support.
+      <c>xelatex</c> was chosen to simplify custom-font support. The index is
+      printed via <c>latex/after_body.tex</c> as described in
+      <xref ref="latex-index"/>.
     </p>
   </section>
 </chapter>

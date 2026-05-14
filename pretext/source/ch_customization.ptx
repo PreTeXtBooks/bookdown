@@ -254,7 +254,9 @@ This is a **nice** book!</input>
       The chapter explains that HTML, LaTeX, and EPUB templates are more
       complex in practice, but they follow the same idea. It also points readers
       to Pandoc's documentation and template repository for the full list of
-      available variables.
+      available variables. For HTML output, <c>bookdown</c> requires some
+      additional comment tokens in the template; see
+      <xref ref="bootstrap-style"/>.
     </p>
   </section>
 
@@ -262,7 +264,8 @@ This is a **nice** book!</input>
     <title>Configuration</title>
 
     <p>
-      In addition to chapter files and output formats, a book can be configured
+      We have mentioned <c>rmd_files</c> in <xref ref="usage"/>, and in
+      addition to chapter files and output formats, a book can be configured
       through <c>_bookdown.yml</c>. The Rmd chapter lists optional settings such
       as the merged-book filename, pre/post chapter scripts, edit/history/view
       links, output directory, and clean-up targets.
@@ -331,7 +334,9 @@ cat('```')
 
     <p>
       The chapter also gives an example of using expressions for both labels and
-      UI terms, here in Hungarian.
+      UI terms, here in Hungarian. The <c>edit</c> field under <c>ui</c>
+      specifies the text associated with the edit link configured in
+      <xref ref="configuration"/>.
     </p>
 
     <program language="yaml">
