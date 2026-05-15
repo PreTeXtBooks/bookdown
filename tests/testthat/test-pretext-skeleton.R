@@ -389,6 +389,41 @@ test_that("PreTeXt customization chapter mirrors the Rmd structure", {
   expect_match(customization, "<xref ref=\"bootstrap-style\"/>", fixed = TRUE)
   expect_match(customization, "<xref ref=\"usage\"/>", fixed = TRUE)
   expect_match(customization, "<xref ref=\"configuration\"/>", fixed = TRUE)
+  expect_match(
+    customization,
+    paste0(
+      "As we mentioned in the very beginning of this book, you are expected to\\s+",
+      "have some basic knowledge about R Markdown"
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "The <c>in_header</c> option takes a file path and inserts it into the\\s+",
+      "<c>&lt;head&gt;</c> tag\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "Some publishers \\(e\\.g\\., Springer and Chapman &amp; Hall/CRC\\) have their\\s+",
+      "own LaTeX style or class files\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "<c>rmd_subdir</c>: whether to search for book source Rmd files in\\s+",
+      "subdirectories \\(by default, only the root directory is searched\\)\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "There is one caveat when you write in a language that uses multibyte\\s+",
+      "characters, such as Chinese, Japanese, and Korean \\(CJK\\)"
+    )
+  )
   expect_match(customization, "https://disqus.com", fixed = TRUE)
   expect_match(customization, "https://hypothes.is", fixed = TRUE)
   expect_match(customization, "<c>breezedark</c>", fixed = TRUE)

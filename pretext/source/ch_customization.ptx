@@ -4,10 +4,13 @@
 
   <introduction>
     <p>
-      As mentioned at the beginning of this book, readers are expected to have
-      some basic knowledge of R Markdown. This chapter focuses on how
-      <c>bookdown</c> output can be customized, either with simple YAML
-      metadata options or by replacing larger pieces of the Pandoc template.
+      As we mentioned in the very beginning of this book, you are expected to
+      have some basic knowledge about R Markdown, and we have been focusing on
+      introducing the <c>bookdown</c> features instead of <c>rmarkdown</c>. In
+      fact, R Markdown is highly customizable, and there are many options that
+      you can use to customize the output document. Depending on how much you
+      want to customize the output, you may use some simple options in the YAML
+      metadata, or just replace the entire Pandoc template.
     </p>
   </introduction>
 
@@ -32,13 +35,16 @@ output:
     </program>
 
     <p>
-      For HTML output, the most common customization point is the <c>css</c>
-      option. A more general option is <c>includes</c>, which works for both
-      HTML and LaTeX and provides the <c>in_header</c>, <c>before_body</c>, and
-      <c>after_body</c> sub-options.
+      For HTML output formats, you are most likely to use the <c>css</c> option
+      to provide your own CSS stylesheets to customize the appearance of HTML
+      elements. There is an option <c>includes</c> that applies to more
+      formats, including HTML and LaTeX. The <c>includes</c> option allows you
+      to insert arbitrary custom content before and/or after the body of the
+      output. It has three sub-options: <c>in_header</c>, <c>before_body</c>,
+      and <c>after_body</c>. You need to know the basic structure of an HTML or
+      LaTeX document to understand these options. The source of an HTML
+      document looks like this:
     </p>
-
-    <p>The Rmd chapter illustrates the basic structure of an HTML document:</p>
 
     <program language="html">
       <input>&lt;html&gt;
@@ -54,7 +60,14 @@ output:
 &lt;/html&gt;</input>
     </program>
 
-    <p>It also shows the corresponding high-level LaTeX document structure:</p>
+    <p>
+      The <c>in_header</c> option takes a file path and inserts it into the
+      <c>&lt;head&gt;</c> tag. The <c>before_body</c> file will be inserted
+      right below the opening <c>&lt;body&gt;</c> tag, and <c>after_body</c> is
+      inserted before the closing tag <c>&lt;/body&gt;</c>.
+    </p>
+
+    <p>A LaTeX source document has a similar structure:</p>
 
     <program language="latex">
       <input>\documentclass{book}
@@ -72,8 +85,12 @@ output:
     </program>
 
     <p>
-      One HTML example inserts a MathJax configuration file into the page head
-      so displayed equation numbers appear on the left instead of the right.
+      The <c>includes</c> option is very useful and flexible. For HTML output,
+      it means you can insert arbitrary HTML code into the output. For example,
+      when you have LaTeX math expressions rendered via the MathJax library in
+      the HTML output, and want the equation numbers to be displayed on the
+      left (default is on the right), you can create a text file that contains
+      the following code:
     </p>
 
     <program language="html">
@@ -83,6 +100,13 @@ MathJax.Hub.Config({
 });
 &lt;/script&gt;</input>
     </program>
+
+    <p>
+      Let's assume the file is named <c>mathjax-number.html</c>, and it is in
+      the root directory of your book (the directory that contains all your Rmd
+      files). You can insert this file into the HTML head via the
+      <c>in_header</c> option, e.g.,
+    </p>
 
     <program language="yaml">
       <input>---
@@ -94,16 +118,22 @@ output:
     </program>
 
     <p>
-      The chapter also notes that comment systems such as Disqus or Hypothesis
-      (<url href="https://disqus.com" visual="disqus.com"/>,
-      <url href="https://hypothes.is" visual="hypothes.is"/>) can be embedded
-      in the same way through <c>includes</c> (see
-      <xref ref="collaboration"/>).
+      Another example is to enable comments or discussions on your HTML pages.
+      There are several possibilities, such as Disqus
+      (<url href="https://disqus.com" visual="disqus.com"/>) or Hypothesis
+      (<url href="https://hypothes.is" visual="hypothes.is"/>). These services
+      can be easily embedded in your HTML book via the <c>includes</c> option
+      (see <xref ref="collaboration"/> for details).
     </p>
 
     <p>
-      For LaTeX output, the same mechanism can be used to add packages or
-      preamble fixes. The Rmd source gives this example preamble file.
+      Similarly, if you are familiar with LaTeX, you can add arbitrary LaTeX
+      code to the preamble. That means you can use any LaTeX packages and set
+      up any package options for your book. For example, this book used the
+      <c>in_header</c> option to use a few more LaTeX packages like
+      <c>booktabs</c> (for better-looking tables) and <c>longtable</c> (for
+      tables that span across multiple pages), and applied a fix to an XeLaTeX
+      problem that links on graphics do not work:
     </p>
 
     <program language="latex">
@@ -125,6 +155,11 @@ output:
 \fi</input>
     </program>
 
+    <p>
+      The above LaTeX code is saved in a file <c>preamble.tex</c>, and the YAML
+      metadata looks like this:
+    </p>
+
     <program language="yaml">
       <input>---
 output:
@@ -139,11 +174,14 @@ output:
     <title>Theming</title>
 
     <p>
-      Sometimes the goal is to change the overall look and feel rather than add
-      a single snippet. The chapter explains that formats such as
-      <c>gitbook</c>, <c>tufte_html_book</c>, and <c>tufte_book2</c> already
-      have stronger built-in themes, while <c>html_book()</c> and
-      <c>pdf_book()</c> are more open to customization.
+      Sometimes you may want to change the overall theme of the output, and
+      usually this can be done through the <c>in_header</c> option described in
+      the previous section, or the <c>css</c> option if the output is HTML.
+      Some output formats have their unique themes, such as <c>gitbook</c>,
+      <c>tufte_html_book</c>, and <c>tufte_book2</c>, and you may not want to
+      customize these themes too much. By comparison, the output formats
+      <c>html_book()</c> and <c>pdf_book()</c> are not tied to particular
+      themes and more customizable.
     </p>
 
     <p>
@@ -166,15 +204,18 @@ output:
     </program>
 
     <p>
-      If none of the built-in Bootstrap styles are suitable, the chapter
-      recommends setting <c>theme</c> to <c>null</c> and using custom CSS or
-      HTML includes instead.
+      If you do not like any of these Bootstrap styles, you can set
+      <c>theme</c> to <c>null</c>, and apply your own CSS through the
+      <c>css</c> or <c>includes</c> option.
     </p>
 
     <p>
-      For <c>pdf_book()</c>, one common customization is changing the document
-      class. The Rmd source gives the KOMA-Script <c>scrbook</c> class as an
-      example.
+      For <c>pdf_book()</c>, besides the <c>in_header</c> option mentioned in
+      the previous section, another possibility is to change the document
+      class. There are many possible LaTeX classes for books, such as
+      <c>memoir</c>, <c>amsbook</c>, KOMA-Script and so on. Here is a brief
+      sample of the YAML metadata specifying the <c>scrbook</c> class from the
+      KOMA-Script package:
     </p>
 
     <program language="yaml">
@@ -187,8 +228,20 @@ output:
     </program>
 
     <p>
-      When changing document classes, an additional Pandoc argument may be
-      needed so top-level headings are treated as chapters.
+      Some publishers (e.g., Springer and Chapman &amp; Hall/CRC) have their
+      own LaTeX style or class files. You may try to change the
+      <c>documentclass</c> option to use their document classes, although
+      typically it is not as simple as that. You may end up using
+      <c>in_header</c>, or even design a custom Pandoc LaTeX template to
+      accommodate these document classes.
+    </p>
+
+    <p>
+      Note that when you change <c>documentclass</c>, you are likely to specify
+      an additional Pandoc argument <c>--top-level-division=chapter</c> so that
+      Pandoc knows the first-level headers should be treated as chapters
+      instead of sections (this is the default when <c>documentclass</c> is
+      <c>book</c>), e.g.,
     </p>
 
     <program language="yaml">
@@ -203,9 +256,11 @@ output:
     <title>Templates</title>
 
     <p>
-      Pandoc uses templates when converting Markdown to other output formats.
-      These templates are plain-text files containing variables such as
-      <c>$title$</c> and <c>$body$</c> that Pandoc later substitutes.
+      When Pandoc converts Markdown to another output format, it uses a
+      template under the hood. The template is a plain-text file that contains
+      some variables of the form <c>$variable$</c>. These variables will be
+      replaced by their values generated by Pandoc. Below is a very brief
+      template for HTML output:
     </p>
 
     <program language="html">
@@ -220,7 +275,12 @@ output:
 &lt;/html&gt;</input>
     </program>
 
-    <p>The chapter then gives this simple Markdown input document:</p>
+    <p>
+      It has two variables <c>title</c> and <c>body</c>. The value of
+      <c>title</c> comes from the <c>title</c> field of the YAML metadata, and
+      <c>body</c> is the HTML code generated from the body of the Markdown
+      input document. For example, suppose we have a Markdown document:
+    </p>
 
     <program language="markdown">
       <input>---
@@ -232,7 +292,10 @@ title: A Nice Book
 This is a **nice** book!</input>
     </program>
 
-    <p>Applying the template yields HTML like the following:</p>
+    <p>
+      If we use the above template to generate an HTML document, its source
+      code will be like this:
+    </p>
 
     <program language="html">
       <input>&lt;html&gt;
@@ -251,11 +314,20 @@ This is a **nice** book!</input>
     </program>
 
     <p>
-      The chapter explains that HTML, LaTeX, and EPUB templates are more
-      complex in practice, but they follow the same idea. It also points readers
-      to Pandoc's documentation and template repository for the full list of
-      available variables. For HTML output, <c>bookdown</c> requires some
-      additional comment tokens in the template; see
+      The actual HTML, LaTeX, and EPUB templates are more complicated, but the
+      idea is the same. You need to know what variables are available: some
+      variables are built-in Pandoc variables, and some can be either defined
+      by users in the YAML metadata, or passed from the command-line option
+      <c>-V</c> or <c>--variable</c>. Some variables only make sense in
+      specific output formats, e.g., the <c>documentclass</c> variable is only
+      used in LaTeX output. You can find all default Pandoc templates in the
+      GitHub repository <url href="https://github.com/jgm/pandoc-templates"
+      visual="github.com/jgm/pandoc-templates"/>.
+    </p>
+
+    <p>
+      Note that for HTML output, <c>bookdown</c> requires some additional
+      comment tokens in the template, and we have explained them in
       <xref ref="bootstrap-style"/>.
     </p>
   </section>
@@ -264,22 +336,82 @@ This is a **nice** book!</input>
     <title>Configuration</title>
 
     <p>
-      We have mentioned <c>rmd_files</c> in <xref ref="usage"/>, and in
-      addition to chapter files and output formats, a book can be configured
-      through <c>_bookdown.yml</c>. The Rmd chapter lists optional settings such
-      as the merged-book filename, pre/post chapter scripts, edit/history/view
-      links, output directory, and clean-up targets.
+      We have mentioned <c>rmd_files</c> in <xref ref="usage"/>, and there are
+      more (optional) settings you can configure for a book in
+      <c>_bookdown.yml</c>. For the <c>bs4_book()</c> format, the
+      <c>edit</c>, <c>history</c>, and <c>view</c> fields have no effect and
+      similar configuration can be specified with the repo argument of the
+      output function (see <xref ref="specifying-the-repository"/>):
     </p>
 
     <ul>
-      <li><p><c>book_filename</c></p></li>
-      <li><p><c>delete_merged_file</c></p></li>
-      <li><p><c>before_chapter_script</c></p></li>
-      <li><p><c>after_chapter_script</c></p></li>
-      <li><p><c>edit</c>, <c>history</c>, and <c>view</c></p></li>
-      <li><p><c>rmd_subdir</c> and <c>include_md</c></p></li>
-      <li><p><c>output_dir</c></p></li>
-      <li><p><c>clean</c></p></li>
+      <li>
+        <p>
+          <c>book_filename</c>: the filename of the main Rmd file, i.e., the
+          Rmd file that is merged from all chapters; by default, it is named
+          <c>_main.Rmd</c>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>delete_merged_file</c>: whether to delete the main Rmd file after
+          the book is successfully rendered.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>before_chapter_script</c>: one or multiple R scripts to be
+          executed before each chapter, e.g., you may want to clear the
+          workspace before compiling each chapter, in which case you can use
+          <c>rm(list = ls(all = TRUE))</c> in the R script.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>after_chapter_script</c>: similar to
+          <c>before_chapter_script</c>, and the R script is executed after each
+          chapter.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>edit</c>: a link that collaborators can click to edit the Rmd
+          source document of the current page; this was designed primarily for
+          GitHub repositories, since it is easy to edit arbitrary plain-text
+          files on GitHub even in other people's repositories. This link should
+          have <c>%s</c> in it, which will be substituted by the actual Rmd
+          filename for each page.
+        </p>
+      </li>
+      <li><p><c>history</c>: similar to <c>edit</c>, a link to the edit/commit history of the current page.</p></li>
+      <li><p><c>view</c>: similar to <c>edit</c>, a link to source code of the current page.</p></li>
+      <li>
+        <p>
+          <c>rmd_subdir</c>: whether to search for book source Rmd files in
+          subdirectories (by default, only the root directory is searched).
+          This may be either a boolean or list of paths if you want to search
+          for book source Rmd files in a subset of subdirectories.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>include_md</c>: include <c>.md</c> files in search for book source
+          (by default only <c>.Rmd</c> files are included).
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>output_dir</c>: the output directory of the book
+          (<c>_book</c> by default); this setting is read and used by
+          <c>render_book()</c>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>clean</c>: a vector of files and directories to be cleaned by the
+          <c>clean_book()</c> function.
+        </p>
+      </li>
     </ul>
 
     <program language="yaml">
@@ -298,15 +430,19 @@ clean: ["my-book.bbl", "R-packages.bib"]</input>
     <title>Internationalization</title>
 
     <p>
-      If the language of a book is not English, certain automatically generated
-      labels and interface strings may need translation. For non-LaTeX output,
-      these values can be configured in the <c>language</c> field of
-      <c>_bookdown.yml</c>.
+      If the language of your book is not English, you will need to translate
+      certain English words and phrases into your language, such as the words
+      <q>Figure</q> and <q>Table</q> when figures/tables are automatically
+      numbered in the HTML output. Internationalization may not be an issue for
+      LaTeX output, since some LaTeX packages can automatically translate these
+      terms into the local language, such as the <c>ctexcap</c> package for
+      Chinese.
     </p>
 
     <p>
-      The Rmd chapter shows an R snippet that prints the default language
-      settings from internal <c>bookdown</c> objects.
+      For non-LaTeX output, you can set the <c>language</c> field in the
+      configuration file <c>_bookdown.yml</c>. Currently the default settings
+      are:
     </p>
 
     <program language="r">
@@ -322,8 +458,8 @@ cat('```')
     </program>
 
     <p>
-      A simple label customization example changes the figure prefix to
-      uppercase.
+      For example, if you want <c>FIGURE x.x</c> instead of
+      <c>Figure x.x</c>, you can change <c>fig</c> to <c>"FIGURE "</c>:
     </p>
 
     <program language="yaml">
@@ -333,10 +469,13 @@ cat('```')
     </program>
 
     <p>
-      The chapter also gives an example of using expressions for both labels and
-      UI terms, here in Hungarian. The <c>edit</c> field under <c>ui</c>
-      specifies the text associated with the edit link configured in
-      <xref ref="configuration"/>.
+      The fields under <c>ui</c> are used to specify some terms in the user
+      interface. The <c>edit</c> field specifies the text associated with the
+      <c>edit</c> link in <c>_bookdown.yml</c> (<xref ref="configuration"/>).
+      The fields <c>chapter_name</c>, <c>appendix_name</c>, <c>fig</c>,
+      <c>tab</c> and <c>eq</c> can be either a character string to be prepended
+      to chapter or reference number, or an R function that takes a number as
+      the input and returns a string. Here is an example for Hungarian:
     </p>
 
     <program language="yaml">
@@ -348,10 +487,20 @@ cat('```')
     </program>
 
     <p>
-      Finally, the chapter notes an important caveat for languages using pure
-      CJK headings: Pandoc may not generate identifiers automatically, so manual
-      identifiers may need to be appended to section headings for
-      cross-references.
+      For <c>chapter_name</c> and <c>appendix_name</c> only, if it is a
+      character vector of length 2, the chapter title prefix will be
+      <c>paste0(chapter_name[1], i, chapter_name[2])</c>, where
+      <c>i</c> is the chapter number.
+    </p>
+
+    <p>
+      There is one caveat when you write in a language that uses multibyte
+      characters, such as Chinese, Japanese, and Korean (CJK): Pandoc cannot
+      generate identifiers from section headings that are pure CJK characters,
+      so you will not be able to cross-reference sections (they do not have
+      labels), unless you manually assign identifiers to them by appending
+      <c>{#identifier}</c> to the section heading, where <c>identifier</c> is
+      an identifier of your choice.
     </p>
   </section>
 </chapter>
