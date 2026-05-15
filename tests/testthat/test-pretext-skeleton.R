@@ -316,6 +316,16 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::epub_book(", fixed = TRUE)
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
   for (text in c(
+    "You do not need the three dashes <c>---</c> in",
+    "We have made several improvements over the original GitBook project.",
+    "When the only available format for readers to download",
+    "The first- and second-level headings appear in the current chapter's",
+    "Bootstrap CSS and JavaScript files",
+    "Currently <c>bookdown</c> provides two e-book formats, EPUB and MOBI."
+  )) {
+    expect_match(formats, text, fixed = TRUE)
+  }
+  for (text in c(
     "<xref ref=\"gitbook-style\"/>",
     "<xref ref=\"bs4-book\"/>",
     "<xref ref=\"bootstrap-style\"/>",

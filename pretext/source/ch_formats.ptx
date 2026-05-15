@@ -9,10 +9,9 @@
       possible options for these formats. Output formats can be specified
       either in the YAML metadata of the first Rmd file of the book, or in a
       separate YAML file named <c>_output.yml</c> under the root directory of
-      the book.
+      the book. Here is a brief example of the former (output formats are
+      specified in the <c>output</c> field of the YAML metadata):
     </p>
-
-    <p>Here is a brief example of YAML metadata in a book source file:</p>
 
     <program language="yaml">
       <input>---
@@ -47,20 +46,26 @@ bookdown::pdf_book:
 bookdown::html_book:
   css: toc.css</input>
     </program>
+
+    <p>
+      In this case, all formats should be at the top level, instead of under an
+      <c>output</c> field. You do not need the three dashes <c>---</c> in
+      <c>_output.yml</c>.
+    </p>
   </introduction>
 
   <section xml:id="html">
     <title>HTML</title>
 
     <p>
-      The main difference between rendering a book with <c>bookdown</c> and
-      rendering a single R Markdown document to HTML is that a book will
-      generate multiple HTML pages by default—normally one HTML file per
-      chapter. This makes it easier to bookmark certain chapters, share URLs,
-      and load the book more quickly in the browser.
+      The main difference between rendering a book (using <c>bookdown</c>) with
+      rendering a single R Markdown document (using <c>rmarkdown</c>) to HTML is
+      that a book will generate multiple HTML pages by default—normally one
+      HTML file per chapter. This makes it easier to bookmark a certain chapter
+      or share its URL with others as you read the book, and faster to load a
+      book into the web browser. Currently we have provided a number of
+      different styles for HTML output:
     </p>
-
-    <p>The chapter introduces four HTML styles:</p>
 
     <ul>
       <li><p>the GitBook style (<xref ref="gitbook-style"/>)</p></li>
@@ -73,16 +78,67 @@ bookdown::html_book:
       <title>GitBook style</title>
 
       <p>
-        The GitBook style was borrowed from GitBook and provides a layout with
-        a sidebar showing the table of contents on the left and the main body
-        of the book on the right. The design is responsive to the window size,
-        so navigation buttons and the sidebar adapt on narrower screens.
+        The GitBook style was borrowed from GitBook, a project launched by
+        Friendcode, Inc. (<url href="https://www.gitbook.com"
+        visual="gitbook.com"/>) and dedicated to helping authors write books
+        with Markdown. It provides a beautiful style, with a layout consisting
+        of a sidebar showing the table of contents on the left, and the main
+        body of a book on the right. The design is responsive to the window
+        size, e.g., the navigation buttons are displayed on the left/right of
+        the book body when the window is wide enough, and collapsed into the
+        bottom when the window is narrow to give readers more horizontal space
+        to read the book body.
       </p>
 
       <p>
         The easiest way to get started writing a new <c>gitbook</c> is to use
-        the RStudio Project Wizard, or create the same template with
-        <c>bookdown::create_gitbook()</c> from the R console.
+        the RStudio Project Wizard (<q>File &gt; New Project &gt; New Directory
+        &gt; Book project using bookdown</q>) and select <c>gitbook</c> from
+        the dropdown menu (see <xref ref="fig-new-bs4-book-pretext"/>).
+      </p>
+
+      <p>
+        If you do not use RStudio or prefer a function, you can create the same
+        project template with <c>bookdown::create_gitbook()</c> from your R
+        console. See <c>?bookdown::create_gitbook</c> for help.
+      </p>
+
+      <p>
+        We have made several improvements over the original GitBook project.
+        The most significant one is that we replaced the Markdown engine with R
+        Markdown v2 based on Pandoc, so that there are a lot more features for
+        you to use when writing a book:
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            You can embed R code chunks and inline R expressions in Markdown,
+            and this makes it easy to create reproducible documents and frees
+            you from synchronizing your computation with its actual output
+            (<c>knitr</c> will take care of it automatically).
+          </p>
+        </li>
+        <li>
+          <p>
+            The Markdown syntax is much richer: you can write anything that
+            Pandoc's Markdown supports, such as LaTeX math expressions and
+            citations.
+          </p>
+        </li>
+        <li>
+          <p>
+            You can embed interactive content in the book (for HTML output
+            only), such as HTML widgets and Shiny apps.
+          </p>
+        </li>
+      </ul>
+
+      <p>
+        We have also added some useful features in the user interface that we
+        will introduce in detail soon. The output format function for the
+        GitBook style in <c>bookdown</c> is <c>gitbook()</c>. Here are its
+        arguments:
       </p>
 
       <program language="r">
@@ -102,16 +158,76 @@ bookdown::html_book:
 
       <p>
         Most arguments are passed to <c>rmarkdown::html_document()</c>,
-        including <c>fig_caption</c>, <c>lib_dir</c>, and <c>...</c>. The
-        chapter strongly recommends using <c>fig_caption = TRUE</c> so figures
-        are properly captioned and can float correctly in LaTeX output.
+        including <c>fig_caption</c>, <c>lib_dir</c>, and <c>...</c>. You can
+        check out the help page of <c>rmarkdown::html_document()</c> for the
+        full list of possible options. We strongly recommend you to use
+        <c>fig_caption = TRUE</c> for two reasons: 1) it is important to explain
+        your figures with captions; 2) enabling figure captions means figures
+        will be placed in floating environments when the output is LaTeX,
+        otherwise you may end up with a lot of white space on certain pages.
+        The format of figure/table numbers depends on if sections are numbered
+        or not: if <c>number_sections = TRUE</c>, these numbers will be of the
+        format <c>X.i</c>, where <c>X</c> is the chapter number, and <c>i</c>
+        in an incremental number; if sections are not numbered, all
+        figures/tables will be numbered sequentially through the book from 1,
+        2, ..., N. Note that in either case, figures and tables will be
+        numbered independently.
       </p>
 
       <p>
-        Beyond the inherited HTML-document options, <c>gitbook()</c> adds
-        <c>split_by</c>, <c>split_bib</c>, and <c>config</c>. The
-        <c>split_by</c> argument controls how the HTML output is split into
-        pages.
+        Among all possible arguments in <c>...</c>, you are most likely to use
+        the <c>css</c> argument to provide one or more custom CSS files to
+        tweak the default CSS style. There are a few arguments of
+        <c>html_document()</c> that have been hard-coded in <c>gitbook()</c>
+        and you cannot change them: <c>toc = TRUE</c> (there must be a table of
+        contents), <c>theme = NULL</c> (not using any Bootstrap themes), and
+        <c>template</c> (there exists an internal GitBook template).
+      </p>
+
+      <p>
+        Please note that if you change <c>self_contained = TRUE</c> to make
+        self-contained HTML pages, the total size of all HTML files can be
+        significantly increased since there are many JS and CSS files that have
+        to be embedded in every single HTML file.
+      </p>
+
+      <p>
+        Besides these <c>html_document()</c> options, <c>gitbook()</c> has
+        three other arguments: <c>split_by</c>, <c>split_bib</c>, and
+        <c>config</c>. The <c>split_by</c> argument specifies how you want to
+        split the HTML output into multiple pages, and its possible values are:
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            <c>rmd</c>: use the base filenames of the input Rmd files to create
+            the HTML filenames, e.g., generate <c>chapter3.html</c> for
+            <c>chapter3.Rmd</c>.
+          </p>
+        </li>
+        <li><p><c>none</c>: do not split the HTML file (the book will be a single HTML file).</p></li>
+        <li><p><c>chapter</c>: split the file by the first-level headers.</p></li>
+        <li><p><c>section</c>: split the file by the second-level headers.</p></li>
+        <li>
+          <p>
+            <c>chapter+number</c> and <c>section+number</c>: similar to
+            <c>chapter</c> and <c>section</c>, but the files will be numbered.
+          </p>
+        </li>
+      </ul>
+
+      <p>
+        For <c>chapter</c> and <c>section</c>, the HTML filenames will be
+        determined by the header identifiers, e.g., the filename for the first
+        chapter with a chapter title <c># Introduction</c> will be
+        <c>introduction.html</c> by default. For <c>chapter+number</c> and
+        <c>section+number</c>, the chapter/section numbers will be prepended to
+        the HTML filenames, e.g., <c>1-introduction.html</c> and
+        <c>2-1-literature.html</c>. The header identifier is automatically
+        generated from the header text by default, and you can manually specify
+        an identifier using the syntax <c>{#your-custom-id}</c> after the
+        header text, e.g.,
       </p>
 
       <program language="markdown">
@@ -122,9 +238,22 @@ it to `introduction`.</input>
       </program>
 
       <p>
-        The <c>config</c> option contains many user-interface settings,
-        including the TOC, toolbar, search, font settings, sharing buttons, and
-        information button. The Rmd chapter shows these defaults as YAML.
+        By default, the bibliography is split and relevant citation items are
+        put at the bottom of each page, so that readers do not have to navigate
+        to a different bibliography page to see the details of citations. This
+        feature can be disabled using <c>split_bib = FALSE</c>, in which case
+        all citations are put on a separate page.
+      </p>
+
+      <p>
+        There are several sub-options in the <c>config</c> option for you to
+        tweak some details in the user interface. Recall that all output format
+        options (not only for <c>bookdown::gitbook</c>) can be either passed to
+        the format function if you use the command-line interface
+        <c>bookdown::render_book()</c>, or written in the YAML metadata. We
+        display the default sub-options of <c>config</c> in the <c>gitbook</c>
+        format as YAML metadata below (note that they are indented under the
+        <c>config</c> option):
       </p>
 
       <program language="yaml">
@@ -159,6 +288,43 @@ it to `introduction`.</input>
     info: true</input>
       </program>
 
+      <p>
+        The <c>toc</c> option controls the behavior of the table of contents
+        (TOC). You can collapse some items initially when a page is loaded via
+        the <c>collapse</c> option. Its possible values are <c>subsection</c>,
+        <c>section</c>, <c>none</c> (or <c>null</c>). This option can be
+        helpful if your TOC is very long and has more than three levels of
+        headings: <c>subsection</c> means collapsing all TOC items for
+        subsections (X.X.X), <c>section</c> means those items for sections
+        (X.X) so only the top-level headings are displayed initially, and
+        <c>none</c> means not collapsing any items in the TOC. For those
+        collapsed TOC items, you can toggle their visibility by clicking their
+        parent TOC items. For example, you can click a chapter title in the TOC
+        to show/hide its sections.
+      </p>
+
+      <p>
+        The <c>scroll_highlight</c> option in <c>toc</c> indicates whether to
+        enable highlighting of TOC items as you scroll the book body (by
+        default this feature is enabled). Whenever a new header comes into the
+        current viewport as you scroll down/up, the corresponding item in TOC
+        on the left will be highlighted.
+      </p>
+
+      <p>
+        Since the sidebar has a fixed width, when an item in the TOC is
+        truncated because the heading text is too wide, you can hover the
+        cursor over it to see a tooltip showing the full text.
+      </p>
+
+      <p>
+        You may add more items before and after the TOC using the HTML tag
+        <c>&lt;li&gt;</c>. These items will be separated from the TOC using a
+        horizontal divider. You can use the pipe character <c>|</c> so that you
+        do not need to escape any characters in these items following the YAML
+        syntax, e.g.,
+      </p>
+
       <program language="yaml">
         <input>toc:
   before: |
@@ -168,6 +334,15 @@ it to `introduction`.</input>
     &lt;li&gt;&lt;a href="https://github.com/rstudio/bookdown"&gt;
     Proudly published with bookdown&lt;/a&gt;&lt;/li&gt;</input>
       </program>
+
+      <p>
+        As you navigate through different HTML pages, we will try to preserve
+        the scroll position of the TOC. Normally you will see the scrollbar in
+        the TOC at a fixed position even if you navigate to the next page.
+        However, if the TOC item for the current chapter/section is not visible
+        when the page is loaded, we will automatically scroll the TOC to make
+        it visible to you.
+      </p>
 
       <program language="r">
         <input>```{r gitbook-toolbar, echo=FALSE, fig.cap='The GitBook toolbar.', out.width='100%'}
@@ -185,10 +360,46 @@ knitr::include_graphics('images/gitbook.png', dpi = NA)
       </figure>
 
       <p>
-        The toolbar lets readers toggle the sidebar, search the book, change
-        font and theme settings, use edit/history/view links (see
-        <xref ref="configuration"/>), download other formats, share links on
-        social networks, and open the keyboard-shortcut information panel.
+        The GitBook style has a toolbar (<xref ref="fig-gitbook-toolbar-pretext"/>)
+        at the top of each page that allows you to dynamically change the book
+        settings. The <c>toolbar</c> option has a sub-option <c>position</c>,
+        which can take values <c>fixed</c> or <c>static</c>. The default is
+        that the toolbar will be fixed at the top of the page, so even if you
+        scroll down the page, the toolbar is still visible there. If it is
+        <c>static</c>, the toolbar will not scroll with the page, i.e., once
+        you scroll away, you will no longer see it.
+      </p>
+
+      <p>
+        The first button on the toolbar can toggle the visibility of the
+        sidebar. You can also hit the <c>S</c> key on your keyboard to do the
+        same thing. The GitBook style can remember the visibility status of the
+        sidebar, e.g., if you closed the sidebar, it will remain closed the
+        next time you open the book. In fact, the GitBook style remembers many
+        other settings as well, such as the search keyword and the font
+        settings.
+      </p>
+
+      <p>
+        The second button on the toolbar is the search button. Its keyboard
+        shortcut is <c>F</c> (Find). When the button is clicked, you will see a
+        search box at the top of the sidebar. As you type in the box, the TOC
+        will be filtered to display the sections that match the search keyword.
+        Now you can use the arrow keys <c>Up</c>/<c>Down</c> to highlight the
+        previous/next match in the search results. When you click the search
+        button again (or hit <c>F</c> outside the search box), the search
+        keyword will be emptied and the search box will be hidden. To disable
+        searching, set the option <c>search: false</c> in <c>config</c>.
+      </p>
+
+      <p>
+        The third button is for font/theme settings. The reader can change the
+        font size (bigger or smaller), the font family (serif or sans serif),
+        and the theme (<q>White</q>, <q>Sepia</q>, or <q>Night</q>). You can set
+        the initial value of these settings via the <c>fontsettings</c> option.
+        Font size is measured on a scale of 0-4; the initial value can be set
+        to 1, 2 (default), 3, or 4. The button can be removed from the toolbar
+        by setting <c>fontsettings: null</c> (or <c>no</c>).
       </p>
 
       <program language="yaml">
@@ -198,16 +409,120 @@ knitr::include_graphics('images/gitbook.png', dpi = NA)
   size: 3</input>
       </program>
 
+      <p>
+        The <c>edit</c> option is the same as the option mentioned in
+        <xref ref="configuration"/>. If it is not empty, an edit button will be
+        added to the toolbar. This was designed for potential contributors to
+        the book to contribute by editing the book on GitHub after clicking the
+        button and sending pull requests. The <c>history</c> and <c>view</c>
+        options work the same way.
+      </p>
+
+      <p>
+        If your book has other output formats for readers to download, you may
+        provide the <c>download</c> option so that a download button can be
+        added to the toolbar. This option takes either a character vector, or a
+        list of character vectors with the length of each vector being 2. When
+        it is a character vector, it should be either a vector of filenames, or
+        filename extensions, e.g., both of the following settings are okay:
+      </p>
+
       <program language="yaml">
         <input>download: ["book.pdf", "book.epub"]
 download: ["pdf", "epub", "mobi"]</input>
       </program>
+
+      <p>
+        When you only provide the filename extensions, the filename is derived
+        from the book filename of the configuration file <c>_bookdown.yml</c>
+        (<xref ref="configuration"/>). When <c>download</c> is <c>null</c>,
+        <c>gitbook()</c> will look for PDF, EPUB, and MOBI files in the book
+        output directory, and automatically add them to the <c>download</c>
+        option. If you just want to suppress the download button, use
+        <c>download: false</c>. All files for readers to download will be
+        displayed in a drop-down menu, and the filename extensions are used as
+        the menu text. When the only available format for readers to download
+        is PDF, the download button will be a single PDF button instead of a
+        drop-down menu.
+      </p>
+
+      <p>
+        An alternative form for the value of the <c>download</c> option is a
+        list of length-2 vectors, e.g.,
+      </p>
 
       <program language="yaml">
         <input>download:
   - ["book.pdf", "PDF"]
   - ["book.epub", "EPUB"]</input>
       </program>
+
+      <p>
+        Each vector in the list consists of the filename and the text to be
+        displayed in the menu. Compared to the first form, this form allows you
+        to customize the menu text, e.g., you may have two different copies of
+        the PDF for readers to download and you will need to make the menu
+        items different.
+      </p>
+
+      <p>
+        On the right of the toolbar, there are some buttons to share the link
+        on social network websites such as Twitter, Facebook, and Linkedin. You
+        can use the <c>sharing</c> option to decide which buttons to enable. If
+        you want to get rid of these buttons entirely, use <c>sharing: null</c>
+        (or <c>no</c>).
+      </p>
+
+      <p>
+        Another button shown on the toolbar is the information (<c>i</c>)
+        button that lists keyboard shortcuts available to navigate the document.
+        This button can be hidden by setting <c>info: false</c>.
+      </p>
+
+      <p>
+        Finally, there are a few more top-level options in the YAML metadata
+        that can be passed to the GitBook HTML template via Pandoc. They may
+        not have clear visible effects on the HTML output, but they may be
+        useful when you deploy the HTML output as a website. These options
+        include:
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            <c>description</c>: A character string to be written to the
+            <c>content</c> attribute of the tag
+            <c>&lt;meta name="description" content=""&gt;</c> in the HTML head
+            (if missing, the title of the book will be used). This can be
+            useful for search engine optimization (SEO). Note that it should be
+            plain text without any Markdown formatting such as
+            <c>_italic_</c> or <c>**bold**</c>.
+          </p>
+        </li>
+        <li><p><c>url</c>: The URL of book's website, e.g., <c>https\://bookdown.org/yihui/bookdown/</c>.</p></li>
+        <li><p><c>github-repo</c>: The GitHub repository of the book of the form <c>user/repo</c>.</p></li>
+        <li><p><c>cover-image</c>: The path to the cover image of the book.</p></li>
+        <li>
+          <p>
+            <c>apple-touch-icon</c>: A path to an icon (e.g., a PNG image).
+            This is for iOS only: when the website is added to the Home screen,
+            the link is represented by this icon.
+          </p>
+        </li>
+        <li><p><c>apple-touch-icon-size</c>: The size of the icon (by default, 152 x 152 pixels).</p></li>
+        <li>
+          <p>
+            <c>favicon</c>: A path to the <q>favorite icon</q>. Typically this
+            icon is displayed in the browser's address bar, or in front of the
+            page title on the tab if the browser support tabs.
+          </p>
+        </li>
+      </ul>
+
+      <p>
+        Below we show some sample YAML metadata (again, please note that these
+        are top-level options):
+      </p>
 
       <program language="yaml">
         <input>---
@@ -222,16 +537,28 @@ apple-touch-icon-size: 120
 favicon: "favicon.ico"
 ---</input>
       </program>
+
+      <p>
+        A nice effect of setting <c>description</c> and <c>cover-image</c> is
+        that when you share the link of your book on some social network
+        websites such as Twitter, the link can be automatically expanded to a
+        card with the cover image and description of the book.
+      </p>
     </subsection>
 
     <subsection xml:id="bs4-book">
       <title>Three-column Bootstrap style</title>
 
       <p>
-        The <c>bs4_book()</c> output format is built with Bootstrap and is
-        designed to provide a clean reading experience on phones, tablets, and
-        desktop screens. On wide screens, the layout includes three columns for
-        chapters, chapter content, and within-chapter navigation.
+        The <c>bs4_book()</c> output format is built with Bootstrap
+        (<url href="https://getbootstrap.com" visual="getbootstrap.com"/>),
+        using carefully crafted features to provide a clean reading experience
+        whether you are on a phone, tablet, or desktop. On a full-size screen,
+        the layout includes three columns of content so readers can quickly see
+        all chapters on the left, the current chapter in the middle, and
+        sections within the the current chapter on the right. You can read an
+        example book here: <url href="https://mastering-shiny.org"
+        visual="mastering-shiny.org"/>.
       </p>
 
       <program language="r">
@@ -250,20 +577,72 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
       </figure>
 
       <p>
-        In addition to the basic bookdown components (<xref ref="ch-components"/>),
-        the main features of <c>bs4_book</c> are:
+        In addition to the basic <c>bookdown</c> components
+        (<xref ref="ch-components"/>), the main features of <c>bs4_book</c>
+        are:
       </p>
 
       <ul>
-        <li><p>customizable colors and fonts with the <c>bslib</c> package</p></li>
-        <li><p>built-in search broken down by section</p></li>
-        <li><p>a within-chapter sidebar table of contents</p></li>
-        <li><p>typography tuned for different device sizes</p></li>
-        <li><p>inline footnotes</p></li>
-        <li><p>syntax highlighting and autolinking via <c>downlit</c></p></li>
-        <li><p>enhanced metadata for social sharing</p></li>
-        <li><p>repository links for source viewing or suggesting edits</p></li>
+        <li>
+          <p>
+            Easy customization of colors and fonts with the <c>bslib</c>
+            package.
+          </p>
+        </li>
+        <li>
+          <p>
+            Built-in search (broken down by section) that helps readers quickly
+            find what they are looking for.
+          </p>
+        </li>
+        <li>
+          <p>
+            A sidebar containing a within-chapter table of contents that makes
+            navigation easy and helps provide context about your current
+            position within the chapter.
+          </p>
+        </li>
+        <li>
+          <p>
+            Thoughtful typography to make the contents as easy as possible to
+            read, regardless of the size of your device. A sticky header gets
+            out of your way when reading, but is easily accessible if you need
+            it.
+          </p>
+        </li>
+        <li>
+          <p>
+            In-line footnotes mean you can read asides next to the text they
+            refer to. This theme is best paired with a reference style that
+            generates footnotes.
+          </p>
+        </li>
+        <li>
+          <p>
+            R syntax highlighting and autolinking by the <c>downlit</c> package
+            is paired with an accessible color scheme designed by Alison Hill.
+          </p>
+        </li>
+        <li>
+          <p>
+            Enhanced metadata for social sharing via platforms like Twitter,
+            LinkedIn, and Facebook, so that each chapter shared will have a
+            unique description, auto-generated based on that chapter's content.
+          </p>
+        </li>
+        <li>
+          <p>
+            Ability to configure links to a remote repository like GitHub or
+            GitLab, allowing readers to easily view each chapter's source file
+            or suggest an edit.
+          </p>
+        </li>
       </ul>
+
+      <p>
+        The output format function is <c>bookdown::bs4_book</c>. Here are its
+        arguments:
+      </p>
 
       <program language="r">
         <input>bookdown::bs4_book(
@@ -277,8 +656,17 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
         <title>Writing a bs4_book</title>
 
         <p>
-          The easiest way to start a <c>bs4_book</c> is the RStudio Project
-          Wizard, or <c>bookdown::create_bs4_book()</c> from the R console.
+          The easiest way to get started writing a new <c>bs4_book</c> is to
+          use the RStudio Project Wizard (<q>File &gt; New Project &gt; New
+          Directory &gt; Book project using bookdown</q>) and select
+          <c>bs4_book</c> from the dropdown menu (see
+          <xref ref="fig-new-bs4-book-pretext"/>).
+        </p>
+
+        <p>
+          If you do not use RStudio or prefer a function, you can create the
+          same project template with <c>bookdown::create_bs4_book()</c> from
+          your R console. See <c>?bookdown::create_bs4_book</c> for help.
         </p>
 
         <program language="r">
@@ -297,10 +685,14 @@ knitr::include_graphics('images/new-bs4-book.png', dpi = NA)
         </figure>
 
         <p>
-          This style is designed for books that use one chapter per page, which
-          means each <c>.Rmd</c> file should contain a single chapter and start
-          with one first-level heading.
+          This style is designed for books that use one chapter per page. This
+          means that each chapter is an <c>.Rmd</c> file, and each
+          <c>.Rmd</c> file can contain one chapter. Each file must start with a
+          first-level heading, <c># Chapter title</c>, and that must be the
+          only first-level heading in the file.
         </p>
+
+        <p>Use second-level and lower-level headings within chapters like:</p>
 
         <program language="markdown">
           <input>#   A chapter
@@ -310,7 +702,23 @@ knitr::include_graphics('images/new-bs4-book.png', dpi = NA)
 ### A subsection</input>
         </program>
 
-        <p>The chapter also gives this example <c>index.Rmd</c> YAML header:</p>
+        <p>
+          The first- and second-level headings appear in the current chapter's
+          sidebar, which sticks to the top of the page as you scroll down. When
+          a section is navigated to, third-level subheadings like
+          <q>A subsection</q> will auto-expand.
+        </p>
+
+        <p>
+          The <c>index.Rmd</c> file is required, and is also your first book
+          chapter. It will be the homepage when you render the book. If you
+          want to include content that should only be included in the HTML
+          version of the book, you may want to include that content
+          conditionally by combining the <c>knitr</c> <c>include</c> chunk
+          option with the <c>knitr::is_html_output()</c> function.
+        </p>
+
+        <p>A YAML header in <c>index.Rmd</c> for a <c>bs4_book</c> would look like this:</p>
 
         <program language="yaml">
           <input>---
@@ -332,8 +740,16 @@ description: |
         <title>Styling &amp; customization</title>
 
         <p>
-          The <c>bs4_book()</c> format builds on Bootstrap and uses the
-          <c>bslib</c> package for easy customization of colors and fonts.
+          The <c>bs4_book()</c> format builds upon the Bootstrap CSS framework,
+          an open source library of reusable chunks of HTML, CSS, and
+          JavaScript code. The Bootstrap framework allows for easy
+          customization of colors and fonts via the <c>bslib</c> R package.
+        </p>
+
+        <p>
+          You can use the <c>theme</c> option to add a <c>primary</c> color in
+          hexadecimal format, which will change the color of all links in your
+          book and the background color of the footer.
         </p>
 
         <program language="yaml">
@@ -357,16 +773,31 @@ description: |
         family: DM Mono
         local: false</input>
         </program>
+
+        <p>
+          By default, <c>google:</c> will bundle font files with your book, so
+          it downloads, caches, and serves the relevant font file(s) locally.
+          This means that when you share it with someone else, the fonts are
+          guaranteed to render, even without an Internet connection
+          (<c>local: false</c> imports files via URL instead of serving them
+          locally).
+        </p>
+
+        <p>
+          You may also use non-Google fonts that you serve locally using
+          <c>sass::font_face()</c>.
+        </p>
       </subsubsection>
 
       <subsubsection xml:id="callout-blocks">
         <title>Callout blocks</title>
 
         <p>
-          Callout blocks can make important parts of the narrative stand out.
-          The <c>bs4_book</c> style includes predefined callout blocks such as
-          <c>.rmdnote</c>, <c>.rmdcaution</c>, <c>.rmdimportant</c>,
-          <c>.rmdtip</c>, and <c>.rmdwarning</c>.
+          Callout blocks can be used to make certain portions of content stand
+          out from the rest of your narrative. The <c>bs4_book</c> style
+          includes special callout blocks with predefined styles for adding a
+          colored border around the text and/or code inside the callout. Use
+          the following syntax to create a callout block:
         </p>
 
         <program language="markdown">
@@ -395,6 +826,19 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           </image>
         </figure>
 
+        <p>
+          You may use Markdown syntax and inline code inside a block. When
+          knitted, the output will look like <xref ref="fig-bs4-note-pretext"/>.
+        </p>
+
+        <p>
+          Available blocks are: <c>.rmdnote</c>, <c>.rmdcaution</c>,
+          <c>.rmdimportant</c>, <c>.rmdtip</c>, and <c>.rmdwarning</c>. The
+          colors used will be based on the default colors provided by
+          Bootstrap, but can be also be customized in your
+          <c>_output.yml</c> file:
+        </p>
+
         <program language="yaml">
           <input>bookdown::bs4_book:
   theme:
@@ -404,16 +848,24 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
     info:    "#0dcaf0"
     warning: "#ffc107"</input>
         </program>
+
+        <p>
+          For LaTeX output, only the content of these blocks will be shown with
+          no colored outline as for HTML. It is up to the user to define the
+          appearance of these blocks for LaTeX output using custom
+          environments.
+        </p>
       </subsubsection>
 
       <subsubsection xml:id="html-metadata">
         <title>HTML metadata</title>
 
         <p>
-          <c>bs4_book()</c> uses Pandoc variables from <c>index.Rmd</c> to
-          generate HTML <c>meta</c> tags (see <xref ref="metadata-for-sharing"/>),
-          and it also creates unique chapter descriptions automatically from
-          chapter content.
+          Bookdown will generate HTML <c>meta</c> tags based on Pandoc's
+          variables set in <c>index.Rmd</c>, described in
+          <xref ref="metadata-for-sharing"/>. Additionally, <c>bs4_book()</c>
+          will create unique chapter descriptions auto-generated from the
+          chapter's contents.
         </p>
       </subsubsection>
 
@@ -421,9 +873,10 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
         <title>Inline Footnotes</title>
 
         <p>
-          The <c>bs4_book</c> format makes footnotes show inline on hover. You
-          can opt out and keep footnotes at the bottom by setting
-          <c>footnotes_inline = FALSE</c>.
+          <c>bs4_book</c> makes any footnotes to show inline on hover instead
+          of a linked item at the bottom of the page. You can set
+          <c>footnotes_inline = FALSE</c> to opt-out this behavior and keep the
+          footnotes at the bottom.
         </p>
 
         <program language="yaml">
@@ -436,9 +889,14 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
         <title>References/Bibliography</title>
 
         <p>
-          If you use a footnote citation style, readers can view references near
-          the text where they are cited. The chapter recommends downloading a
-          footnote-style CSL file, for example from Zotero.
+          Making your citations footnotes allows readers to read them near the
+          text where they are used because <c>bs4_book</c> makes by default
+          footnotes appear inline when clicked. To do that, download a
+          footnote style CSL file; we recommend
+          <url href="https://www.zotero.org/styles/"
+          visual="zotero.org/styles/"/>. For example, you could download the
+          <c>chicago-fullnote-bibliography.csl</c> from Zotero, then add this
+          to your <c>index.Rmd</c>:
         </p>
 
         <program language="yaml">
@@ -450,18 +908,36 @@ csl: chicago-fullnote-bibliography.csl</input>
           <input>suppress-bibliography: true</input>
         </program>
 
+        <p>
+          If you would like to use a citation style that does not support
+          footnotes, references will not be shown inline in popups. In this
+          case, you may wish to add the <c>split_bib</c> option to your
+          <c>_output.yml</c>:
+        </p>
+
         <program language="yaml">
           <input>bookdown::bs4_book:
   split_bib: true</input>
         </program>
+
+        <p>
+          Then your bibliography will be split and relevant citation items will
+          be put at the bottom of each chapter, so that readers do not have to
+          navigate to a different bibliography page to see the details of
+          citations.
+        </p>
       </subsubsection>
 
       <subsubsection xml:id="specifying-the-repository">
         <title>Specifying the repository</title>
 
         <p>
-          You can specify a source repository so readers can view chapter source
-          files or suggest edits.
+          Specify a source repository for your book to give your readers the
+          option to easily view each chapter's source file or suggest an edit.
+        </p>
+
+        <p>
+          If your book has a default branch called <c>main</c>, you can use:
         </p>
 
         <program language="yaml">
@@ -471,6 +947,11 @@ csl: chicago-fullnote-bibliography.csl</input>
     branch: main</input>
         </program>
 
+        <p>
+          If your book is furthermore located in a subdirectory called
+          <c>book</c>, you can use:
+        </p>
+
         <program language="yaml">
           <input>bookdown::bs4_book:
   repo:
@@ -478,6 +959,13 @@ csl: chicago-fullnote-bibliography.csl</input>
     branch: main
     subdir: book</input>
         </program>
+
+        <p>
+          By default, if the repo URL contains <c>github</c>, it will get a
+          GitHub Font Awesome icon, otherwise it gets a GitLab icon. To use
+          another icon, specify it with the correct prefix such as <c>fas</c>,
+          <c>fab</c>, and so on.
+        </p>
 
         <program language="yaml">
           <input>bookdown::bs4_book:
@@ -494,10 +982,17 @@ csl: chicago-fullnote-bibliography.csl</input>
       <title>The default Bootstrap style</title>
 
       <p>
-        The default Bootstrap style in <c>bookdown</c> uses
-        <c>html_book()</c>, which in turn is a special case of
-        <c>html_chapters()</c>. Most options from
-        <c>rmarkdown::html_document()</c> still apply.
+        If you have used R Markdown before, you should be familiar with the
+        Bootstrap style, which is the default style of the HTML output of R
+        Markdown. The output format function in <c>rmarkdown</c> is
+        <c>html_document()</c>, and we have a corresponding format
+        <c>html_book()</c> in <c>bookdown</c> using <c>html_document()</c> as
+        the base format.
+      </p>
+
+      <p>
+        In fact, there is a more general format <c>html_chapters()</c> in
+        <c>bookdown</c> and <c>html_book()</c> is just its special case:
       </p>
 
       <program language="r">
@@ -519,9 +1014,56 @@ csl: chicago-fullnote-bibliography.csl</input>
       </program>
 
       <p>
-        The chapter explains that custom HTML templates must contain three pairs
-        of special HTML comments marking the title, TOC, and body sections.
+        That means that you can use most arguments of
+        <c>rmarkdown::html_document</c>, such as <c>toc</c> (whether to show
+        the table of contents), <c>number_sections</c> (whether to number
+        section headings), and so on. Again, check the help page of
+        <c>rmarkdown::html_document</c> to see the full list of possible
+        options. Note that the argument <c>self_contained</c> is hard-coded to
+        <c>FALSE</c> internally, so you cannot change the value of this
+        argument. We have explained the argument <c>split_by</c> in the
+        previous section.
       </p>
+
+      <p>
+        The arguments <c>template</c> and <c>page_builder</c> are for advanced
+        users, and you do not need to understand them unless you have strong
+        need to customize the HTML output, and those many options provided by
+        <c>rmarkdown::html_document()</c> still do not give you what you want.
+      </p>
+
+      <p>
+        If you want to pass a different HTML template to the
+        <c>template</c> argument, the template must contain three pairs of HTML
+        comments, and each comment must be on a separate line:
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            <c>&lt;!--bookdown:title:start--&gt;</c> and
+            <c>&lt;!--bookdown:title:end--&gt;</c> to mark the title section of
+            the book. This section will be placed only on the first page of the
+            rendered book;
+          </p>
+        </li>
+        <li>
+          <p>
+            <c>&lt;!--bookdown:toc:start--&gt;</c> and
+            <c>&lt;!--bookdown:toc:end--&gt;</c> to mark the table of contents
+            section, which will be placed on all HTML pages;
+          </p>
+        </li>
+        <li>
+          <p>
+            <c>&lt;!--bookdown:body:start--&gt;</c> and
+            <c>&lt;!--bookdown:body:end--&gt;</c> to mark the HTML body of the
+            book, and the HTML body will be split into multiple separate pages.
+            Recall that we merge all R Markdown or Markdown files, render them
+            into a single HTML file, and split it.
+          </p>
+        </li>
+      </ul>
 
       <program language="html">
         <input>&lt;!--bookdown:title:start--&gt;
@@ -531,6 +1073,11 @@ csl: chicago-fullnote-bibliography.csl</input>
 &lt;!--bookdown:body:start--&gt;
 &lt;!--bookdown:body:end--&gt;</input>
       </program>
+
+      <p>
+        You may open the default HTML template to see where these comments were
+        inserted:
+      </p>
 
       <program language="r">
         <input>```{r results='hide'}
@@ -556,6 +1103,17 @@ extract_fun = function(name, script) {
 ```</input>
       </program>
 
+      <p>
+        Once you know how <c>bookdown</c> works internally to generate
+        multiple-page HTML output, it will be easier to understand the argument
+        <c>page_builder</c>, which is a function to compose each individual
+        HTML page using the HTML fragments extracted from the above comment
+        tokens. The default value of <c>page_builder</c> is a function
+        <c>build_chapter</c> in <c>bookdown</c>, and its source code is
+        relatively simple (ignore those internal functions like
+        <c>button_link()</c>):
+      </p>
+
       <program language="html">
         <input>&lt;html&gt;
   &lt;head&gt;
@@ -574,6 +1132,43 @@ extract_fun = function(name, script) {
 &lt;/html&gt;</input>
       </program>
 
+      <p>
+        Basically, this function takes a number of components like the HTML
+        head, the table of contents, the chapter body, and so on, and it is
+        expected to return a character string which is the HTML source of a
+        complete HTML page. You may manipulate all components in this function
+        using text-processing functions like <c>gsub()</c> and <c>paste()</c>.
+      </p>
+
+      <p>
+        What the default page builder does is to put TOC in the first row, the
+        body in the second row, navigation buttons at the bottom of the body,
+        and concatenate them with the HTML head and foot. Here is a sketch of
+        the HTML source code that may help you understand the output of
+        <c>build_chapter()</c>:
+      </p>
+
+      <p>
+        For all HTML pages, the main difference is the chapter body, and most
+        of the rest of the elements are the same. The default output from
+        <c>html_book()</c> will include the Bootstrap CSS and JavaScript files
+        in the <c>&lt;head&gt;</c> tag.
+      </p>
+
+      <p>
+        The TOC is often used for navigation purposes. In the GitBook style,
+        the TOC is displayed in the sidebar. For the Bootstrap style, we did
+        not apply a special style to it, so it is shown as a plain unordered
+        list (in the HTML tag <c>&lt;ul&gt;</c>). It is easy to turn this list
+        into a navigation bar with some CSS techniques. We have provided a CSS
+        file <c>toc.css</c> in this package that you can use.
+      </p>
+
+      <p>
+        You may copy this file to the root directory of your book, and apply it
+        to the HTML output via the <c>css</c> option, e.g.,
+      </p>
+
       <program language="yaml">
         <input>---
 output:
@@ -582,23 +1177,53 @@ output:
     css: toc.css
 ---</input>
       </program>
+
+      <p>
+        There are many possible ways to turn <c>&lt;ul&gt;</c> lists into
+        navigation menus if you do a little bit searching on the web, and you
+        can choose a menu style that you like. The <c>toc.css</c> we just
+        mentioned is a style with white menu texts on a black background, and
+        supports sub-menus (e.g., section titles are displayed as drop-down
+        menus under chapter titles).
+      </p>
+
+      <p>
+        As a matter of fact, you can get rid of the Bootstrap style in
+        <c>html_document()</c> if you set the <c>theme</c> option to
+        <c>null</c>, and you are free to apply arbitrary styles to the HTML
+        output using the <c>css</c> option (and possibly the
+        <c>includes</c> option if you want to include arbitrary content in the
+        HTML head/foot).
+      </p>
     </subsection>
 
     <subsection xml:id="tufte-style">
       <title>Tufte style</title>
 
       <p>
-        Like the Bootstrap style, the Tufte style is provided by
-        <c>tufte_html_book()</c>, a special case of <c>html_chapters()</c>
-        using <c>tufte::tufte_html()</c> as the base format. Please see the
-        <c>tufte</c> package (<xref ref="R-tufte-reference"/>) if you are not
-        familiar with the Tufte style.
+        Like the Bootstrap style, the Tufte style is provided by an output
+        format <c>tufte_html_book()</c>, which is also a special case of
+        <c>html_chapters()</c> using <c>tufte::tufte_html()</c> as the base
+        format. Please see the <c>tufte</c> package
+        (<xref ref="R-tufte-reference"/>) if you are not familiar with the
+        Tufte style.
       </p>
 
       <p>
-        It uses a main text column on the left and a margin column on the
-        right, where footnotes, margin notes, references, and margin figures
-        can appear.
+        Basically, it is a layout with a main column on the left and a margin
+        column on the right. The main body is in the main column, and the
+        margin column is used to place footnotes, margin notes, references, and
+        margin figures, and so on.
+      </p>
+
+      <p>
+        All arguments of <c>tufte_html_book()</c> have exactly the same
+        meanings as <c>html_book()</c>, e.g., you can also customize the CSS
+        via the <c>css</c> option. There are a few elements that are specific
+        to the Tufte style, though, such as margin notes, margin figures, and
+        full-width figures. Note that you do not need to do anything special to
+        footnotes and references, since they will be automatically put in the
+        margin. A brief YAML example of the <c>tufte_html_book</c> format:
       </p>
 
       <program language="yaml">
@@ -616,12 +1241,27 @@ output:
     <title>LaTeX/PDF</title>
 
     <p>
-      The chapter recommends developing a book primarily in HTML and leaving
-      the fine points of LaTeX typesetting until later. The LaTeX/PDF output
-      format is provided by <c>pdf_book()</c>, whose main purpose is to resolve
+      We strongly recommend that you use an HTML output format instead of
+      LaTeX when you develop a book, since you will not be too distracted by
+      the typesetting details, which can bother you a lot if you constantly
+      look at the PDF output of a book. Leave the job of careful typesetting
+      to the very end (ideally after you have really finished the content of
+      the book).
+    </p>
+
+    <p>
+      The LaTeX/PDF output format is provided by <c>pdf_book()</c> in
+      <c>bookdown</c>. There is not a significant difference between
+      <c>pdf_book()</c> and the <c>pdf_document()</c> format in
+      <c>rmarkdown</c>. The main purpose of <c>pdf_book()</c> is to resolve the
       labels and cross-references written using the syntax described in
       <xref ref="figures"/>, <xref ref="tables"/>, and
-      <xref ref="cross-references"/>.
+      <xref ref="cross-references"/>. If the only output format that you want
+      for a book is LaTeX/PDF, you may use the syntax specific to LaTeX, such
+      as <c>\label{}</c> to label figures/tables/sections, and <c>\ref{}</c>
+      to cross-reference them via their labels, because Pandoc supports LaTeX
+      commands in Markdown. However, the LaTeX syntax is not portable to other
+      output formats, such as HTML and e-books.
     </p>
 
     <program language="yaml">
@@ -631,6 +1271,12 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 ---</input>
     </program>
+
+    <p>
+      There are a large number of other YAML options that you can specify for
+      LaTeX output, such as the paper size, font size, page margin, line
+      spacing, font families, and so on.
+    </p>
 
     <program language="r">
       <input>bookdown::pdf_book(
@@ -642,8 +1288,13 @@ biblio-style: apalike
     </program>
 
     <p>
-      The chapter also notes that <c>tufte_book2()</c> is essentially
-      <c>pdf_book(base_format = tufte::tufte_book)</c>.
+      The <c>pdf_book()</c> format is a general format like
+      <c>html_book()</c>, and it also has a <c>base_format</c> argument. You
+      can change the <c>base_format</c> function to other output format
+      functions, and <c>bookdown</c> has provided a simple wrapper function
+      <c>tufte_book2()</c>, which is basically
+      <c>pdf_book(base_format = tufte::tufte_book)</c>, to produce a PDF book
+      using the Tufte PDF style.
     </p>
   </section>
 
@@ -651,18 +1302,17 @@ biblio-style: apalike
     <title>E-Books</title>
 
     <p>
-      <c>bookdown</c> provides two e-book formats: EPUB and MOBI. These can be
-      read on smartphones, tablets, or dedicated e-readers.
+      Currently <c>bookdown</c> provides two e-book formats, EPUB and MOBI.
+      Books in these formats can be read on devices like smartphones, tablets,
+      or special e-readers such as Kindle.
     </p>
 
     <subsection xml:id="epub">
       <title>EPUB</title>
 
       <p>
-        To create an EPUB book, use <c>epub_book()</c>. It shares some options
-        with <c>rmarkdown::html_document()</c>, and also adds EPUB-specific
-        options such as <c>stylesheet</c>, <c>cover_image</c>,
-        <c>metadata</c>, <c>chapter_level</c>, and <c>epub_version</c>.
+        To create an EPUB book, you can use the <c>epub_book()</c> format. It
+        has some options in common with <c>rmarkdown::html_document()</c>.
       </p>
 
       <program language="r">
@@ -677,13 +1327,39 @@ biblio-style: apalike
       </program>
 
       <p>
-        The chapter explains that an EPUB book is essentially a collection of
-        HTML pages bundled into one file, so features from
-        <xref ref="ch-components"/> such as figure and table captions,
-        cross-references, custom blocks, and citations still work in EPUB.
-        The <c>chapter_level</c> option determines the level by which the book
-        is split into internal chapter files, similar to the <c>split_by</c>
-        argument of HTML output formats (see <xref ref="html"/>).
+        The option <c>toc</c> is turned off because the e-book reader can often
+        figure out a TOC automatically from the book, so it is not necessary to
+        add a few pages for the TOC. There are a few options specific to EPUB:
+      </p>
+
+      <ul>
+        <li><p><c>stylesheet</c>: It is similar to the <c>css</c> option in HTML output formats, and you can customize the appearance of elements using CSS.</p></li>
+        <li><p><c>cover_image</c>: The path to the cover image of the book.</p></li>
+        <li><p><c>metadata</c>: The path to an XML file for the metadata of the book.</p></li>
+        <li>
+          <p>
+            <c>chapter_level</c>: Internally an EPUB book is a series of
+            <q>chapter</q> files, and this option determines the level by which
+            the book is split into these files. This is similar to the
+            <c>split_by</c> argument of HTML output formats we mentioned in
+            <xref ref="html"/>, but an EPUB book is a single file, and you will
+            not see these <q>chapter</q> files directly.
+          </p>
+        </li>
+        <li><p><c>epub_version</c>: Version 3 or 2 of EPUB.</p></li>
+      </ul>
+
+      <p>
+        An EPUB book is essentially a collection of HTML pages, e.g., you can
+        apply CSS rules to its elements, embed images, insert math
+        expressions, and so on. Figure/table captions, cross-references, custom
+        blocks, and citations mentioned in <xref ref="ch-components"/> also
+        work for EPUB.
+      </p>
+
+      <p>
+        There are several EPUB readers available, including Calibre, Apple's
+        iBooks, and Google Play Books.
       </p>
     </subsection>
 
@@ -691,10 +1367,12 @@ biblio-style: apalike
       <title>MOBI</title>
 
       <p>
-        MOBI e-books can be read on Kindle devices. Because Pandoc does not
-        support MOBI output directly, the chapter recommends third-party tools
-        such as Calibre. The <c>bookdown::calibre()</c> helper wraps the
-        <c>ebook-convert</c> command-line utility.
+        MOBI e-books can be read on Amazon's Kindle devices. Pandoc does not
+        support MOBI output natively, but you may use third-party tools to
+        convert EPUB to MOBI. One possible tool is Calibre. Calibre is
+        open-source and free, and supports conversion among many more formats.
+        The function <c>calibre()</c> in <c>bookdown</c> is a wrapper function
+        of the command-line utility <c>ebook-convert</c> in Calibre.
       </p>
     </subsection>
   </section>
@@ -703,11 +1381,24 @@ biblio-style: apalike
     <title>A single document</title>
 
     <p>
-      Sometimes you may want automatic numbering and cross-references without
-      building a full multi-file book. For that use case, <c>bookdown</c>
-      provides formats such as <c>html_document2()</c>, <c>tufte_html2()</c>,
+      Sometimes you may not want to write a book, but a single long-form
+      article or report instead. Usually what you do is call
+      <c>rmarkdown::render()</c> with a certain output format. The main
+      features missing there are the automatic numbering of
+      figures/tables/equations, and cross-referencing
+      figures/tables/equations/sections. We have factored out these features
+      from <c>bookdown</c>, so that you can use them without having to prepare
+      a book of multiple Rmd files.
+    </p>
+
+    <p>
+      The functions <c>html_document2()</c>, <c>tufte_html2()</c>,
       <c>pdf_document2()</c>, <c>word_document2()</c>,
-      <c>tufte_handout2()</c>, and <c>tufte_book2()</c>.
+      <c>tufte_handout2()</c>, and <c>tufte_book2()</c> are designed for this
+      purpose. If you render an R Markdown document with the output format,
+      say, <c>bookdown::html_document2</c>, you will get figure/table numbers
+      and be able to cross-reference them in the single HTML page using the
+      syntax described in <xref ref="ch-components"/>.
     </p>
 
     <program language="yaml">
@@ -725,6 +1416,14 @@ bookdown::pdf_document2
 ```</input>
     </program>
 
+    <p>
+      The above HTML and PDF output format functions are basically wrappers of
+      output formats <c>bookdown::html_book</c> and
+      <c>bookdown::pdf_book</c>, in the sense that they changed the
+      <c>base_format</c> argument. For example, you can take a look at the
+      source code of <c>pdf_document2</c>:
+    </p>
+
     <program language="yaml">
       <input>output:
   bookdown::pdf_book:
@@ -732,17 +1431,25 @@ bookdown::pdf_document2
     </program>
 
     <p>
-      This approach can port <c>bookdown</c> features to the
-      <c>jss_article</c> format in the <c>rticles</c> package
-      (<xref ref="R-rticles-reference"/>).
+      After you know this fact, you can apply the same idea to other output
+      formats by using the appropriate <c>base_format</c>. For example, you can
+      port the <c>bookdown</c> features to the <c>jss_article</c> format in the
+      <c>rticles</c> package (<xref ref="R-rticles-reference"/>) by using the
+      YAML metadata above.
     </p>
 
     <p>
-      The chapter closes by noting that the <c>gitbook()</c> format can also
-      be used for a single R Markdown document, especially when
-      <c>split_by = 'none'</c> and optionally <c>self_contained = TRUE</c>.
-      All features introduced in <xref ref="ch-components"/> are available in
-      these single-document formats.
+      Then you will be able to use all features we introduced in
+      <xref ref="ch-components"/>. Although the <c>gitbook()</c> format was
+      designed primarily for books, you can actually also apply it to a single
+      R Markdown document. The only difference is that there will be no search
+      button on the single page output, because you can simply use the
+      searching tool of your web browser to find text. You may also want to set
+      the option <c>split_by</c> to <c>none</c> to only generate a single
+      output page, in which case there will not be any navigation buttons,
+      since there are no other pages to navigate to. Another option you may
+      want to use is <c>self_contained = TRUE</c> when it is only a single
+      output page.
     </p>
   </section>
 </chapter>
