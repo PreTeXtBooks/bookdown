@@ -154,30 +154,36 @@ Execution halted</input>
     </p>
 
     <program language="r">
-      <input>res &lt;- base::system('pdflatex --version', intern = TRUE)
-res &lt;- paste("## ", res)
-res &lt;- paste0(res, collapse = "\n")</input>
-      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
-## kpathsea version 6.3.4
-## Copyright 2022 Han The Thanh</output>
-    </program>
-
-    <program language="r">
-      <input>system('pdflatex --version')</input>
-      <output>## pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
-## kpathsea version 6.3.4
-## Copyright 2022 Han The Thanh</output>
+<input>
+system('pdflatex --version')
+##  pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)
+##  kpathsea version 6.4.2
+##  Copyright 2026 Han The Thanh (pdfTeX) et al.
+##  There is NO warranty.  Redistribution of this software is
+##  covered by the terms of both the pdfTeX copyright and
+##  the Lesser GNU General Public License.
+##  For more information about these matters, see the file
+##  named COPYING and the pdfTeX source.
+##  Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+##  Compiled with libpng 1.6.55; using libpng 1.6.55
+##  Compiled with zlib 1.3.2; using zlib 1.3.2
+##  Compiled with xpdf version 4.06
+</input>
     </program>
 
     <p>
-      For maintenance, the chapter recommends updating TinyTeX packages when you
-      run into LaTeX problems and reinstalling TinyTeX entirely if an annual
-      upgrade becomes necessary.
+      To update TinyTeX, you may run:
     </p>
 
     <program language="r">
       <input>tinytex::tlmgr_update()</input>
     </program>
+
+    <p>
+      From year to year, you may need to upgrade TinyTeX, too
+      (otherwise you cannot install or update any LaTeX packages),
+      in which case you may reinstall TinyTeX:
+    </p>
 
     <program language="r">
       <input>tinytex::reinstall_tinytex()</input>
