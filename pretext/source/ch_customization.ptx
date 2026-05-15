@@ -383,8 +383,18 @@ This is a **nice** book!</input>
           filename for each page.
         </p>
       </li>
-      <li><p><c>history</c>: similar to <c>edit</c>, a link to the edit/commit history of the current page.</p></li>
-      <li><p><c>view</c>: similar to <c>edit</c>, a link to source code of the current page.</p></li>
+      <li>
+        <p>
+          <c>history</c>: similar to <c>edit</c>, a link to the edit/commit
+          history of the current page.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>view</c>: similar to <c>edit</c>, a link to source code of the
+          current page.
+        </p>
+      </li>
       <li>
         <p>
           <c>rmd_subdir</c>: whether to search for book source Rmd files in

@@ -406,7 +406,7 @@ test_that("PreTeXt customization chapter mirrors the Rmd structure", {
   expect_match(
     customization,
     paste0(
-      "Some publishers \\(e\\.g\\., Springer and Chapman (?:&amp;|&) Hall/CRC\\) have their\\s*",
+      "Some publishers \\(e\\.g\\., Springer and Chapman &amp; Hall/CRC\\) have their\\s*",
       "own LaTeX style or class files\\."
     )
   )
