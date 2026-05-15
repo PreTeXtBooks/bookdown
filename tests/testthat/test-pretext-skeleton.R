@@ -459,6 +459,41 @@ test_that("PreTeXt editing chapter mirrors the Rmd structure", {
   expect_match(editing, "<xref ref=\"fig-mathquill-pretext\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"fig-citr-pretext\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"fig-disqus-pretext\"/>", fixed = TRUE)
+  expect_match(
+    editing,
+    paste0(
+      "In this chapter, we explain how to edit, build, preview, and serve the\\s*",
+      "book locally\\."
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "The most important argument is <c>output_format</c>, which can take a\\s*",
+      "character string of the output format"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "One downside of previewing a chapter is that the cross-references to\\s*",
+      "other chapters will not work"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "The server will listen to changes in the book root directory: whenever\\s*",
+      "you modify any files in the book directory"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "Readers can contribute in two ways\\. One way is to contribute content\\s*",
+      "directly, and the easiest way, is through GitHub pull requests"
+    )
+  )
   expect_match(editing, "rstudio.github.io/rstudioaddins", fixed = TRUE)
   expect_match(editing, "help.github.com/articles/about-pull-requests", fixed = TRUE)
   expect_match(editing, "bookdown::render_book(\"index.Rmd\", \"bookdown::gitbook\")", fixed = TRUE)
