@@ -556,7 +556,7 @@ favicon: "favicon.ico"
         whether you are on a phone, tablet, or desktop. On a full-size screen,
         the layout includes three columns of content so readers can quickly see
         all chapters on the left, the current chapter in the middle, and
-        sections within the the current chapter on the right. You can read an
+        sections within the current chapter on the right. You can read an
         example book here: <url href="https://mastering-shiny.org"
         visual="mastering-shiny.org"/>.
       </p>
@@ -873,7 +873,7 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
         <title>Inline Footnotes</title>
 
         <p>
-          <c>bs4_book</c> makes any footnotes to show inline on hover instead
+          <c>bs4_book</c> makes any footnotes show inline on hover instead
           of a linked item at the bottom of the page. You can set
           <c>footnotes_inline = FALSE</c> to opt-out this behavior and keep the
           footnotes at the bottom.
