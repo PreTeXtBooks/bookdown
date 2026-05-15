@@ -5,8 +5,10 @@
   <introduction>
     <p>
       This book is a guide to authoring books and technical documents with R
-      Markdown and the R package <c>bookdown</c>. It focuses on the features
-      specific to writing books, long-form articles, or reports, such as:
+      Markdown (<xref ref="R-rmarkdown-reference"/>) and the R package
+      <c>bookdown</c> (<xref ref="R-bookdown-reference"/>). It focuses on the
+      features specific to writing books, long-form articles, or reports,
+      such as:
     </p>
 
     <ul>
@@ -19,14 +21,15 @@
 
     <p>
       It is not a comprehensive introduction to R Markdown or the
-      <c>knitr</c> package, on top of which <c>bookdown</c> was built. To learn
-      more about R Markdown, please check out the online documentation at
+      <c>knitr</c> package (<xref ref="R-knitr-reference"/>), on top of which
+      <c>bookdown</c> was built. To learn more about R Markdown, please check
+      out the online documentation at
       <url href="http://rmarkdown.rstudio.com" visual="rmarkdown.rstudio.com"/>.
-      For <c>knitr</c>, the Rmd source points readers to
+      For <c>knitr</c>, please see
       <xref ref="xie2015-reference"/>. You do not have to be an expert in the R
-      language to read this book, but you are expected to have some basic
-      knowledge about R Markdown and <c>knitr</c>. For beginners, you may get
-      started with the cheatsheets at
+      language (<xref ref="R-base-reference"/>) to read this book, but you are
+      expected to have some basic knowledge about R Markdown and <c>knitr</c>.
+      For beginners, you may get started with the cheatsheets at
       <url
         href="https://www.rstudio.com/resources/cheatsheets/"
         visual="rstudio.com/resources/cheatsheets/"
@@ -59,8 +62,9 @@
       moment that are necessary to write a relatively complicated document like
       a book, such as automatic numbering of figures and tables in the HTML
       output, cross-references of figures and tables, and fine control of the
-      appearance of figures. These are some of the problems that we have
-      addressed in the <c>bookdown</c> package.
+      appearance of figures (for example, it is currently impossible to specify
+      the alignment of images using the Markdown syntax). These are some of the
+      problems that we have addressed in the <c>bookdown</c> package.
     </p>
 
     <p>
@@ -264,8 +268,9 @@ We have finished a nice book.</input>
       You can override the above behavior by including a configuration file
       named <c>_bookdown.yml</c> in the book directory. It is a YAML file, and
       R Markdown users should be familiar with this format since it is also
-      used to write the metadata in the beginning of R Markdown documents. You
-      can use a field named <c>rmd_files</c> to define your own list and order
+      used to write the metadata in the beginning of R Markdown documents
+      (you can learn more about YAML in <xref ref="r-markdown"/>). You can use
+      a field named <c>rmd_files</c> to define your own list and order
       of Rmd files for the book. For example,
     </p>
 
@@ -371,7 +376,8 @@ link-citations: yes
       may knit each chapter in a separate R session, and <c>bookdown</c> will
       merge the Markdown output of all chapters to render the book. We call
       these two approaches <q>Merge and Knit</q> (M-K) and
-      <q>Knit and Merge</q> (K-M), respectively.
+      <q>Knit and Merge</q> (K-M), respectively. The differences between them
+      may seem subtle, but can be fairly important depending on your use cases.
     </p>
 
     <ul>
@@ -425,7 +431,10 @@ link-citations: yes
       frequently, since most of the time you are very unlikely to be satisfied:
       text may overflow into the page margin, figures may float too far away,
       and so on. Do not try to make things look right immediately, because you
-      may be disappointed over and over again as you keep revising the book.
+      may be disappointed over and over again as you keep revising the book,
+      and things may be messed up again even if you only made some minor changes
+      (see <url href="http://bit.ly/tbrLtx" visual="bit.ly/tbrLtx"/> for a
+      nice illustration).
     </p>
 
     <p>

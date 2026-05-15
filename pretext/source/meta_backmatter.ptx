@@ -15,9 +15,78 @@
       Donald E. Knuth. <q>Literate Programming</q>. <em>The Computer
       Journal</em> 27(2):97--111, 1984.
     </biblio>
+    <biblio type="raw" xml:id="R-bookdown-reference">
+      Yihui Xie (2016). <em>bookdown: Authoring Books and Technical Documents
+      with R Markdown</em>. Chapman and Hall/CRC, Boca Raton, Florida.
+      <url href="https://bookdown.org/yihui/bookdown"
+      visual="bookdown.org/yihui/bookdown"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-rmarkdown-reference">
+      JJ Allaire, Yihui Xie, et al. <em>rmarkdown: Dynamic Documents for R</em>.
+      R package. <url href="https://rmarkdown.rstudio.com"
+      visual="rmarkdown.rstudio.com"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-knitr-reference">
+      Yihui Xie. <em>knitr: A General-Purpose Package for Dynamic Report
+      Generation in R</em>. R package.
+      <url href="https://yihui.org/knitr/" visual="yihui.org/knitr/"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-base-reference">
+      R Core Team. <em>R: A Language and Environment for Statistical
+      Computing</em>. R Foundation for Statistical Computing, Vienna, Austria.
+      <url href="https://www.R-project.org/" visual="R-project.org"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-htmlwidgets-reference">
+      Ramnath Vaidyanathan, Yihui Xie, JJ Allaire, Joe Cheng, Carson Sievert,
+      and Kenton Russell. <em>htmlwidgets: HTML Widgets for R</em>. R package.
+      <url href="https://github.com/ramnathv/htmlwidgets"
+      visual="github.com/ramnathv/htmlwidgets"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-webshot-reference">
+      Winston Chang. <em>webshot: Take Screenshots of Web Pages</em>. R package.
+      <url href="https://github.com/wch/webshot" visual="github.com/wch/webshot"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-DT-reference">
+      Yihui Xie, Joe Cheng, and Xianying Tan. <em>DT: A Wrapper of the
+      JavaScript Library 'DataTables'</em>. R package.
+      <url href="https://github.com/rstudio/DT" visual="github.com/rstudio/DT"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-miniUI-reference">
+      Joe Cheng. <em>miniUI: Shiny UI Widgets for Small Screens</em>. R package.
+      <url href="https://github.com/rstudio/miniUI"
+      visual="github.com/rstudio/miniUI"/>.
+    </biblio>
+    <biblio type="raw" xml:id="rmarkdown2020-reference">
+      Yihui Xie, Christophe Dervieux, and Emily Riederer.
+      <em>R Markdown Cookbook</em>. Chapman and Hall/CRC, Boca Raton, Florida,
+      2020. <url href="https://bookdown.org/yihui/rmarkdown-cookbook"
+      visual="bookdown.org/yihui/rmarkdown-cookbook"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-servr-reference">
+      Yihui Xie. <em>servr: A Simple HTTP Server to Serve Static Files or
+      Dynamic Documents</em>. R package.
+      <url href="https://github.com/yihui/servr" visual="github.com/yihui/servr"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-citr-reference">
+      Frederik Aust. <em>citr: RStudio Add-in to Insert Markdown Citations</em>.
+      R package.
+      <url href="https://github.com/crsh/citr" visual="github.com/crsh/citr"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-tufte-reference">
+      Yihui Xie and JJ Allaire. <em>tufte: Tufte's Styles for R Markdown
+      Documents</em>. R package.
+      <url href="https://github.com/rstudio/tufte"
+      visual="github.com/rstudio/tufte"/>.
+    </biblio>
+    <biblio type="raw" xml:id="R-rticles-reference">
+      JJ Allaire, Yihui Xie, Christophe Dervieux, et al.
+      <em>rticles: Article Formats for R Markdown</em>. R package.
+      <url href="https://github.com/rstudio/rticles"
+      visual="github.com/rstudio/rticles"/>.
+    </biblio>
     <biblio type="raw" xml:id="placeholder-reference">
-      Generated references from <c>book.bib</c> and <c>packages.bib</c>
-      belong here.
+      Additional generated references from <c>book.bib</c> and
+      <c>packages.bib</c> belong here.
     </biblio>
   </references>
 

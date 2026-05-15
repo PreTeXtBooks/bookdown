@@ -78,7 +78,7 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")</input>
       Instead of repeatedly calling <c>render_book()</c> or
       <c>preview_chapter()</c>, the Rmd chapter explains how to live-preview the
       book in a browser with <c>serve_book()</c>, which serves HTML output using
-      the <c>servr</c> package.
+      the <c>servr</c> package (<xref ref="R-servr-reference"/>).
     </p>
 
     <program language="r">
@@ -169,7 +169,9 @@ output:
       session, the chapter recommends <c>bookdown::serve_book(daemon = TRUE)</c>.
       If you are not familiar with addins, the original chapter points readers
       to <url href="http://rstudio.github.io/rstudioaddins/"
-      visual="rstudio.github.io/rstudioaddins/"/>.
+      visual="rstudio.github.io/rstudioaddins/"/>. The
+      <q>Input LaTeX Math</q> addin provides a text box to help type
+      <latex/> math expressions (see <xref ref="fig-mathquill-pretext"/>).
     </p>
 
     <figure xml:id="fig-mathquill-pretext">
@@ -182,8 +184,11 @@ output:
     </figure>
 
     <p>
-      Another example in the chapter is the <c>citr</c> addin for inserting
-      citations by browsing a bibliography database instead of remembering keys.
+      Another example in the chapter is the <c>citr</c> package
+      (<xref ref="R-citr-reference"/>), which provides an addin named
+      <q>Insert citations</q> for inserting citations by browsing a
+      bibliography database instead of remembering keys (see
+      <xref ref="fig-citr-pretext"/>).
     </p>
 
     <figure xml:id="fig-citr-pretext">
@@ -220,7 +225,8 @@ output:
       The chapter uses Disqus as its example of embedded HTML page comments and
       shows the JavaScript snippet that can be saved to <c>disqus.html</c> and
       then inserted on every page via <c>after_body</c> as in
-      <xref ref="yaml-options"/>.
+      <xref ref="yaml-options"/> (see <xref ref="fig-disqus-pretext"/> for what
+      the discussion area looks like).
     </p>
 
     <program language="html">
