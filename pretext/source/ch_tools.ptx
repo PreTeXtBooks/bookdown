@@ -30,9 +30,10 @@
     </program>
 
     <p>
-      It then shows how to install optional dependencies as well, which can be
-      convenient if you do not mind installing packages that may not be used in
-      a given project.
+      This installs all required R packages. You can also choose to install
+      all optional packages as well, if you do not care too much about whether
+      these packages will actually be used to compile your book (such as
+      htmlwidgets):
     </p>
 
     <program language="r">
@@ -40,9 +41,8 @@
     </program>
 
     <p>
-      To test the development version from GitHub, the chapter recommends
-      installing <c>devtools</c> first if necessary and then installing
-      <c>bookdown</c> from the repository.
+      If you want to test the development version of bookdown on GitHub,
+      you need to install devtools first:.
     </p>
 
     <program language="r">
@@ -51,8 +51,8 @@ devtools::install_github('rstudio/bookdown')</input>
     </program>
 
     <p>
-      Since packages on CRAN and GitHub are updated regularly, the chapter also
-      suggests updating your installed packages from time to time.
+      R packages are also often constantly updated on CRAN or GitHub, so you
+      may want to update them once in a while:
     </p>
 
     <program language="r">
@@ -60,8 +60,8 @@ devtools::install_github('rstudio/bookdown')</input>
     </program>
 
     <p>
-      Although it is not required, the chapter also recommends the RStudio IDE
-      as a convenient environment for R-related work. The RStudio IDE can be
+      Although it is not required,  the RStudio IDE can make a lot of things
+      much easier when you work on R-related projects. The RStudio IDE can be
       downloaded from <url href="https://www.posit.co"
       visual="posit.co"/>.
     </p>
