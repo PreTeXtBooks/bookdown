@@ -262,6 +262,8 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "<section xml:id=\"markdown-syntax\">", fixed = TRUE)
   expect_match(components, "<subsection xml:id=\"equations\">", fixed = TRUE)
   expect_match(components, "<subsection xml:id=\"theorems\">", fixed = TRUE)
+  expect_match(components, "<title>A note on the old syntax</title>", fixed = TRUE)
+  expect_match(components, "<title>Text references</title>", fixed = TRUE)
   expect_match(components, "<section xml:id=\"figures\">", fixed = TRUE)
   expect_match(components, "<section xml:id=\"tables\">", fixed = TRUE)
   expect_match(components, "<section xml:id=\"citations\">", fixed = TRUE)

@@ -683,7 +683,7 @@ Or indent by four spaces:
 </hypothesis>
 
 <subsection xml:id="subsec-old-theorem-syntax">
-  <title>A Note on the Old Syntax</title>
+  <title>A note on the old syntax</title>
 
   <p>
     For older versions of bookdown (before v0.21), a theorem environment could be 
@@ -806,7 +806,7 @@ Or indent by four spaces:
 </subsection>
 
 <subsection xml:id="subsec-text-references">
-  <title>Text References</title>
+  <title>Text references</title>
 
   <p>
     You can assign some text to a label and reference the text using the label 
