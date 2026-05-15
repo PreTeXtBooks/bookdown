@@ -4,11 +4,13 @@
 
   <introduction>
     <p>
-      As mentioned in <xref ref="ch-intro"/>, this book is not intended to be a
-      comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. This chapter
-      briefly explains some basic concepts and syntax in both packages and
-      points readers to further help resources such as
-      <url href="https://stackoverflow.com" visual="stackoverflow.com"/>.
+      As mentioned in <xref ref="ch-intro"/>,  this book is not a
+      comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. In this
+      chapter, we briefly explain some basic concepts and syntax in
+      <c>knitr</c> and <c>rmarkdown</c>. If you have any further 
+      questions, you may post them on <url href="https://stackoverflow.com">
+      StackOverflow</url> and tag your questions with <c>r</c>, <c>knitr</c>,
+      <c>rmarkdown</c>, and/or <c>bookdown</c>, whichever is appropriate.
     </p>
   </introduction>
 
@@ -58,15 +60,14 @@ print(x.split(' '))
 
     <program language="markdown">
       <input>````
-`r "\x60r ''\x60"````{r}
+`r ''````{r}
 # a literal code chunk
 ```
 ````</input>
     </program>
 
     <p>
-      After compilation, the inline expression disappears and the visible result
-      looks like this.
+      After the document is compiled, the inline expression will disappear and you will see:
     </p>
 
     <program language="markdown">
