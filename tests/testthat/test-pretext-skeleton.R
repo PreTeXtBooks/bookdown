@@ -316,10 +316,17 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::epub_book(", fixed = TRUE)
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
   for (text in c(
-    "You do not need the three dashes <c>---</c> in",
+    "You do not need the three dashes <c>---</c> in <c>_output.yml</c>.",
     "We have made several improvements over the original GitBook project.",
-    "When the only available format for readers to download",
-    "The first- and second-level headings appear in the current chapter's",
+    paste(
+      "When the only available format for readers to download is PDF,",
+      "the download button will be a single PDF button instead of a",
+      "drop-down menu."
+    ),
+    paste(
+      "The first- and second-level headings appear in the current chapter's",
+      "sidebar, which sticks to the top of the page as you scroll down."
+    ),
     "Bootstrap CSS and JavaScript files",
     "Currently <c>bookdown</c> provides two e-book formats, EPUB and MOBI."
   )) {

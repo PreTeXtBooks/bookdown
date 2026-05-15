@@ -499,7 +499,7 @@ download: ["pdf", "epub", "mobi"]</input>
             <c>_italic_</c> or <c>**bold**</c>.
           </p>
         </li>
-        <li><p><c>url</c>: The URL of book's website, e.g., <c>https\://bookdown.org/yihui/bookdown/</c>.</p></li>
+        <li><p><c>url</c>: The URL of the book's website, e.g., <c>https\://bookdown.org/yihui/bookdown/</c>.</p></li>
         <li><p><c>github-repo</c>: The GitHub repository of the book of the form <c>user/repo</c>.</p></li>
         <li><p><c>cover-image</c>: The path to the cover image of the book.</p></li>
         <li>
