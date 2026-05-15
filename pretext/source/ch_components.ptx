@@ -31,7 +31,10 @@
         (<c>**text**</c>). Text surrounded by <c>~</c> will be converted to a
         subscript, and similarly, two carets (<c>^</c>) produce a superscript.
         To mark text as <c>inline code</c>, use a pair of backticks, for
-        example, <c>`code`</c>. Small caps can be produced by the HTML tag
+        example, <c>`code`</c><fn>To include literal backticks, use more
+        backticks outside, e.g., you can use two backticks to preserve one
+        backtick inside: <c>`` `code` ``</c></fn>. Small caps can be produced
+        by the HTML tag
         <c>span</c>, links are created using <c>[text](link)</c>, and the
         syntax for images is similar: just add an exclamation mark. Footnotes
         are put inside the square brackets after a caret, for example,
@@ -109,17 +112,21 @@
         <li><p>the third item</p></li>
       </ol>
 
-      <p>Blockquotes are written after <c>&gt;</c>, and the Rmd source uses a Mark Twain quotation as its example.</p>
+      <p>Blockquotes are written after <c>&gt;</c>, e.g.,</p>
 
       <program language="markdown">
-        <input>&gt; A blockquote example
+        <input>&gt; "I thoroughly disapprove of duels. If a man should challenge me,
+  I would take him kindly and forgivingly by the hand and lead him
+  to a quiet place and kill him."
 &gt;
 &gt; --- Mark Twain</input>
       </program>
 
       <blockquote>
-        <p>A blockquote example.</p>
-        <p>— Mark Twain</p>
+        <p>"I thoroughly disapprove of duels. If a man should challenge me, I
+        would take him kindly and forgivingly by the hand and lead him to a
+        quiet place and kill him."</p>
+        <p>                                — Mark Twain</p>
       </blockquote>
 
       <p>
@@ -141,39 +148,83 @@ Or indent by four spaces:
     <subsection xml:id="math-expressions">
       <title>Math expressions</title>
 
-      <p>
-        Inline LaTeX equations can be written in a pair of dollar signs using
-        the LaTeX syntax, for example,
-        <c>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</c>; math expressions of
-        the display style can be written in a pair of double dollar signs.
-      </p>
+<p>
+  Inline LaTeX equations can be written in a pair of dollar signs using the LaTeX 
+  syntax, e.g., <c>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</c> (actual output: 
+  <m>f(k) = \binom{n}{k} p^{k} (1-p)^{n-k}</m>); math expressions of the display 
+  style can be written in a pair of double dollar signs, e.g., 
+  <c>$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$</c>, and the output looks like this:
+</p>
 
-      <md>
-        f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}
-      </md>
+<me>f(k) = \binom{n}{k} p^{k} (1-p)^{n-k}</me>
 
-      <p>You can also use math environments inside dollar pairs, for example,</p>
+<p>
+  You can also use math environments inside <c>$ $</c> or <c>$$ $$</c>, e.g.,
+</p>
 
-      <program language="latex">
-        <input>$$\begin{array}{ccc}
-x_{11} &amp; x_{12} &amp; x_{13}\\
-x_{21} &amp; x_{22} &amp; x_{23}
-\end{array}$$</input>
-      </program>
+<program language="latex">
+  <input>
+    $$\begin{array}{ccc}
+    x_{11} &amp; x_{12} &amp; x_{13}\\
+    x_{21} &amp; x_{22} &amp; x_{23}
+    \end{array}$$
+  </input>
+</program>
 
-      <program language="latex">
-        <input>$$X = \begin{bmatrix}1 &amp; x_{1}\\
-1 &amp; x_{2}\\
-1 &amp; x_{3}
-\end{bmatrix}$$</input>
-      </program>
+<me>
+  \begin{array}{ccc}
+  x_{11} \amp x_{12} \amp x_{13}\\
+  x_{21} \amp x_{22} \amp x_{23}
+  \end{array}
+</me>
 
-      <program language="latex">
-        <input>$$\Theta = \begin{pmatrix}\alpha &amp; \beta\\
-\gamma &amp; \delta
-\end{pmatrix}$$</input>
-      </program>
-    </subsection>
+<program language="latex">
+  <input>
+    $$X = \begin{bmatrix}1 &amp; x_{1}\\
+    1 &amp; x_{2}\\
+    1 &amp; x_{3}
+    \end{bmatrix}$$
+  </input>
+</program>
+
+<me>
+  X = \begin{bmatrix}
+  1 \amp x_{1}\\
+  1 \amp x_{2}\\
+  1 \amp x_{3}
+  \end{bmatrix}
+</me>
+
+<program language="latex">
+  <input>
+    $$\Theta = \begin{pmatrix}\alpha &amp; \beta\\
+    \gamma &amp; \delta
+    \end{pmatrix}$$
+  </input>
+</program>
+
+<me>
+  \Theta = \begin{pmatrix}
+  \alpha \amp \beta\\
+  \gamma \amp \delta
+  \end{pmatrix}
+</me>
+
+<program language="latex">
+  <input>
+    $$\begin{vmatrix}a &amp; b\\
+    c &amp; d
+    \end{vmatrix}=ad-bc$$
+  </input>
+</program>
+
+<me>
+  \begin{vmatrix}
+  a \amp b\\
+  c \amp d
+  \end{vmatrix} = ad - bc
+</me>
+</subsection>
   </section>
 
   <section xml:id="markdown-extensions">
@@ -211,160 +262,601 @@ x_{21} &amp; x_{22} &amp; x_{23}
       <aside>
         <title>Caution</title>
         <p>
-          All labels in <c>bookdown</c> must only contain alphanumeric
-          characters, <c>:</c>, <c>-</c>, and/or <c>/</c>. Equation references
-          work best for LaTeX/PDF output, and they are not well supported in
-          Word output or e-books. For HTML output, <c>bookdown</c> can only
-          number the equations with labels.
+  Equation labels must start with the prefix <c>eq:</c> in bookdown. All labels in 
+  bookdown must only contain alphanumeric characters, <c>:</c>, <c>-</c>, and/or 
+  <c>/</c>. Equation references work best for LaTeX/PDF output, and they are not well 
+  supported in Word output or e-books. For HTML output, bookdown can only number the 
+  equations with labels. Please make sure equations without labels are not numbered by 
+  either using the <c>equation*</c> environment or adding <c>\nonumber</c> or 
+  <c>\notag</c> to your equations. The same rules apply to other math environments, 
+  such as <c>eqnarray</c>, <c>gather</c>, <c>align</c>, and so on (e.g., you can use 
+  the <c>align*</c> environment).
         </p>
       </aside>
 
-      <program language="latex">
-        <input>\begin{equation*}
-\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
-\end{equation*}</input>
-      </program>
+<p>
+  We demonstrate a few more math equation environments below. Here is an unnumbered 
+  equation using the <c>equation*</c> environment:
+</p>
 
-      <program language="latex">
-        <input>\begin{align}
-g(X_{n}) &amp;= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
-\sqrt{n}[g(X_{n})-g(\theta)] &amp;= g'\left({\tilde{\theta}}\right)
-  \sqrt{n}[X_{n}-\theta ] (#eq:align)
-\end{align}</input>
-      </program>
+<program language="latex">
+  <input>
+    \begin{equation*}
+    \frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+    \end{equation*}
+  </input>
+</program>
+
+<me>
+  \frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+</me>
+
+<p>
+  Below is an <c>align</c> environment:
+</p>
+
+<program language="latex">
+  <input>
+    \begin{align}
+    g(X_{n}) &amp;= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
+    \sqrt{n}[g(X_{n})-g(\theta)] &amp;= g'\left({\tilde{\theta}}\right)
+      \sqrt{n}[X_{n}-\theta ] (\#eq:align)
+    \end{align}
+  </input>
+</program>
+
+<mdn>
+  <mrow>
+    g(X_{n}) \amp = g(\theta)+g'(\tilde{\theta})(X_{n}-\theta)
+  </mrow>
+  <mrow xml:id="eq-align">
+    \sqrt{n}[g(X_{n})-g(\theta)] \amp = g'\left(\tilde{\theta}\right)
+    \sqrt{n}[X_{n}-\theta]
+  </mrow>
+</mdn>
+
+<p>
+  You can use the <c>split</c> environment inside <c>equation</c> so that all lines 
+  share the same number. By default, each line in the <c>align</c> environment will 
+  be assigned an equation number. We suppressed the number of the first line in the 
+  previous example using <c>\notag</c>. In this example, the whole <c>split</c> 
+  environment was assigned a single number.
+</p>
+
+<program language="latex">
+  <input>
+    \begin{equation}
+    \begin{split}
+    \mathrm{Var}(\hat{\beta}) &amp; =\mathrm{Var}((X'X)^{-1}X'y)\\
+     &amp; =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+     &amp; =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+     &amp; =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
+     &amp; =(X'X)^{-1}\sigma^{2}
+    \end{split}
+    (\#eq:var-beta)
+    \end{equation}
+  </input>
+</program>
+
+<men xml:id="eq-var-beta">
+  \begin{split}
+  \mathrm{Var}(\hat{\beta}) \amp = \mathrm{Var}((X'X)^{-1}X'y)\\
+  \amp = (X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+  \amp = (X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+  \amp = (X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
+  \amp = (X'X)^{-1}\sigma^{2}
+  \end{split}
+</men>
     </subsection>
 
     <subsection xml:id="theorems">
       <title>Theorems and proofs</title>
+<p>
+  Theorems and proofs are commonly used in articles and books in mathematics. However, 
+  please do not be misled by the names: a <q>theorem</q> is just a numbered/labeled 
+  environment, and it does not have to be a mathematical theorem (e.g., it can be an 
+  example irrelevant to mathematics). Similarly, a <q>proof</q> is an unnumbered 
+  environment. In this section, we always use the general meanings of a <q>theorem</q> 
+  and <q>proof</q> unless explicitly stated.
+</p>
 
-      <p>
-        Theorems and proofs are commonly used in articles and books in
-        mathematics. However, please do not be misled by the names: a theorem
-        is just a numbered or labeled environment, and it does not have to be a
-        mathematical theorem. Similarly, a proof is an unnumbered environment.
-      </p>
+<p>
+  In bookdown, the types of theorem environments supported are in <xref ref="table-theorem-envs"/>. 
+  To write a theorem, you can use the syntax below:
+</p>
 
-      <program language="markdown">
-        <input>::: {.theorem}
-This is a `theorem` environment that can contain **any**
-_Markdown_ syntax.
-:::</input>
-      </program>
+<program language="markdown">
+  <input>
+    ::: {.theorem}
+    This is a `theorem` environment that can contain **any**
+    _Markdown_ syntax.
+    :::
+  </input>
+</program>
 
-      <program language="markdown">
-        <input>::: {.theorem #pyth name="Pythagorean theorem"}
-For a right triangle, if $c$ denotes the length of the hypotenuse
-and $a$ and $b$ denote the lengths of the other two sides, we have
+<p>
+  This syntax is based on Pandoc's fenced Div blocks and can already be used in any 
+  R Markdown document to write custom blocks. Bookdown only offers special handling 
+  for theorem and proof environments. Since this uses the syntax of Pandoc's Markdown, 
+  you can write any valid Markdown text inside the block.
+</p>
 
-$$a^2 + b^2 = c^2$$
-:::</input>
-      </program>
+<table xml:id="table-theorem-envs">
+  <title>Theorem environments in bookdown</title>
+  <tabular halign="left">
+    <row header="yes">
+      <cell>Environment</cell>
+      <cell>Printed Name</cell>
+      <cell>Label Prefix</cell>
+    </row>
+    <row>
+      <cell><c>theorem</c></cell>
+      <cell>Theorem</cell>
+      <cell><c>thm</c></cell>
+    </row>
+    <row>
+      <cell><c>lemma</c></cell>
+      <cell>Lemma</cell>
+      <cell><c>lem</c></cell>
+    </row>
+    <row>
+      <cell><c>corollary</c></cell>
+      <cell>Corollary</cell>
+      <cell><c>cor</c></cell>
+    </row>
+    <row>
+      <cell><c>proposition</c></cell>
+      <cell>Proposition</cell>
+      <cell><c>prp</c></cell>
+    </row>
+    <row>
+      <cell><c>conjecture</c></cell>
+      <cell>Conjecture</cell>
+      <cell><c>cnj</c></cell>
+    </row>
+    <row>
+      <cell><c>definition</c></cell>
+      <cell>Definition</cell>
+      <cell><c>def</c></cell>
+    </row>
+    <row>
+      <cell><c>example</c></cell>
+      <cell>Example</cell>
+      <cell><c>exm</c></cell>
+    </row>
+    <row>
+      <cell><c>exercise</c></cell>
+      <cell>Exercise</cell>
+      <cell><c>exr</c></cell>
+    </row>
+    <row>
+      <cell><c>hypothesis</c></cell>
+      <cell>Hypothesis</cell>
+      <cell><c>hyp</c></cell>
+    </row>
+  </tabular>
+</table>
 
-      <p>
-        The proof environments currently supported are <c>proof</c>,
-        <c>remark</c>, and <c>solution</c>. The syntax is similar to theorem
-        environments, and proof environments can also be named using the
-        <c>name</c> attribute. The only difference is that since they are
-        unnumbered, you cannot reference them, even if you provide an ID to a
-        proof environment.
-      </p>
+<p>
+  To write other theorem environments, replace <c>::: {.theorem}</c> with other 
+  environment names in <xref ref="table-theorem-envs"/>, e.g., <c>::: {.lemma}</c>.
+</p>
 
-      <p>
-        We have tried to make all these theorem and proof environments work out
-        of the box, no matter if your output is PDF or HTML. If you are a
-        LaTeX or HTML expert, you may want to customize the style of these
-        environments anyway (see Chapter <xref ref="ch-customization"/>).
-        Customization in HTML is easy with CSS, and each environment is
-        enclosed in <c>&lt;div&gt;&lt;/div&gt;</c> with the CSS class being the
-        environment name, e.g., <c>&lt;div class="lemma"&gt;&lt;/div&gt;</c>.
-        For LaTeX output, we have predefined the style to be
-        <c>definition</c> for environments <c>definition</c>, <c>example</c>,
-        <c>exercise</c>, and <c>hypothesis</c>, and <c>remark</c> for
-        environments <c>proof</c> and <c>remark</c>. All other environments use
-        the <c>plain</c> style. The style definition is done through the
-        <c>\theoremstyle{}</c> command of the <c>amsthm</c> package. If you do
-        not want the default theorem definitions to be automatically added by
-        <c>bookdown</c>, you can set
-        <c>options(bookdown.theorem.preamble = FALSE)</c>. This can be useful,
-        for example, to avoid conflicts in single documents (Section
-        <xref ref="a-single-document"/>) using the output format
-        <c>bookdown::pdf_book</c> with a <c>base_format</c> that has already
-        included <c>amsmath</c> definitions.
-      </p>
+<p>
+  A theorem can have a <c>name</c> attribute so its name will be printed. For example,
+</p>
 
-      <subsubsection xml:id="theorem-engine">
-        <title>A note on the old syntax</title>
+<program language="markdown">
+  <input>
+    ::: {.theorem name="Pythagorean theorem"}
+    For a right triangle, if $c$ denotes the length of the hypotenuse
+    and $a$ and $b$ denote the lengths of the other two sides, we have
+    $$a^2 + b^2 = c^2$$
+    :::
+  </input>
+</program>
 
-        <p>
-          For older versions of <c>bookdown</c> (before v0.21), a theorem
-          environment could be written with an older fenced-code syntax. This
-          still works, but the newer fenced-Div syntax is recommended.
-        </p>
+<p>
+  If you want to refer to a theorem, you should label it. The label can be provided 
+  as an ID to the block of the form <c>#label</c>. For example,
+</p>
 
-        <program language="r">
-          <input>bookdown::fence_theorems("01-intro.Rmd", output = "01-intro-new.Rmd")</input>
-        </program>
-      </subsubsection>
+<program language="markdown">
+  <input>
+    ::: {.theorem #foo}
+    A labeled theorem here.
+    :::
+  </input>
+</program>
+
+<p>
+  After you label a theorem, you can refer to it using the syntax 
+  <c>\@ref(prefix:label)</c>. See the column Label Prefix in 
+  <xref ref="table-theorem-envs"/> for the value of prefix for each environment. 
+  For example, we have a labeled and named theorem below, and <c>\@ref(thm:pyth)</c> 
+  gives us its theorem number:
+</p>
+
+<program language="markdown">
+  <input>
+    ::: {.theorem #pyth name="Pythagorean theorem"}
+    For a right triangle, if $c$ denotes the length of the hypotenuse
+    and $a$ and $b$ denote the lengths of the other two sides, we have
+
+    $$a^2 + b^2 = c^2$$
+    :::
+  </input>
+</program>
+
+<theorem xml:id="thm-pyth">
+  <title>Pythagorean theorem</title>
+  <statement>
+    <p>
+      For a right triangle, if <m>c</m> denotes the length of the hypotenuse and 
+      <m>a</m> and <m>b</m> denote the lengths of the other two sides, we have
+      <me>a^2 + b^2 = c^2</me>
+    </p>
+  </statement>
+</theorem>
+
+<p>
+  The proof environments currently supported are <c>proof</c>, <c>remark</c>, and 
+  <c>solution</c>. The syntax is similar to theorem environments, and proof environments 
+  can also be named using the <c>name</c> attribute. The only difference is that since 
+  they are unnumbered, you cannot reference them, even if you provide an ID to a proof 
+  environment.
+</p>
+
+<p>
+  We have tried to make all these theorem and proof environments work out of the box, 
+  no matter if your output is PDF or HTML. If you are a LaTeX or HTML expert, you may 
+  want to customize the style of these environments anyway. Customization in HTML is 
+  easy with CSS, and each environment is enclosed in <c>&lt;div&gt;&lt;/div&gt;</c> 
+  with the CSS class being the environment name, e.g., 
+  <c>&lt;div class="lemma"&gt;&lt;/div&gt;</c>. For LaTeX output, we have predefined 
+  the style to be <c>definition</c> for environments <c>definition</c>, <c>example</c>, 
+  <c>exercise</c>, and <c>hypothesis</c>, and <c>remark</c> for environments 
+  <c>proof</c> and <c>remark</c>. All other environments use the <c>plain</c> style. 
+  The style definition is done through the <c>\theoremstyle{}</c> command of the 
+  <c>amsthm</c> package. If you do not want the default theorem definitions to be 
+  automatically added by bookdown, you can set 
+  <c>options(bookdown.theorem.preamble = FALSE)</c>.
+</p>
+
+<p>
+  Theorems are numbered by chapters by default. If there are no chapters in your 
+  document, they are numbered by sections instead. If the whole document is unnumbered 
+  (the output format option <c>number_sections = FALSE</c>), all theorems are numbered 
+  sequentially from 1, 2, <ellipsis/>, N. LaTeX supports numbering one theorem 
+  environment after another, e.g., let theorems and lemmas share the same counter. 
+  This is not supported for HTML/EPUB output in bookdown. You can change the numbering 
+  scheme in the LaTeX preamble by defining your own theorem environments, e.g.,
+</p>
+
+<program language="latex">
+  <input>
+    \newtheorem{theorem}{Theorem}
+    \newtheorem{lemma}[theorem]{Lemma}
+  </input>
+</program>
+
+<p>
+  When bookdown detects <c>\newtheorem{theorem}</c> in your LaTeX preamble, it will 
+  not write out its default theorem definitions, which means you have to define all 
+  theorem environments by yourself. For the sake of simplicity and consistency, we do 
+  not recommend that you do this. It can be confusing when your Theorem 18 in PDF 
+  becomes Theorem 2.4 in HTML.
+</p>
+
+<p>
+  Below we show more examples<fn>Some examples are adapted from the Wikipedia page
+  <url href = "https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)"/>
+  </fn> of the theorem and proof environments, so you can see 
+  the default styles in bookdown.
+</p>
+
+<definition xml:id="def-characteristic-function">
+  <statement>
+    <p>
+      The characteristic function of a random variable <m>X</m> is defined by
+      <me>\varphi_X(t) = E[e^{itX}], \quad t \in \mathbb{R}</me>
+    </p>
+  </statement>
+</definition>
+
+<example xml:id="exm-characteristic-uniform">
+  <statement>
+    <p>
+      We derive the characteristic function of <m>X \sim U(0,1)</m> with the 
+      probability density function <m>f(x) = 1_{x \in [0,1]}</m>.
+    </p>
+    <md>
+      <mrow>\varphi_X(t) \amp = E[e^{itX}] = \int e^{itx} f(x)\,dx = \int_0^1 e^{itx}\,dx</mrow>
+      <mrow>\amp = \int_0^1 (\cos(tx) + i\sin(tx))\,dx</mrow>
+      <mrow>\amp = \left(\frac{\sin(tx)}{t} - i\frac{\cos(tx)}{t}\right)\Bigg|_0^1</mrow>
+      <mrow>\amp = \frac{\sin(t)}{t} - i\left(\frac{\cos(t)-1}{t}\right)</mrow>
+      <mrow>\amp = \frac{i\sin(t)}{it} + \frac{\cos(t)-1}{it} = \frac{e^{it}-1}{it}</mrow>
+    </md>
+    <p>
+      Note that we used the fact <m>e^{ix} = \cos(x) + i\sin(x)</m> twice.
+    </p>
+  </statement>
+</example>
+
+<lemma xml:id="lem-same-distribution">
+  <statement>
+    <p>
+      For any two random variables <m>X_1</m>, <m>X_2</m>, they both have the same 
+      probability distribution if and only if
+      <me>\varphi_{X_1}(t) = \varphi_{X_2}(t)</me>
+    </p>
+  </statement>
+</lemma>
+
+<theorem xml:id="thm-characteristic-linear">
+  <statement>
+    <p>
+      If <m>X_1, \ldots, X_n</m> are independent random variables, and 
+      <m>a_1, \ldots, a_n</m> are some constants, then the characteristic function 
+      of the linear combination <m>S_n = \sum_{i=1}^n a_i X_i</m> is
+      <me>\varphi_{S_n}(t) = \prod_{i=1}^n \varphi_{X_i}(a_i t) = \varphi_{X_1}(a_1 t) \cdots \varphi_{X_n}(a_n t)</me>
+    </p>
+  </statement>
+</theorem>
+
+<proposition xml:id="prp-poisson-sum">
+  <statement>
+    <p>
+      The distribution of the sum of independent Poisson random variables 
+      <m>X_i \sim \mathrm{Pois}(\lambda_i), i = 1, 2, \cdots, n</m> is 
+      <m>\mathrm{Pois}\left(\sum_{i=1}^n \lambda_i\right)</m>.
+    </p>
+  </statement>
+  <proof>
+    <p>
+      The characteristic function of <m>X \sim \mathrm{Pois}(\lambda)</m> is 
+      <m>\varphi_X(t) = e^{\lambda(e^{it}-1)}</m>. Let 
+      <m>P_n = \sum_{i=1}^n X_i</m>. We know from 
+      <xref ref="thm-characteristic-linear"/> that
+      <me>
+        \varphi_{P_n}(t) = \prod_{i=1}^n \varphi_{X_i}(t) = \prod_{i=1}^n e^{\lambda_i(e^{it}-1)} = e^{\sum_{i=1}^n \lambda_i(e^{it}-1)}
+      </me>
+      This is the characteristic function of a Poisson random variable with the 
+      parameter <m>\lambda = \sum_{i=1}^n \lambda_i</m>. From 
+      <xref ref="lem-same-distribution"/>, we know the distribution of <m>P_n</m> 
+      is <m>\mathrm{Pois}\left(\sum_{i=1}^n \lambda_i\right)</m>.
+    </p>
+  </proof>
+</proposition>
+
+<remark>
+  <p>
+    In some cases, it is very convenient and easy to figure out the distribution of 
+    the sum of independent random variables using characteristic functions.
+  </p>
+</remark>
+
+<corollary xml:id="cor-characteristic-sum">
+  <statement>
+    <p>
+      The characteristic function of the sum of two independent random variables 
+      <m>X_1</m> and <m>X_2</m> is the product of characteristic functions of 
+      <m>X_1</m> and <m>X_2</m>, i.e.,
+      <me>\varphi_{X_1 + X_2}(t) = \varphi_{X_1}(t)\varphi_{X_2}(t)</me>
+    </p>
+  </statement>
+</corollary>
+
+<exercise xml:id="exr-sample-mean-cf">
+  <title>Characteristic Function of the Sample Mean</title>
+  <statement>
+    <p>
+      Let <m>\bar{X} = \sum_{i=1}^n \frac{1}{n} X_i</m> be the sample mean of 
+      <m>n</m> independent and identically distributed random variables, each with 
+      characteristic function <m>\varphi_X</m>. Compute the characteristic function 
+      of <m>\bar{X}</m>.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      Applying <xref ref="thm-characteristic-linear"/>, we have
+      <me>
+        \varphi_{\bar{X}}(t) = \prod_{i=1}^n \varphi_{X_i}\!\left(\frac{t}{n}\right) 
+        = \left[\varphi_X\!\left(\frac{t}{n}\right)\right]^n
+      </me>
+    </p>
+  </solution>
+</exercise>
+
+<hypothesis xml:id="hyp-riemann">
+  <title>Riemann Hypothesis</title>
+  <statement>
+    <p>
+      The Riemann Zeta-function is defined as
+      <me>\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}</me>
+      for complex values of <m>s</m> and which converges when the real part of 
+      <m>s</m> is greater than 1. The Riemann hypothesis is that the Riemann zeta 
+      function has its zeros only at the negative even integers and complex numbers 
+      with real part <m>1/2</m>.
+    </p>
+  </statement>
+</hypothesis>
+
+<subsection xml:id="subsec-old-theorem-syntax">
+  <title>A Note on the Old Syntax</title>
+
+  <p>
+    For older versions of bookdown (before v0.21), a theorem environment could be 
+    written like this:
+  </p>
+
+  <program language="markdown">
+    <input>
+```{theorem pyth, name="Pythagorean theorem"}
+      For a right triangle, if $c$ denotes the length of the hypotenuse
+      and $a$ and $b$ denote the lengths of the other two sides, we have
+
+      $$a^2 + b^2 = c^2$$
+```
+    </input>
+  </program>
+
+  <p>
+    This syntax still works, but we do not recommend it since the new syntax allows 
+    you to write richer content and has a cleaner implementation.
+  </p>
+
+  <p>
+    This conversion between the two syntaxes is straightforward. The above theorem 
+    could be rewritten in this way:
+  </p>
+
+  <program language="markdown">
+    <input>
+      ::: {.theorem #pyth name="Pythagorean theorem"}
+      For a right triangle, if $c$ denotes the length of the hypotenuse
+      and $a$ and $b$ denote the lengths of the other two sides, we have
+
+      $$a^2 + b^2 = c^2$$
+      :::
+    </input>
+  </program>
+
+  <p>
+    You can use the helper function <c>bookdown::fence_theorems()</c> to convert a 
+    whole file or a piece of text. This is a one-time operation. We have tried to do 
+    the conversion from old to new syntax safely, but we might have missed some edge 
+    cases. To make sure you do not overwrite the input file by accident, you can write 
+    the converted source to a new file, e.g.,
+  </p>
+
+  <program language="r">
+    <input>
+      bookdown::fence_theorems("01-intro.Rmd", output = "01-intro-new.Rmd")
+    </input>
+  </program>
+
+  <p>
+    Then double check the content of <c>01-intro-new.Rmd</c>. Using 
+    <c>output = NULL</c> will print the result of conversion in the R console, and is 
+    another way to check the conversion. If you are using a version control tool, you 
+    can set <c>output</c> to be the same as input, as it should be safe and easy for 
+    you to revert the change if anything goes wrong.
+  </p>
+
+</subsection>
+
     </subsection>
 
     <subsection xml:id="special-headers">
       <title>Special headers</title>
 
-      <p>
-        There are a few special types of first-level headers that will be
-        processed differently in <c>bookdown</c>, including <c>(PART)</c>
-        headers for parts and <c>(APPENDIX)</c> headers for appendices.
-      </p>
+ <p>
+  There are a few special types of first-level headers that will be processed 
+  differently in bookdown. The first type is an unnumbered header that starts with 
+  the token <c>(PART)</c>. This kind of header is translated to part titles. If you 
+  are familiar with LaTeX, this basically means <c>\part{}</c>. When your book has a 
+  large number of chapters, you may want to organize them into parts, e.g.,
+</p>
 
-      <program language="markdown">
-        <input># (PART) Part I {-}
+<program language="markdown">
+  <input>
+    # (PART) Part I {-}
 
-# Chapter One
+    # Chapter One
 
-# Chapter Two
+    # Chapter Two
 
-# (PART) Part II {-}
+    # (PART) Part II {-}
 
-# Chapter Three</input>
-      </program>
+    # Chapter Three
+  </input>
+</program>
 
-      <program language="markdown">
-        <input># Chapter One
+<p>
+  A part title should be written right before the first chapter title in this part, 
+  both titles in the same document. You can use <c>(PART\*)</c> (the backslash before 
+  <c>*</c> is required) instead of <c>(PART)</c> if a part title should not be numbered.
+</p>
 
-# Chapter Two
+<p>
+  The second type is an unnumbered header that starts with <c>(APPENDIX)</c>, 
+  indicating that all chapters after this header are appendices, e.g.,
+</p>
 
-# (APPENDIX) Appendix {-}
+<program language="markdown">
+  <input>
+    # Chapter One
 
-# Appendix A
+    # Chapter Two
 
-# Appendix B</input>
-      </program>
-    </subsection>
+    # (APPENDIX) Appendix {-}
 
-    <subsection xml:id="text-references">
-      <title>Text references</title>
+    # Appendix A
 
-      <p>
-        You can assign some text to a label and reference the text using the
-        label elsewhere in your document. This can be particularly useful for
-        long figure (<xref ref="figures"/>) and table (<xref ref="tables"/>)
-        captions.
-      </p>
+    # Appendix B
+  </input>
+</program>
 
-      <program language="markdown">
-        <input>(ref:foo) Define a text reference **here**.</input>
-      </program>
+<p>
+  The numbering style of appendices will be automatically changed in LaTeX/PDF and 
+  HTML output (usually in the form A, A.1, A.2, B, B.1, <ellipsis/>). This feature 
+  is not available to e-books or Word output.
+</p>
+</subsection>
 
-      <program language="markdown">
-        <input>A normal paragraph.
+<subsection xml:id="subsec-text-references">
+  <title>Text References</title>
 
-(ref:foo) A scatterplot of the data `cars` using **base** R graphics.
+  <p>
+    You can assign some text to a label and reference the text using the label 
+    elsewhere in your document. This can be particularly useful for long figure/table 
+    captions, in which case you normally will have to write the whole character string 
+    in the chunk header (e.g., <c>fig.cap = "A long long figure caption."</c>) or your 
+    R code (e.g., <c>kable(caption = "A long long table caption.")</c>). It is also 
+    useful when these captions contain special HTML or LaTeX characters, e.g., if the 
+    figure caption contains an underscore, it works in the HTML output but may not work 
+    in LaTeX output because the underscore must be escaped in LaTeX.
+  </p>
+
+  <p>
+    The syntax for a text reference is <c>(ref:label) text</c>, where <c>label</c> is 
+    a unique label<fn>You may consider using the code chunk labels</fn> throughout the document for <c>text</c>. It must be in a separate 
+    paragraph with empty lines above and below it. The paragraph must not be wrapped 
+    into multiple lines, and should not end with a white space. For example,
+  </p>
+
+  <program language="markdown">
+    <input>
+      (ref:foo) Define a text reference **here**.
+    </input>
+  </program>
+
+  <p>
+    Then you can use <c>(ref:foo)</c> in your figure/table captions. The text can 
+    contain anything that Markdown supports, as long as it is one single paragraph. 
+    Here is a complete example:
+  </p>
+
+  <program language="markdown">
+    <input>
+      A normal paragraph.
+
+      (ref:foo) A scatterplot of the data `cars` using **base** R graphics.
 
 ```{r foo, fig.cap='(ref:foo)'}
-plot(cars)  # a scatterplot
-```</input>
-      </program>
-    </subsection>
+      plot(cars)  # a scatterplot
+```
+    </input>
+  </program>
+
+  <p>
+    Text references can be used anywhere in the document (not limited to figure 
+    captions). It can also be useful if you want to reuse a fragment of text in 
+    multiple places.
+  </p>
+
+</subsection>
   </section>
 
   <section xml:id="r-code">
