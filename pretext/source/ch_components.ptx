@@ -682,7 +682,7 @@ Or indent by four spaces:
   </statement>
 </hypothesis>
 
-<subsection xml:id="subsec-old-theorem-syntax">
+<subsubsection xml:id="theorem-engine">
   <title>A note on the old syntax</title>
 
   <p>
@@ -744,7 +744,7 @@ Or indent by four spaces:
     you to revert the change if anything goes wrong.
   </p>
 
-</subsection>
+</subsubsection>
 
     </subsection>
 
@@ -805,7 +805,7 @@ Or indent by four spaces:
 </p>
 </subsection>
 
-<subsection xml:id="subsec-text-references">
+<subsection xml:id="text-references">
   <title>Text references</title>
 
   <p>
