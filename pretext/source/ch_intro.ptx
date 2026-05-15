@@ -82,16 +82,11 @@
 
     <p>
       Another goal of this project is to make it easy to produce books that
-      look visually pleasant. Some nice existing examples include GitBook
-      (<url href="https://www.gitbook.com" visual="gitbook.com"/>), Tufte CSS
-      (<url
-        href="http://edwardtufte.github.io/tufte-css/"
-        visual="edwardtufte.github.io/tufte-css/"
-      />), and Tufte-<latex/>
-      (<url
-        href="https://tufte-latex.github.io/tufte-latex/"
-        visual="tufte-latex.github.io/tufte-latex/"
-      />). We hope to integrate these themes and styles into <c>bookdown</c>,
+      look visually pleasant. Some nice existing examples include 
+      <url href="https://www.gitbook.com">GitBook</url>, 
+      <url href="http://edwardtufte.github.io/tufte-css/">Tufte CSS</url>, 
+      <url href="https://tufte-latex.github.io/tufte-latex/">Tufte-<latex/></url>.
+      We hope to integrate these themes and styles into <c>bookdown</c>,
       so authors do not have to dive into the details of how to use a certain
       <latex/> class or how to configure CSS for HTML output.
     </p>
@@ -157,7 +152,7 @@ install.packages('bookdown')
         If you are planning on printing your book to <init>PDF</init>, you will
         need a <latex/> distribution. We recommend that you install TinyTeX
         (which includes XeLaTeX):
-        <url href="https://yihui.org/tinytex/" visual="yihui.org/tinytex/"/>.
+        <url href="https://yihui.org/tinytex/">yihui.org/tinytex/</url>.
       </p>
     </aside>
 
@@ -166,6 +161,7 @@ install.packages('bookdown')
       Viewer. You may add or change the R Markdown files, and hit the
       <q>Knit</q> button again to preview the book. If you prefer not to use
       RStudio, you may also compile the book through the command line.
+      See the next section for details.
     </p>
 
     <p>
@@ -192,7 +188,7 @@ install.packages('bookdown')
       title using the first-level heading, for example <c># Chapter Title</c>.
       All R Markdown files must be encoded in UTF-8, especially when they
       contain multi-byte characters such as Chinese, Japanese, and Korean. Here
-      is an example:
+      is an example (the bullets are the filenames, followed by the file content):
     </p>
 
     <ul>
@@ -261,12 +257,14 @@ We have finished a nice book.</input>
       always be treated as the first file when merging all Rmd files. The
       reason for this special treatment is that the HTML file
       <c>index.html</c> to be generated from <c>index.Rmd</c> is usually the
-      default index file when you view a website.
+      default index file when you view a website, e.g., you are actually browsing
+      <url href = "http://yihui.org/index.html"/> when you open <url href = "http://yihui.org/"/>.
     </p>
 
     <p>
       You can override the above behavior by including a configuration file
-      named <c>_bookdown.yml</c> in the book directory. It is a YAML file, and
+      named <c>_bookdown.yml</c> in the book directory. It is a YAML file,
+      <url href = "https://en.wikipedia.org/wiki/YAML"/> and
       R Markdown users should be familiar with this format since it is also
       used to write the metadata in the beginning of R Markdown documents
       (you can learn more about YAML in <xref ref="r-markdown"/>). You can use
@@ -280,7 +278,9 @@ We have finished a nice book.</input>
 
     <p>
       In this case, <c>bookdown</c> will use the list of files you defined in
-      this YAML field. If you want both HTML and <latex/>/<init>PDF</init>
+      this YAML field (<c>index.Rmd</c> will be added to the list if it exists,
+      and filenames starting with underscores are always ignored). If you want
+      both HTML and <latex/>/<init>PDF</init>
       output from the book, and use different Rmd files for HTML and
       <latex/> output, you may specify these files for the two output formats
       separately, for example,
@@ -322,7 +322,8 @@ bookdown::render_book('foo.Rmd', bookdown::pdf_book(keep_tex = TRUE))</input>
     <p>
       To use <c>render_book</c> and the output format functions in the RStudio
       IDE, you can define a YAML field named <c>site</c> that takes the value
-      <c>bookdown::bookdown_site</c>, and the output format functions can be
+      <c>bookdown::bookdown_site</c><fn>This function calls
+      <c>bookdown::render_book()</c></fn>, and the output format functions can be
       used in the <c>output</c> field. For example,
     </p>
 
@@ -370,56 +371,62 @@ link-citations: yes
   <section xml:id="new-session">
     <title>Two rendering approaches</title>
 
-    <p>
-      Merging all chapters into one Rmd file and knitting it is one way to
-      render the book in <c>bookdown</c>. There is actually another way: you
-      may knit each chapter in a separate R session, and <c>bookdown</c> will
-      merge the Markdown output of all chapters to render the book. We call
-      these two approaches <q>Merge and Knit</q> (M-K) and
-      <q>Knit and Merge</q> (K-M), respectively. The differences between them
-      may seem subtle, but can be fairly important depending on your use cases.
-    </p>
+<p>
+  Merging all chapters into one Rmd file and knitting it is one way to render the book 
+  in bookdown. There is actually another way: you may knit each chapter in a separate R 
+  session, and bookdown will merge the Markdown output of all chapters to render the 
+  book. We call these two approaches <q>Merge and Knit</q> (M-K) and <q>Knit and 
+  Merge</q> (K-M), respectively. The differences between them may seem subtle, but can 
+  be fairly important depending on your use cases.
+</p>
 
-    <ul>
-      <li>
-        <p>
-          The most significant difference is that M-K runs <em>all</em> code
-          chunks in all chapters in the same R session, whereas K-M uses
-          separate R sessions for individual chapters. For M-K, the state of
-          the R session from previous chapters is carried over to later
-          chapters. For K-M, all chapters are isolated from each other.
-        </p>
-      </li>
-      <li>
-        <p>
-          Because <c>knitr</c> does not allow duplicate chunk labels in a
-          source document, you need to make sure there are no duplicate labels
-          in your book chapters when you use the M-K approach. The K-M approach
-          only requires no duplicate labels within any single Rmd file.
-        </p>
-      </li>
-      <li>
-        <p>
-          K-M does not allow Rmd files to be in subdirectories, but M-K does.
-        </p>
-      </li>
-    </ul>
-
+<ul>
+  <li>
     <p>
-      The default approach in <c>bookdown</c> is M-K. To switch to K-M, you
-      either use the argument <c>new_session = TRUE</c> when calling
-      <c>render_book()</c>, or set <c>new_session: yes</c> in the
-      configuration file <c>_bookdown.yml</c>.
+      The most significant difference is that M-K runs all code chunks in all chapters 
+      in the same R session, whereas K-M uses separate R sessions for individual 
+      chapters. For M-K, the state of the R session from previous chapters is carried 
+      over to later chapters (e.g., objects created in previous chapters are available 
+      to later chapters, unless you deliberately deleted them); for K-M, all chapters 
+      are isolated from each other.<fn>Of course, no one can stop you from writing out 
+      some files in one chapter, and reading them in another chapter. It is hard to 
+      isolate these kinds of side-effects.</fn> If you want each chapter to compile from 
+      a clean state, use the K-M approach. It can be very tricky and difficult to restore 
+      a running R session to a completely clean state if you use the M-K approach. For 
+      example, even if you detach/unload packages loaded in a previous chapter, R will 
+      not clean up the S3 methods registered by these packages.
     </p>
-
+  </li>
+  <li>
     <p>
-      You can configure the <c>book_filename</c> option in
-      <c>_bookdown.yml</c> for the K-M approach, but it should be a Markdown
-      filename, for example <c>_main.md</c>, although the filename extension
-      does not really matter, and you can even leave out the extension. All
-      other configurations work for both M-K and K-M.
+      Because knitr does not allow duplicate chunk labels in a source document, you need 
+      to make sure there are no duplicate labels in your book chapters when you use the 
+      M-K approach, otherwise knitr will signal an error when knitting the merged Rmd 
+      file. Note that this means there must not be duplicate labels throughout the whole 
+      book. The K-M approach only requires no duplicate labels within any single Rmd file.
     </p>
-  </section>
+  </li>
+  <li>
+    <p>
+      K-M does not allow Rmd files to be in subdirectories, but M-K does.
+    </p>
+  </li>
+</ul>
+
+<p>
+  The default approach in bookdown is M-K. To switch to K-M, you either use the argument 
+  <c>new_session = TRUE</c> when calling <c>render_book()</c>, or set 
+  <c>new_session: yes</c> in the configuration file <c>_bookdown.yml</c>.
+</p>
+
+<p>
+  You can configure the <c>book_filename</c> option in <c>_bookdown.yml</c> for the K-M 
+  approach, but it should be a Markdown filename, e.g., <c>_main.md</c>, although the 
+  filename extension does not really matter, and you can even leave out the extension, 
+  e.g., just set <c>book_filename: _main</c>. All other configurations work for both 
+  M-K and K-M.
+</p>
+</section>
 
   <section xml:id="some-tips">
     <title>Some tips</title>
