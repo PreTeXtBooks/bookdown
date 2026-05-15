@@ -590,7 +590,9 @@ output:
       <p>
         Like the Bootstrap style, the Tufte style is provided by
         <c>tufte_html_book()</c>, a special case of <c>html_chapters()</c>
-        using <c>tufte::tufte_html()</c> as the base format.
+        using <c>tufte::tufte_html()</c> as the base format. Please see the
+        <c>tufte</c> package (<xref ref="R-tufte-reference"/>) if you are not
+        familiar with the Tufte style.
       </p>
 
       <p>
@@ -679,6 +681,9 @@ biblio-style: apalike
         HTML pages bundled into one file, so features from
         <xref ref="ch-components"/> such as figure and table captions,
         cross-references, custom blocks, and citations still work in EPUB.
+        The <c>chapter_level</c> option determines the level by which the book
+        is split into internal chapter files, similar to the <c>split_by</c>
+        argument of HTML output formats (see <xref ref="html"/>).
       </p>
     </subsection>
 
@@ -725,6 +730,12 @@ bookdown::pdf_document2
   bookdown::pdf_book:
     base_format: rticles::jss_article</input>
     </program>
+
+    <p>
+      This approach can port <c>bookdown</c> features to the
+      <c>jss_article</c> format in the <c>rticles</c> package
+      (<xref ref="R-rticles-reference"/>).
+    </p>
 
     <p>
       The chapter closes by noting that the <c>gitbook()</c> format can also

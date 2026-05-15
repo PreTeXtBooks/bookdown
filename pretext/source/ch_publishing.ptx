@@ -74,9 +74,10 @@
 
       <p>
         The project does not need to live on GitHub or in any other
-        version-controlled repository. If you need a practice project, the Rmd
-        source suggests creating a simple HTML book with
-        <c>bookdown::create_gitbook()</c> or <c>bookdown::create_bs4_book()</c>.
+        version-controlled repository. If you need a practice project, see
+        <xref ref="fig-new-bs4-book-pretext"/> for how to create a new book in
+        RStudio, or use the function <c>bookdown::create_gitbook()</c> or
+        <c>bookdown::create_bs4_book()</c> from your R console.
       </p>
     </subsection>
 
@@ -113,7 +114,8 @@
 
       <p>
         After signing up for Netlify, you can manually update the site from the
-        Deploys page by dragging and dropping the folder again.
+        Deploys page by dragging and dropping the folder again
+        (see <xref ref="fig-netlify-drag-drop-pretext"/>).
       </p>
 
       <figure xml:id="fig-netlify-drag-drop-pretext">
@@ -273,8 +275,9 @@ cache:
 
       <p>
         For HTML books, <c>bookdown</c> creates a custom <c>404.html</c> page in
-        the output directory. Hosting platforms such as Netlify, GitHub Pages,
-        and GitLab Pages can use this file as the site's custom not-found page.
+        the output directory (see <xref ref="fig-404-page-pretext"/>). Hosting
+        platforms such as Netlify, GitHub Pages, and GitLab Pages can use this
+        file as the site's custom not-found page.
       </p>
 
       <figure xml:id="fig-404-page-pretext">

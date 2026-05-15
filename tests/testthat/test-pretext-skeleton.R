@@ -112,6 +112,15 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
   expect_match(backmatter, "xml:id=\"R-rmarkdown-reference\"", fixed = TRUE)
   expect_match(backmatter, "xml:id=\"R-knitr-reference\"", fixed = TRUE)
   expect_match(backmatter, "xml:id=\"R-base-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-htmlwidgets-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-webshot-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-DT-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-miniUI-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"rmarkdown2020-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-servr-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-citr-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-tufte-reference\"", fixed = TRUE)
+  expect_match(backmatter, "xml:id=\"R-rticles-reference\"", fixed = TRUE)
   expect_no_match(backmatter, "Add bibliography entries or generated references here.", fixed = TRUE)
   expect_match(backmatter, "<index>", fixed = TRUE)
 
@@ -201,6 +210,7 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   expect_match(frontmatter, "github.com/rstudio/bookdown/graphs/contributors", fixed = TRUE)
   expect_match(frontmatter, "Lastly I want to thank my family", fixed = TRUE)
   expect_match(frontmatter, "Elkhorn, Nebraska", fixed = TRUE)
+  expect_match(frontmatter, "<xref ref=\"xie2015-reference\"/>", fixed = TRUE)
   expect_no_match(frontmatter, "Replace this abstract", fixed = TRUE)
 })
 
@@ -269,7 +279,13 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
     "<xref ref=\"theorems\"/>",
     "<xref ref=\"bs4-book\"/>",
     "<xref ref=\"yaml-options\"/>",
-    "<xref ref=\"configuration\"/>"
+    "<xref ref=\"configuration\"/>",
+    "<xref ref=\"rmarkdown2020-reference\"/>",
+    "<xref ref=\"R-htmlwidgets-reference\"/>",
+    "<xref ref=\"R-webshot-reference\"/>",
+    "<xref ref=\"R-DT-reference\"/>",
+    "<xref ref=\"R-miniUI-reference\"/>",
+    "<xref ref=\"fig-knitr-logo-pretext\"/>"
   )) {
     expect_match(components, text, fixed = TRUE)
   }
@@ -309,7 +325,10 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
     "<xref ref=\"metadata-for-sharing\"/>",
     "<xref ref=\"figures\"/>",
     "<xref ref=\"tables\"/>",
-    "<xref ref=\"cross-references\"/>"
+    "<xref ref=\"cross-references\"/>",
+    "<xref ref=\"html\"/>",
+    "<xref ref=\"R-tufte-reference\"/>",
+    "<xref ref=\"R-rticles-reference\"/>"
   )) {
     expect_match(formats, text, fixed = TRUE)
   }
@@ -374,6 +393,11 @@ test_that("PreTeXt editing chapter mirrors the Rmd structure", {
   expect_match(editing, "<xref ref=\"usage\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"gitbook-style\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"yaml-options\"/>", fixed = TRUE)
+  expect_match(editing, "<xref ref=\"R-servr-reference\"/>", fixed = TRUE)
+  expect_match(editing, "<xref ref=\"R-citr-reference\"/>", fixed = TRUE)
+  expect_match(editing, "<xref ref=\"fig-mathquill-pretext\"/>", fixed = TRUE)
+  expect_match(editing, "<xref ref=\"fig-citr-pretext\"/>", fixed = TRUE)
+  expect_match(editing, "<xref ref=\"fig-disqus-pretext\"/>", fixed = TRUE)
   expect_match(editing, "rstudio.github.io/rstudioaddins", fixed = TRUE)
   expect_match(editing, "help.github.com/articles/about-pull-requests", fixed = TRUE)
   expect_match(editing, "bookdown::render_book(\"index.Rmd\", \"bookdown::gitbook\")", fixed = TRUE)
@@ -401,6 +425,9 @@ test_that("PreTeXt publishing chapter mirrors the Rmd structure", {
   expect_match(publishing, "<xref ref=\"yaml-options\"/>", fixed = TRUE)
   expect_match(publishing, "<xref ref=\"markdown-syntax\"/>", fixed = TRUE)
   expect_match(publishing, "<xref ref=\"latex-index\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"fig-new-bs4-book-pretext\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"fig-netlify-drag-drop-pretext\"/>", fixed = TRUE)
+  expect_match(publishing, "<xref ref=\"fig-404-page-pretext\"/>", fixed = TRUE)
   expect_match(publishing, "posit.co/products/enterprise/connect", fixed = TRUE)
   expect_match(publishing, "bookdown.org/connect", fixed = TRUE)
   expect_match(publishing, "pages.github.com", fixed = TRUE)

@@ -495,6 +495,9 @@ knitr::kable(
       also reference sections using the same syntax <c>\@ref(label)</c>,
       where <c>label</c> is the section ID. By default, Pandoc will generate an
       ID for all section headers, but it is safer to assign IDs manually.
+      Cross-references work even when referring to an item not on the current
+      page of the output, such as
+      <xref ref="fig-knitr-logo-pretext"/>.
     </p>
   </section>
 
@@ -504,7 +507,10 @@ knitr::kable(
     <p>
       Custom blocks are often used in technical books to create salient boxes
       of code and/or narrative that call the reader's attention, such as notes
-      and warnings. The <xref ref="bs4-book"/> output format includes built-in
+      and warnings. These can be included using Pandoc's syntax for fenced
+      <c>Div</c> blocks; see the
+      <em>R Markdown Cookbook</em> (<xref ref="rmarkdown2020-reference"/>) for
+      instructions. The <xref ref="bs4-book"/> output format includes built-in
       styling for selected custom blocks.
     </p>
   </section>
@@ -588,9 +594,13 @@ popular version control system.</input>
     <title>HTML widgets</title>
 
     <p>
+      One way to bring JavaScript libraries into R is through the
+      <c>htmlwidgets</c> package (<xref ref="R-htmlwidgets-reference"/>).
       HTML widgets were originally designed for HTML output only, and they
       require the availability of JavaScript, so they will not work in
-      non-HTML output formats, such as LaTeX/PDF.
+      non-HTML output formats, such as LaTeX/PDF. Since <c>knitr</c> v1.13,
+      HTML widgets are rendered automatically as screenshots taken via the
+      <c>webshot</c> package (<xref ref="R-webshot-reference"/>).
     </p>
 
     <program language="r">
@@ -599,6 +609,11 @@ install.packages('webshot')
 webshot::install_phantomjs()
 ```</input>
     </program>
+
+    <p>
+      Here is an example of a table widget created using the
+      <c>DT</c> package (<xref ref="R-DT-reference"/>):
+    </p>
 
     <program language="r">
       <input>```{r DT-demo, fig.cap='A table widget rendered via the DT package.', dev='png', cache=TRUE, cache.extra=packageVersion('DT'), screenshot.opts=list(zoom=2), out.width=if(knitr::is_latex_output()) '100%'}
@@ -621,5 +636,11 @@ DT::datatable(iris)
 knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
 ```</input>
     </program>
+
+    <p>
+      The above Shiny app was created using the <c>miniUI</c> package
+      (<xref ref="R-miniUI-reference"/>), which provides layout functions
+      particularly useful for Shiny apps on small screens.
+    </p>
   </section>
 </chapter>

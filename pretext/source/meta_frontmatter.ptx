@@ -232,7 +232,8 @@
       when I first saw the GitBook project in 2013, because I immediately
       realized it was a beautiful book style and there was a lot more power we
       could add to it, judging from my experience of writing the
-      <em>knitr</em> book and reading other books.
+      <em>knitr</em> book (<xref ref="xie2015-reference"/>) and reading other
+      books.
     </p>
 
     <p>
