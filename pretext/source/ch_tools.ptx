@@ -4,9 +4,9 @@
 
   <introduction>
     <p>
-      This appendix gives a brief introduction to the software packages required
-      for working with R Markdown and <c>bookdown</c>, with an emphasis on how
-      to install and maintain the core tools.
+      For those who are not familiar with software packages required for using R
+      Markdown, we give a brief introduction to the installation and maintenance
+      of these packages.
     </p>
   </introduction>
 
@@ -14,15 +14,15 @@
     <title>R and R packages</title>
 
     <p>
-      R can be downloaded from a CRAN mirror such as
-      <url href="https://cran.rstudio.com" visual="cran.rstudio.com"/>. Since R
-      has several releases each year, the chapter notes that you may want to
-      upgrade it occasionally.
+      R can be downloaded and installed from any CRAN (the Comprehensive R
+      Archive Network) mirrors, e.g.,
+      <url href="https://cran.rstudio.com" visual="cran.rstudio.com"/>. Please
+      note that there will be a few new releases of R every year, and you may
+      want to upgrade R occasionally.
     </p>
 
     <p>
-      To install <c>bookdown</c>, the Rmd source first gives the simplest
-      package-installation command.
+      To install the <c>bookdown</c> package, you can type this in R:
     </p>
 
     <program language="r">
@@ -41,8 +41,8 @@
     </program>
 
     <p>
-      If you want to test the development version of bookdown on GitHub,
-      you need to install devtools first:.
+      If you want to test the development version of <c>bookdown</c> on GitHub,
+      you need to install <c>devtools</c> first:
     </p>
 
     <program language="r">
@@ -60,7 +60,7 @@ devtools::install_github('rstudio/bookdown')</input>
     </program>
 
     <p>
-      Although it is not required,  the RStudio IDE can make a lot of things
+      Although it is not required, the RStudio IDE can make a lot of things
       much easier when you work on R-related projects. The RStudio IDE can be
       downloaded from <url href="https://www.posit.co"
       visual="posit.co"/>.

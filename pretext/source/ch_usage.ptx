@@ -4,13 +4,13 @@
 
   <introduction>
     <p>
-      As mentioned in <xref ref="ch-intro"/>,  this book is not a
-      comprehensive guide to <c>knitr</c> or <c>rmarkdown</c>. In this
-      chapter, we briefly explain some basic concepts and syntax in
-      <c>knitr</c> and <c>rmarkdown</c>. If you have any further 
-      questions, you may post them on <url href="https://stackoverflow.com">
-      StackOverflow</url> and tag your questions with <c>r</c>, <c>knitr</c>,
-      <c>rmarkdown</c>, and/or <c>bookdown</c>, whichever is appropriate.
+      As mentioned in <xref ref="ch-intro"/>, this book is not a comprehensive
+      guide to <c>knitr</c> or <c>rmarkdown</c>. In this chapter, we briefly
+      explain some basic concepts and syntax in <c>knitr</c> and
+      <c>rmarkdown</c>. If you have any further questions, you may post them on
+      <url href="https://stackoverflow.com">StackOverflow</url> and tag your
+      questions with <c>r</c>, <c>knitr</c>, <c>rmarkdown</c>, and/or
+      <c>bookdown</c>, whichever is appropriate.
     </p>
   </introduction>
 
@@ -18,22 +18,24 @@
     <title>knitr</title>
 
     <p>
-      The <c>knitr</c> package was designed around the idea of literate
-      programming: program code can be intermingled with prose in a source
-      document, then extracted, executed, and displayed together with the text
-      in the rendered output. The Rmd source explicitly attributes this idea to
-      <xref ref="knuth1984-reference"/>. Its basic syntax is introduced in
-      <xref ref="r-code"/>.
+      The <c>knitr</c> package was designed based on the idea of
+      <q>Literate Programming</q> (<xref ref="knuth1984-reference"/>), which
+      allows you to intermingle program code with text in a source document.
+      When <c>knitr</c> compiles a document, the program code (in code chunks)
+      will be extracted and executed, and the program output will be displayed
+      together with the original text in the output document. We have
+      introduced the basic syntax in <xref ref="r-code"/>.
     </p>
 
     <p>
-      R Markdown is not the only source format supported by <c>knitr</c>. The
-      same idea also applies to combinations such as R with LaTeX or HTML, and
-      <c>knitr</c> can work with other computing languages such as Python, C++,
-      or SQL. The Rmd chapter includes this simple Python-engine example and
-      links to the engine documentation at <url
+      R Markdown is not the only source format that <c>knitr</c> supports. The
+      basic idea can be applied to other computing and authoring languages. For
+      example, <c>knitr</c> also supports the combination of R and LaTeX
+      (<c>*.Rnw</c> documents), and R + HTML (<c>*.Rhtml</c>), etc. You can use
+      other computing languages with <c>knitr</c> as well, such as C++, Python,
+      SQL, and so on. Below is a simple example and you can see <url
       href="http://rmarkdown.rstudio.com/authoring_knitr_engines.html"
-      visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"/>.
+      visual="rmarkdown.rstudio.com/authoring_knitr_engines.html"/> for more.
     </p>
 
     <program language="markdown">
@@ -44,18 +46,22 @@ print(x.split(' '))
     </program>
 
     <p>
-      The chapter also notes that Python users may be familiar with IPython or
-      Jupyter notebooks (<url href="https://jupyter.org"
-      visual="jupyter.org"/>), and that R Markdown notebooks provide a related
-      workflow with additional benefits. It also points to the R Notebooks blog
-      post at <url href="https://blog.rstudio.org/2016/10/05/r-notebooks/"
+      Python users may be familiar with IPython or Jupyter Notebooks
+      (<url href="https://jupyter.org" visual="jupyter.org"/>). In fact, R
+      Markdown can also be used as notebooks, and has some additional benefits;
+      see this blog post for more information: <url
+      href="https://blog.rstudio.org/2016/10/05/r-notebooks/"
       visual="blog.rstudio.org/2016/10/05/r-notebooks/"/>.
     </p>
 
     <p>
-      To show a literal code chunk in a document, the Rmd source demonstrates a
-      small inline expression that produces an empty string before the chunk
-      header, while wrapping the whole example in four backticks.
+      If you want to show a literal chunk in your document, you can add an
+      inline expression that generates an empty string
+      (<c>`r "\x60r ''\x60"`</c>) before the chunk header, and wrap the code
+      chunk in four backticks. Follow the indenting rule if the literal code
+      chunk is to be displayed in other environments such as a list: <url
+      href="https://pandoc.org/MANUAL.html#block-content-in-list-items"
+      visual="pandoc.org/MANUAL.html#block-content-in-list-items"/>.
     </p>
 
     <program language="markdown">
@@ -79,9 +85,9 @@ print(x.split(' '))
 
     <p>
       Normally you do not need to call <c>knitr</c> functions directly when
-      compiling a document because <c>rmarkdown</c> calls <c>knitr</c> for you.
-      If you only want to knit a source document without converting it further,
-      the chapter points readers to <c>knitr::knit()</c>.
+      compiling a document, since <c>rmarkdown</c> will call <c>knitr</c>. If
+      you do want to compile a source document without further converting it to
+      other formats, you may use the <c>knitr::knit()</c> function.
     </p>
   </section>
 
@@ -89,17 +95,21 @@ print(x.split(' '))
     <title>R Markdown</title>
 
     <p>
-      Thanks to R and Pandoc, R Markdown documents can combine computation with
-      conversion to a variety of output formats, including HTML, PDF, Word,
-      slides, dashboards, and websites. The chapter explains that an R Markdown
-      document typically consists of optional YAML metadata followed by the
-      document body. The syntax for the document body is introduced in
-      <xref ref="ch-components"/>.
+      Thanks to the power of R and Pandoc, you can easily do computing in R
+      Markdown documents, and convert them to a variety of output formats,
+      including HTML/PDF/Word documents, HTML5/Beamer slides, dashboards, and
+      websites, etc. An R Markdown document usually consists of the YAML
+      metadata (optional) and the document body. We have introduced the syntax
+      for writing various components of the document body in
+      <xref ref="ch-components"/>, and we explain more about the YAML metadata
+      in this section.
     </p>
 
     <p>
-      Metadata is written at the very beginning of the document and is delimited
-      by lines containing three dashes.
+      Metadata for R Markdown can be written in the very beginning of a
+      document, starting and ending with three dashes <c>---</c>,
+      respectively. YAML metadata typically consists of tag-value pairs
+      separated by colons, e.g.,
     </p>
 
     <program language="yaml">
@@ -110,9 +120,15 @@ author: "Yihui Xie"
     </program>
 
     <p>
-      Character values are often quoted for safety, and logical values can be
-      written with forms such as <c>yes</c>/<c>true</c> and
-      <c>no</c>/<c>false</c>.
+      For character values, you may omit the quotes when the values do not
+      contain special characters, but it is safer to quote them if they are
+      expected to be character values.
+    </p>
+
+    <p>
+      Besides characters, another common type of values are logical values.
+      Both <c>yes</c> and <c>true</c> mean true, and <c>no</c>/<c>false</c>
+      mean false, e.g.,
     </p>
 
     <program language="yaml">
@@ -120,7 +136,8 @@ author: "Yihui Xie"
     </program>
 
     <p>
-      The chapter also shows two equivalent ways to write vector values.
+      Values can be vectors, and there are two ways of writing vectors. The
+      following two ways are equivalent:
     </p>
 
     <program language="yaml">
@@ -134,8 +151,8 @@ author: "Yihui Xie"
     </program>
 
     <p>
-      List values are written by indenting nested fields two more spaces, as in
-      this output-format example.
+      Values can also be lists of values. You just need to indent the values by
+      two more spaces, e.g.,
     </p>
 
     <program language="yaml">
@@ -146,9 +163,8 @@ author: "Yihui Xie"
     </program>
 
     <p>
-      A common mistake is forgetting that indentation. The Rmd chapter contrasts
-      the malformed structure below with the correctly indented version that most
-      users intend.
+      It is a common mistake to forget to indent the values. For example, the
+      following data
     </p>
 
     <program language="yaml">
@@ -162,6 +178,10 @@ toc: yes</input>
 html_document: null
 toc: yes</input>
     </program>
+
+    <p>
+      Instead of what you probably would have expected:
+    </p>
 
     <program language="yaml">
       <input>output:
@@ -200,9 +220,9 @@ toc: yes</input>
     </program>
 
     <p>
-      Finally, the chapter notes that many more output formats are available in
-      other packages, including <c>bookdown</c>, <c>tufte</c>, <c>rticles</c>,
-      <c>flexdashboard</c>, <c>revealjs</c>, and <c>rmdformats</c>.
+      There are many more possible output formats in other R packages,
+      including <c>bookdown</c>, <c>tufte</c>, <c>rticles</c>,
+      <c>flexdashboard</c>, <c>revealjs</c>, and <c>rmdformats</c>, etc.
     </p>
   </section>
 </appendix>
