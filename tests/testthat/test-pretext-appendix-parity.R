@@ -13,7 +13,7 @@ appendix_source <- function(file) {
 test_that("PreTeXt tools appendix preserves key Rmd installation details", {
   tools <- paste(xfun::read_utf8(appendix_source("ch_tools.ptx")), collapse = "\n")
 
-  expect_match(tools, "Comprehensive R\\s+Archive Network")
+  expect_match(tools, "Comprehensive R.*Archive Network")
   expect_match(tools, "there will be a few new releases of R every year", fixed = TRUE)
   expect_match(tools, "you need to install <c>devtools</c> first:", fixed = TRUE)
 })
@@ -24,7 +24,7 @@ test_that("PreTeXt usage appendix preserves key Rmd explanatory details", {
   expect_match(usage, "<q>Literate Programming</q>", fixed = TRUE)
   expect_match(usage, "<c>*.Rnw</c> documents", fixed = TRUE)
   expect_match(usage, "<c>*.Rhtml</c>", fixed = TRUE)
-  expect_match(usage, "R\\s+Markdown can also be used as notebooks")
+  expect_match(usage, "R.*Markdown can also be used as notebooks")
   expect_match(
     usage,
     "pandoc.org/MANUAL.html#block-content-in-list-items",
