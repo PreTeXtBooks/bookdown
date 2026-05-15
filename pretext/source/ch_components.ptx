@@ -669,7 +669,7 @@ Or indent by four spaces:
 </exercise>
 
 <hypothesis xml:id="hyp-riemann">
-  <title>Riemann Hypothesis</title>
+  <title>Riemann hypothesis</title>
   <statement>
     <p>
       The Riemann Zeta-function is defined as
