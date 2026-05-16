@@ -346,12 +346,15 @@ output:
       In fact, collaboration with GIT is possible even if they do not know how
       to use GIT, because GitHub has made it possible to create and edit files
       online right in your web browser. Only one person has to be familiar with
-      GIT, and that person can set up the book repository.
+      GIT, and that person can set up the book repository. The rest of the 
+      collaborators can contribute content online, although they will have more 
+      freedom if they know the basic usage of GIT to work locally.
     </p>
 
     <p>
       Readers can contribute in two ways. One way is to contribute content
-      directly, and the easiest way, is through GitHub pull requests if your
+      directly, and the easiest way, is through <url href = "https://help.github.com/articles/about-pull-requests/">
+      GitHub pull requests</url> if your
       book source is hosted on GitHub. Basically, any GitHub user can click the
       edit button on the page of an Rmd source file, edit the content, and
       submit the changes to you for your approval. If you are satisfied with
