@@ -928,7 +928,7 @@ knitr::include_graphics(rep('images/knit-logo.png', 3))
 
     <figure xml:id="fig-knitr-logo-pretext">
       <title>Three knitr logos included in the document from an external PNG image file.</title>
-      <image source="../assets/images/knit-logo.png" width="35%">
+      <image source="images/knit-logo.png" width="35%">
         <description>
           <p>The knitr logo image reused from the Rmd example assets.</p>
         </description>

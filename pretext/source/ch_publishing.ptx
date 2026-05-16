@@ -164,8 +164,7 @@
 
       <figure xml:id="fig-netlify-drag-drop-pretext">
         <title>Screenshot of drag and drop deploy update box on Netlify.</title>
-        <image source="../assets/images/netlify-drag-drop-update.png"
-        width="100%">
+        <image source="images/netlify-drag-drop-update.png" width="100%">
           <description>
             <p>Screenshot of drag and drop deploy update box on Netlify.</p>
           </description>
@@ -496,7 +495,7 @@ cache:
 
       <figure xml:id="fig-404-page-pretext">
         <title>Screenshot of an example 404 page.</title>
-        <image source="../assets/images/404.png" width="100%">
+        <image source="images/404.png" width="100%">
           <description>
             <p>Screenshot showing an online bs4_book with the sidebar,
             footer, and CSS styling in place. The text reads: Page not found.
@@ -549,8 +548,8 @@ cache:
       </p>
 
       <figure xml:id="fig-social-og-pretext">
-        <title>Screenshots showing cover-image, title, and description of an HTML book when the link is shared on Facebook and LinkedIn (left), and on Twitter (right).</title>
-        <image source="../assets/images/social-og.png" width="100%">
+        <title>Sharing preview on Facebook and LinkedIn.</title>
+        <image source="images/social-og.png" width="100%">
           <description>
             <p>When a link is shared on social media, the auto-preview shows
             the cover-image, title, and description in a summary card
@@ -561,7 +560,7 @@ cache:
 
       <figure xml:id="fig-social-twitter-pretext">
         <title>Sharing preview on Twitter.</title>
-        <image source="../assets/images/social-twitter.png" width="100%">
+        <image source="images/social-twitter.png" width="100%">
           <description>
             <p>When a link is shared on Twitter, the auto-preview shows the
             cover-image, title, and description in a summary card

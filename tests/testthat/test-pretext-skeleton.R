@@ -153,6 +153,16 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
       info = sprintf("Missing carried-over image asset: %s", asset)
     )
   }
+
+  pretext_files <- file.path(source_dir, c("meta_frontmatter.ptx", chapter_files))
+  for (path in pretext_files) {
+    expect_no_match(
+      paste(xfun::read_utf8(path), collapse = "\n"),
+      "../assets/images/",
+      fixed = TRUE,
+      info = sprintf("PreTeXt image sources should be relative to assets/: %s", basename(path))
+    )
+  }
 })
 
 test_that("PreTeXt about-author chapter mirrors the Rmd structure", {
@@ -183,9 +193,9 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
 
   expect_match(frontmatter, "<personname>Yihui Xie</personname>", fixed = TRUE)
   expect_match(frontmatter, "bookdown.org/yihui/bookdown", fixed = TRUE)
-  expect_match(frontmatter, "../assets/images/cover.jpg", fixed = TRUE)
-  expect_match(frontmatter, "../assets/images/logo.png", fixed = TRUE)
-  expect_match(frontmatter, "../assets/images/by-nc-sa.png", fixed = TRUE)
+  expect_match(frontmatter, "images/cover.jpg", fixed = TRUE)
+  expect_match(frontmatter, "images/logo.png", fixed = TRUE)
+  expect_match(frontmatter, "images/by-nc-sa.png", fixed = TRUE)
   for (text in c(
     "<paragraphs xml:id=\"why-read-this-book\">",
     "<paragraphs xml:id=\"structure-of-the-book\">",

@@ -25,7 +25,7 @@
     <introduction>
       <figure xml:id="fig-cover-pretext">
         <title>The cover image for the bookdown book.</title>
-        <image source="../assets/images/cover.jpg" width="70%">
+        <image source="images/cover.jpg" width="70%">
           <description>
             <p>The cover image for the bookdown book.</p>
           </description>
@@ -61,7 +61,7 @@
 
       <figure xml:id="fig-logo-pretext">
         <title>The bookdown hex logo.</title>
-        <image source="../assets/images/logo.png" width="40%">
+        <image source="images/logo.png" width="40%">
           <description>
             <p>The hex logo for the bookdown package.</p>
           </description>
@@ -80,7 +80,7 @@
 
       <figure xml:id="fig-license-pretext">
         <title>Creative Commons license badge.</title>
-        <image source="../assets/images/by-nc-sa.png" width="25%">
+        <image source="images/by-nc-sa.png" width="25%">
           <description>
             <p>The Creative Commons Attribution-NonCommercial-ShareAlike badge.</p>
           </description>
