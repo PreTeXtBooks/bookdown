@@ -1259,11 +1259,13 @@ knitr::kable(
       custom blocks may be used to highlight a note or a warning. These can be
       included in multiple <c>bookdown</c> output formats using Pandoc's syntax
       for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html"/>).
-      See the custom blocks section in the <em>R Markdown Cookbook</em>
-      (<url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>)
-      and <xref ref="rmarkdown2020-reference"/> for instructions. The
-      <xref ref="bs4-book"/> output format includes styling for selected custom
-      blocks.
+      See <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html">
+      R Markdown Cookbook</url> (<xref ref="rmarkdown2020"/>) for instructions.
+     </p>
+
+     <p>
+      The <c>bs4-book</c> HTML output format includes styling for selected custom
+      blocks; see <xref ref="rmarkdown2020-reference"/>.
     </p>
   </section>
 
