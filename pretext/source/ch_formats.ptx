@@ -1404,8 +1404,6 @@ biblio-style: apalike
         Calibre with Homebrew (<url href = "https://brew.sh">https://brew.sh</url>)
         via the command <c>brew cask install calibre</c>, so you do not need to worry
        about the <c>PATH</c> issue.
-
-
       </p>
     </subsection>
   </section>
@@ -1434,6 +1432,11 @@ biblio-style: apalike
       syntax described in <xref ref="ch-components"/>.
     </p>
 
+    <p>
+      Below are a few examples of these output formats in the YAML metadata of
+      a single Rmd file (you can also add these formats to the <c>_output.yml</c> file):
+    </p>
+
     <program language="css">
       <input>output:
   bookdown::html_document2: default
@@ -1441,12 +1444,6 @@ biblio-style: apalike
     keep_tex: true
   bookdown::word_document2:
     toc: true</input>
-    </program>
-
-    <program language="r">
-      <input>```{r}
-bookdown::pdf_document2
-```</input>
     </program>
 
     <p>
@@ -1457,10 +1454,21 @@ bookdown::pdf_document2
       source code of <c>pdf_document2</c>:
     </p>
 
-    <program language="css">
-      <input>output:
-  bookdown::pdf_book:
-    base_format: rticles::jss_article</input>
+    <program language="r">
+      <input>
+bookdown::pdf_document2
+      </input>
+    </program>
+
+    <program language="r">
+      <input>
+## function (...) 
+## {
+##     pdf_book(..., base_format = rmarkdown::pdf_document)
+## }
+## &lt;bytecode: 0x144dc55e8&gt;
+## &lt;environment: namespace:bookdown&gt;
+      </input>
     </program>
 
     <p>
@@ -1471,9 +1479,20 @@ bookdown::pdf_document2
       YAML metadata above.
     </p>
 
+    <program language="css">
+      <input>
+output:
+  bookdown::pdf_book:
+    base_format: rticles::jss_article
+      </input>
+    </program>
+
     <p>
       Then you will be able to use all features we introduced in
-      <xref ref="ch-components"/>. Although the <c>gitbook()</c> format was
+      <xref ref="ch-components"/>. 
+    </p>
+    <p>
+      Although the <c>gitbook()</c> format was
       designed primarily for books, you can actually also apply it to a single
       R Markdown document. The only difference is that there will be no search
       button on the single page output, because you can simply use the
