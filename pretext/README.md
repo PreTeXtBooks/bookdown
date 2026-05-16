@@ -39,7 +39,10 @@ For interactive code blocks, add the `interactive="yes"` attribute.
 
 ## Images
 
-Images should be placed in the `source/images/` directory or the `assets/` directory and can be included using the `<image>` element in PreTeXt.
+Images should be placed in the `source/images/` directory or the `assets/`
+directory and can be included using the `<image>` element in PreTeXt. When an
+image lives under `assets/`, reference it relative to that external directory
+(for example, `source="images/logo.png"`).
 
 ## Project Structure
 

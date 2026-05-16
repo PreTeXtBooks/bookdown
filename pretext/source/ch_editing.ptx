@@ -303,7 +303,7 @@ output:
 
     <figure xml:id="fig-mathquill-pretext">
       <title>The RStudio addin to help input LaTeX math.</title>
-      <image source="../assets/images/mathquill.png" width="100%">
+      <image source="images/mathquill.png" width="100%">
         <description>
           <p>A screenshot of the RStudio addin used to preview LaTeX math input.</p>
         </description>
@@ -322,7 +322,7 @@ output:
 
     <figure xml:id="fig-citr-pretext">
       <title>The RStudio addin to help insert citations.</title>
-      <image source="../assets/images/citr.png" width="100%">
+      <image source="images/citr.png" width="100%">
         <description>
           <p>A screenshot of the citation-insertion addin shown in the editing chapter.</p>
         </description>
@@ -415,7 +415,7 @@ output:
 
     <figure xml:id="fig-disqus-pretext">
       <title>A book page with a discussion area.</title>
-      <image source="../assets/images/disqus.png" width="100%">
+      <image source="images/disqus.png" width="100%">
         <description>
           <p>A screenshot showing a discussion area embedded at the bottom of a book page.</p>
         </description>

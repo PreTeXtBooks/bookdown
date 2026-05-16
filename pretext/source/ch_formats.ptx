@@ -346,7 +346,7 @@ it to `introduction`.</input>
 
       <figure xml:id="fig-gitbook-toolbar-pretext">
         <title>The GitBook toolbar.</title>
-        <image source="../assets/images/gitbook.png" width="100%">
+        <image source="images/gitbook.png" width="100%">
           <description>
             <p>A screenshot of the GitBook toolbar used in the output formats chapter.</p>
           </description>
@@ -557,7 +557,7 @@ favicon: "favicon.ico"
 
       <figure xml:id="fig-bs4-book-pretext">
         <title>Home page of a book with the three-column Bootstrap style.</title>
-        <image source="../assets/images/bs4-book.png" width="100%">
+        <image source="images/bs4-book.png" width="100%">
           <description>
             <p>A screenshot of a book home page rendered with the bs4_book style.</p>
           </description>
@@ -662,7 +662,7 @@ favicon: "favicon.ico"
 
         <figure xml:id="fig-new-bs4-book-pretext">
           <title>Screenshot of the RStudio Project Wizard for creating a new bookdown project.</title>
-          <image source="../assets/images/new-bs4-book.png" width="90%">
+          <image source="images/new-bs4-book.png" width="90%">
             <description>
               <p>The RStudio Project Wizard with the bs4_book option selected.</p>
             </description>
@@ -809,7 +809,7 @@ head(beaver1, n = 5)
 
         <figure xml:id="fig-bs4-note-pretext">
           <title>A special callout block.</title>
-          <image source="../assets/images/rmd-note.png" width="85%">
+          <image source="images/rmd-note.png" width="85%">
             <description>
               <p>An example of a styled callout block in the bs4_book theme.</p>
             </description>

@@ -120,7 +120,7 @@
 
       <figure xml:id="fig-netlify-drag-drop-pretext">
         <title>Screenshot of drag and drop deploy update box on Netlify.</title>
-        <image source="../assets/images/netlify-drag-drop-update.png" width="100%">
+        <image source="images/netlify-drag-drop-update.png" width="100%">
           <description>
             <p>A screenshot of Netlify's drag-and-drop deployment update area.</p>
           </description>
@@ -282,7 +282,7 @@ cache:
 
       <figure xml:id="fig-404-page-pretext">
         <title>Screenshot of an example 404 page.</title>
-        <image source="../assets/images/404.png" width="100%">
+        <image source="images/404.png" width="100%">
           <description>
             <p>A screenshot of the example 404 page embedded within a rendered HTML book.</p>
           </description>
@@ -310,7 +310,7 @@ cache:
 
       <figure xml:id="fig-social-og-pretext">
         <title>Sharing preview on Facebook and LinkedIn.</title>
-        <image source="../assets/images/social-og.png" width="100%">
+        <image source="images/social-og.png" width="100%">
           <description>
             <p>A screenshot of the social-sharing card preview shown on Facebook and LinkedIn.</p>
           </description>
@@ -319,7 +319,7 @@ cache:
 
       <figure xml:id="fig-social-twitter-pretext">
         <title>Sharing preview on Twitter.</title>
-        <image source="../assets/images/social-twitter.png" width="100%">
+        <image source="images/social-twitter.png" width="100%">
           <description>
             <p>A screenshot of the social-sharing card preview shown on Twitter.</p>
           </description>
