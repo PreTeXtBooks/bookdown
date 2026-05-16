@@ -920,11 +920,15 @@ plot(dist ~ speed, cars)  # a scatterplot
     </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-</input>
+      <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
+```</input>
     </program>
+
+    <image source="images/pressure-plot.png" width="70%">
+      <description>
+        <p>A pressure plot shown without a caption.</p>
+      </description>
+    </image>
 
     <p>
       The disadvantage of typesetting figures in this way is that when there 
@@ -979,71 +983,108 @@ plot(pressure, pch = 19, type = "b")
       plots, i.e., the ratio of figure height/width. If the figure width is
       <c>6</c> inches (<c>fig.width = 6</c>) and <c>fig.asp = 0.7</c>, the
       figure height will be automatically calculated from
-      <c>fig.width * fig.asp = 6 * 0.7 = 4.2</c>.
+      <c>fig.width * fig.asp = 6 * 0.7 = 4.2</c>. <xref ref="fig-pressure-plot"/>
+      is an example using the chunk options <c>fig.asp = 0.7</c>,
+      <c>fig.width = 6</c>, and <c>fig.align = 'center'</c>, generated from
+      the code below:
     </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-      </input>
+      <input>```{r pressure-plot, fig.asp=.7, fig.width=6, fig.cap='A figure example with the specified aspect ratio, width, and alignment.', fig.align='center', out.width='90%'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+```</input>
     </program>
 
-<p>
-  The actual size of a plot is determined by the chunk options <c>fig.width</c> and 
-  <c>fig.height</c> (the size of the plot generated from a graphical device), and we 
-  can specify the output size of plots via the chunk options <c>out.width</c> and 
-  <c>out.height</c>. The possible value of these two options depends on the output 
-  format of the document. For example, <c>out.width = '30%'</c> is a valid value for 
-  HTML output, but not for LaTeX/PDF output. However, knitr will automatically convert 
-  a percentage value for <c>out.width</c> of the form <c>x%</c> to 
-  <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as 
-  <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to 
-  specify a relative width of a plot in a consistent manner. 
-  <xref ref="fig-cars-plot"/> is an example of <c>out.width = 70%</c>.
-</p>
+    <figure xml:id="fig-pressure-plot">
+      <caption>A figure example with the specified aspect ratio, width, and alignment.</caption>
+      <image source="images/pressure-plot.png" width="90%">
+        <description>
+          <p>A pressure plot with centered alignment and a 0.7 aspect ratio.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      The actual size of a plot is determined by the chunk options <c>fig.width</c> and
+      <c>fig.height</c> (the size of the plot generated from a graphical device), and we
+      can specify the output size of plots via the chunk options <c>out.width</c> and
+      <c>out.height</c>. The possible value of these two options depends on the output
+      format of the document. For example, <c>out.width = '30%'</c> is a valid value for
+      HTML output, but not for LaTeX/PDF output. However, knitr will automatically convert
+      a percentage value for <c>out.width</c> of the form <c>x%</c> to
+      <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as
+      <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to
+      specify a relative width of a plot in a consistent manner.
+      <xref ref="fig-cars-plot"/> is an example of <c>out.width = 70%</c>.
+    </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
+      <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\\%.'}
+par(mar = c(4, 4, .1, .1))
 plot(cars, pch = 19)
-      </input>
+```</input>
     </program>
 
-<p>
-  If you want to put multiple plots in one figure environment, you must use the chunk 
-  option <c>fig.show = 'hold'</c> to hold multiple plots from a code chunk and include 
-  them in one environment. You can also place plots side by side if the sum of the width 
-  of all plots is smaller than or equal to the current line width. For example, if two 
-  plots have the same width <c>50%</c>, they will be placed side by side. Similarly, 
-  you can specify <c>out.width = '33%'</c> to arrange three plots on one line. 
-  <xref ref="fig-multi-plots"/> is an example of two plots, each with a width of 
-  <c>50%</c>.
-</p>
+    <figure xml:id="fig-cars-plot">
+      <caption>A figure example with a relative width 70%.</caption>
+      <image source="images/cars-plot.png" width="70%">
+        <description>
+          <p>A scatterplot of stopping distance against speed.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      If you want to put multiple plots in one figure environment, you must use the chunk
+      option <c>fig.show = 'hold'</c> to hold multiple plots from a code chunk and include
+      them in one environment. You can also place plots side by side if the sum of the width
+      of all plots is smaller than or equal to the current line width. For example, if two
+      plots have the same width <c>50%</c>, they will be placed side by side. Similarly,
+      you can specify <c>out.width = '33%'</c> to arrange three plots on one line.
+      <xref ref="fig-multi-plots"/> is an example of two plots, each with a width of
+      <c>50%</c>.
+    </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
+      <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
 plot(cars, pch = 19)
-      </input>
+```</input>
     </program>
 
-<p>
-  Sometimes you may have certain images that are not generated from R code, and you 
-  can include them in R Markdown via the function <c>knitr::include_graphics()</c>. 
-  <xref ref="fig-knitr-logo"/> is an example of three knitr logos included in a figure 
-  environment. You may pass one or multiple image paths to the 
-  <c>include_graphics()</c> function, and all chunk options that apply to normal R 
-  plots also apply to these images, e.g., you can use <c>out.width = '33%'</c> to set 
-  the widths of these images in the output document.
-</p>
+    <figure xml:id="fig-multi-plots">
+      <caption>Two plots placed side by side.</caption>
+      <sidebyside widths="50% 50%">
+        <image source="images/pressure-plot.png" width="100%">
+          <description>
+            <p>A pressure plot shown as the first panel in a side-by-side figure.</p>
+          </description>
+        </image>
+        <image source="images/cars-plot.png" width="100%">
+          <description>
+            <p>A cars plot shown as the second panel in a side-by-side figure.</p>
+          </description>
+        </image>
+      </sidebyside>
+    </figure>
 
-<program language="r">
-  <input>
-    knitr::include_graphics(rep("images/knit-logo.png", 3))
-  </input>
-</program>
+    <p>
+      Sometimes you may have certain images that are not generated from R code, and you
+      can include them in R Markdown via the function <c>knitr::include_graphics()</c>.
+      <xref ref="fig-knitr-logo-pretext"/> is an example of three knitr logos included in a figure
+      environment. You may pass one or multiple image paths to the
+      <c>include_graphics()</c> function, and all chunk options that apply to normal R
+      plots also apply to these images, e.g., you can use <c>out.width = '33%'</c> to set
+      the widths of these images in the output document.
+    </p>
+
+    <program language="r">
+      <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
+knitr::include_graphics(rep('images/knit-logo.png', 3))
+```</input>
+    </program>
 
     <figure xml:id="fig-knitr-logo-pretext">
       <caption>Three knitr logos included in the document from an external PNG image file.</caption>

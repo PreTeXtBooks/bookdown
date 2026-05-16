@@ -135,12 +135,14 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "disqus.png",
     "gitbook.png",
     "important.png",
+    "cars-plot.png",
     "knit-logo.png",
     "logo.png",
     "mathquill.png",
     "netlify-drag-drop-update.png",
     "new-bs4-book.png",
     "note.png",
+    "pressure-plot.png",
     "rmd-note.png",
     "social-og.png",
     "social-twitter.png",
@@ -300,6 +302,8 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "bibliography:", fixed = TRUE)
   expect_match(components, "yet-another.bib", fixed = TRUE)
   expect_match(components, "link-citations: true", fixed = TRUE)
+  expect_match(components, "images/pressure-plot.png", fixed = TRUE)
+  expect_match(components, "images/cars-plot.png", fixed = TRUE)
   expect_match(components, "images/knit-logo.png", fixed = TRUE)
   expect_match(components, "DT::datatable(iris)", fixed = TRUE)
   expect_match(components, "knitr::include_app('https://yihui.shinyapps.io/miniUI/'", fixed = TRUE)
@@ -328,6 +332,13 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   )) {
     expect_match(components, text, fixed = TRUE)
   }
+  expect_match(components, "<figure xml:id=\"fig-pressure-plot\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-cars-plot\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-multi-plots\">", fixed = TRUE)
+  expect_match(components, "<caption>A figure example with the specified aspect ratio, width, and alignment.</caption>", fixed = TRUE)
+  expect_match(components, "<caption>A figure example with a relative width 70%.</caption>", fixed = TRUE)
+  expect_match(components, "<caption>Two plots placed side by side.</caption>", fixed = TRUE)
+  expect_match(components, "<sidebyside widths=\"50% 50%\">", fixed = TRUE)
   knitr_logo_figure <- regmatches(
     components,
     regexec(
