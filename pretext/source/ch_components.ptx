@@ -863,7 +863,7 @@ Or indent by four spaces:
     <title>R code</title>
 
     <p>
-      There are two types of R code in R Markdown/<c>knitr</c> documents: R
+      There are two types of R code in R Markdown and <c>knitr</c> documents: R
       code chunks, and inline R code. The syntax for inline R code is
       <c>`r R_CODE`</c>, and it can be embedded inline with other document
       elements. R code chunks look like plain code blocks, but have
