@@ -703,7 +703,7 @@ favicon: "favicon.ico"
           option with the <c>knitr::is_html_output()</c> function. See the
           <url href = "https://yihui.org/rmarkdown-cookbook/latex-html.html">
           R Markdown Cookbook</url> for instructions<fn>The PreTeXt version
-          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook/>here</url></fn></p>
+          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook"/>here</url></fn></p>
         </p>
 
         <p>A YAML header in <c>index.Rmd</c> for a <c>bs4_book</c> would look like this:</p>
@@ -846,7 +846,7 @@ head(beaver1, n = 5)
           environments. See the
           <url href = "https://yihui.org/rmarkdown-cookbook/latex-html.html">
           R Markdown Cookbook</url> for a how-to<fn>The PreTeXt version
-          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook/>here</url></fn></p>
+          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook"/>here</url></fn></p>
 
         </p>
       </subsubsection>
