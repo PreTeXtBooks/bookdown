@@ -214,8 +214,8 @@ output:
       the previous section, another possibility is to change the document
       class. There are many possible LaTeX classes for books, such as
       <url href ="https://www.ctan.org/pkg/memoir">memoir</url>,
-      <url href ="https://www.ctan.org/pkg/amsbook>amsbook</url>,
-      <url href ="https://www.ctan.org/pkg/koma-script>KOMA-Script</url> and so on. Here is a brief
+      <url href ="https://www.ctan.org/pkg/amsbook">amsbook</url>,
+      <url href ="https://www.ctan.org/pkg/koma-script">KOMA-Script</url> and so on. Here is a brief
       sample of the YAML metadata specifying the <c>scrbook</c> class from the
       KOMA-Script package:
     </p>
