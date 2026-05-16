@@ -318,6 +318,32 @@ test_that("PreTeXt output formats chapter mirrors the Rmd structure", {
   expect_match(formats, "bookdown::pdf_book(", fixed = TRUE)
   expect_match(formats, "bookdown::epub_book(", fixed = TRUE)
   expect_match(formats, "bookdown::word_document2", fixed = TRUE)
+  expect_match(
+    formats,
+    "You do not need the three dashes <c>---</c> in\\s+<c>_output\\.yml</c>\\."
+  )
+  expect_match(
+    formats,
+    paste0(
+      "When the only available format for readers to download\\s+",
+      "is PDF, the download button will be a single PDF button instead of a\\s+",
+      "drop-down menu\\."
+    )
+  )
+  expect_match(
+    formats,
+    paste0(
+      "The first- and second-level headings appear in the current chapter's\\s+",
+      "sidebar, which sticks to the top of the page as you scroll down\\."
+    )
+  )
+  for (text in c(
+    "We have made several improvements over the original GitBook project.",
+    "Bootstrap CSS and JavaScript files",
+    "Currently <c>bookdown</c> provides two e-book formats, EPUB and MOBI."
+  )) {
+    expect_match(formats, text, fixed = TRUE)
+  }
   for (text in c(
     "<xref ref=\"gitbook-style\"/>",
     "<xref ref=\"bs4-book\"/>",
@@ -366,6 +392,41 @@ test_that("PreTeXt customization chapter mirrors the Rmd structure", {
   expect_match(customization, "<xref ref=\"bootstrap-style\"/>", fixed = TRUE)
   expect_match(customization, "<xref ref=\"usage\"/>", fixed = TRUE)
   expect_match(customization, "<xref ref=\"configuration\"/>", fixed = TRUE)
+  expect_match(
+    customization,
+    paste0(
+      "As we mentioned in the very beginning of this book, you are expected to\\s*",
+      "have some basic knowledge about R Markdown"
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "The <c>in_header</c> option takes a file path and inserts it into the\\s*",
+      "<c>&lt;head&gt;</c> tag\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "Some publishers \\(e\\.g\\., Springer and Chapman &amp; Hall/CRC\\) have their\\s*",
+      "own LaTeX style or class files\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "<c>rmd_subdir</c>: whether to search for book source Rmd files in\\s*",
+      "subdirectories \\(by default, only the root directory is searched\\)\\."
+    )
+  )
+  expect_match(
+    customization,
+    paste0(
+      "There is one caveat when you write in a language that uses multibyte\\s*",
+      "characters, such as Chinese, Japanese, and Korean \\(CJK\\)"
+    )
+  )
   expect_match(customization, "https://disqus.com", fixed = TRUE)
   expect_match(customization, "https://hypothes.is", fixed = TRUE)
   expect_match(customization, "<c>breezedark</c>", fixed = TRUE)
@@ -401,6 +462,41 @@ test_that("PreTeXt editing chapter mirrors the Rmd structure", {
   expect_match(editing, "<xref ref=\"fig-mathquill-pretext\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"fig-citr-pretext\"/>", fixed = TRUE)
   expect_match(editing, "<xref ref=\"fig-disqus-pretext\"/>", fixed = TRUE)
+  expect_match(
+    editing,
+    paste0(
+      "In this chapter, we explain how to edit, build, preview, and serve the\\s*",
+      "book locally\\."
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "The most important argument is <c>output_format</c>, which can take a\\s*",
+      "character string of the output format"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "One downside of previewing a chapter is that the cross-references to\\s*",
+      "other chapters will not work"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "The server will listen to changes in the book root directory: whenever\\s*",
+      "you modify any files in the book directory"
+    )
+  )
+  expect_match(
+    editing,
+    paste0(
+      "Readers can contribute in two ways\\. One way is to contribute content\\s*",
+      "directly, and the easiest way, is through GitHub pull requests"
+    )
+  )
   expect_match(editing, "rstudio.github.io/rstudioaddins", fixed = TRUE)
   expect_match(editing, "help.github.com/articles/about-pull-requests", fixed = TRUE)
   expect_match(editing, "bookdown::render_book(\"index.Rmd\", \"bookdown::gitbook\")", fixed = TRUE)
