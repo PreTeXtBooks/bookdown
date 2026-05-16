@@ -4,10 +4,10 @@
 
   <introduction>
     <p>
-      As you develop a book, you may want to make draft output available online
-      so readers can give early feedback. After the writing is finished, you may
-      also need to think about more formal publishing options such as printed
-      copies or e-books.
+      As you develop the book, you make the draft book available to the public
+      to get early feedback from readers, e.g., publish it to a website. After
+      you finish writing the book, you need to think about options to formally
+      publish it as either printed copies or e-books.
     </p>
   </introduction>
 
@@ -15,13 +15,28 @@
     <title>RStudio Connect</title>
 
     <p>
-      The Rmd chapter begins with a simple publishing route: render the book and
-      deploy the output. It highlights <c>publish_book()</c> in
-      <c>bookdown</c> as a convenience wrapper for publishing to
-      <url href="https://bookdown.org" visual="bookdown.org"/>, the hosting
-      service described there as being built on top of
-      <url href="https://posit.co/products/enterprise/connect/"
-      visual="posit.co/products/enterprise/connect/"/>.
+      In theory, you can render the book by yourself and publish the output
+      anywhere you want. For example, you can host the HTML files on your own
+      web server. We have provided a function <c>publish_book()</c> in
+      <c>bookdown</c> to make it very simple to upload your book to
+      <url href="https://bookdown.org" visual="bookdown.org"/>, which is a
+      website provided by RStudio to host your books for free. This website is
+      built on top of <url href="https://posit.co/products/enterprise/connect/"
+      visual="posit.co/products/enterprise/connect/">RStudio Connect</url>, an
+      RStudio product that allows you to deploy a variety of R-related
+      applications to a server, including R Markdown documents, Shiny
+      applications, R plots, and so on.
+    </p>
+
+    <p>
+      You do not have to know much about RStudio Connect to publish your book
+      to bookdown.org. Basically you sign up at
+      <url href="https://bookdown.org/connect/"
+      visual="bookdown.org/connect/"/>, and the first time you try to run
+      <c>bookdown::publish_book()</c>, you will be asked to authorize
+      <c>bookdown</c> to publish to your bookdown.org account. In the future,
+      you simply call <c>publish_book()</c> again and <c>bookdown</c> will no
+      longer ask for anything.
     </p>
 
     <program language="r">
@@ -29,11 +44,10 @@
     </program>
 
     <p>
-      The first time you try to publish, the service asks you to authorize
-      <c>bookdown</c> to publish to your account. After that, you can publish
-      again without repeating the authorization step. The original instructions
-      point readers to <url href="https://bookdown.org/connect/"
-      visual="bookdown.org/connect/"/> for the initial sign-in flow.
+      The only argument of <c>publish_book()</c> that you may want to touch is
+      <c>render</c>. It determines whether you want to render the book before
+      publishing. If you have run <c>render_book()</c> before, you do not need
+      to change this argument, otherwise you may set it to <c>'local'</c>:
     </p>
 
     <program language="r">
@@ -41,9 +55,8 @@
     </program>
 
     <p>
-      The chapter notes that the <c>render</c> argument is the main setting most
-      readers may want to change, and that a self-hosted RStudio Connect server
-      can be used as an alternative destination.
+      If you have set up your own RStudio Connect server, you can certainly
+      publish the book to that server instead of bookdown.org.
     </p>
   </section>
 
@@ -51,33 +64,55 @@
     <title>Netlify Drop</title>
 
     <p>
-      Netlify Drop is presented as a quick way to publish a static HTML book
-      without first placing the project under version control. All you need is a
-      local <c>bookdown</c> project that can be built to an output directory.
+      Netlify (<url href="https://netlify.com" visual="netlify.com"/>) is a
+      platform that offers cloud hosting and serverless backend services for
+      static websites. Netlify offers both free and paid tiers for service, but
+      they also offer a service called Netlify Drop
+      (<url href="https://app.netlify.com/drop"
+      visual="app.netlify.com/drop"/>), which is a free publishing option that
+      does not require a Netlify account to start. This option does not rely on
+      your <c>bookdown</c> project being in a version-controlled repository.
+      All you need is a <c>bookdown</c> project that you can build locally.
     </p>
 
     <subsection xml:id="build-and-deploy-pipeline-sequence">
       <title>The build-and-deploy pipeline sequence</title>
 
-      <p>The chapter describes the flow as:</p>
+      <p>This publishing approach sets up the following flow of events:</p>
 
       <ol>
-        <li><p>start with a local <c>bookdown</c> project;</p></li>
-        <li><p>build the book locally, usually into <c>_book/</c>;</p></li>
-        <li><p>drag the output directory into the Netlify Drop interface;</p></li>
-        <li><p>repeat the local build and upload process whenever the book changes.</p></li>
+        <li><p>You start with a local <c>bookdown</c> project.</p></li>
+        <li><p>You build your book locally to an output directory of choice
+          (<c>_book/</c> by default).</p></li>
+        <li><p>You go to Netlify Drop
+          (<url href="https://app.netlify.com/drop"
+          visual="app.netlify.com/drop"/>), and drag &amp; drop the output
+          directory into the Netlify browser-based user interface.</p></li>
+        <li><p>You make changes to your book, rebuild locally, then drag &amp;
+          drop the output directory again into Netlify to
+          update.</p></li>
       </ol>
+
+      <p>
+        The above is an overview<mdash/>read on for step-by-step instructions.
+      </p>
     </subsection>
 
     <subsection xml:id="before-you-begin">
       <title>Before you begin</title>
 
       <p>
-        The project does not need to live on GitHub or in any other
-        version-controlled repository. If you need a practice project, see
+        Start with a local <c>bookdown</c> project. It does not need to be in
+        GitHub or another version-controlled repository.
+      </p>
+
+      <p>
+        If you do not have an existing book, you can create a simple
+        <c>bookdown</c> HTML book to practice with instead. See
         <xref ref="fig-new-bs4-book-pretext"/> for how to create a new book in
         RStudio, or use the function <c>bookdown::create_gitbook()</c> or
-        <c>bookdown::create_bs4_book()</c> from your R console.
+        <c>bookdown::create_bs4_book()</c> from your R console if you do not
+        use RStudio.
       </p>
     </subsection>
 
@@ -85,8 +120,8 @@
       <title>Build your book</title>
 
       <p>
-        Build the book locally using whichever method from
-        <xref ref="build-the-book"/> you prefer.
+        From your <c>bookdown</c> project, build your book locally using
+        whichever method from <xref ref="build-the-book"/> you prefer.
       </p>
     </subsection>
 
@@ -94,47 +129,68 @@
       <title>Deploy your site</title>
 
       <p>
-        Go to <url href="https://app.netlify.com/drop" visual="netlify.com/drop"/>
-        and drop the output directory from your project into the upload area.
-        By default this will usually be <c>_book/</c>, unless you changed the
-        output directory in <c>_bookdown.yml</c>.
+        Go to Netlify Drop
+        (<url href="https://app.netlify.com/drop"
+        visual="netlify.com/drop"/>), where you should see a box that tells
+        you to &#x201C;Drag and drop your site folder here.&#x201D;
       </p>
 
       <p>
-        The chapter notes that deployment is fast and that Netlify initially
-        assigns a random subdomain such as
-        <c>https://random-word-12345.netlify.com</c>. Unclaimed sites are deleted
-        after 24 hours, but signing up for a Netlify account lets you keep the
-        site online permanently.
+        Next, drag and drop the output directory from your <c>bookdown</c>
+        project (<c>_book/</c> by default, unless you changed this in your
+        <c>_bookdown.yml</c> file) into that box in your web browser. You
+        should see your book deploy quickly with a random subdomain name of the
+        form <c>https://random-word-12345.netlify.com</c>.
+      </p>
+
+      <p>
+        You will also see a notice that unclaimed sites are deleted after 24
+        hours. You can sign up for a Netlify account to claim your site and
+        keep it online permanently.
       </p>
     </subsection>
 
     <subsection xml:id="optional-update-your-site">
-      <title>Optional: Update your site</title>
+      <title><em>Optional: Update your site</em></title>
 
       <p>
-        After signing up for Netlify, you can manually update the site from the
-        Deploys page by dragging and dropping the folder again
-        (see <xref ref="fig-netlify-drag-drop-pretext"/>).
+        After signing up for Netlify, you <em>can</em> update this kind of
+        site, but it is a manual update. Go to Netlify.com and navigate to
+        find your site, then click on &#x201C;Deploys.&#x201D; You should see
+        a box as shown in <xref ref="fig-netlify-drag-drop-pretext"/>,
+        indicating you may drag and drop your site folder to update your site
+        (you may need to scroll to the bottom of this page).
       </p>
 
       <figure xml:id="fig-netlify-drag-drop-pretext">
         <title>Screenshot of drag and drop deploy update box on Netlify.</title>
-        <image source="../assets/images/netlify-drag-drop-update.png" width="100%">
+        <image source="../assets/images/netlify-drag-drop-update.png"
+        width="100%">
           <description>
-            <p>A screenshot of Netlify's drag-and-drop deployment update area.</p>
+            <p>Screenshot of drag and drop deploy update box on Netlify.</p>
           </description>
         </image>
       </figure>
+
+      <p>
+        Edit your book, build it locally again, then drag and drop the output
+        directory here again.
+      </p>
     </subsection>
 
     <subsection xml:id="netlify-subdomain">
-      <title>Optional: change the default subdomain</title>
+      <title><em>Optional: change the default subdomain</em></title>
 
       <p>
-        The chapter explains how to change the generated Netlify subdomain from
-        the site settings page, and points readers to Netlify's custom-domain
-        documentation if they want to use their own domain instead.
+        Navigate to your site's landing page on Netlify.com
+        (<url href="https://app.netlify.com"
+        visual="app.netlify.com"/>), click on <em>Overview &gt; Site
+        Settings</em>. Under <em>Site information</em>, click on <em>Change
+        site name</em> and update it to a name that you want. If you want to
+        use your own domain instead of Netlify's subdomain, please read the
+        documentation at
+        <url href="https://docs.netlify.com/domains-https/custom-domains/"
+        visual="docs.netlify.com/domains-https/custom-domains/"/>.
       </p>
     </subsection>
 
@@ -142,10 +198,13 @@
       <title>Drawbacks and alternatives</title>
 
       <p>
-        This workflow is convenient for quickly sharing a prototype, but it is a
-        manual process and does not make much use of version control. For books
-        under active collaboration, the chapter recommends more automated,
-        repository-based workflows.
+        This workflow is great to quickly share a book prototype. However, if
+        you opt to not claim your site, the link will expire in 24 hours. Even
+        if you do claim your site and set up a Netlify account, this workflow
+        is not ideal for books you are actively editing or collaborating on
+        because every time you update your local version of the book, you need
+        to manually upload the book to Netlify. You are also not reaping the
+        benefits of version control with this approach.
       </p>
     </subsection>
   </section>
@@ -154,11 +213,16 @@
     <title>GitHub</title>
 
     <p>
-      <url href="https://pages.github.com" visual="pages.github.com"/> can host
-      the HTML output of a <c>bookdown</c> project for free. Because the output
-      is already a complete static site, the important detail is to add a
-      hidden <c>.nojekyll</c> file so GitHub does not try to rebuild the site
-      with <url href="http://jekyllrb.com" visual="jekyllrb.com"/>.
+      You can host your book on GitHub for free via GitHub Pages
+      (<url href="https://pages.github.com"
+      visual="pages.github.com"/>). GitHub supports Jekyll
+      (<url href="http://jekyllrb.com" visual="jekyllrb.com"/>), a static
+      website builder, to build a website from Markdown files. That may be the
+      more common use case of GitHub Pages, but GitHub also supports arbitrary
+      static HTML files, so you can just host the HTML output files of your
+      book on GitHub. The key is to create a hidden file <c>.nojekyll</c> that
+      tells GitHub that your website is not to be built via Jekyll, since the
+      <c>bookdown</c> HTML output is already a standalone website.
     </p>
 
     <program language="bash">
@@ -172,16 +236,30 @@ git add .nojekyll</input>
     </program>
 
     <p>
-      The chapter also mentions a <c>/docs</c>-based GitHub Pages workflow on
-      the main branch by setting <c>output_dir: "docs"</c> in
-      <c>_bookdown.yml</c> and configuring the repository settings accordingly,
-      following the linked GitHub Help page at
-      <url href="http://bit.ly/2cvloKV" visual="bit.ly/2cvloKV"/>.
+      If you are on Windows, you may not have the <c>touch</c> command, and
+      you can create the file in R using <c>file.create('.nojekyll')</c>.
     </p>
 
     <p>
-      Another option is to publish from a dedicated <c>gh-pages</c> branch. The
-      Rmd source provides these setup commands.
+      One approach is to publish your book as a GitHub Pages site from a
+      <c>/docs</c> folder on your <c>master</c> branch as described in
+      <url href="http://bit.ly/2cvloKV" visual="bit.ly/2cvloKV">GitHub
+      Help.</url> First, set the output directory of your book to be
+      <c>/docs</c> by adding the line <c>output_dir: "docs"</c> to the
+      configuration file <c>_bookdown.yml</c>. Then, after pushing your
+      changes to GitHub, go to your repository's settings and under
+      &#x201C;GitHub Pages&#x201D; change the &#x201C;Source&#x201D; to be
+      &#x201C;master branch /docs folder&#x201D;. In this case, the
+      <c>.nojekyll</c> file has to be in the <c>/docs</c> folder.
+    </p>
+
+    <p>
+      An alternative approach is to create a <c>gh-pages</c> branch in your
+      repository, build the book, put the HTML output (including all external
+      resources like images, CSS, and JavaScript files) in this branch, and
+      push the branch to the remote repository. If your book repository does
+      not have the <c>gh-pages</c> branch, you may use the following commands
+      to create one:
     </p>
 
     <program language="bash">
@@ -201,11 +279,71 @@ git push origin gh-pages</input>
     </program>
 
     <p>
-      Once that groundwork is done, the rest can be automated in scripts and run
-      from the cloud. The chapter uses
-      <url href="https://travis-ci.com" visual="travis-ci.com"/> as its main
-      example of a server that can rebuild and redeploy the book whenever new
-      commits are pushed.
+      After you have set up GIT, the rest of work can be automated via a
+      script (Shell, R, or Makefile, depending on your preference). Basically,
+      you compile the book to HTML, then run git commands to push the files to
+      GitHub, but you probably do not want to do this over and over again
+      manually and locally. It can be very handy to automate the publishing
+      process completely on the cloud, so once it is set up correctly, all you
+      have to do next is write the book and push the Rmd source files to
+      GitHub, and your book will always be automatically built and published
+      from the server side.
+    </p>
+
+    <p>
+      One service that you can utilize is Travis CI
+      (<url href="https://travis-ci.com" visual="travis-ci.com"/>). It is
+      free for public repositories on GitHub, and was designed for continuous
+      integration (CI) of software packages. Travis CI can be connected to
+      GitHub in the sense that whenever you push to GitHub, Travis can be
+      triggered to run certain commands/scripts on the latest version of your
+      repository.<fn>You need to authorize the Travis CI service for your
+      repository on GitHub first. See
+      <url href="https://docs.travis-ci.com/user/getting-started/"
+      visual="docs.travis-ci.com/user/getting-started/"/> for how to get
+      started with Travis CI.</fn> These commands are specified in a YAML
+      file named <c>.travis.yml</c> in the root directory of your repository,
+      and they are usually for the purpose of testing software, but in fact
+      they are quite open-ended, meaning that you can run arbitrary commands
+      on a Travis (virtual) machine. That means you can certainly run your
+      own scripts to build your book on Travis. Note that Travis only supports
+      Ubuntu and Mac OS X at the moment, so you should have some basic
+      knowledge about Linux/Unix commands.
+    </p>
+
+    <p>
+      The next question is, how to publish the book built on Travis to GitHub?
+      Basically you have to grant Travis write access to your GitHub
+      repository. This authorization can be done in several ways, and the
+      easiest one to beginners may be a personal access token. Here are a few
+      steps you may follow:
+    </p>
+
+    <ol>
+      <li><p>Create a
+        <url href="http://bit.ly/2cEBYWB" visual="bit.ly/2cEBYWB">personal
+        access token</url> for your account on GitHub (make sure to enable
+        the &#x201C;repo&#x201D; scope so that using this token will enable
+        writing to your GitHub repos).</p></li>
+      <li><p>Encrypt it in the environment variable <c>GITHUB_PAT</c> via
+        command line <c>travis encrypt</c> and store it in
+        <c>.travis.yml</c>, e.g <c>travis encrypt
+        GITHUB_PAT=TOKEN</c>. If you do not know how to install or use the
+        Travis command-line tool, simply save this environment variable via
+        <url href="https://travis-ci.com/user/repo/settings"
+        visual="travis-ci.com/user/repo/settings"/> where <c>user</c> is
+        your GitHub ID, and <c>repo</c> is the name of the
+        repository.</p></li>
+      <li><p>You can clone this <c>gh-pages</c> branch on Travis using your
+        GitHub token, add the HTML output files from R Markdown (do not
+        forget to add figures and CSS style files as well), and push to the
+        remote repository.</p></li>
+    </ol>
+
+    <p>
+      Assume you are in the <c>master</c> branch right now (where you put the
+      Rmd source files), and have compiled the book to the <c>_book</c>
+      directory. What you can do next on Travis is:
     </p>
 
     <program language="bash">
@@ -225,6 +363,17 @@ git commit -m "Update the book"
 git push -q origin gh-pages</input>
     </program>
 
+    <p>
+      The variable name <c>GITHUB_PAT</c> and the directory name
+      <c>book-output</c> are arbitrary, and you can use any names you prefer,
+      as long as the names do not conflict with existing environment variable
+      names or directory names. This script, together with the build script we
+      mentioned in <xref ref="build-the-book"/>, can be put in the
+      <c>master</c> branch as Shell scripts, e.g., you can name them as
+      <c>_build.sh</c> and <c>_deploy.sh</c>. Then your <c>.travis.yml</c>
+      may look like this:
+    </p>
+
     <program language="yaml">
       <input>language: r
 pandoc_version: 1.19.2.1
@@ -242,6 +391,25 @@ script:
   - ./_deploy.sh</input>
     </program>
 
+    <p>
+      The <c>language</c> key tells Travis to use a virtual machine that has R
+      installed. The <c>secure</c> key is your encrypted personal access
+      token. If you have already saved the <c>GITHUB_PAT</c> variable using
+      the web interface on Travis instead of the command-line tool
+      <c>travis encrypt</c>, you can leave out this key.
+    </p>
+
+    <p>
+      Since this Travis service is primarily for checking R packages, you will
+      also need a (fake) <c>DESCRIPTION</c> file as if the book repository
+      were an R package. The only thing in this file that really matters is
+      the specification of dependencies. All dependencies will be installed
+      via the <c>devtools</c> package. If a dependency is on CRAN or
+      BioConductor, you can simply list it in the <c>Imports</c> field of the
+      <c>DESCRIPTION</c> file. If it is on GitHub, you may use the
+      <c>Remotes</c> field to list its repository name. Below is an example:
+    </p>
+
     <program language="dcf">
       <input>Package: placeholder
 Type: Book
@@ -250,6 +418,24 @@ Version: 0.0.1
 Imports: bookdown, ggplot2
 Remotes: rstudio/bookdown</input>
     </program>
+
+    <p>
+      If you use the
+      <url href="https://docs.travis-ci.com/user/workers/container-based-infrastructure/"
+      visual="docs.travis-ci.com/user/workers/container-based-infrastructure/">container-based
+      infrastructure</url> on Travis, you can enable caching by using
+      <c>sudo: false</c> in <c>.travis.yml</c>. Normally you should cache at
+      least two types of directories: the figure directory (e.g.,
+      <c>_main_files</c>) and the cache directory (e.g.,
+      <c>_main_cache</c>). These directory names may also be different if you
+      have specified the <c>knitr</c> chunk options <c>fig.path</c> and
+      <c>cache.path</c>, but I'd strongly recommend you not to change these
+      options. The figure and cache directories are stored under the
+      <c>_bookdown_files</c> directory of the book root directory. A
+      <c>.travis.yml</c> file that has enabled caching of <c>knitr</c> figure
+      and cache directories may have additional configurations <c>sudo</c> and
+      <c>cache</c> like this:
+    </p>
 
     <program language="yaml">
       <input>sudo: false
@@ -261,9 +447,25 @@ cache:
     </program>
 
     <p>
-      The Rmd chapter closes this section by noting that GitHub Pages and Travis
-      CI are only examples, not requirements, and that any server capable of
-      hosting static output can be used.
+      If your book is very time-consuming to build, you may use the above
+      configurations on Travis to save time. Note that <c>packages: yes</c>
+      means the R packages installed on Travis are also cached.
+    </p>
+
+    <p>
+      All above scripts and configurations can be found in the
+      <c>bookdown-demo</c> repository:
+      <url href="https://github.com/rstudio/bookdown-demo/"
+      visual="github.com/rstudio/bookdown-demo/"/>. If you copy them to your
+      own repository, please remember to change the <c>secure</c> key in
+      <c>.travis.yml</c> using your own encrypted variable
+      <c>GITHUB_PAT</c>.
+    </p>
+
+    <p>
+      GitHub and Travis CI are certainly not the only choices to build and
+      publish your book. You are free to store and publish the book on your
+      own server.
     </p>
   </section>
 
@@ -274,27 +476,59 @@ cache:
       <title>HTML 404 pages</title>
 
       <p>
-        For HTML books, <c>bookdown</c> creates a custom <c>404.html</c> page in
-        the output directory (see <xref ref="fig-404-page-pretext"/>). Hosting
-        platforms such as Netlify, GitHub Pages, and GitLab Pages can use this
-        file as the site's custom not-found page.
+        If a reader tries to access a page in your book that cannot be found,
+        a browser will display a
+        <url href="https://en.wikipedia.org/wiki/HTTP_404"
+        visual="en.wikipedia.org/wiki/HTTP_404">404 error</url> as it cannot
+        find the requested web page. This 404 error is displayed on a 404
+        page. Each web server has a default for a 404 page. However, most web
+        serving platforms like Netlify, Github Pages, and Gitlab Pages will
+        use a file named <c>404.html</c> in the root of your website as a
+        custom error page, if you provide it.
+      </p>
+
+      <p>
+        For all HTML book formats, <c>bookdown</c> creates a custom
+        <c>404.html</c> in your output directory using simple content (a
+        header, and a body of 2 paragraphs); see
+        <xref ref="fig-404-page-pretext"/>.
       </p>
 
       <figure xml:id="fig-404-page-pretext">
         <title>Screenshot of an example 404 page.</title>
         <image source="../assets/images/404.png" width="100%">
           <description>
-            <p>A screenshot of the example 404 page embedded within a rendered HTML book.</p>
+            <p>Screenshot showing an online bs4_book with the sidebar,
+            footer, and CSS styling in place. The text reads: Page not found.
+            The page you requested cannot be found (perhaps it was moved or
+            renamed). You may want to try searching to find the page's new
+            location, or use the table of contents to find the page you are
+            looking for.</p>
           </description>
         </image>
       </figure>
 
       <p>
-        The chapter explains that the 404 page remains embedded within the book
-        layout so readers can still use the overall navigation and styling. To
-        customize it, add either <c>_404.Rmd</c> or <c>_404.md</c> to the project
-        root. If a root-level <c>404.html</c> file already exists,
-        <c>bookdown</c> leaves it untouched.
+        As you can see, this 404 page is embedded within the book so that
+        readers can quickly find their way back to the book's content. The
+        overall structure of the book's website (including navbar, footer,
+        sidebars, etc.) and the CSS styling are preserved on the 404 page.
+      </p>
+
+      <p>
+        To customize the 404 page instead of using the one <c>bookdown</c>
+        provides, you may add either a <c>_404.Rmd</c> or a <c>_404.md</c>
+        file to your project root. If either file is found when you render
+        the book, the content will be rendered and included as the body of
+        the 404 page embedded within the book structure.
+      </p>
+
+      <p>
+        If a 404.html file already exists in the main repo at the root level
+        (alongside the book's <c>.Rmd</c> files), then <c>bookdown</c> will
+        leave that file as is and will not overwrite it. This is because we
+        assume you already have a mechanism in place in your publishing
+        workflow to use this custom <c>404.html</c>.
       </p>
     </subsection>
 
@@ -302,17 +536,25 @@ cache:
       <title>Metadata for sharing</title>
 
       <p>
-        HTML books can also expose metadata for social sharing on platforms such
-        as Twitter, Facebook, and LinkedIn. The key inputs come from the
-        <c>index.Rmd</c> YAML, especially the book <c>url</c>, the
-        <c>cover-image</c>, the <c>title</c>, and the <c>description</c>.
+        Bookdown HTML books will provide HTML metadata for social sharing on
+        platforms like Twitter, Facebook, and LinkedIn, using information you
+        provide in the <c>index.Rmd</c> YAML. To set up, set the <c>url</c>
+        for your book and the path to your <c>cover-image</c> file. The path
+        may be either to an absolute URL, or to a relative image file located
+        in your project. Your book's <c>title</c> and <c>description</c> are
+        also used. A nice effect of setting these options is that when readers
+        share the link of your book on social network websites, the link will
+        be automatically expanded to a card with the cover image and
+        description of the book.
       </p>
 
       <figure xml:id="fig-social-og-pretext">
-        <title>Sharing preview on Facebook and LinkedIn.</title>
+        <title>Screenshots showing cover-image, title, and description of an HTML book when the link is shared on Facebook and LinkedIn (left), and on Twitter (right).</title>
         <image source="../assets/images/social-og.png" width="100%">
           <description>
-            <p>A screenshot of the social-sharing card preview shown on Facebook and LinkedIn.</p>
+            <p>When a link is shared on social media, the auto-preview shows
+            the cover-image, title, and description in a summary card
+            layout.</p>
           </description>
         </image>
       </figure>
@@ -321,16 +563,32 @@ cache:
         <title>Sharing preview on Twitter.</title>
         <image source="../assets/images/social-twitter.png" width="100%">
           <description>
-            <p>A screenshot of the social-sharing card preview shown on Twitter.</p>
+            <p>When a link is shared on Twitter, the auto-preview shows the
+            cover-image, title, and description in a summary card
+            layout.</p>
           </description>
         </image>
       </figure>
 
       <p>
-        The chapter recommends validating this metadata with
-        <url href="https://www.opengraph.xyz" visual="opengraph.xyz"/> or with
-        platform-specific tools for Facebook, LinkedIn, and Twitter.
+        Whichever method you use to publish your HTML book, you may check your
+        metadata using
+        <url href="https://www.opengraph.xyz" visual="opengraph.xyz"/>, which
+        shows you previews of how your link will look when shared across
+        platforms. You may also use a platform-specific developer tool:
       </p>
+
+      <ul>
+        <li><p>Facebook:
+          <url href="https://developers.facebook.com/tools/debug/"
+          visual="developers.facebook.com/tools/debug/"/></p></li>
+        <li><p>LinkedIn:
+          <url href="https://www.linkedin.com/post-inspector/"
+          visual="linkedin.com/post-inspector/"/></p></li>
+        <li><p>Twitter:
+          <url href="https://cards-dev.twitter.com/validator"
+          visual="cards-dev.twitter.com/validator"/></p></li>
+      </ul>
     </subsection>
   </section>
 
@@ -338,16 +596,41 @@ cache:
     <title>Publishers</title>
 
     <p>
-      Beyond online publishing, the chapter discusses working with a traditional
-      publisher or self-publishing. It emphasizes that publishers who support
-      LaTeX make it much easier to publish a book written with <c>bookdown</c>.
+      Besides publishing your book online, you can certainly consider
+      publishing it with a publisher. For example, this book was published
+      with Chapman &amp; Hall/CRC, and there is also a free online version at
+      <url href="https://yihui.org/bookdown/"
+      visual="yihui.org/bookdown/"/> (with an agreement with the publisher).
+      Another option that you can consider is self-publishing
+      (<url href="https://en.wikipedia.org/wiki/Self-publishing"
+      visual="en.wikipedia.org/wiki/Self-publishing"/>) if you do not want to
+      work with an established publisher. Pablo Casas has written two blog
+      posts that you may find useful:
+      <url href="https://blog.datascienceheroes.com/how-to-self-publish-a-book/"
+      visual="blog.datascienceheroes.com/how-to-self-publish-a-book/">&#x201C;How
+      to self-publish a book&#x201D;</url> and
+      <url href="https://blog.datascienceheroes.com/how-to-self-publish-a-book-customizing-bookdown/"
+      visual="blog.datascienceheroes.com/how-to-self-publish-a-book-customizing-bookdown/">&#x201C;How
+      to self-publish a book: customizing bookdown&#x201D;</url>.
     </p>
 
     <p>
-      The book's example uses the Chapman &amp; Hall/CRC class
-      <c>krantz.cls</c>, but the same general approach also applies to other
-      publisher classes such as Springer's <c>svmono.cls</c>.
+      It will be much easier to publish a book written with <c>bookdown</c>
+      if the publisher you choose supports LaTeX. For example, Chapman &amp;
+      Hall provides a LaTeX class named <c>krantz.cls</c>, and Springer
+      provides <c>svmono.cls</c>. To apply these LaTeX classes to your PDF
+      book, set <c>documentclass</c> in the YAML metadata of <c>index.Rmd</c>
+      to the class filename (without the extension <c>.cls</c>).
     </p>
+
+    <p>
+      The LaTeX class is the most important setting in the YAML metadata. It
+      controls the overall style of the PDF book. There are often other
+      settings you want to tweak, and we will show some details about this
+      book below.
+    </p>
+
+    <p>The YAML metadata of this book contains these settings:</p>
 
     <program language="yaml">
       <input>documentclass: krantz
@@ -359,9 +642,22 @@ monofontoptions: "Scale=0.7"</input>
     </program>
 
     <p>
-      In the LaTeX preamble (see <xref ref="yaml-options"/>), the Rmd source
-      shows a set of tweaks for fonts, floating environments, quotations, and
-      hyperlink handling.
+      The field <c>lot: yes</c> means we want the List of Tables, and
+      similarly, <c>lof</c> means List of Figures. The base font size is
+      <c>12pt</c>, and we used
+      <url href="https://www.fontsquirrel.com/fonts/source-code-pro"
+      visual="fontsquirrel.com/fonts/source-code-pro">Source Code Pro</url>
+      as the monospaced (fixed-width) font, which is applied to all program
+      code in this book.
+    </p>
+
+    <p>
+      In the LaTeX preamble (<xref ref="yaml-options"/>), we have a few more
+      settings. First, we set the main font to be
+      <url href="https://www.fontsquirrel.com/fonts/alegreya"
+      visual="fontsquirrel.com/fonts/alegreya">Alegreya</url>, and since
+      this font does not have the Small Capitals feature, we used the
+      Alegreya SC font.
     </p>
 
     <program language="latex">
@@ -370,6 +666,11 @@ monofontoptions: "Scale=0.7"</input>
 ]{Alegreya}</input>
     </program>
 
+    <p>
+      The following commands make floating environments less likely to float
+      by allowing them to occupy larger fractions of pages without floating.
+    </p>
+
     <program language="latex">
       <input>\renewcommand{\textfraction}{0.05}
 \renewcommand{\topfraction}{0.8}
@@ -377,18 +678,31 @@ monofontoptions: "Scale=0.7"</input>
 \renewcommand{\floatpagefraction}{0.75}</input>
     </program>
 
+    <p>
+      Since <c>krantz.cls</c> provided an environment <c>VF</c> for quotes,
+      we redefine the standard <c>quote</c> environment to <c>VF</c>. You can
+      see its style in <xref ref="markdown-syntax"/>.
+    </p>
+
     <program language="latex">
       <input>\renewenvironment{quote}{\begin{VF}}{\end{VF}}</input>
     </program>
 
     <p>
-      The quote environment style can be seen in <xref ref="markdown-syntax"/>.
+      Then we redefine hyperlinks to be footnotes, because when the book is
+      printed on paper, readers are not able to click on links in text.
+      Footnotes will tell them what the actual links are.
     </p>
 
     <program language="latex">
       <input>\let\oldhref\href
 \renewcommand{\href}[2]{#2\footnote{\url{#1}}}</input>
     </program>
+
+    <p>
+      We also have some settings for the <c>bookdown::pdf_book</c> format in
+      <c>_output.yml</c>:
+    </p>
 
     <program language="yaml">
       <input>bookdown::pdf_book:
@@ -408,17 +722,76 @@ monofontoptions: "Scale=0.7"</input>
   highlight_bw: yes</input>
     </program>
 
+    <p>
+      All preamble settings we mentioned above are in the file
+      <c>latex/preamble.tex</c>, where we also specified that the front
+      matter starts:
+    </p>
+
     <program language="latex">
-      <input>\frontmatter
-\mainmatter</input>
+      <input>\frontmatter</input>
     </program>
 
     <p>
-      The chapter explains why <c>cairo_pdf</c> is used to embed fonts, why
-      <c>highlight_bw</c> is useful for black-and-white printing, and why
-      <c>xelatex</c> was chosen to simplify custom-font support. The index is
-      printed via <c>latex/after_body.tex</c> as described in
-      <xref ref="latex-index"/>.
+      In <c>latex/before_body.tex</c>, we inserted a few blank pages required
+      by the publisher and wrote the dedication page. Before the first chapter
+      of the book, we inserted
+    </p>
+
+    <program language="latex">
+      <input>\mainmatter</input>
+    </program>
+
+    <p>
+      so that LaTeX knows to change the page numbering style from Roman
+      numerals (for the front matter) to Arabic numerals (for the book body).
+    </p>
+
+    <p>
+      We printed the index in <c>latex/after_body.tex</c>
+      (<xref ref="latex-index"/>).
+    </p>
+
+    <p>
+      The graphical device (<c>dev</c>) for saving plots was set to
+      <c>cairo_pdf</c> so that the fonts are embedded in plots, since the
+      default device <c>pdf</c> does not embed fonts. Your copyeditor is
+      likely to require you to embed all fonts used in the PDF, so that the
+      book can be printed exactly as it looks, otherwise certain fonts may be
+      substituted and the typeface can be unpredictable.
+    </p>
+
+    <p>
+      The <c>quote_footer</c> field was to make sure the quote footers were
+      right-aligned: the LaTeX command <c>\VA{}</c> was provided by
+      <c>krantz.cls</c> to include the quote footer.
+    </p>
+
+    <p>
+      The <c>highlight_bw</c> option was set to true so that the colors in
+      syntax highlighted code blocks were converted to grayscale, since this
+      book will be printed in black-and-white.
+    </p>
+
+    <p>
+      The book was compiled to PDF through <c>xelatex</c> to make it easier
+      for us to use custom fonts.
+    </p>
+
+    <p>
+      All above settings except the <c>VF</c> environment and the
+      <c>\VA{}</c> command can be applied to any other LaTeX document
+      classes.
+    </p>
+
+    <p>
+      In case you want to work with Chapman &amp; Hall as well, you may start
+      with the copy of <c>krantz.cls</c> in our repository
+      (<url href="https://github.com/rstudio/bookdown/tree/master/inst/examples"
+      visual="github.com/rstudio/bookdown/tree/master/inst/examples"/>) instead
+      of the copy you get from your editor. We have worked with the LaTeX help
+      desk to fix quite a few issues with this LaTeX class, so hopefully it
+      will work well for your book if you use <c>bookdown</c>.
     </p>
   </section>
 </chapter>
