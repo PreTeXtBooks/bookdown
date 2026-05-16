@@ -163,7 +163,7 @@
       </p>
 
       <figure xml:id="fig-netlify-drag-drop-pretext">
-        <title>Screenshot of drag and drop deploy update box on Netlify.</title>
+        <caption>Screenshot of drag and drop deploy update box on Netlify.</caption>
         <image source="images/netlify-drag-drop-update.png" width="100%">
           <description>
             <p>Screenshot of drag and drop deploy update box on Netlify.</p>
@@ -494,7 +494,7 @@ cache:
       </p>
 
       <figure xml:id="fig-404-page-pretext">
-        <title>Screenshot of an example 404 page.</title>
+        <caption>Screenshot of an example 404 page.</caption>
         <image source="images/404.png" width="100%">
           <description>
             <p>Screenshot showing an online bs4_book with the sidebar,
@@ -548,7 +548,7 @@ cache:
       </p>
 
       <figure xml:id="fig-social-og-pretext">
-        <title>Sharing preview on Facebook and LinkedIn.</title>
+        <caption>Screenshots showing cover-image, title, and description of an HTML book when the link is shared on Facebook and LinkedIn</caption>
         <image source="images/social-og.png" width="100%">
           <description>
             <p>When a link is shared on social media, the auto-preview shows
@@ -559,7 +559,7 @@ cache:
       </figure>
 
       <figure xml:id="fig-social-twitter-pretext">
-        <title>Sharing preview on Twitter.</title>
+        <caption>Screenshots showing cover-image, title, and description of an HTML book when the link is shared on Twitter</caption>
         <image source="images/social-twitter.png" width="100%">
           <description>
             <p>When a link is shared on Twitter, the auto-preview shows the
