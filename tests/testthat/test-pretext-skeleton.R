@@ -295,6 +295,18 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "no-caption, fig.width=6, fig.asp=.7", fixed = TRUE)
   expect_match(components, "ref.label='pressure-plot'", fixed = TRUE)
   expect_match(components, "fig.width * fig.asp = 6 * 0.7 = 4.2", fixed = TRUE)
+  expect_match(components, "other packages and functions later in this section", fixed = TRUE)
+  expect_match(components, "table label for a code chunk with the label", fixed = TRUE)
+  expect_match(components, "\\@ref(tab:table-single)", fixed = TRUE)
+  expect_match(components, "\\@ref(tab:table-multi)", fixed = TRUE)
+  expect_match(components, "feature is only available in HTML and PDF output", fixed = TRUE)
+  expect_match(components, "ctan.org/pkg/longtable", fixed = TRUE)
+  expect_match(components, "Section header text]</c>: example", fixed = TRUE)
+  expect_match(components, "A single document", fixed = TRUE)
+  expect_match(components, "non-English books", fixed = TRUE)
+  expect_match(components, "Internationalization", fixed = TRUE)
+  expect_match(components, "extension-auto_identifiers", fixed = TRUE)
+  expect_match(components, "extension-implicit_header_references", fixed = TRUE)
   expect_match(components, "advantages of using <c>include_graphics()</c>", fixed = TRUE)
   expect_match(components, "longtable, tidy=FALSE", fixed = TRUE)
   expect_match(components, "When a referenced label cannot be found", fixed = TRUE)
@@ -339,13 +351,14 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
     "<xref ref=\"R-webshot-reference\"/>",
     "<xref ref=\"R-DT-reference\"/>",
     "<xref ref=\"R-miniUI-reference\"/>",
-    "<xref ref=\"fig-knitr-logo-pretext\"/>"
+    "<xref ref=\"fig-knitr-logo-pretext\"/>",
+    "<xref ref=\"eq-binom\"/>"
   )) {
     expect_match(components, text, fixed = TRUE)
   }
   expect_match(components, "<figure xml:id=\"fig-pressure-plot\">", fixed = TRUE)
-  expect_match(components, "<figure xml:id=\"fig-cars-plot\">", fixed = TRUE)
-  expect_match(components, "<figure xml:id=\"fig-multi-plots\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-cars-plot-pretext\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-multi-plots-pretext\">", fixed = TRUE)
   expect_match(components, "<caption>A figure example with the specified aspect ratio, width, and alignment.</caption>", fixed = TRUE)
   expect_match(components, "<caption>A figure example with a relative width 70%.</caption>", fixed = TRUE)
   expect_match(components, "<caption>Two plots placed side by side.</caption>", fixed = TRUE)

@@ -1012,7 +1012,7 @@ plot(pressure, pch = 19, type = 'b')
       <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as
       <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to
       specify a relative width of a plot in a consistent manner.
-      <xref ref="fig-cars-plot"/> is an example of <c>out.width = 70%</c>.
+      <xref ref="fig-cars-plot-pretext"/> is an example of <c>out.width = 70%</c>.
     </p>
 
     <program language="r">
@@ -1022,7 +1022,7 @@ plot(cars, pch = 19)
 ```</input>
     </program>
 
-    <figure xml:id="fig-cars-plot">
+    <figure xml:id="fig-cars-plot-pretext">
       <caption>A figure example with a relative width 70%.</caption>
       <image source="images/cars-plot.png" width="70%">
         <description>
@@ -1038,7 +1038,7 @@ plot(cars, pch = 19)
       of all plots is smaller than or equal to the current line width. For example, if two
       plots have the same width <c>50%</c>, they will be placed side by side. Similarly,
       you can specify <c>out.width = '33%'</c> to arrange three plots on one line.
-      <xref ref="fig-multi-plots"/> is an example of two plots, each with a width of
+      <xref ref="fig-multi-plots-pretext"/> is an example of two plots, each with a width of
       <c>50%</c>.
     </p>
 
@@ -1050,7 +1050,7 @@ plot(cars, pch = 19)
 ```</input>
     </program>
 
-    <figure xml:id="fig-multi-plots">
+    <figure xml:id="fig-multi-plots-pretext">
       <caption>Two plots placed side by side.</caption>
       <sidebyside widths="50% 50%">
         <image source="images/pressure-plot.png" width="100%">
@@ -1160,14 +1160,18 @@ knitr::include_graphics(rep('images/knit-logo.png', 3))
       For now, the most convenient way to generate a table is the function
       <c>knitr::kable()</c>, because there are some internal tricks in
       <c>knitr</c> to make it work with <c>bookdown</c>, and users do not have
-      to know anything about these implementation details.
+      to know anything about these implementation details. We will explain how
+      to use other packages and functions later in this section.
     </p>
 
     <p>
       Like figures, tables with captions will also be numbered and can be
       referenced. The <c>kable()</c> function will automatically generate a
       label for a table environment, which is the prefix <c>tab:</c> plus the
-      chunk label.
+      chunk label. For example, the table label for a code chunk with the label
+      <c>foo</c> will be <c>tab:foo</c>, and we can still use the syntax
+      <c>\@ref(label)</c> to reference the table. Table
+      <c>\@ref(tab:table-single)</c> is a simple example.
     </p>
 
     <program language="r">
@@ -1181,8 +1185,9 @@ knitr::kable(
 
     <p>
       If you want to put multiple tables in a single table environment, wrap
-      the data objects into a list. This feature is only available in HTML and
-      PDF output.
+      the data objects (usually data frames) into a list.
+      See Table <c>\@ref(tab:table-multi)</c> for an example. Please note that
+      this feature is only available in HTML and PDF output.
     </p>
 
     <program language="r">
@@ -1199,10 +1204,13 @@ knitr::kable(
 
     <p>
       When you do not want a table to float in PDF, you may use the LaTeX
-      package <c>longtable</c>, which can break a table across multiple pages.
-      To use <c>longtable</c>, pass <c>longtable = TRUE</c> to
-      <c>kable()</c>, and include <c>\usepackage{longtable}</c> in the LaTeX
-      preamble.
+      package <url href="https://www.ctan.org/pkg/longtable"><c>longtable</c></url>,
+      which can break a table across multiple pages. To use
+      <c>longtable</c>, pass <c>longtable = TRUE</c> to <c>kable()</c>, and
+      make sure to include <c>\usepackage{longtable}</c> in the LaTeX
+      preamble (see <xref ref="yaml-options"/> for how to customize the LaTeX
+      preamble). Of course, this is irrelevant to HTML output, since tables in
+      HTML do not need to float.
     </p>
 
     <program language="r">
@@ -1215,8 +1223,9 @@ knitr::kable(
     </program>
 
     <p>
-      Pandoc supports several types of Markdown tables, such as simple tables,
-      multiline tables, grid tables, and pipe tables. What
+      Pandoc supports several types of
+      <url href="http://pandoc.org/MANUAL.html#tables">Markdown tables</url>,
+      such as simple tables, multiline tables, grid tables, and pipe tables. What
       <c>knitr::kable()</c> generates is a simple table like this:
     </p>
 
@@ -1237,14 +1246,19 @@ knitr::kable(
       You can use any types of Markdown tables in your document. To
       cross-reference a Markdown table, it must have a labeled caption in the
       form <c>Table: (\#label) Caption here</c>, where <c>label</c> must have
-      the prefix <c>tab:</c>.
+      the prefix <c>tab:</c>, e.g., <c>tab:simple-table</c>.
     </p>
 
     <p>
       If you decide to use other R packages to generate tables, you have to be
       careful about portability: it should work for both HTML and LaTeX output
-      automatically, and when writing out an HTML table, the caption must be
-      written in the <c>&lt;caption&gt;&lt;/caption&gt;</c> tag.
+      automatically, so it must consider the output format internally (check
+      <c>knitr::opts_knit$get('rmarkdown.pandoc.to')</c>). When writing out an
+      HTML table, the caption must be written in the
+      <c>&lt;caption&gt;&lt;/caption&gt;</c> tag. For simple tables,
+      <c>kable()</c> should suffice. If you have to create complicated tables
+      (e.g., with certain cells spanning across multiple columns/rows), you
+      will have to take the aforementioned issues into consideration.
     </p>
   </section>
 
@@ -1258,8 +1272,13 @@ knitr::kable(
       also reference sections using the same syntax <c>\@ref(label)</c>,
       where <c>label</c> is the section ID. By default, Pandoc will generate
       an ID for all section headers, e.g., a section <c># Hello World</c> will
-      have an ID <c>hello-world</c>. We recommend manually assigning IDs to
-      section headers.
+      have an ID <c>hello-world</c>. We recommend you to manually assign an ID
+      to a section header to make sure you do not forget to update the
+      reference label after you change the section header. To assign an ID to a
+      section header, simply add <c>{#id}</c> to the end of the section
+      header. Further attributes of section headers can be set using standard
+      <url href="http://pandoc.org/MANUAL.html#heading-identifiers">Pandoc
+      syntax</url>.
     </p>
 
     <p>
@@ -1278,7 +1297,8 @@ knitr::kable(
         <p>
           If you are happy with the section header as the link text, use it
           inside a single set of square brackets:
-          <c>[Section header text]</c>.
+          <c>[Section header text]</c>: example <q>A single document</q> via
+          <c>[A single document]</c>
         </p>
       </li>
       <li>
@@ -1286,16 +1306,31 @@ knitr::kable(
           There are two ways to specify custom link text:
         </p>
         <ul>
-          <li><p><c>[link text][Section header text]</c></p></li>
-          <li><p><c>[link text](#ID)</c></p></li>
+          <li>
+            <p><c>[link text][Section header text]</c>, e.g.,
+            <q>non-English books</q> via
+            <c>[non-English books][Internationalization]</c></p>
+          </li>
+          <li>
+            <p><c>[link text](#ID)</c>, e.g., <q>Table stuff</q> via
+            <c>[Table stuff](#tables)</c></p>
+          </li>
         </ul>
       </li>
     </ul>
 
     <p>
+      The Pandoc documentation provides more details on
+      <url href="http://pandoc.org/MANUAL.html#extension-auto_identifiers">automatic
+      section IDs</url> and
+      <url href="http://pandoc.org/MANUAL.html#extension-implicit_header_references">implicit
+      header references</url>.
+    </p>
+
+    <p>
       Cross-references still work even when we refer to an item that is not on
-      the current page of the PDF or HTML output, such as
-      <xref ref="fig-knitr-logo-pretext"/>.
+      the current page of the PDF or HTML output. For example, see
+      <xref ref="eq-binom"/> and <xref ref="fig-knitr-logo-pretext"/>.
     </p>
   </section>
 
