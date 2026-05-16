@@ -1118,9 +1118,29 @@ DT::datatable(iris)
     <title>Web pages and Shiny apps</title>
 
     <p>
-      Similar to HTML widgets, arbitrary web pages can be embedded in the book
-      with <c>knitr::include_url()</c>. The related function
-      <c>knitr::include_app()</c> was designed for embedding Shiny apps.
+      Similar to HTML widgets, arbitrary web pages can be embedded in the book.
+      You can use the function <c>knitr::include_url()</c> to include a web
+      page through its URL. When the output format is HTML, an <c>iframe</c> is
+      used<fn>An <c>iframe</c> is basically a box on one web page to embed
+      another web page.</fn>; in other cases, <c>knitr</c> tries to take a
+      screenshot of the web page (or use the custom screenshot you provided).
+      All chunk options are the same as those for HTML widgets. One option that
+      may require your special attention is the <c>delay</c> option: HTML
+      widgets are rendered locally, so usually they are fast to load for
+      PhantomJS to take screenshots, but an arbitrary URL may take longer to
+      load, so you may want to use a larger <c>delay</c> value, e.g., use the
+      chunk option <c>screenshot.opts = list(delay = 5)</c>.
+    </p>
+
+    <p>
+      A related function is <c>knitr::include_app()</c>, which is very similar
+      to <c>include_url()</c>, and it was designed for embedding Shiny apps via
+      their URLs in the output. Its only difference with <c>include_url()</c>
+      is that it automatically adds a query parameter <c>?showcase=0</c> to the
+      URL, if no other query parameters are present in the URL, to disable the
+      Shiny showcase mode, which is unlikely to be useful for screenshots or
+      iframes. If you do want the showcase mode, use <c>include_url()</c>
+      instead of <c>include_app()</c>. Below is a Shiny app example:
     </p>
 
     <program language="r">
@@ -1130,9 +1150,25 @@ knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
     </program>
 
     <p>
+      Again, you will see a live app if you are reading an HTML version of this
+      book, and a static screenshot if you are reading other types of formats.
       The above Shiny app was created using the <c>miniUI</c> package
       (<xref ref="R-miniUI-reference"/>), which provides layout functions
-      particularly useful for Shiny apps on small screens.
+      that are particularly nice for Shiny apps on small screens. If you use
+      normal Shiny layout functions, you are likely to see vertical and/or
+      horizontal scrollbars in the iframes because the page size is too big to
+      fit in an iframe. When the default width of the iframe is too small, you
+      may use the chunk option <c>out.width</c> to change it. For the height of
+      the iframe, use the <c>height</c> argument of
+      <c>include_url()</c>/<c>include_app()</c>.
+    </p>
+
+    <p>
+      Shiny apps may take even longer to load than usual URLs. You may want to
+      use a conservative value for the <c>delay</c> option, e.g., 10. Needless
+      to say, <c>include_url()</c> and <c>include_app()</c> require a working
+      Internet connection, unless you have previously cached the chunk (but web
+      pages inside iframes still will not work without an Internet connection).
     </p>
   </section>
 </chapter>
