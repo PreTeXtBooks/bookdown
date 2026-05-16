@@ -1277,7 +1277,8 @@ output:
       as <c>\label{}</c> to label figures/tables/sections, and <c>\ref{}</c>
       to cross-reference them via their labels, because Pandoc supports LaTeX
       commands in Markdown. However, the LaTeX syntax is not portable to other
-      output formats, such as HTML and e-books.
+      output formats, such as HTML and e-books. That is why we introduced the syntax
+      <c>(\#label)</c> for labels and <c>\@ref(label)</c> for cross-references.
     </p>
 
     <program language="css">
@@ -1291,7 +1292,14 @@ biblio-style: apalike
     <p>
       There are a large number of other YAML options that you can specify for
       LaTeX output, such as the paper size, font size, page margin, line
-      spacing, font families, and so on.
+      spacing, font families, and so on. See
+      <url href = "http://pandoc.org/MANUAL.html#variables-for-latex">
+      http://pandoc.org/MANUAL.html#variables-for-latex</url> for a full list of options.
+    </p>
+
+    <p>
+     The <c>pdf_book()</c> format is a general format like <c>html_book()</c>, and it
+     also has a <c>base_format</c> argument:
     </p>
 
     <program language="r">
@@ -1374,7 +1382,8 @@ biblio-style: apalike
       </p>
 
       <p>
-        There are several EPUB readers available, including Calibre, Apple's
+        There are several EPUB readers available, including <url href = "https://www.calibre-ebook.com">
+        Calibre</url>, Apple's
         iBooks, and Google Play Books.
       </p>
     </subsection>
@@ -1387,8 +1396,16 @@ biblio-style: apalike
         support MOBI output natively, but you may use third-party tools to
         convert EPUB to MOBI. One possible tool is Calibre. Calibre is
         open-source and free, and supports conversion among many more formats.
+        For example, you can convert HTML to EPUB, Word documents to MOBI, and so on. 
         The function <c>calibre()</c> in <c>bookdown</c> is a wrapper function
         of the command-line utility <c>ebook-convert</c> in Calibre.
+        You need to make sure that the executable <c>ebook-convert</c> can be found via
+        the environment variable <c>PATH</c>. If you use macOS, you can install
+        Calibre with Homebrew (<url href = "https://brew.sh">https://brew.sh</url>)
+        via the command <c>brew cask install calibre</c>, so you do not need to worry
+       about the <c>PATH</c> issue.
+
+
       </p>
     </subsection>
   </section>
