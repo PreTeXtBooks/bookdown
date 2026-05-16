@@ -882,7 +882,11 @@ plot(dist ~ speed, cars)  # a scatterplot
     <p>
       To learn more about <c>knitr</c> chunk options, see
       <xref ref="xie2015-reference"/> or the web page
-      <url href="https://yihui.org/knitr/options"/>. For books, additional R
+      <url href="https://yihui.org/knitr/options"/>.
+    </p>
+
+    <p>
+      For books, additional R
       code can be executed before/after each chapter; see
       <c>before_chapter_script</c> and <c>after_chapter_script</c> in
       <xref ref="configuration"/>.
@@ -902,6 +906,11 @@ plot(dist ~ speed, cars)  # a scatterplot
       <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
 ```</input>
     </program>
+
+    <p>
+      This chunk is intentionally empty, because the code is reused from the
+      chunk label <c>pressure-plot</c> via <c>ref.label</c>.
+    </p>
 
     <p>
       The disadvantage of typesetting figures in this way is that when there is
