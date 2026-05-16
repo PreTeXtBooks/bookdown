@@ -13,7 +13,7 @@
       specified in the <c>output</c> field of the YAML metadata):
     </p>
 
-    <program language="yaml">
+    <program language="css">
       <input>---
 title: "An Impressive Book"
 author: "Li Lei and Han Meimei"
@@ -34,7 +34,7 @@ documentclass: book
 
     <p>Here is an example of <c>_output.yml</c>:</p>
 
-    <program language="yaml">
+    <program language="css">
       <input>bookdown::gitbook:
   lib_dir: assets
   split_by: section
@@ -256,7 +256,7 @@ it to `introduction`.</input>
         <c>config</c> option):
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>bookdown::gitbook:
   config:
     toc:
@@ -325,7 +325,7 @@ it to `introduction`.</input>
         syntax, e.g.,
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>toc:
   before: |
     &lt;li&gt;&lt;a href="..."&gt;My Awesome Book&lt;/a&gt;&lt;/li&gt;
@@ -343,12 +343,6 @@ it to `introduction`.</input>
         when the page is loaded, we will automatically scroll the TOC to make
         it visible to you.
       </p>
-
-      <program language="r">
-        <input>```{r gitbook-toolbar, echo=FALSE, fig.cap='The GitBook toolbar.', out.width='100%'}
-knitr::include_graphics('images/gitbook.png', dpi = NA)
-```</input>
-      </program>
 
       <figure xml:id="fig-gitbook-toolbar-pretext">
         <title>The GitBook toolbar.</title>
@@ -402,7 +396,7 @@ knitr::include_graphics('images/gitbook.png', dpi = NA)
         by setting <c>fontsettings: null</c> (or <c>no</c>).
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>fontsettings:
   theme: night
   family: serif
@@ -427,7 +421,7 @@ knitr::include_graphics('images/gitbook.png', dpi = NA)
         filename extensions, e.g., both of the following settings are okay:
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>download: ["book.pdf", "book.epub"]
 download: ["pdf", "epub", "mobi"]</input>
       </program>
@@ -451,7 +445,7 @@ download: ["pdf", "epub", "mobi"]</input>
         list of length-2 vectors, e.g.,
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>download:
   - ["book.pdf", "PDF"]
   - ["book.epub", "EPUB"]</input>
@@ -524,7 +518,7 @@ download: ["pdf", "epub", "mobi"]</input>
         are top-level options):
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>---
 title: "An Awesome Book"
 author: "John Smith"
@@ -561,12 +555,6 @@ favicon: "favicon.ico"
         visual="mastering-shiny.org"/>.
       </p>
 
-      <program language="r">
-        <input>```{r fig.align='center', echo=FALSE, fig.link='https://mastering-shiny.org', fig.cap="Home page of a book with the three-column Bootstrap style.", out.width=if(knitr::is_latex_output()) '100%'}
-knitr::include_graphics('images/bs4-book.png', dpi = NA)
-```</input>
-      </program>
-
       <figure xml:id="fig-bs4-book-pretext">
         <title>Home page of a book with the three-column Bootstrap style.</title>
         <image source="../assets/images/bs4-book.png" width="100%">
@@ -585,8 +573,8 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
       <ul>
         <li>
           <p>
-            Easy customization of colors and fonts with the <c>bslib</c>
-            package.
+            Easy customization of colors and fonts with the
+            <url href = "https://pkgs.rstudio.com/bslib/">bslib package</url>.
           </p>
         </li>
         <li>
@@ -619,7 +607,8 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
         </li>
         <li>
           <p>
-            R syntax highlighting and autolinking by the <c>downlit</c> package
+            R syntax highlighting and autolinking by the 
+            <url href = "https://downlit.r-lib.org/">downlit package</url>.
             is paired with an accessible color scheme designed by Alison Hill.
           </p>
         </li>
@@ -666,14 +655,10 @@ knitr::include_graphics('images/bs4-book.png', dpi = NA)
         <p>
           If you do not use RStudio or prefer a function, you can create the
           same project template with <c>bookdown::create_bs4_book()</c> from
-          your R console. See <c>?bookdown::create_bs4_book</c> for help.
+          your R console. See <c>?bookdown::create_bs4_book</c> or the
+          <url href = "https://pkgs.rstudio.com/bookdown/reference/create_book.html">
+          online documentation</url> for help.
         </p>
-
-        <program language="r">
-          <input>```{r new-bs4-book, fig.align='center', echo=FALSE, fig.cap="Screenshot of the RStudio Project Wizard for creating a new bookdown project."}
-knitr::include_graphics('images/new-bs4-book.png', dpi = NA)
-```</input>
-        </program>
 
         <figure xml:id="fig-new-bs4-book-pretext">
           <title>Screenshot of the RStudio Project Wizard for creating a new bookdown project.</title>
@@ -715,12 +700,15 @@ knitr::include_graphics('images/new-bs4-book.png', dpi = NA)
           want to include content that should only be included in the HTML
           version of the book, you may want to include that content
           conditionally by combining the <c>knitr</c> <c>include</c> chunk
-          option with the <c>knitr::is_html_output()</c> function.
+          option with the <c>knitr::is_html_output()</c> function. See the
+          <url href = "https://yihui.org/rmarkdown-cookbook/latex-html.html">
+          R Markdown Cookbook</url> for instructions<fn>The PreTeXt version
+          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook/>here</url></fn></p>
         </p>
 
         <p>A YAML header in <c>index.Rmd</c> for a <c>bs4_book</c> would look like this:</p>
 
-        <program language="yaml">
+        <program language="css">
           <input>---
 title: "A Minimal Book Example"
 author: "Jane Doe"
@@ -743,22 +731,30 @@ description: |
           The <c>bs4_book()</c> format builds upon the Bootstrap CSS framework,
           an open source library of reusable chunks of HTML, CSS, and
           JavaScript code. The Bootstrap framework allows for easy
-          customization of colors and fonts via the <c>bslib</c> R package.
+          customization of colors and fonts via the <url href = "https://pkgs.rstudio.com/bslib/">bslib R package</url>.
         </p>
 
         <p>
           You can use the <c>theme</c> option to add a <c>primary</c> color in
-          hexadecimal format, which will change the color of all links in your
+          <url href = "https://en.wikipedia.org/wiki/Web_colors">hexadecimal format</url>,
+          which will change the color of all links in your
           book and the background color of the footer.
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   theme:
     primary: "#0d6efd"</input>
         </program>
 
-        <program language="yaml">
+<p>For custom font settings, adding a <c>google:</c> keyword triggers
+<c>sass::font_google()</c>’s ability to automatically import
+<url href = "https://fonts.google.com/">Google Font files</url>.
+Here is an example YAML that changes the <c>base_font</c>,
+<c>heading_font</c>, and <c>code_font</c>:
+</p>
+
+        <program language="css">
           <input>bookdown::bs4_book:
   theme:
     primary: "#0d6efd"
@@ -811,12 +807,6 @@ head(beaver1, n = 5)
 :::</input>
         </program>
 
-        <program language="r">
-          <input>```{r bs4-note, fig.align='center', echo=FALSE, fig.cap="A special callout block."}
-knitr::include_graphics('images/rmd-note.png', dpi = NA)
-```</input>
-        </program>
-
         <figure xml:id="fig-bs4-note-pretext">
           <title>A special callout block.</title>
           <image source="../assets/images/rmd-note.png" width="85%">
@@ -839,7 +829,7 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           <c>_output.yml</c> file:
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   theme:
     primary: "#0d6efd"
@@ -853,7 +843,11 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           For LaTeX output, only the content of these blocks will be shown with
           no colored outline as for HTML. It is up to the user to define the
           appearance of these blocks for LaTeX output using custom
-          environments.
+          environments. See the
+          <url href = "https://yihui.org/rmarkdown-cookbook/latex-html.html">
+          R Markdown Cookbook</url> for a how-to<fn>The PreTeXt version
+          can be found <url href = "https://pretextbooks.github.io/rmarkdown-cookbook/>here</url></fn></p>
+
         </p>
       </subsubsection>
 
@@ -865,7 +859,9 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           variables set in <c>index.Rmd</c>, described in
           <xref ref="metadata-for-sharing"/>. Additionally, <c>bs4_book()</c>
           will create unique chapter descriptions auto-generated from the
-          chapter's contents.
+          chapter's contents. You can have a look at the <c>bs4_book</c>
+          <url href = "https://github.com/rstudio/bookdown/blob/main/inst/templates/bs4_book.html">
+          HTML template</url> for details on how these variables are used.
         </p>
       </subsubsection>
 
@@ -879,7 +875,7 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           footnotes at the bottom.
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   footnotes_inline: false</input>
         </program>
@@ -893,18 +889,22 @@ knitr::include_graphics('images/rmd-note.png', dpi = NA)
           text where they are used because <c>bs4_book</c> makes by default
           footnotes appear inline when clicked. To do that, download a
           footnote style CSL file; we recommend
-          <url href="https://www.zotero.org/styles/"
-          visual="zotero.org/styles/"/>. For example, you could download the
-          <c>chicago-fullnote-bibliography.csl</c> from Zotero, then add this
+          <url href="https://www.zotero.org/styles/">zotero.org/styles</url>.
+          For example, you could download the
+          <c>chicago-fullnote-bibliography.csl</c> from 
+          <url href = "https://www.zotero.org/styles/?q=id%3Achicago-fullnote-bibliography">
+          Zotero</url>, then add this
           to your <c>index.Rmd</c>:
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bibliography: refs.bib
 csl: chicago-fullnote-bibliography.csl</input>
         </program>
 
-        <program language="yaml">
+<p>Optionally, if you no longer want a reference section at the back of the book, add this line to your <c>index.Rmd</c>:</p>
+
+        <program language="css">
           <input>suppress-bibliography: true</input>
         </program>
 
@@ -915,7 +915,7 @@ csl: chicago-fullnote-bibliography.csl</input>
           <c>_output.yml</c>:
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   split_bib: true</input>
         </program>
@@ -940,7 +940,7 @@ csl: chicago-fullnote-bibliography.csl</input>
           If your book has a default branch called <c>main</c>, you can use:
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   repo:
     base: https://github.com/hadley/ggplot2-book
@@ -952,7 +952,7 @@ csl: chicago-fullnote-bibliography.csl</input>
           <c>book</c>, you can use:
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   repo:
     base: https://github.com/hadley/ggplot2-book
@@ -962,12 +962,13 @@ csl: chicago-fullnote-bibliography.csl</input>
 
         <p>
           By default, if the repo URL contains <c>github</c>, it will get a
-          GitHub Font Awesome icon, otherwise it gets a GitLab icon. To use
+          GitHub <url href = "https://fontawesome.com/">Font Awesome</url> icon, otherwise it gets a GitLab icon. To use
           another icon, specify it with the correct prefix such as <c>fas</c>,
-          <c>fab</c>, and so on.
+          <c>fab</c>, and so on (<url href = "https://fontawesome.com/v5.0/how-to-use/on-the-web/referencing-icons/basic-use">
+          Font Awesome 5</url>).
         </p>
 
-        <program language="yaml">
+        <program language="css">
           <input>bookdown::bs4_book:
   repo:
     base: https://github.com/hadley/ggplot2-book
@@ -983,11 +984,13 @@ csl: chicago-fullnote-bibliography.csl</input>
 
       <p>
         If you have used R Markdown before, you should be familiar with the
-        Bootstrap style, which is the default style of the HTML output of R
+        Bootstrap style (<url href = "https://getbootstrap.com/">https://getbootstrap.com/</url>),
+        which is the default style of the HTML output of R
         Markdown. The output format function in <c>rmarkdown</c> is
         <c>html_document()</c>, and we have a corresponding format
         <c>html_book()</c> in <c>bookdown</c> using <c>html_document()</c> as
-        the base format.
+        the base format. You can read an example <c>html_book()</c> here:
+        <url href = "https://bookdown.org/yihui/bookdown-demo2">https://bookdown.org/yihui/bookdown-demo2</url>
       </p>
 
       <p>
@@ -1008,6 +1011,10 @@ csl: chicago-fullnote-bibliography.csl</input>
                "5+number", "6+number", "rmd", "none")
 )</input>
       </program>
+
+<p>Note that it has a <c>base_format</c> argument that takes a base output format function, and
+<c>html_book()</c> is basically <c>html_chapters(base_format = rmarkdown::html_document)</c>.
+All arguments of <c>html_book()</c> are passed to <c>html_chapters()</c>:</p>
 
       <program language="r">
         <input>bookdown::html_book(...)</input>
@@ -1065,42 +1072,16 @@ csl: chicago-fullnote-bibliography.csl</input>
         </li>
       </ul>
 
-      <program language="html">
-        <input>&lt;!--bookdown:title:start--&gt;
-&lt;!--bookdown:title:end--&gt;
-&lt;!--bookdown:toc:start--&gt;
-&lt;!--bookdown:toc:end--&gt;
-&lt;!--bookdown:body:start--&gt;
-&lt;!--bookdown:body:end--&gt;</input>
-      </program>
-
       <p>
         You may open the default HTML template to see where these comments were
         inserted:
       </p>
 
       <program language="r">
-        <input>```{r results='hide'}
-bookdown:::bookdown_file('templates/default.html')
+        <input>
+bookdown:::bookdown_file("templates/default.html")
 # you may use file.edit() to open this file
-```</input>
-      </program>
-
-      <program language="r">
-        <input>```{r include=FALSE}
-extract_fun = function(name, script) {
-  x = readLines(script)
-  def = paste(name, '= ')
-  i = which(substr(x, 1, nchar(def)) == def)
-  if (length(i) == 0) stop('Cannot find ', def, ' from ', script)
-  i = i[1]
-  j = which(x == '}')
-  j = min(j[j > i])
-  x[i:j]
-}
-```
-```{r eval=FALSE, tidy=FALSE, code=extract_fun('build_chapter', '../../R/html.R')}
-```</input>
+</input>
       </program>
 
       <p>
@@ -1112,6 +1093,53 @@ extract_fun = function(name, script) {
         <c>build_chapter</c> in <c>bookdown</c>, and its source code is
         relatively simple (ignore those internal functions like
         <c>button_link()</c>):
+      </p>
+
+      <program language="css">
+        <input>
+build_chapter = function(
+  head, toc, chapter, link_prev, link_next, rmd_cur, html_cur, foot
+) {
+  toc = add_toc_class(toc)
+  paste(c(
+    head,
+    '&lt;div class="row"&gt;',
+    '&lt;div class="col-sm-12"&gt;',
+    toc,
+    '&lt;/div&gt;',
+    '&lt;/div&gt;',
+    '&lt;div class="row"&gt;',
+    '&lt;div class="col-sm-12"&gt;',
+    chapter,
+    '&lt;p style="text-align: center;"&gt;',
+    button_link(link_prev, 'Previous'),
+    source_link(rmd_cur, type = 'edit'),
+    source_link(rmd_cur, type = 'history'),
+    source_link(rmd_cur, type = 'view'),
+    button_link(link_next, 'Next'),
+    '&lt;/p&gt;',
+    '&lt;/div&gt;',
+    '&lt;/div&gt;',
+    foot
+  ), collapse = '\n')
+}
+</input>
+      </program>
+
+      <p>
+        Basically, this function takes a number of components like the HTML
+        head, the table of contents, the chapter body, and so on, and it is
+        expected to return a character string which is the HTML source of a
+        complete HTML page. You may manipulate all components in this function
+        using text-processing functions like <c>gsub()</c> and <c>paste()</c>.
+      </p>
+
+      <p>
+        What the default page builder does is to put TOC in the first row, the
+        body in the second row, navigation buttons at the bottom of the body,
+        and concatenate them with the HTML head and foot. Here is a sketch of
+        the HTML source code that may help you understand the output of
+        <c>build_chapter()</c>:
       </p>
 
       <program language="html">
@@ -1132,21 +1160,6 @@ extract_fun = function(name, script) {
 &lt;/html&gt;</input>
       </program>
 
-      <p>
-        Basically, this function takes a number of components like the HTML
-        head, the table of contents, the chapter body, and so on, and it is
-        expected to return a character string which is the HTML source of a
-        complete HTML page. You may manipulate all components in this function
-        using text-processing functions like <c>gsub()</c> and <c>paste()</c>.
-      </p>
-
-      <p>
-        What the default page builder does is to put TOC in the first row, the
-        body in the second row, navigation buttons at the bottom of the body,
-        and concatenate them with the HTML head and foot. Here is a sketch of
-        the HTML source code that may help you understand the output of
-        <c>build_chapter()</c>:
-      </p>
 
       <p>
         For all HTML pages, the main difference is the chapter body, and most
@@ -1161,7 +1174,9 @@ extract_fun = function(name, script) {
         not apply a special style to it, so it is shown as a plain unordered
         list (in the HTML tag <c>&lt;ul&gt;</c>). It is easy to turn this list
         into a navigation bar with some CSS techniques. We have provided a CSS
-        file <c>toc.css</c> in this package that you can use.
+        file <c>toc.css</c> in this package that you can use, and you can find
+        it <url href="https://github.com/rstudio/bookdown/blob/master/inst/examples/css/toc.css">
+        here</url>.
       </p>
 
       <p>
@@ -1169,7 +1184,7 @@ extract_fun = function(name, script) {
         to the HTML output via the <c>css</c> option, e.g.,
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>---
 output:
   bookdown::html_book:
@@ -1206,7 +1221,8 @@ output:
         <c>html_chapters()</c> using <c>tufte::tufte_html()</c> as the base
         format. Please see the <c>tufte</c> package
         (<xref ref="R-tufte-reference"/>) if you are not familiar with the
-        Tufte style.
+        Tufte style. You can read an example <c>tufte_html_book()</c> here:
+        <url href = "https://bookdown.org/yihui/bookdown-demo3/">https://bookdown.org/yihui/bookdown-demo3/</url>.
       </p>
 
       <p>
@@ -1226,7 +1242,7 @@ output:
         margin. A brief YAML example of the <c>tufte_html_book</c> format:
       </p>
 
-      <program language="yaml">
+      <program language="css">
         <input>---
 output:
   bookdown::tufte_html_book:
@@ -1264,7 +1280,7 @@ output:
       output formats, such as HTML and e-books.
     </p>
 
-    <program language="yaml">
+    <program language="css">
       <input>---
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1401,7 +1417,7 @@ biblio-style: apalike
       syntax described in <xref ref="ch-components"/>.
     </p>
 
-    <program language="yaml">
+    <program language="css">
       <input>output:
   bookdown::html_document2: default
   bookdown::pdf_document2:
@@ -1424,7 +1440,7 @@ bookdown::pdf_document2
       source code of <c>pdf_document2</c>:
     </p>
 
-    <program language="yaml">
+    <program language="css">
       <input>output:
   bookdown::pdf_book:
     base_format: rticles::jss_article</input>
