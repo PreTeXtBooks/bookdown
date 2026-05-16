@@ -391,12 +391,6 @@ Or indent by four spaces:
   you can write any valid Markdown text inside the block.
 </p>
 
-<p>
-  See <url href="https://pandoc.org/MANUAL.html#divs-and-spans"/> for fenced
-  Div blocks and <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>
-  for custom blocks.
-</p>
-
 <table xml:id="table-theorem-envs">
   <title>Theorem environments in bookdown</title>
   <tabular halign="left">
@@ -926,24 +920,27 @@ plot(dist ~ speed, cars)  # a scatterplot
     </p>
 
     <program language="r">
-      <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
-```</input>
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+</input>
     </program>
 
     <p>
-      This chunk is intentionally empty, because the code is reused from the
-      chunk label <c>pressure-plot</c> via <c>ref.label</c>.
-    </p>
-
-    <p>
-      The disadvantage of typesetting figures in this way is that when there is
-      not enough space on the current page to place a figure, it may either
-      reach the bottom of the page (hence exceeds the page margin), or be
-      pushed to the next page, leaving a large white margin at the bottom of
-      the current page. That is basically why there are floating environments
-      in LaTeX: elements that cannot be split over multiple pages (like
-      figures) are put in floating environments, so they can float to a page
-      that has enough space to hold them.
+      The disadvantage of typesetting figures in this way is that when there 
+      is not enough space on the current page to place a figure, it may either 
+      reach the bottom of the page (hence exceeds the page margin), or be pushed 
+      to the next page, leaving a large white margin at the bottom of the current 
+      page. That is basically why there are “floating environments” in LaTeX: 
+      elements that cannot be split over multiple pages (like figures) are put in 
+      floating environments, so they can float to a page that has enough space to 
+      hold them. There is also a disadvantage of floating things forward or 
+      backward, though. That is, readers may have to jump to a different page to 
+      find the figure mentioned on the current page. This is simply a natural 
+      consequence of having to typeset things on multiple pages of fixed sizes. 
+      This issue does not exist in HTML, however, since everything can be placed 
+      continuously on one single page (presumably with infinite height), and there 
+      is no need to split anything across multiple pages of the same page size.
     </p>
 
     <p>
@@ -955,7 +952,8 @@ plot(dist ~ speed, cars)  # a scatterplot
       <c>fig:foo</c> (the prefix <c>fig:</c> is added before <c>foo</c>). To
       reference a figure, use the syntax <c>\@ref(label)</c><fn>Do not forget
       the leading backslash! And also note the parentheses <c>()</c> after
-      <c>ref</c>; they are not curly braces <c>{}</c>.</fn>.
+      <c>ref</c>; they are not curly braces <c>{}</c>.</fn>, where <c>label</c>
+      is the figure label, e.g., <c>fig:foo</c>.
     </p>
 
     <p>
@@ -976,13 +974,6 @@ plot(dist ~ speed, cars)  # a scatterplot
       </p>
     </aside>
 
-    <program language="r">
-      <input>```{r pressure-plot, fig.asp=.7, fig.width=6, fig.cap='A figure example with the specified aspect ratio, width, and alignment.', fig.align='center', out.width='90%'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, pch = 19, type = 'b')
-```</input>
-    </program>
-
     <p>
       The chunk option <c>fig.asp</c> can be used to set the aspect ratio of
       plots, i.e., the ratio of figure height/width. If the figure width is
@@ -992,52 +983,70 @@ plot(pressure, pch = 19, type = 'b')
     </p>
 
     <program language="r">
-      <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\%.'}
-par(mar = c(4, 4, .1, .1))
-plot(cars, pch = 19)
-```</input>
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+      </input>
     </program>
 
-    <p>
-      The actual size of a plot is determined by the chunk options
-      <c>fig.width</c> and <c>fig.height</c>, and we can specify the output size
-      of plots via <c>out.width</c> and <c>out.height</c>. For example,
-      <c>out.width = '30%'</c> is a valid value for HTML output, but not for
-      LaTeX/PDF output. However, <c>knitr</c> will automatically convert a
-      percentage value for <c>out.width</c> of the form <c>x%</c> to
-      <c>(x / 100) \linewidth</c> for LaTeX output.
-    </p>
+<p>
+  The actual size of a plot is determined by the chunk options <c>fig.width</c> and 
+  <c>fig.height</c> (the size of the plot generated from a graphical device), and we 
+  can specify the output size of plots via the chunk options <c>out.width</c> and 
+  <c>out.height</c>. The possible value of these two options depends on the output 
+  format of the document. For example, <c>out.width = '30%'</c> is a valid value for 
+  HTML output, but not for LaTeX/PDF output. However, knitr will automatically convert 
+  a percentage value for <c>out.width</c> of the form <c>x%</c> to 
+  <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as 
+  <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to 
+  specify a relative width of a plot in a consistent manner. 
+  <xref ref="fig-cars-plot"/> is an example of <c>out.width = 70%</c>.
+</p>
 
     <program language="r">
-      <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, pch = 19, type = 'b')
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
 plot(cars, pch = 19)
-```</input>
+      </input>
     </program>
 
-    <p>
-      If you want to put multiple plots in one figure environment, you must use
-      the chunk option <c>fig.show = 'hold'</c> to hold multiple plots from a
-      code chunk and include them in one environment.
-    </p>
+<p>
+  If you want to put multiple plots in one figure environment, you must use the chunk 
+  option <c>fig.show = 'hold'</c> to hold multiple plots from a code chunk and include 
+  them in one environment. You can also place plots side by side if the sum of the width 
+  of all plots is smaller than or equal to the current line width. For example, if two 
+  plots have the same width <c>50%</c>, they will be placed side by side. Similarly, 
+  you can specify <c>out.width = '33%'</c> to arrange three plots on one line. 
+  <xref ref="fig-multi-plots"/> is an example of two plots, each with a width of 
+  <c>50%</c>.
+</p>
 
     <program language="r">
-      <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
-knitr::include_graphics(rep('images/knit-logo.png', 3))
-```</input>
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+plot(cars, pch = 19)
+      </input>
     </program>
 
-    <p>
-      Sometimes you may have certain images that are not generated from R code,
-      and you can include them in R Markdown via
-      <c>knitr::include_graphics()</c>. You may pass one or multiple image
-      paths, and all chunk options that apply to normal R plots also apply to
-      these images.
-    </p>
+<p>
+  Sometimes you may have certain images that are not generated from R code, and you 
+  can include them in R Markdown via the function <c>knitr::include_graphics()</c>. 
+  <xref ref="fig-knitr-logo"/> is an example of three knitr logos included in a figure 
+  environment. You may pass one or multiple image paths to the 
+  <c>include_graphics()</c> function, and all chunk options that apply to normal R 
+  plots also apply to these images, e.g., you can use <c>out.width = '33%'</c> to set 
+  the widths of these images in the output document.
+</p>
+
+<program language="r">
+  <input>
+    knitr::include_graphics(rep("images/knit-logo.png", 3))
+  </input>
+</program>
 
     <figure xml:id="fig-knitr-logo-pretext">
-      <title>Three knitr logos included in the document from an external PNG image file.</title>
+      <caption>Three knitr logos included in the document from an external PNG image file.</caption>
       <sidebyside widths="32.8% 32.8% 32.8%">
         <image source="images/knit-logo.png" width="100%">
           <description>
@@ -1057,39 +1066,54 @@ knitr::include_graphics(rep('images/knit-logo.png', 3))
       </sidebyside>
     </figure>
 
-    <p>
-      There are a few advantages of using <c>include_graphics()</c>:
-    </p>
+<p>
+  There are a few advantages of using <c>include_graphics()</c>:
+</p>
 
-    <ol>
-      <li>
-        <p>
-          You do not need to worry about the document output format. The
-          function <c>include_graphics()</c> in <c>knitr</c> takes care of
-          output-specific details automatically.
-        </p>
-      </li>
-      <li>
-        <p>
-          The syntax for controlling image attributes is the same as when
-          images are generated from R code, e.g., <c>fig.cap</c>,
-          <c>out.width</c>, and <c>fig.show</c>.
-        </p>
-      </li>
-      <li>
-        <p>
-          <c>include_graphics()</c> can use PDF graphics automatically when the
-          output format is LaTeX and corresponding PDF files exist.
-        </p>
-      </li>
-      <li>
-        <p>
-          You can scale images proportionally via the <c>dpi</c> argument, and
-          always override width by setting a non-<c>NULL</c> value to
-          <c>out.width</c>.
-        </p>
-      </li>
-    </ol>
+<ol>
+  <li>
+    <p>
+      You do not need to worry about the document output format, e.g., when the output 
+      format is LaTeX, you may have to use the LaTeX command <c>\includegraphics{}</c> 
+      to include an image, and when the output format is Markdown, you have to use 
+      <c>![]()</c>. The function <c>include_graphics()</c> in knitr takes care of these 
+      details automatically.
+    </p>
+  </li>
+  <li>
+    <p>
+      The syntax for controlling the image attributes is the same as when images are 
+      generated from R code, e.g., chunk options <c>fig.cap</c>, <c>out.width</c>, and 
+      <c>fig.show</c> still have the same meanings.
+    </p>
+  </li>
+  <li>
+    <p>
+      <c>include_graphics()</c> can be smart enough to use PDF graphics automatically 
+      when the output format is LaTeX and the PDF graphics files exist, e.g., an image 
+      path <c>foo/bar.png</c> can be automatically replaced with <c>foo/bar.pdf</c> if 
+      the latter exists. PDF images often have better qualities than raster images in 
+      LaTeX/PDF output. To make use of this feature, set the argument 
+      <c>auto_pdf = TRUE</c>, or set the global option 
+      <c>options(knitr.graphics.auto_pdf = TRUE)</c> to enable this feature globally 
+      in an R session.
+    </p>
+  </li>
+  <li>
+    <p>
+      You can easily scale these images proportionally using the same ratio. This can 
+      be done via the <c>dpi</c> argument (dots per inch), which takes the value from 
+      the chunk option <c>dpi</c> by default. If it is a numeric value and the chunk 
+      option <c>out.width</c> is not set, the output width of an image will be its 
+      actual width (in pixels) divided by <c>dpi</c>, and the unit will be inches. For 
+      example, for an image with the size 672 x 480, its output width will be 7 inches 
+      (<c>7in</c>) when <c>dpi = 96</c>. This feature requires the package 
+      <c>png</c> and/or <c>jpeg</c> to be installed. You can always override the 
+      automatic calculation of width in inches by providing a non-<c>NULL</c> value to 
+      the chunk option <c>out.width</c>, or use <c>include_graphics(dpi = NA)</c>.
+    </p>
+  </li>
+</ol>
   </section>
 
   <section xml:id="tables">
