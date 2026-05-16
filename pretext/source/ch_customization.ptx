@@ -185,7 +185,7 @@ output:
     </p>
 
     <p>
-      As mentioned in Section <xref ref="bootstrap-style"/>, the default style
+      As mentioned in <xref ref="bootstrap-style"/>, the default style
       for <c>html_book()</c> is the Bootstrap style. The Bootstrap style
       actually has several built-in themes that you can use, including
       <c>default</c>, <c>bootstrap</c>, <c>cerulean</c>, <c>cosmo</c>,
@@ -213,7 +213,9 @@ output:
       For <c>pdf_book()</c>, besides the <c>in_header</c> option mentioned in
       the previous section, another possibility is to change the document
       class. There are many possible LaTeX classes for books, such as
-      <c>memoir</c>, <c>amsbook</c>, KOMA-Script and so on. Here is a brief
+      <url href ="https://www.ctan.org/pkg/memoir">memoir</url>,
+      <url href ="https://www.ctan.org/pkg/amsbook>amsbook</url>,
+      <url href ="https://www.ctan.org/pkg/koma-script>KOMA-Script</url> and so on. Here is a brief
       sample of the YAML metadata specifying the <c>scrbook</c> class from the
       KOMA-Script package:
     </p>
@@ -320,7 +322,8 @@ This is a **nice** book!</input>
       by users in the YAML metadata, or passed from the command-line option
       <c>-V</c> or <c>--variable</c>. Some variables only make sense in
       specific output formats, e.g., the <c>documentclass</c> variable is only
-      used in LaTeX output. You can find all default Pandoc templates in the
+      used in LaTeX output.  Please see the documentation of Pandoc to learn more
+      about these variables, and you can find all default Pandoc templates in the
       GitHub repository <url href="https://github.com/jgm/pandoc-templates"
       visual="github.com/jgm/pandoc-templates"/>.
     </p>
