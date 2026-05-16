@@ -341,10 +341,10 @@ This is a **nice** book!</input>
     <p>
       We have mentioned <c>rmd_files</c> in <xref ref="usage"/>, and there are
       more (optional) settings you can configure for a book in
-      <c>_bookdown.yml</c>. For the <c>bs4_book()</c> format, the
+      <c>_bookdown.yml</c><fn>For the <c>bs4_book()</c> format, the
       <c>edit</c>, <c>history</c>, and <c>view</c> fields have no effect and
-      similar configuration can be specified with the repo argument of the
-      output function (see <xref ref="specifying-the-repository"/>):
+      similar configuration can be specified with the <url href = "https://yihui.org/bookdown/html.html#specifying-the-repository">repo</url> argument of the
+      output function</fn>:
     </p>
 
     <ul>
@@ -427,6 +427,8 @@ This is a **nice** book!</input>
       </li>
     </ul>
 
+<p>Here is a sample <c>_bookdown.yml</c>:</p>
+
     <program language="yaml">
       <input>book_filename: "my-book.Rmd"
 delete_merged_file: true
@@ -458,16 +460,30 @@ clean: ["my-book.bbl", "R-packages.bib"]</input>
       are:
     </p>
 
-    <program language="r">
-      <input>```{r echo=FALSE, comment='', results='asis'}
-cat('```yaml\n')
-cat(yaml::as.yaml(list(language = list(
-    label = c(bookdown:::label_names, bookdown:::label_names_math2),
-    ui = bookdown:::ui_names
-  ))
-))
-cat('```')
-```</input>
+    <program language="css">
+      <input>
+language:
+  label:
+    fig: 'Figure '
+    tab: 'Table '
+    eq: 'Equation '
+    thm: 'Theorem '
+    lem: 'Lemma '
+    cor: 'Corollary '
+    prp: 'Proposition '
+    cnj: 'Conjecture '
+    def: 'Definition '
+    exm: 'Example '
+    exr: 'Exercise '
+    hyp: 'Hypothesis '
+    proof: 'Proof. '
+    remark: 'Remark. '
+    solution: 'Solution. '
+  ui:
+    edit: Edit
+    chapter_name: ''
+    appendix_name: ''
+</input>
     </program>
 
     <p>
