@@ -1046,7 +1046,7 @@ plot(cars, pch = 19)
 </program>
 
     <figure xml:id="fig-knitr-logo-pretext">
-      <title>Three knitr logos included in the document from an external PNG image file.</title>
+      <caption>Three knitr logos included in the document from an external PNG image file.</caption>
       <image source="images/knit-logo.png" width="35%">
         <description>
           <p>The knitr logo image reused from the Rmd example assets.</p>
