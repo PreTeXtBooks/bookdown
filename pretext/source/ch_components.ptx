@@ -26,18 +26,22 @@
 
       <p>
         You can make text <em>italic</em> by surrounding it with underscores or
-        asterisks, for example, <c>_text_</c> or <c>*text*</c>. For
-        <em>bold</em> text, use two underscores (<c>__text__</c>) or asterisks
+        asterisks, e.g., <c>_text_</c> or <c>*text*</c>. For <em>bold</em>
+        text, use two underscores (<c>__text__</c>) or asterisks
         (<c>**text**</c>). Text surrounded by <c>~</c> will be converted to a
-        subscript, and similarly, two carets (<c>^</c>) produce a superscript.
-        To mark text as <c>inline code</c>, use a pair of backticks, for
-        example, <c>`code`</c><fn>To include literal backticks, use more
-        backticks outside, e.g., you can use two backticks to preserve one
-        backtick inside: <c>`` `code` ``</c></fn>. Small caps can be produced
-        by the HTML tag
-        <c>span</c>, links are created using <c>[text](link)</c>, and the
-        syntax for images is similar: just add an exclamation mark. Footnotes
-        are put inside the square brackets after a caret, for example,
+        subscript (e.g., <c>H~2~SO~4~</c>), and similarly, two carets
+        (<c>^</c>) produce a superscript (e.g., <c>Fe^2+^</c>). To mark text
+        as <c>inline code</c>, use a pair of backticks, e.g., <c>`code`</c><fn>
+        To include literal backticks, use more backticks outside, e.g., you can
+        use two backticks to preserve one backtick inside:
+        <c>`` `code` ``</c>.
+      </fn>. Small caps can be produced by the HTML tag <c>span</c>, e.g.,
+        <c>&lt;span style="font-variant:small-caps;"&gt;Small Caps&lt;/span&gt;</c>.
+        Links are created using <c>[text](link)</c>, e.g.,
+        <c>[Posit](https://www.posit.co)</c>, and the syntax for images is
+        similar: just add an exclamation mark, e.g.,
+        <c>![alt text or image title](path/to/image)</c>. Footnotes are put
+        inside the square brackets after a caret <c>^[]</c>, e.g.,
         <c>^[This is a footnote.]</c>. We will talk about citations in
         <xref ref="citations"/>.
       </p>
@@ -255,9 +259,14 @@ Or indent by four spaces:
 
       <p>It renders the equation below:</p>
 
-      <md>
+      <men xml:id="eq-binom">
         f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}
-      </md>
+      </men>
+
+      <p>
+        You may refer to it using <c>\@ref(eq-binom)</c>, e.g., see
+        <xref ref="eq-binom"/>.
+      </p>
 
       <aside>
         <title>Caution</title>
@@ -292,7 +301,7 @@ Or indent by four spaces:
 </me>
 
 <p>
-  Below is an <c>align</c> environment:
+  Below is an <c>align</c> environment <xref ref="eq-align"/>.
 </p>
 
 <program language="latex">
@@ -316,11 +325,12 @@ Or indent by four spaces:
 </mdn>
 
 <p>
-  You can use the <c>split</c> environment inside <c>equation</c> so that all lines 
-  share the same number. By default, each line in the <c>align</c> environment will 
-  be assigned an equation number. We suppressed the number of the first line in the 
-  previous example using <c>\notag</c>. In this example, the whole <c>split</c> 
-  environment was assigned a single number.
+  You can use the <c>split</c> environment inside <c>equation</c> so that all
+  lines share the same number <xref ref="eq-var-beta"/>. By default, each line
+  in the <c>align</c> environment will be assigned an equation number. We
+  suppressed the number of the first line in the previous example using
+  <c>\notag</c>. In this example, the whole <c>split</c> environment was
+  assigned a single number.
 </p>
 
 <program language="latex">
@@ -379,6 +389,12 @@ Or indent by four spaces:
   R Markdown document to write custom blocks. Bookdown only offers special handling 
   for theorem and proof environments. Since this uses the syntax of Pandoc's Markdown, 
   you can write any valid Markdown text inside the block.
+</p>
+
+<p>
+  See <url href="https://pandoc.org/MANUAL.html#divs-and-spans"/> for fenced
+  Div blocks and <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>
+  for custom blocks.
 </p>
 
 <table xml:id="table-theorem-envs">
@@ -521,6 +537,13 @@ Or indent by four spaces:
   <c>amsthm</c> package. If you do not want the default theorem definitions to be 
   automatically added by bookdown, you can set 
   <c>options(bookdown.theorem.preamble = FALSE)</c>.
+</p>
+
+<p>
+  This can be useful, for example, to avoid conflicts in single documents
+  (<xref ref="a-single-document"/>) using the output format
+  <c>bookdown::pdf_book</c> with a <c>base_format</c> that has already included
+  <c>amsmath</c> definitions.
 </p>
 
 <p>
@@ -682,7 +705,7 @@ Or indent by four spaces:
   </statement>
 </hypothesis>
 
-<subsection xml:id="subsec-old-theorem-syntax">
+<subsubsection xml:id="theorem-engine">
   <title>A note on the old syntax</title>
 
   <p>
@@ -744,7 +767,7 @@ Or indent by four spaces:
     you to revert the change if anything goes wrong.
   </p>
 
-</subsection>
+</subsubsection>
 
     </subsection>
 
@@ -805,7 +828,7 @@ Or indent by four spaces:
 </p>
 </subsection>
 
-<subsection xml:id="subsec-text-references">
+<subsection xml:id="text-references">
   <title>Text references</title>
 
   <p>
@@ -863,11 +886,12 @@ Or indent by four spaces:
     <title>R code</title>
 
     <p>
-      There are two types of R code in R Markdown and <c>knitr</c> documents:
-      R code chunks, and inline R code. For books, additional R code can be
-      executed before or after each chapter via the
-      <c>before_chapter_script</c> and <c>after_chapter_script</c> options in
-      <xref ref="configuration"/>.
+      There are two types of R code in R Markdown and <c>knitr</c> documents: R
+      code chunks, and inline R code. The syntax for inline R code is
+      <c>`r R_CODE`</c>, and it can be embedded inline with other document
+      elements. R code chunks look like plain code blocks, but have
+      <c>{r}</c> after the three backticks and (optionally) chunk options
+      inside <c>{}</c>, e.g.,
     </p>
 
     <program language="markdown">
@@ -877,6 +901,19 @@ rnorm(10)  # 10 random numbers
 plot(dist ~ speed, cars)  # a scatterplot
 ```</input>
     </program>
+
+    <p>
+      To learn more about <c>knitr</c> chunk options, see
+      <xref ref="xie2015-reference"/> or the web page
+      <url href="https://yihui.org/knitr/options"/>.
+    </p>
+
+    <p>
+      For books, additional R
+      code can be executed before/after each chapter; see
+      <c>before_chapter_script</c> and <c>after_chapter_script</c> in
+      <xref ref="configuration"/>.
+    </p>
   </section>
 
   <section xml:id="figures">
@@ -884,9 +921,50 @@ plot(dist ~ speed, cars)  # a scatterplot
 
     <p>
       By default, figures have no captions in the output generated by
-      <c>knitr</c>. If we assign a figure caption to a code chunk via the chunk
-      option <c>fig.cap</c>, R plots will be put into figure environments,
-      automatically labeled and numbered, and can also be cross-referenced.
+      <c>knitr</c>, which means they will be placed wherever they were
+      generated in the R code. Below is such an example.
+    </p>
+
+    <program language="r">
+      <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
+```</input>
+    </program>
+
+    <p>
+      This chunk is intentionally empty, because the code is reused from the
+      chunk label <c>pressure-plot</c> via <c>ref.label</c>.
+    </p>
+
+    <p>
+      The disadvantage of typesetting figures in this way is that when there is
+      not enough space on the current page to place a figure, it may either
+      reach the bottom of the page (hence exceeds the page margin), or be
+      pushed to the next page, leaving a large white margin at the bottom of
+      the current page. That is basically why there are floating environments
+      in LaTeX: elements that cannot be split over multiple pages (like
+      figures) are put in floating environments, so they can float to a page
+      that has enough space to hold them.
+    </p>
+
+    <p>
+      If we assign a figure caption to a code chunk via the chunk option
+      <c>fig.cap</c>, R plots will be put into figure environments, which will
+      be automatically labeled and numbered, and can also be cross-referenced.
+      The label of a figure environment is generated from the label of the code
+      chunk, e.g., if the chunk label is <c>foo</c>, the figure label will be
+      <c>fig:foo</c> (the prefix <c>fig:</c> is added before <c>foo</c>). To
+      reference a figure, use the syntax <c>\@ref(label)</c><fn>Do not forget
+      the leading backslash! And also note the parentheses <c>()</c> after
+      <c>ref</c>; they are not curly braces <c>{}</c>.</fn>.
+    </p>
+
+    <p>
+      To take advantage of Markdown formatting within the figure caption, you
+      will need to use text references (see <xref ref="text-references"/>). For
+      example, a figure caption that contains <c>_italic text_</c> will not
+      work when the output format is LaTeX/PDF, since the underscore is a
+      special character in LaTeX, but if you use text references, it will be
+      translated to LaTeX code when the output is LaTeX.
     </p>
 
     <aside>
@@ -905,12 +983,30 @@ plot(pressure, pch = 19, type = 'b')
 ```</input>
     </program>
 
+    <p>
+      The chunk option <c>fig.asp</c> can be used to set the aspect ratio of
+      plots, i.e., the ratio of figure height/width. If the figure width is
+      <c>6</c> inches (<c>fig.width = 6</c>) and <c>fig.asp = 0.7</c>, the
+      figure height will be automatically calculated from
+      <c>fig.width * fig.asp = 6 * 0.7 = 4.2</c>.
+    </p>
+
     <program language="r">
       <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\%.'}
 par(mar = c(4, 4, .1, .1))
 plot(cars, pch = 19)
 ```</input>
     </program>
+
+    <p>
+      The actual size of a plot is determined by the chunk options
+      <c>fig.width</c> and <c>fig.height</c>, and we can specify the output size
+      of plots via <c>out.width</c> and <c>out.height</c>. For example,
+      <c>out.width = '30%'</c> is a valid value for HTML output, but not for
+      LaTeX/PDF output. However, <c>knitr</c> will automatically convert a
+      percentage value for <c>out.width</c> of the form <c>x%</c> to
+      <c>(x / 100) \linewidth</c> for LaTeX output.
+    </p>
 
     <program language="r">
       <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
@@ -920,11 +1016,25 @@ plot(cars, pch = 19)
 ```</input>
     </program>
 
+    <p>
+      If you want to put multiple plots in one figure environment, you must use
+      the chunk option <c>fig.show = 'hold'</c> to hold multiple plots from a
+      code chunk and include them in one environment.
+    </p>
+
     <program language="r">
       <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
 knitr::include_graphics(rep('images/knit-logo.png', 3))
 ```</input>
     </program>
+
+    <p>
+      Sometimes you may have certain images that are not generated from R code,
+      and you can include them in R Markdown via
+      <c>knitr::include_graphics()</c>. You may pass one or multiple image
+      paths, and all chunk options that apply to normal R plots also apply to
+      these images.
+    </p>
 
     <figure xml:id="fig-knitr-logo-pretext">
       <title>Three knitr logos included in the document from an external PNG image file.</title>
@@ -934,6 +1044,40 @@ knitr::include_graphics(rep('images/knit-logo.png', 3))
         </description>
       </image>
     </figure>
+
+    <p>
+      There are a few advantages of using <c>include_graphics()</c>:
+    </p>
+
+    <ol>
+      <li>
+        <p>
+          You do not need to worry about the document output format. The
+          function <c>include_graphics()</c> in <c>knitr</c> takes care of
+          output-specific details automatically.
+        </p>
+      </li>
+      <li>
+        <p>
+          The syntax for controlling image attributes is the same as when
+          images are generated from R code, e.g., <c>fig.cap</c>,
+          <c>out.width</c>, and <c>fig.show</c>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>include_graphics()</c> can use PDF graphics automatically when the
+          output format is LaTeX and corresponding PDF files exist.
+        </p>
+      </li>
+      <li>
+        <p>
+          You can scale images proportionally via the <c>dpi</c> argument, and
+          always override width by setting a non-<c>NULL</c> value to
+          <c>out.width</c>.
+        </p>
+      </li>
+    </ol>
   </section>
 
   <section xml:id="tables">
@@ -942,7 +1086,15 @@ knitr::include_graphics(rep('images/knit-logo.png', 3))
     <p>
       For now, the most convenient way to generate a table is the function
       <c>knitr::kable()</c>, because there are some internal tricks in
-      <c>knitr</c> to make it work with <c>bookdown</c>.
+      <c>knitr</c> to make it work with <c>bookdown</c>, and users do not have
+      to know anything about these implementation details.
+    </p>
+
+    <p>
+      Like figures, tables with captions will also be numbered and can be
+      referenced. The <c>kable()</c> function will automatically generate a
+      label for a table environment, which is the prefix <c>tab:</c> plus the
+      chunk label.
     </p>
 
     <program language="r">
@@ -953,6 +1105,12 @@ knitr::kable(
 )
 ```</input>
     </program>
+
+    <p>
+      If you want to put multiple tables in a single table environment, wrap
+      the data objects into a list. This feature is only available in HTML and
+      PDF output.
+    </p>
 
     <program language="r">
       <input>```{r table-multi, tidy=FALSE}
@@ -966,15 +1124,55 @@ knitr::kable(
 ```</input>
     </program>
 
+    <p>
+      When you do not want a table to float in PDF, you may use the LaTeX
+      package <c>longtable</c>, which can break a table across multiple pages.
+      To use <c>longtable</c>, pass <c>longtable = TRUE</c> to
+      <c>kable()</c>, and include <c>\usepackage{longtable}</c> in the LaTeX
+      preamble.
+    </p>
+
+    <program language="r">
+      <input>```{r longtable, tidy=FALSE}
+knitr::kable(
+  iris[1:55, ], longtable = TRUE, booktabs = TRUE,
+  caption = 'A table generated by the longtable package.'
+)
+```</input>
+    </program>
+
+    <p>
+      Pandoc supports several types of Markdown tables, such as simple tables,
+      multiline tables, grid tables, and pipe tables. What
+      <c>knitr::kable()</c> generates is a simple table like this:
+    </p>
+
     <program language="markdown">
       <input>Table: A simple table in Markdown.
 
  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width
 -------------  ------------  -------------  ------------
-          5.1           3.5            1.4           0.2
-          4.9           3.0            1.4           0.2
-          4.7           3.2            1.3           0.2</input>
+           5.1           3.5            1.4           0.2
+           4.9           3.0            1.4           0.2
+           4.7           3.2            1.3           0.2
+           4.6           3.1            1.5           0.2
+           5.0           3.6            1.4           0.2
+           5.4           3.9            1.7           0.4</input>
     </program>
+
+    <p>
+      You can use any types of Markdown tables in your document. To
+      cross-reference a Markdown table, it must have a labeled caption in the
+      form <c>Table: (\#label) Caption here</c>, where <c>label</c> must have
+      the prefix <c>tab:</c>.
+    </p>
+
+    <p>
+      If you decide to use other R packages to generate tables, you have to be
+      careful about portability: it should work for both HTML and LaTeX output
+      automatically, and when writing out an HTML table, the caption must be
+      written in the <c>&lt;caption&gt;&lt;/caption&gt;</c> tag.
+    </p>
   </section>
 
   <section xml:id="cross-references">
@@ -985,10 +1183,45 @@ knitr::kable(
       (<xref ref="equations"/>), theorems (<xref ref="theorems"/>), figures
       (<xref ref="figures"/>), and tables (<xref ref="tables"/>). You can
       also reference sections using the same syntax <c>\@ref(label)</c>,
-      where <c>label</c> is the section ID. By default, Pandoc will generate an
-      ID for all section headers, but it is safer to assign IDs manually.
-      Cross-references work even when referring to an item not on the current
-      page of the output, such as
+      where <c>label</c> is the section ID. By default, Pandoc will generate
+      an ID for all section headers, e.g., a section <c># Hello World</c> will
+      have an ID <c>hello-world</c>. We recommend manually assigning IDs to
+      section headers.
+    </p>
+
+    <p>
+      When a referenced label cannot be found, you will see two question marks
+      like <c>\@ref(fig:does-not-exist)</c>, as well as a warning message in
+      the R console when rendering the book.
+    </p>
+
+    <p>
+      You can also create text-based links using explicit or automatic section
+      IDs or even the actual section header text.
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          If you are happy with the section header as the link text, use it
+          inside a single set of square brackets:
+          <c>[Section header text]</c>.
+        </p>
+      </li>
+      <li>
+        <p>
+          There are two ways to specify custom link text:
+        </p>
+        <ul>
+          <li><p><c>[link text][Section header text]</c></p></li>
+          <li><p><c>[link text](#ID)</c></p></li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>
+      Cross-references still work even when we refer to an item that is not on
+      the current page of the PDF or HTML output, such as
       <xref ref="fig-knitr-logo-pretext"/>.
     </p>
   </section>
@@ -998,12 +1231,15 @@ knitr::kable(
 
     <p>
       Custom blocks are often used in technical books to create salient boxes
-      of code and/or narrative that call the reader's attention, such as notes
-      and warnings. These can be included using Pandoc's syntax for fenced
-      <c>Div</c> blocks; see the
-      <em>R Markdown Cookbook</em> (<xref ref="rmarkdown2020-reference"/>) for
-      instructions. The <xref ref="bs4-book"/> output format includes built-in
-      styling for selected custom blocks.
+      of code and/or narrative that call the reader's attention. For example,
+      custom blocks may be used to highlight a note or a warning. These can be
+      included in multiple <c>bookdown</c> output formats using Pandoc's syntax
+      for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html"/>).
+      See the custom blocks section in the <em>R Markdown Cookbook</em>
+      (<url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>)
+      and <xref ref="rmarkdown2020-reference"/> for instructions. The
+      <xref ref="bs4-book"/> output format includes styling for selected custom
+      blocks.
     </p>
   </section>
 
@@ -1012,8 +1248,30 @@ knitr::kable(
 
     <p>
       Pandoc offers two methods for managing citations and bibliographic
-      references in a document: <c>pandoc-citeproc</c>, or a PDF-only citation
-      package such as <c>natbib</c> or <c>biblatex</c>.
+      references in a document.
+    </p>
+
+    <ol>
+      <li>
+        <p>
+          The default method is to use <c>pandoc-citeproc</c>, which follows
+          Citation Style Language (CSL) specifications.
+        </p>
+      </li>
+      <li>
+        <p>
+          Users may also choose to use either <c>natbib</c> or <c>biblatex</c>
+          as a citation package. In this case, bibliographic data files need to
+          be in BibTeX or BibLaTeX format, and the output format is limited to
+          PDF.
+        </p>
+      </li>
+    </ol>
+
+    <p>
+      To use <c>natbib</c> or <c>biblatex</c> to process references, you can
+      set the <c>citation_package</c> option of the R Markdown output format,
+      e.g.,
     </p>
 
     <program language="yaml">
@@ -1023,6 +1281,17 @@ knitr::kable(
   bookdown::pdf_book:
     citation_package: biblatex</input>
     </program>
+
+    <p>
+      Even if you choose <c>natbib</c> or <c>biblatex</c> for PDF output, all
+      other output formats will use <c>pandoc-citeproc</c>. For any non-PDF
+      output format, <c>pandoc-citeproc</c> is the only available option.
+    </p>
+
+    <p>
+      The bibliographic data can be in several formats. We have shown examples
+      of BibTeX databases in this section.
+    </p>
 
     <program language="bibtex">
       <input>@Manual{R-base,
@@ -1036,11 +1305,48 @@ knitr::kable(
 }</input>
     </program>
 
+    <p>
+      A bibliography entry starts with <c>@type{</c>, where <c>type</c> may be
+      <c>article</c>, <c>book</c>, <c>manual</c>, and so on<fn>The type name is
+      case-insensitive, so it does not matter if it is <c>manual</c>,
+      <c>Manual</c>, or <c>MANUAL</c>.</fn>. To cite an entry, use
+      <c>@key</c> or <c>[@key]</c>.
+    </p>
+
+    <p>
+      There is a helper function <c>write_bib()</c> in <c>knitr</c> to generate
+      BibTeX entries automatically for R packages, e.g.,
+    </p>
+
     <program language="r">
       <input>```{r write-bib, comment='', warning=FALSE}
 # the second argument can be a .bib file
 knitr::write_bib(c('knitr', 'stringr'), '', width = 60)
 ```</input>
+    </program>
+
+    <p>
+      Once you have one or multiple <c>.bib</c> files, you may use the field
+      <c>bibliography</c> in the YAML metadata of your first R Markdown
+      document.
+    </p>
+
+    <program language="yaml">
+      <input>---
+bibliography: ["one.bib", "another.bib", "yet-another.bib"]
+biblio-style: "apalike"
+link-citations: true
+---</input>
+    </program>
+
+    <p>
+      For non-LaTeX output, you can add an empty chapter as the last chapter of
+      your book. For example, if your last chapter is <c>06-references.Rmd</c>,
+      its content can be an inline R expression:
+    </p>
+
+    <program language="markdown">
+      <input>`r if (knitr::is_html_output()) '# References {-}'`</input>
     </program>
   </section>
 
@@ -1118,9 +1424,29 @@ DT::datatable(iris)
     <title>Web pages and Shiny apps</title>
 
     <p>
-      Similar to HTML widgets, arbitrary web pages can be embedded in the book
-      with <c>knitr::include_url()</c>. The related function
-      <c>knitr::include_app()</c> was designed for embedding Shiny apps.
+      Similar to HTML widgets, arbitrary web pages can be embedded in the book.
+      You can use the function <c>knitr::include_url()</c> to include a web
+      page through its URL. When the output format is HTML, an <c>iframe</c> is
+      used<fn>An <c>iframe</c> is basically a box on one web page to embed
+      another web page.</fn>; in other cases, <c>knitr</c> tries to take a
+      screenshot of the web page (or use the custom screenshot you provided).
+      All chunk options are the same as those for HTML widgets. One option that
+      may require your special attention is the <c>delay</c> option: HTML
+      widgets are rendered locally, so usually they are fast to load for
+      PhantomJS to take screenshots, but an arbitrary URL may take longer to
+      load, so you may want to use a larger <c>delay</c> value, e.g., use the
+      chunk option <c>screenshot.opts = list(delay = 5)</c>.
+    </p>
+
+    <p>
+      A related function is <c>knitr::include_app()</c>, which is very similar
+      to <c>include_url()</c>, and it was designed for embedding Shiny apps via
+      their URLs in the output. Its only difference with <c>include_url()</c>
+      is that it automatically adds a query parameter <c>?showcase=0</c> to the
+      URL, if no other query parameters are present in the URL, to disable the
+      Shiny showcase mode, which is unlikely to be useful for screenshots or
+      iframes. If you do want the showcase mode, use <c>include_url()</c>
+      instead of <c>include_app()</c>. Below is a Shiny app example:
     </p>
 
     <program language="r">
@@ -1130,9 +1456,25 @@ knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
     </program>
 
     <p>
+      Again, you will see a live app if you are reading an HTML version of this
+      book, and a static screenshot if you are reading other types of formats.
       The above Shiny app was created using the <c>miniUI</c> package
       (<xref ref="R-miniUI-reference"/>), which provides layout functions
-      particularly useful for Shiny apps on small screens.
+      that are particularly nice for Shiny apps on small screens. If you use
+      normal Shiny layout functions, you are likely to see vertical and/or
+      horizontal scrollbars in the iframes because the page size is too big to
+      fit in an iframe. When the default width of the iframe is too small, you
+      may use the chunk option <c>out.width</c> to change it. For the height of
+      the iframe, use the <c>height</c> argument of
+      <c>include_url()</c>/<c>include_app()</c>.
+    </p>
+
+    <p>
+      Shiny apps may take even longer to load than usual URLs. You may want to
+      use a conservative value for the <c>delay</c> option, e.g., 10. Needless
+      to say, <c>include_url()</c> and <c>include_app()</c> require a working
+      Internet connection, unless you have previously cached the chunk (but web
+      pages inside iframes still will not work without an Internet connection).
     </p>
   </section>
 </chapter>
