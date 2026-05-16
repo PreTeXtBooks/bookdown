@@ -26,18 +26,22 @@
 
       <p>
         You can make text <em>italic</em> by surrounding it with underscores or
-        asterisks, for example, <c>_text_</c> or <c>*text*</c>. For
-        <em>bold</em> text, use two underscores (<c>__text__</c>) or asterisks
+        asterisks, e.g., <c>_text_</c> or <c>*text*</c>. For <em>bold</em>
+        text, use two underscores (<c>__text__</c>) or asterisks
         (<c>**text**</c>). Text surrounded by <c>~</c> will be converted to a
-        subscript, and similarly, two carets (<c>^</c>) produce a superscript.
-        To mark text as <c>inline code</c>, use a pair of backticks, for
-        example, <c>`code`</c><fn>To include literal backticks, use more
-        backticks outside, e.g., you can use two backticks to preserve one
-        backtick inside: <c>`` `code` ``</c></fn>. Small caps can be produced
-        by the HTML tag
-        <c>span</c>, links are created using <c>[text](link)</c>, and the
-        syntax for images is similar: just add an exclamation mark. Footnotes
-        are put inside the square brackets after a caret, for example,
+        subscript (e.g., <c>H~2~SO~4~</c>), and similarly, two carets
+        (<c>^</c>) produce a superscript (e.g., <c>Fe^2+^</c>). To mark text
+        as <c>inline code</c>, use a pair of backticks, e.g., <c>`code`</c><fn>
+        To include literal backticks, use more backticks outside, e.g., you can
+        use two backticks to preserve one backtick inside:
+        <c>`` `code` ``</c>.
+      </fn>. Small caps can be produced by the HTML tag <c>span</c>, e.g.,
+        <c>&lt;span style="font-variant:small-caps;"&gt;Small Caps&lt;/span&gt;</c>.
+        Links are created using <c>[text](link)</c>, e.g.,
+        <c>[Posit](https://www.posit.co)</c>, and the syntax for images is
+        similar: just add an exclamation mark, e.g.,
+        <c>![alt text or image title](path/to/image)</c>. Footnotes are put
+        inside the square brackets after a caret <c>^[]</c>, e.g.,
         <c>^[This is a footnote.]</c>. We will talk about citations in
         <xref ref="citations"/>.
       </p>
@@ -255,9 +259,14 @@ Or indent by four spaces:
 
       <p>It renders the equation below:</p>
 
-      <md>
+      <men xml:id="eq-binom">
         f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}
-      </md>
+      </men>
+
+      <p>
+        You may refer to it using <c>\@ref(eq:binom)</c>, e.g., see
+        <xref ref="eq-binom"/>.
+      </p>
 
       <aside>
         <title>Caution</title>
@@ -292,7 +301,7 @@ Or indent by four spaces:
 </me>
 
 <p>
-  Below is an <c>align</c> environment:
+  Below is an <c>align</c> environment <xref ref="eq-align"/>.
 </p>
 
 <program language="latex">
@@ -316,11 +325,12 @@ Or indent by four spaces:
 </mdn>
 
 <p>
-  You can use the <c>split</c> environment inside <c>equation</c> so that all lines 
-  share the same number. By default, each line in the <c>align</c> environment will 
-  be assigned an equation number. We suppressed the number of the first line in the 
-  previous example using <c>\notag</c>. In this example, the whole <c>split</c> 
-  environment was assigned a single number.
+  You can use the <c>split</c> environment inside <c>equation</c> so that all
+  lines share the same number <xref ref="eq-var-beta"/>. By default, each line
+  in the <c>align</c> environment will be assigned an equation number. We
+  suppressed the number of the first line in the previous example using
+  <c>\notag</c>. In this example, the whole <c>split</c> environment was
+  assigned a single number.
 </p>
 
 <program language="latex">
@@ -379,6 +389,12 @@ Or indent by four spaces:
   R Markdown document to write custom blocks. Bookdown only offers special handling 
   for theorem and proof environments. Since this uses the syntax of Pandoc's Markdown, 
   you can write any valid Markdown text inside the block.
+</p>
+
+<p>
+  See <url href="https://pandoc.org/MANUAL.html#divs-and-spans"/> for fenced
+  Div blocks and <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>
+  for custom blocks.
 </p>
 
 <table xml:id="table-theorem-envs">
@@ -521,6 +537,13 @@ Or indent by four spaces:
   <c>amsthm</c> package. If you do not want the default theorem definitions to be 
   automatically added by bookdown, you can set 
   <c>options(bookdown.theorem.preamble = FALSE)</c>.
+</p>
+
+<p>
+  This can be useful, for example, to avoid conflicts in single documents
+  (<xref ref="a-single-document"/>) using the output format
+  <c>bookdown::pdf_book</c> with a <c>base_format</c> that has already included
+  <c>amsmath</c> definitions.
 </p>
 
 <p>

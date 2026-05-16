@@ -264,6 +264,11 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "<subsection xml:id=\"theorems\">", fixed = TRUE)
   expect_match(components, "<subsubsection xml:id=\"theorem-engine\">", fixed = TRUE)
   expect_match(components, "<subsection xml:id=\"text-references\">", fixed = TRUE)
+  expect_match(components, "H~2~SO~4~", fixed = TRUE)
+  expect_match(components, "[Posit](https://www.posit.co)", fixed = TRUE)
+  expect_match(components, "You may refer to it using <c>\\@ref(eq:binom)</c>", fixed = TRUE)
+  expect_match(components, "fenced Div blocks", fixed = TRUE)
+  expect_match(components, "bookdown::pdf_book", fixed = TRUE)
   expect_match(components, "<title>A note on the old syntax</title>", fixed = TRUE)
   expect_match(components, "<title>Text references</title>", fixed = TRUE)
   expect_match(components, "<title>Riemann hypothesis</title>", fixed = TRUE)
@@ -292,8 +297,8 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "query parameter <c>?showcase=0</c>", fixed = TRUE)
   expect_match(components, "Shiny apps may take even longer to load than usual URLs.", fixed = TRUE)
   expect_match(components, "inside iframes still will not work", fixed = TRUE)
-  expect_match(components, "<c>proof</c>, <c>remark</c>, and <c>solution</c>", fixed = TRUE)
-  expect_match(components, "The only difference is that since they are", fixed = TRUE)
+  expect_match(components, "The proof environments currently supported are <c>proof</c>", fixed = TRUE)
+  expect_match(components, "they are unnumbered, you cannot reference them", fixed = TRUE)
   expect_match(components, "The style definition is done through the", fixed = TRUE)
   for (text in c(
     "<xref ref=\"citations\"/>",
