@@ -273,5 +273,45 @@
     <p>Elkhorn, Nebraska</p>
   </acknowledgement>
 
+  <preface xml:id="pretext-edition-note">
+    <title>Note on This PreTeXt Edition</title>
+
+    <p>
+      This is a
+      <url href="https://pretextbook.org/" visual="pretextbook.org">PreTeXt</url>
+      conversion of <em>bookdown: Authoring Books and Technical Documents with R
+      Markdown</em>, originally written by
+      <url href="http://yihui.org/" visual="yihui.org">Yihui Xie</url>.
+      The original work is available online at
+      <url href="https://bookdown.org/yihui/bookdown/"
+      visual="bookdown.org/yihui/bookdown"/> and was published by
+      Chapman &amp; Hall/CRC. The original GitHub repository for the book
+      source is at
+      <url href="https://github.com/rstudio/bookdown"
+      visual="github.com/rstudio/bookdown"/>.
+    </p>
+
+    <p>
+      This PreTeXt edition was prepared by
+      <url href="https://github.com/PreTeXtBooks/bookdown"
+      visual="github.com/PreTeXtBooks/bookdown">the PreTeXtBooks project</url>
+      to make the content available in the PreTeXt format, enabling accessible
+      and structured output in HTML, PDF, and other formats. All prose, code
+      examples, figures, and mathematical content are intended to be faithful
+      reproductions of the original work, though occasional typographical errors
+      may have been introduced in the conversion process. Report any issues to
+      our
+      <url href="https://github.com/PreTeXtBooks/bookdown/issues"
+      visual="github.com/PreTeXtBooks/bookdown/issues">GitHub Issues Page</url>.
+    </p>
+
+    <p>
+      The original work by Yihui Xie is licensed under a
+      <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      visual="creativecommons.org/licenses/by-nc-sa/4.0">Creative Commons
+      Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
+    </p>
+  </preface>
+
   <xi:include href="./ch_about_author.ptx" />
 </frontmatter>
