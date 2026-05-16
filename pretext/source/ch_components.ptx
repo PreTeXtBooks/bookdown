@@ -880,8 +880,8 @@ Or indent by four spaces:
     <title>R code</title>
 
     <p>
-      There are two types of R code in R Markdown and <c>knitr</c> documents: R
-      code chunks, and inline R code. The syntax for inline R code is
+      There are two types of R code in R Markdown/<c>knitr</c> documents: R
+      code chunks, and inline R code. The syntax for the latter is
       <c>`r R_CODE`</c>, and it can be embedded inline with other document
       elements. R code chunks look like plain code blocks, but have
       <c>{r}</c> after the three backticks and (optionally) chunk options
@@ -899,11 +899,7 @@ plot(dist ~ speed, cars)  # a scatterplot
     <p>
       To learn more about <c>knitr</c> chunk options, see
       <xref ref="xie2015-reference"/> or the web page
-      <url href="https://yihui.org/knitr/options"/>.
-    </p>
-
-    <p>
-      For books, additional R
+      <url href="https://yihui.org/knitr/options"/>. For books, additional R
       code can be executed before/after each chapter; see
       <c>before_chapter_script</c> and <c>after_chapter_script</c> in
       <xref ref="configuration"/>.
@@ -1311,8 +1307,9 @@ knitr::kable(
       of code and/or narrative that call the reader's attention. For example,
       custom blocks may be used to highlight a note or a warning. These can be
       included in multiple <c>bookdown</c> output formats using Pandoc's syntax
-      for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html"/>).
-      See the custom blocks section in the <em>R Markdown Cookbook</em>
+      for fenced <c>Div</c> blocks
+      (<url href="https://pandoc.org/MANUAL.html#divs-and-spans"/>). Section
+      9.6 in the <em>R Markdown Cookbook</em>
       (<url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>)
       and <xref ref="rmarkdown2020-reference"/> for instructions. The
       <xref ref="bs4-book"/> output format includes styling for selected custom
@@ -1331,16 +1328,25 @@ knitr::kable(
     <ol>
       <li>
         <p>
-          The default method is to use <c>pandoc-citeproc</c>, which follows
-          Citation Style Language (CSL) specifications.
+          The default method is to use a Pandoc helper program called
+          <c>pandoc-citeproc</c>, which follows the specifications of the
+          <url href="https://docs.citationstyles.org/en/v1.0.1/specification.html">Citation
+          Style Language (CSL)</url> and obtains specific formatting
+          instructions from one of the huge number of available
+          <url href="https://www.zotero.org/styles/">CSL style files.</url>
         </p>
       </li>
       <li>
         <p>
-          Users may also choose to use either <c>natbib</c> or <c>biblatex</c>
-          as a citation package. In this case, bibliographic data files need to
-          be in BibTeX or BibLaTeX format, and the output format is limited to
-          PDF.
+          Users may also choose to use either
+          <url href="https://ctan.org/pkg/natbib"><c>natbib</c></url>
+          (based on <c>bibtex</c>) or
+          <url href="https://ctan.org/pkg/biblatex"><c>biblatex</c></url> as a
+          “citation package”. In this case, the bibliographic data files need
+          to be in the <c>bibtex</c> or <c>biblatex</c> format, and the
+          document output format is limited to PDF. Again, various
+          bibliographic styles are available (please consult the documentation
+          of these packages).
         </p>
       </li>
     </ol>
@@ -1361,13 +1367,29 @@ knitr::kable(
 
     <p>
       Even if you choose <c>natbib</c> or <c>biblatex</c> for PDF output, all
-      other output formats will use <c>pandoc-citeproc</c>. For any non-PDF
-      output format, <c>pandoc-citeproc</c> is the only available option.
+      other output formats will be using <c>pandoc-citeproc</c>. If you use
+      matching styles (e.g., <c>biblio-style: apa</c> for <c>biblatex</c>
+      along with <c>csl: apa.csl</c> for <c>pandoc-citeproc</c>), output to
+      PDF and to non-PDF formats will be very similar, though not necessarily
+      identical.
     </p>
 
     <p>
-      The bibliographic data can be in several formats. We have shown examples
-      of BibTeX databases in this section.
+      For any non-PDF output format, <c>pandoc-citeproc</c> is the only
+      available option. If consistency across PDF and non-PDF output formats is
+      important, use <c>pandoc-citeproc</c> throughout.
+    </p>
+
+    <p>
+      The bibliographic data can be in several formats. We have only shown
+      examples of BibTeX databases in this section, and please see the
+      <url href="https://pandoc.org/MANUAL.html#citations">Citations</url>
+      section of the Pandoc manual for other possible formats.
+    </p>
+
+    <p>
+      A BibTeX database is a plain-text file (with the conventional filename
+      extension <c>.bib</c>) that consists of bibliography entries like this:
     </p>
 
     <program language="bibtex">
@@ -1386,8 +1408,23 @@ knitr::kable(
       A bibliography entry starts with <c>@type{</c>, where <c>type</c> may be
       <c>article</c>, <c>book</c>, <c>manual</c>, and so on<fn>The type name is
       case-insensitive, so it does not matter if it is <c>manual</c>,
-      <c>Manual</c>, or <c>MANUAL</c>.</fn>. To cite an entry, use
-      <c>@key</c> or <c>[@key]</c>.
+      <c>Manual</c>, or <c>MANUAL</c>.</fn>. Then there is a citation key, like
+      <c>R-base</c> in the above example. To cite an entry, use <c>@key</c> or
+      <c>[@key]</c> (the latter puts the citation in braces), e.g.,
+      <c>@R-base</c> is rendered as <c>@R-base</c>, and <c>[@R-base]</c>
+      generates <c>[@R-base]</c>. A note can be included within the square
+      brackets, e.g., <c>[a note about, @R-base]</c> will be rendered as
+      <c>[a note about, @R-base]</c>. If you are familiar with the
+      <c>natbib</c> package in LaTeX, <c>@key</c> is basically
+      <c>\citet{key}</c>, and <c>[@key]</c> is equivalent to
+      <c>\citep{key}</c>.
+    </p>
+
+    <p>
+      There are a number of fields in a bibliography entry, such as
+      <c>title</c>, <c>author</c>, and <c>year</c>, etc. You may see
+      <url href="https://en.wikipedia.org/wiki/BibTeX"/> for possible types of
+      entries and fields in BibTeX.
     </p>
 
     <p>
@@ -1405,7 +1442,9 @@ knitr::write_bib(c('knitr', 'stringr'), '', width = 60)
     <p>
       Once you have one or multiple <c>.bib</c> files, you may use the field
       <c>bibliography</c> in the YAML metadata of your first R Markdown
-      document.
+      document (which is typically <c>index.Rmd</c>), and you can also specify
+      the bibliography style via <c>biblio-style</c> (this only applies to PDF
+      output), e.g.,
     </p>
 
     <program language="yaml">
@@ -1417,14 +1456,27 @@ link-citations: true
     </program>
 
     <p>
-      For non-LaTeX output, you can add an empty chapter as the last chapter of
-      your book. For example, if your last chapter is <c>06-references.Rmd</c>,
-      its content can be an inline R expression:
+      The field <c>link-citations</c> can be used to add internal links from
+      the citation text of the author-year style to the bibliography entry in
+      the HTML output.
+    </p>
+
+    <p>
+      When the output format is LaTeX, the list of references will be
+      automatically put in a chapter or section at the end of the document. For
+      non-LaTeX output, you can add an empty chapter as the last chapter of your
+      book. For example, if your last chapter is the Rmd file
+      <c>06-references.Rmd</c>, its content can be an inline R expression:
     </p>
 
     <program language="markdown">
       <input>`r if (knitr::is_html_output()) '# References {-}'`</input>
     </program>
+
+    <p>
+      For more detailed instructions and further examples on how to use
+      citations, please see the “Citations” section of the Pandoc manual.
+    </p>
   </section>
 
   <section xml:id="latex-index">
