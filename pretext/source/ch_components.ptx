@@ -391,12 +391,6 @@ Or indent by four spaces:
   you can write any valid Markdown text inside the block.
 </p>
 
-<p>
-  See <url href="https://pandoc.org/MANUAL.html#divs-and-spans"/> for fenced
-  Div blocks and <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>
-  for custom blocks.
-</p>
-
 <table xml:id="table-theorem-envs">
   <title>Theorem environments in bookdown</title>
   <tabular halign="left">
@@ -926,8 +920,10 @@ plot(dist ~ speed, cars)  # a scatterplot
     </p>
 
     <program language="r">
-      <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
-```</input>
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+</input>
     </program>
 
     <p>
