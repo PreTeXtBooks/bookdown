@@ -882,7 +882,7 @@ plot(dist ~ speed, cars)  # a scatterplot
     <p>
       To learn more about <c>knitr</c> chunk options, see
       <xref ref="xie2015-reference"/> or the web page
-      <url href="http://yihui.org/knitr/options"/>. For books, additional R
+      <url href="https://yihui.org/knitr/options"/>. For books, additional R
       code can be executed before/after each chapter; see
       <c>before_chapter_script</c> and <c>after_chapter_script</c> in
       <xref ref="configuration"/>.
@@ -1202,9 +1202,10 @@ knitr::kable(
       of code and/or narrative that call the reader's attention. For example,
       custom blocks may be used to highlight a note or a warning. These can be
       included in multiple <c>bookdown</c> output formats using Pandoc's syntax
-      for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html#divs-and-spans"/>).
-      See Section 9.6 in the <em>R Markdown Cookbook</em>
-      (<xref ref="rmarkdown2020-reference"/>) for instructions. The
+      for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html"/>).
+      See the custom blocks section in the <em>R Markdown Cookbook</em>
+      (<url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>)
+      and <xref ref="rmarkdown2020-reference"/> for instructions. The
       <xref ref="bs4-book"/> output format includes styling for selected custom
       blocks.
     </p>
