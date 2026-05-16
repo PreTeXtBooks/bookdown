@@ -328,6 +328,19 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   )) {
     expect_match(components, text, fixed = TRUE)
   }
+  knitr_logo_figure <- regmatches(
+    components,
+    regexec(
+      "<figure xml:id=\"fig-knitr-logo-pretext\">([\\s\\S]*?)</figure>",
+      components,
+      perl = TRUE
+    )
+  )[[1]][2]
+  expect_match(knitr_logo_figure, "<sidebyside widths=\"32.8% 32.8% 32.8%\">", fixed = TRUE)
+  expect_equal(
+    sum(gregexpr("<image source=\"images/knit-logo.png\" width=\"100%\">", knitr_logo_figure, fixed = TRUE)[[1]] > 0),
+    3
+  )
   expect_no_match(components, "This is an empty sample chapter file", fixed = TRUE)
 })
 
