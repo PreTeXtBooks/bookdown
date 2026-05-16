@@ -264,7 +264,7 @@ Or indent by four spaces:
       </men>
 
       <p>
-        You may refer to it using <c>\@ref(eq:binom)</c>, e.g., see
+        You may refer to it using <c>\@ref(eq-binom)</c>, e.g., see
         <xref ref="eq-binom"/>.
       </p>
 

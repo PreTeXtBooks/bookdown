@@ -266,7 +266,7 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "<subsection xml:id=\"text-references\">", fixed = TRUE)
   expect_match(components, "H~2~SO~4~", fixed = TRUE)
   expect_match(components, "[Posit](https://www.posit.co)", fixed = TRUE)
-  expect_match(components, "@ref(eq:binom)</c>", fixed = TRUE)
+  expect_match(components, "@ref(eq-binom)</c>", fixed = TRUE)
   expect_match(components, "fenced Div blocks", fixed = TRUE)
   expect_match(components, "bookdown::pdf_book", fixed = TRUE)
   expect_match(components, "<title>A note on the old syntax</title>", fixed = TRUE)
