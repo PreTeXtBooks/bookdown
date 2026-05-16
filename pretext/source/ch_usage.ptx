@@ -39,10 +39,12 @@
     </p>
 
     <program language="markdown">
-      <input>`r ''````{python}
+      <input>
+```{python}
 x = 'Hello, Python World!'
 print(x.split(' '))
-```</input>
+```
+`</input>
     </program>
 
     <p>
@@ -57,11 +59,11 @@ print(x.split(' '))
     <p>
       If you want to show a literal chunk in your document, you can add an
       inline expression that generates an empty string
-      (<c>`r "\x60r ''\x60"`</c>) before the chunk header, and wrap the code
-      chunk in four backticks. Follow the indenting rule if the literal code
+      (<c>`r ''`</c>) before the chunk header, and wrap the code
+      chunk in four backticks<fn>Follow the indenting rule if the literal code
       chunk is to be displayed in other environments such as a list: <url
       href="https://pandoc.org/MANUAL.html#block-content-in-list-items"
-      visual="pandoc.org/MANUAL.html#block-content-in-list-items"/>.
+      visual="pandoc.org/MANUAL.html#block-content-in-list-items"/></fn>.
     </p>
 
     <program language="markdown">
@@ -173,6 +175,10 @@ html_document:
 toc: yes</input>
     </program>
 
+    <p>
+      actually means
+    </p>
+
     <program language="yaml">
       <input>output: null
 html_document: null
@@ -200,24 +206,22 @@ toc: yes</input>
     <p>
       The <c>rmarkdown</c> package has provided these R Markdown output formats:
     </p>
+<ul>
+  <li><p><c>beamer_presentation</c></p></li>
+  <li><p><c>context_document</c></p></li>
+  <li><p><c>github_document</c></p></li>
+  <li><p><c>html_document</c></p></li>
+  <li><p><c>ioslides_presentation</c></p></li>
+  <li><p><c>latex_document</c></p></li>
+  <li><p><c>md_document</c></p></li>
+  <li><p><c>odt_document</c></p></li>
+  <li><p><c>pdf_document</c></p></li>
+  <li><p><c>powerpoint_presentation</c></p></li>
+  <li><p><c>rtf_document</c></p></li>
+  <li><p><c>slidy_presentation</c></p></li>
+  <li><p><c>word_document</c></p></li>
+</ul>
 
-    <program language="r">
-      <input>knitr::combine_words(
-  grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')),
-       value = TRUE),
-  sep = '\n', and = '', before = '- `', after = '`'
-)</input>
-      <output>- `beamer_presentation`
-- `github_document`
-- `html_document`
-- `ioslides_presentation`
-- `md_document`
-- `odt_document`
-- `pdf_document`
-- `powerpoint_presentation`
-- `slidy_presentation`
-- `word_document`</output>
-    </program>
 
     <p>
       There are many more possible output formats in other R packages,
