@@ -224,6 +224,27 @@ test_that("PreTeXt frontmatter mirrors the Rmd structure", {
   expect_match(frontmatter, "Elkhorn, Nebraska", fixed = TRUE)
   expect_match(frontmatter, "<xref ref=\"xie2015-reference\"/>", fixed = TRUE)
   expect_no_match(frontmatter, "Replace this abstract", fixed = TRUE)
+
+  expect_match(
+    frontmatter,
+    "<preface xml:id=\"pretext-edition-note\">",
+    fixed = TRUE
+  )
+  expect_match(
+    frontmatter,
+    "<title>Note on This PreTeXt Edition</title>",
+    fixed = TRUE
+  )
+  for (text in c(
+    "pretextbook.org",
+    "bookdown.org/yihui/bookdown",
+    "github.com/rstudio/bookdown",
+    "github.com/PreTeXtBooks/bookdown",
+    "github.com/PreTeXtBooks/bookdown/issues",
+    "creativecommons.org/licenses/by-nc-sa/4.0"
+  )) {
+    expect_match(frontmatter, text, fixed = TRUE)
+  }
 })
 
 test_that("PreTeXt introduction chapter mirrors the Rmd structure", {

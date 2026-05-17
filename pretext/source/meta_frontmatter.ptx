@@ -6,19 +6,6 @@
     </author>
   </titlepage>
 
-  <abstract>
-    <p>
-      A guide to authoring books with R Markdown, including how to generate
-      figures and tables, and insert cross-references, citations, HTML widgets,
-      and Shiny apps in R Markdown. The book can be exported to HTML, PDF, and
-      e-books (e.g. EPUB). The book style is customizable. You can easily write
-      and preview the book in RStudio IDE or other editors, and host the book
-      wherever you want (e.g.
-      <url href="https://bookdown.org/yihui/bookdown/"
-      visual="bookdown.org/yihui/bookdown" />).
-    </p>
-  </abstract>
-
   <preface xml:id="preface">
     <title>Preface</title>
 
@@ -97,8 +84,9 @@
         visual="crcpress.com/product/isbn/9781138700109"/> or Amazon.
       </p>
     </introduction>
+  </preface>
 
-    <paragraphs xml:id="why-read-this-book">
+    <preface xml:id="why-read-this-book">
       <title>Why read this book</title>
 
       <p>
@@ -146,9 +134,9 @@
         prepare a few R Markdown book chapters, and <em>bookdown</em> can help
         you turn them into a beautiful book.
       </p>
-    </paragraphs>
+    </preface>
 
-    <paragraphs xml:id="structure-of-the-book">
+    <preface xml:id="structure-of-the-book">
       <title>Structure of the book</title>
 
       <p>
@@ -170,9 +158,9 @@
         it: some sections are there for the sake of completeness, and not all
         sections are equally useful to every book project.
       </p>
-    </paragraphs>
+    </preface>
 
-    <paragraphs xml:id="software-information-and-conventions">
+    <preface xml:id="software-information-and-conventions">
       <title>Software information and conventions</title>
 
       <p>
@@ -220,8 +208,7 @@
         filenames are formatted in a typewriter font, and function names are
         followed by parentheses.
       </p>
-    </paragraphs>
-  </preface>
+    </preface>
 
   <acknowledgement xml:id="acknowledgments">
     <title>Acknowledgments</title>
@@ -272,6 +259,46 @@
 
     <p>Elkhorn, Nebraska</p>
   </acknowledgement>
+
+  <preface xml:id="pretext-edition-note">
+    <title>Note on This PreTeXt Edition</title>
+
+    <p>
+      This is a
+      <url href="https://pretextbook.org/" visual="pretextbook.org">PreTeXt</url>
+      conversion of <em>bookdown: Authoring Books and Technical Documents with R
+      Markdown</em>, originally written by
+      <url href="http://yihui.org/" visual="yihui.org">Yihui Xie</url>.
+      The original work is available online at
+      <url href="https://bookdown.org/yihui/bookdown/"
+      visual="bookdown.org/yihui/bookdown"/> and was published by
+      Chapman &amp; Hall/CRC. The original GitHub repository for the book
+      source is at
+      <url href="https://github.com/rstudio/bookdown"
+      visual="github.com/rstudio/bookdown"/>.
+    </p>
+
+    <p>
+      This PreTeXt edition was prepared by
+      <url href="https://github.com/PreTeXtBooks/bookdown"
+      visual="github.com/PreTeXtBooks/bookdown">the PreTeXtBooks project</url>
+      to make the content available in the PreTeXt format, enabling accessible
+      and structured output in HTML, PDF, and other formats. All prose, code
+      examples, figures, and mathematical content are intended to be faithful
+      reproductions of the original work, though occasional typographical errors
+      may have been introduced in the conversion process. Report any issues to
+      our
+      <url href="https://github.com/PreTeXtBooks/bookdown/issues"
+      visual="github.com/PreTeXtBooks/bookdown/issues">GitHub Issues Page</url>.
+    </p>
+
+    <p>
+      The original work by Yihui Xie is licensed under a
+      <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      visual="creativecommons.org/licenses/by-nc-sa/4.0">Creative Commons
+      Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
+    </p>
+  </preface>
 
   <xi:include href="./ch_about_author.ptx" />
 </frontmatter>

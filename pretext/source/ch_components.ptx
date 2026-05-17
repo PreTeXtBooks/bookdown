@@ -1344,9 +1344,13 @@ knitr::kable(
       included in multiple <c>bookdown</c> output formats using Pandoc's syntax
       for fenced <c>Div</c> blocks
       (<url href="https://pandoc.org/MANUAL.html#divs-and-spans"/>). Section
-      9.6 in the <em>R Markdown Cookbook</em>
-      (<url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html"/>)
-      and <xref ref="rmarkdown2020-reference"/> for instructions. The
+      9.6 in the 
+      <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html">
+      R Markdown Cookbook</url>
+      (<xref ref="rmarkdown2020-reference"/>) for instructions.
+    </p>
+     <p>
+       The
       <xref ref="bs4-book"/> output format includes styling for selected custom
       blocks.
     </p>
