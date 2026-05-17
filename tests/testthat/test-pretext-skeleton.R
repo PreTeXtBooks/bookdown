@@ -135,12 +135,14 @@ test_that("PreTeXt skeleton mirrors the Rmd book layout", {
     "disqus.png",
     "gitbook.png",
     "important.png",
+    "cars-plot.png",
     "knit-logo.png",
     "logo.png",
     "mathquill.png",
     "netlify-drag-drop-update.png",
     "new-bs4-book.png",
     "note.png",
+    "pressure-plot.png",
     "rmd-note.png",
     "social-og.png",
     "social-twitter.png",
@@ -308,19 +310,44 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
   expect_match(components, "<section xml:id=\"cross-references\">", fixed = TRUE)
   expect_match(components, "<section xml:id=\"custom-blocks\">", fixed = TRUE)
   expect_match(components, "<section xml:id=\"citations\">", fixed = TRUE)
-  expect_match(components, "The syntax for inline R code is", fixed = TRUE)
+  expect_match(components, "R Markdown/<c>knitr</c> documents", fixed = TRUE)
+  expect_match(components, "The syntax for the latter is", fixed = TRUE)
   expect_match(components, "`r R_CODE`", fixed = TRUE)
   expect_match(components, "no-caption, fig.width=6, fig.asp=.7", fixed = TRUE)
   expect_match(components, "ref.label='pressure-plot'", fixed = TRUE)
   expect_match(components, "fig.width * fig.asp = 6 * 0.7 = 4.2", fixed = TRUE)
+  expect_match(components, "other packages and functions later in this section", fixed = TRUE)
+  expect_match(components, "table label for a code chunk with the label", fixed = TRUE)
+  expect_match(components, "\\@ref(tab:table-single)", fixed = TRUE)
+  expect_match(components, "\\@ref(tab:table-multi)", fixed = TRUE)
+  expect_match(components, "feature is only available in HTML and PDF output", fixed = TRUE)
+  expect_match(components, "ctan.org/pkg/longtable", fixed = TRUE)
+  expect_match(components, "Section header text]</c>: example", fixed = TRUE)
+  expect_match(components, "A single document", fixed = TRUE)
+  expect_match(components, "non-English books", fixed = TRUE)
+  expect_match(components, "Internationalization", fixed = TRUE)
+  expect_match(components, "extension-auto_identifiers", fixed = TRUE)
+  expect_match(components, "extension-implicit_header_references", fixed = TRUE)
   expect_match(components, "advantages of using <c>include_graphics()</c>", fixed = TRUE)
   expect_match(components, "longtable, tidy=FALSE", fixed = TRUE)
   expect_match(components, "When a referenced label cannot be found", fixed = TRUE)
   expect_match(components, "There are two ways to specify custom link text:", fixed = TRUE)
   expect_match(components, "fenced <c>Div</c> blocks", fixed = TRUE)
+  expect_match(components, "9.6 in the <em>R Markdown Cookbook</em>", fixed = TRUE)
+  expect_match(components, "pandoc-citeproc</c>, which follows the specifications", fixed = TRUE)
+  expect_match(components, "matching styles (e.g.,", fixed = TRUE)
+  expect_match(components, "If consistency across PDF and non-PDF output formats is", fixed = TRUE)
+  expect_match(components, "plain-text file (with the conventional filename", fixed = TRUE)
+  expect_match(components, "A note can be included within the square", fixed = TRUE)
+  expect_match(components, "There are a number of fields in a bibliography entry", fixed = TRUE)
   expect_match(components, "bibliography:", fixed = TRUE)
   expect_match(components, "yet-another.bib", fixed = TRUE)
   expect_match(components, "link-citations: true", fixed = TRUE)
+  expect_match(components, "The field <c>link-citations</c> can be used", fixed = TRUE)
+  expect_match(components, "When the output format is LaTeX, the list of references", fixed = TRUE)
+  expect_match(components, "For more detailed instructions and further examples", fixed = TRUE)
+  expect_match(components, "images/pressure-plot.png", fixed = TRUE)
+  expect_match(components, "images/cars-plot.png", fixed = TRUE)
   expect_match(components, "images/knit-logo.png", fixed = TRUE)
   expect_match(components, "DT::datatable(iris)", fixed = TRUE)
   expect_match(components, "knitr::include_app('https://yihui.shinyapps.io/miniUI/'", fixed = TRUE)
@@ -345,10 +372,31 @@ test_that("PreTeXt components chapter mirrors the Rmd structure", {
     "<xref ref=\"R-webshot-reference\"/>",
     "<xref ref=\"R-DT-reference\"/>",
     "<xref ref=\"R-miniUI-reference\"/>",
-    "<xref ref=\"fig-knitr-logo-pretext\"/>"
+    "<xref ref=\"fig-knitr-logo-pretext\"/>",
+    "<xref ref=\"eq-binom\"/>"
   )) {
     expect_match(components, text, fixed = TRUE)
   }
+  expect_match(components, "<figure xml:id=\"fig-pressure-plot\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-cars-plot-pretext\">", fixed = TRUE)
+  expect_match(components, "<figure xml:id=\"fig-multi-plots-pretext\">", fixed = TRUE)
+  expect_match(components, "<caption>A figure example with the specified aspect ratio, width, and alignment.</caption>", fixed = TRUE)
+  expect_match(components, "<caption>A figure example with a relative width 70%.</caption>", fixed = TRUE)
+  expect_match(components, "<caption>Two plots placed side by side.</caption>", fixed = TRUE)
+  expect_match(components, "<sidebyside widths=\"50% 50%\">", fixed = TRUE)
+  knitr_logo_figure <- regmatches(
+    components,
+    regexec(
+      "<figure xml:id=\"fig-knitr-logo-pretext\">([\\s\\S]*?)</figure>",
+      components,
+      perl = TRUE
+    )
+  )[[1]][2]
+  expect_match(knitr_logo_figure, "<sidebyside widths=\"32.8% 32.8% 32.8%\">", fixed = TRUE)
+  expect_equal(
+    sum(gregexpr("<image source=\"images/knit-logo.png\" width=\"100%\">", knitr_logo_figure, fixed = TRUE)[[1]] > 0),
+    3
+  )
   expect_no_match(components, "This is an empty sample chapter file", fixed = TRUE)
 })
 

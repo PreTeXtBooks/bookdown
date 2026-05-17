@@ -880,8 +880,8 @@ Or indent by four spaces:
     <title>R code</title>
 
     <p>
-      There are two types of R code in R Markdown and <c>knitr</c> documents: R
-      code chunks, and inline R code. The syntax for inline R code is
+      There are two types of R code in R Markdown/<c>knitr</c> documents: R
+      code chunks, and inline R code. The syntax for the latter is
       <c>`r R_CODE`</c>, and it can be embedded inline with other document
       elements. R code chunks look like plain code blocks, but have
       <c>{r}</c> after the three backticks and (optionally) chunk options
@@ -899,11 +899,7 @@ plot(dist ~ speed, cars)  # a scatterplot
     <p>
       To learn more about <c>knitr</c> chunk options, see
       <xref ref="xie2015-reference"/> or the web page
-      <url href="https://yihui.org/knitr/options"/>.
-    </p>
-
-    <p>
-      For books, additional R
+      <url href="https://yihui.org/knitr/options"/>. For books, additional R
       code can be executed before/after each chapter; see
       <c>before_chapter_script</c> and <c>after_chapter_script</c> in
       <xref ref="configuration"/>.
@@ -920,11 +916,15 @@ plot(dist ~ speed, cars)  # a scatterplot
     </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-</input>
+      <input>```{r no-caption, fig.width=6, fig.asp=.7, out.width='70%', ref.label='pressure-plot'}
+```</input>
     </program>
+
+    <image source="images/pressure-plot.png" width="70%">
+      <description>
+        <p>A pressure plot shown without a caption.</p>
+      </description>
+    </image>
 
     <p>
       The disadvantage of typesetting figures in this way is that when there 
@@ -979,79 +979,128 @@ plot(pressure, pch = 19, type = "b")
       plots, i.e., the ratio of figure height/width. If the figure width is
       <c>6</c> inches (<c>fig.width = 6</c>) and <c>fig.asp = 0.7</c>, the
       figure height will be automatically calculated from
-      <c>fig.width * fig.asp = 6 * 0.7 = 4.2</c>.
+      <c>fig.width * fig.asp = 6 * 0.7 = 4.2</c>. <xref ref="fig-pressure-plot"/>
+      is an example using the chunk options <c>fig.asp = 0.7</c>,
+      <c>fig.width = 6</c>, and <c>fig.align = 'center'</c>, generated from
+      the code below:
     </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-      </input>
+      <input>```{r pressure-plot, fig.asp=.7, fig.width=6, fig.cap='A figure example with the specified aspect ratio, width, and alignment.', fig.align='center', out.width='90%'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+```</input>
     </program>
 
-<p>
-  The actual size of a plot is determined by the chunk options <c>fig.width</c> and 
-  <c>fig.height</c> (the size of the plot generated from a graphical device), and we 
-  can specify the output size of plots via the chunk options <c>out.width</c> and 
-  <c>out.height</c>. The possible value of these two options depends on the output 
-  format of the document. For example, <c>out.width = '30%'</c> is a valid value for 
-  HTML output, but not for LaTeX/PDF output. However, knitr will automatically convert 
-  a percentage value for <c>out.width</c> of the form <c>x%</c> to 
-  <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as 
-  <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to 
-  specify a relative width of a plot in a consistent manner. 
-  <xref ref="fig-cars-plot"/> is an example of <c>out.width = 70%</c>.
-</p>
+    <figure xml:id="fig-pressure-plot">
+      <caption>A figure example with the specified aspect ratio, width, and alignment.</caption>
+      <image source="images/pressure-plot.png" width="90%">
+        <description>
+          <p>A pressure plot with centered alignment and a 0.7 aspect ratio.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      The actual size of a plot is determined by the chunk options <c>fig.width</c> and
+      <c>fig.height</c> (the size of the plot generated from a graphical device), and we
+      can specify the output size of plots via the chunk options <c>out.width</c> and
+      <c>out.height</c>. The possible value of these two options depends on the output
+      format of the document. For example, <c>out.width = '30%'</c> is a valid value for
+      HTML output, but not for LaTeX/PDF output. However, knitr will automatically convert
+      a percentage value for <c>out.width</c> of the form <c>x%</c> to
+      <c>(x / 100) \linewidth</c>, e.g., <c>out.width = '70%'</c> will be treated as
+      <c>.7\linewidth</c> when the output format is LaTeX. This makes it possible to
+      specify a relative width of a plot in a consistent manner.
+      <xref ref="fig-cars-plot-pretext"/> is an example of <c>out.width = 70%</c>.
+    </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
+      <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\\%.'}
+par(mar = c(4, 4, .1, .1))
 plot(cars, pch = 19)
-      </input>
+```</input>
     </program>
 
-<p>
-  If you want to put multiple plots in one figure environment, you must use the chunk 
-  option <c>fig.show = 'hold'</c> to hold multiple plots from a code chunk and include 
-  them in one environment. You can also place plots side by side if the sum of the width 
-  of all plots is smaller than or equal to the current line width. For example, if two 
-  plots have the same width <c>50%</c>, they will be placed side by side. Similarly, 
-  you can specify <c>out.width = '33%'</c> to arrange three plots on one line. 
-  <xref ref="fig-multi-plots"/> is an example of two plots, each with a width of 
-  <c>50%</c>.
-</p>
+    <figure xml:id="fig-cars-plot-pretext">
+      <caption>A figure example with a relative width 70%.</caption>
+      <image source="images/cars-plot.png" width="70%">
+        <description>
+          <p>A scatterplot of stopping distance against speed.</p>
+        </description>
+      </image>
+    </figure>
+
+    <p>
+      If you want to put multiple plots in one figure environment, you must use the chunk
+      option <c>fig.show = 'hold'</c> to hold multiple plots from a code chunk and include
+      them in one environment. You can also place plots side by side if the sum of the width
+      of all plots is smaller than or equal to the current line width. For example, if two
+      plots have the same width <c>50%</c>, they will be placed side by side. Similarly,
+      you can specify <c>out.width = '33%'</c> to arrange three plots on one line.
+      <xref ref="fig-multi-plots-pretext"/> is an example of two plots, each with a width of
+      <c>50%</c>.
+    </p>
 
     <program language="r">
-      <input>
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
+      <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
 plot(cars, pch = 19)
-      </input>
+```</input>
     </program>
 
-<p>
-  Sometimes you may have certain images that are not generated from R code, and you 
-  can include them in R Markdown via the function <c>knitr::include_graphics()</c>. 
-  <xref ref="fig-knitr-logo"/> is an example of three knitr logos included in a figure 
-  environment. You may pass one or multiple image paths to the 
-  <c>include_graphics()</c> function, and all chunk options that apply to normal R 
-  plots also apply to these images, e.g., you can use <c>out.width = '33%'</c> to set 
-  the widths of these images in the output document.
-</p>
+    <figure xml:id="fig-multi-plots-pretext">
+      <caption>Two plots placed side by side.</caption>
+      <sidebyside widths="50% 50%">
+        <image source="images/pressure-plot.png" width="100%">
+          <description>
+            <p>A pressure plot shown as the first panel in a side-by-side figure.</p>
+          </description>
+        </image>
+        <image source="images/cars-plot.png" width="100%">
+          <description>
+            <p>A cars plot shown as the second panel in a side-by-side figure.</p>
+          </description>
+        </image>
+      </sidebyside>
+    </figure>
 
-<program language="r">
-  <input>
-    knitr::include_graphics(rep("images/knit-logo.png", 3))
-  </input>
-</program>
+    <p>
+      Sometimes you may have certain images that are not generated from R code, and you
+      can include them in R Markdown via the function <c>knitr::include_graphics()</c>.
+      <xref ref="fig-knitr-logo-pretext"/> is an example of three knitr logos included in a figure
+      environment. You may pass one or multiple image paths to the
+      <c>include_graphics()</c> function, and all chunk options that apply to normal R
+      plots also apply to these images, e.g., you can use <c>out.width = '33%'</c> to set
+      the widths of these images in the output document.
+    </p>
+
+    <program language="r">
+      <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
+knitr::include_graphics(rep('images/knit-logo.png', 3))
+```</input>
+    </program>
 
     <figure xml:id="fig-knitr-logo-pretext">
       <caption>Three knitr logos included in the document from an external PNG image file.</caption>
-      <image source="images/knit-logo.png" width="35%">
-        <description>
-          <p>The knitr logo image reused from the Rmd example assets.</p>
-        </description>
-      </image>
+      <sidebyside widths="32.8% 32.8% 32.8%">
+        <image source="images/knit-logo.png" width="100%">
+          <description>
+            <p>The knitr logo image reused from the Rmd example assets.</p>
+          </description>
+        </image>
+        <image source="images/knit-logo.png" width="100%">
+          <description>
+            <p>The knitr logo image reused from the Rmd example assets.</p>
+          </description>
+        </image>
+        <image source="images/knit-logo.png" width="100%">
+          <description>
+            <p>The knitr logo image reused from the Rmd example assets.</p>
+          </description>
+        </image>
+      </sidebyside>
     </figure>
 
 <p>
@@ -1111,14 +1160,18 @@ plot(cars, pch = 19)
       For now, the most convenient way to generate a table is the function
       <c>knitr::kable()</c>, because there are some internal tricks in
       <c>knitr</c> to make it work with <c>bookdown</c>, and users do not have
-      to know anything about these implementation details.
+      to know anything about these implementation details. We will explain how
+      to use other packages and functions later in this section.
     </p>
 
     <p>
       Like figures, tables with captions will also be numbered and can be
       referenced. The <c>kable()</c> function will automatically generate a
       label for a table environment, which is the prefix <c>tab:</c> plus the
-      chunk label.
+      chunk label. For example, the table label for a code chunk with the label
+      <c>foo</c> will be <c>tab:foo</c>, and we can still use the syntax
+      <c>\@ref(label)</c> to reference the table. Table
+      <c>\@ref(tab:table-single)</c> is a simple example.
     </p>
 
     <program language="r">
@@ -1132,8 +1185,9 @@ knitr::kable(
 
     <p>
       If you want to put multiple tables in a single table environment, wrap
-      the data objects into a list. This feature is only available in HTML and
-      PDF output.
+      the data objects (usually data frames) into a list.
+      See Table <c>\@ref(tab:table-multi)</c> for an example. Please note that
+      this feature is only available in HTML and PDF output.
     </p>
 
     <program language="r">
@@ -1150,10 +1204,13 @@ knitr::kable(
 
     <p>
       When you do not want a table to float in PDF, you may use the LaTeX
-      package <c>longtable</c>, which can break a table across multiple pages.
-      To use <c>longtable</c>, pass <c>longtable = TRUE</c> to
-      <c>kable()</c>, and include <c>\usepackage{longtable}</c> in the LaTeX
-      preamble.
+      package <url href="https://www.ctan.org/pkg/longtable"><c>longtable</c></url>,
+      which can break a table across multiple pages. To use
+      <c>longtable</c>, pass <c>longtable = TRUE</c> to <c>kable()</c>, and
+      make sure to include <c>\usepackage{longtable}</c> in the LaTeX
+      preamble (see <xref ref="yaml-options"/> for how to customize the LaTeX
+      preamble). Of course, this is irrelevant to HTML output, since tables in
+      HTML do not need to float.
     </p>
 
     <program language="r">
@@ -1166,8 +1223,9 @@ knitr::kable(
     </program>
 
     <p>
-      Pandoc supports several types of Markdown tables, such as simple tables,
-      multiline tables, grid tables, and pipe tables. What
+      Pandoc supports several types of
+      <url href="http://pandoc.org/MANUAL.html#tables">Markdown tables</url>,
+      such as simple tables, multiline tables, grid tables, and pipe tables. What
       <c>knitr::kable()</c> generates is a simple table like this:
     </p>
 
@@ -1188,14 +1246,19 @@ knitr::kable(
       You can use any types of Markdown tables in your document. To
       cross-reference a Markdown table, it must have a labeled caption in the
       form <c>Table: (\#label) Caption here</c>, where <c>label</c> must have
-      the prefix <c>tab:</c>.
+      the prefix <c>tab:</c>, e.g., <c>tab:simple-table</c>.
     </p>
 
     <p>
       If you decide to use other R packages to generate tables, you have to be
       careful about portability: it should work for both HTML and LaTeX output
-      automatically, and when writing out an HTML table, the caption must be
-      written in the <c>&lt;caption&gt;&lt;/caption&gt;</c> tag.
+      automatically, so it must consider the output format internally (check
+      <c>knitr::opts_knit$get('rmarkdown.pandoc.to')</c>). When writing out an
+      HTML table, the caption must be written in the
+      <c>&lt;caption&gt;&lt;/caption&gt;</c> tag. For simple tables,
+      <c>kable()</c> should suffice. If you have to create complicated tables
+      (e.g., with certain cells spanning across multiple columns/rows), you
+      will have to take the aforementioned issues into consideration.
     </p>
   </section>
 
@@ -1209,8 +1272,13 @@ knitr::kable(
       also reference sections using the same syntax <c>\@ref(label)</c>,
       where <c>label</c> is the section ID. By default, Pandoc will generate
       an ID for all section headers, e.g., a section <c># Hello World</c> will
-      have an ID <c>hello-world</c>. We recommend manually assigning IDs to
-      section headers.
+      have an ID <c>hello-world</c>. We recommend you to manually assign an ID
+      to a section header to make sure you do not forget to update the
+      reference label after you change the section header. To assign an ID to a
+      section header, simply add <c>{#id}</c> to the end of the section
+      header. Further attributes of section headers can be set using standard
+      <url href="http://pandoc.org/MANUAL.html#heading-identifiers">Pandoc
+      syntax</url>.
     </p>
 
     <p>
@@ -1229,7 +1297,8 @@ knitr::kable(
         <p>
           If you are happy with the section header as the link text, use it
           inside a single set of square brackets:
-          <c>[Section header text]</c>.
+          <c>[Section header text]</c>: example <q>A single document</q> via
+          <c>[A single document]</c>
         </p>
       </li>
       <li>
@@ -1237,16 +1306,31 @@ knitr::kable(
           There are two ways to specify custom link text:
         </p>
         <ul>
-          <li><p><c>[link text][Section header text]</c></p></li>
-          <li><p><c>[link text](#ID)</c></p></li>
+          <li>
+            <p><c>[link text][Section header text]</c>, e.g.,
+            <q>non-English books</q> via
+            <c>[non-English books][Internationalization]</c></p>
+          </li>
+          <li>
+            <p><c>[link text](#ID)</c>, e.g., <q>Table stuff</q> via
+            <c>[Table stuff](#tables)</c></p>
+          </li>
         </ul>
       </li>
     </ul>
 
     <p>
+      The Pandoc documentation provides more details on
+      <url href="http://pandoc.org/MANUAL.html#extension-auto_identifiers">automatic
+      section IDs</url> and
+      <url href="http://pandoc.org/MANUAL.html#extension-implicit_header_references">implicit
+      header references</url>.
+    </p>
+
+    <p>
       Cross-references still work even when we refer to an item that is not on
-      the current page of the PDF or HTML output, such as
-      <xref ref="fig-knitr-logo-pretext"/>.
+      the current page of the PDF or HTML output. For example, see
+      <xref ref="eq-binom"/> and <xref ref="fig-knitr-logo-pretext"/>.
     </p>
   </section>
 
@@ -1258,14 +1342,17 @@ knitr::kable(
       of code and/or narrative that call the reader's attention. For example,
       custom blocks may be used to highlight a note or a warning. These can be
       included in multiple <c>bookdown</c> output formats using Pandoc's syntax
-      for fenced <c>Div</c> blocks (<url href="https://pandoc.org/MANUAL.html"/>).
-      See <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html">
-      R Markdown Cookbook</url> (<xref ref="rmarkdown2020"/>) for instructions.
-     </p>
-
+      for fenced <c>Div</c> blocks
+      (<url href="https://pandoc.org/MANUAL.html#divs-and-spans"/>). Section
+      9.6 in the 
+      <url href="https://yihui.org/rmarkdown-cookbook/custom-blocks.html">
+      R Markdown Cookbook</url>
+      (<xref ref="rmarkdown2020-reference"/>) for instructions.
+    </p>
      <p>
-      The <c>bs4-book</c> HTML output format includes styling for selected custom
-      blocks; see <xref ref="rmarkdown2020-reference"/>.
+       The
+      <xref ref="bs4-book"/> output format includes styling for selected custom
+      blocks.
     </p>
   </section>
 
@@ -1280,16 +1367,25 @@ knitr::kable(
     <ol>
       <li>
         <p>
-          The default method is to use <c>pandoc-citeproc</c>, which follows
-          Citation Style Language (CSL) specifications.
+          The default method is to use a Pandoc helper program called
+          <c>pandoc-citeproc</c>, which follows the specifications of the
+          <url href="https://docs.citationstyles.org/en/v1.0.1/specification.html">Citation
+          Style Language (CSL)</url> and obtains specific formatting
+          instructions from one of the huge number of available
+          <url href="https://www.zotero.org/styles/">CSL style files.</url>
         </p>
       </li>
       <li>
         <p>
-          Users may also choose to use either <c>natbib</c> or <c>biblatex</c>
-          as a citation package. In this case, bibliographic data files need to
-          be in BibTeX or BibLaTeX format, and the output format is limited to
-          PDF.
+          Users may also choose to use either
+          <url href="https://ctan.org/pkg/natbib"><c>natbib</c></url>
+          (based on <c>bibtex</c>) or
+          <url href="https://ctan.org/pkg/biblatex"><c>biblatex</c></url> as a
+          “citation package”. In this case, the bibliographic data files need
+          to be in the <c>bibtex</c> or <c>biblatex</c> format, and the
+          document output format is limited to PDF. Again, various
+          bibliographic styles are available (please consult the documentation
+          of these packages).
         </p>
       </li>
     </ol>
@@ -1310,13 +1406,29 @@ knitr::kable(
 
     <p>
       Even if you choose <c>natbib</c> or <c>biblatex</c> for PDF output, all
-      other output formats will use <c>pandoc-citeproc</c>. For any non-PDF
-      output format, <c>pandoc-citeproc</c> is the only available option.
+      other output formats will be using <c>pandoc-citeproc</c>. If you use
+      matching styles (e.g., <c>biblio-style: apa</c> for <c>biblatex</c>
+      along with <c>csl: apa.csl</c> for <c>pandoc-citeproc</c>), output to
+      PDF and to non-PDF formats will be very similar, though not necessarily
+      identical.
     </p>
 
     <p>
-      The bibliographic data can be in several formats. We have shown examples
-      of BibTeX databases in this section.
+      For any non-PDF output format, <c>pandoc-citeproc</c> is the only
+      available option. If consistency across PDF and non-PDF output formats is
+      important, use <c>pandoc-citeproc</c> throughout.
+    </p>
+
+    <p>
+      The bibliographic data can be in several formats. We have only shown
+      examples of BibTeX databases in this section, and please see the
+      <url href="https://pandoc.org/MANUAL.html#citations">Citations</url>
+      section of the Pandoc manual for other possible formats.
+    </p>
+
+    <p>
+      A BibTeX database is a plain-text file (with the conventional filename
+      extension <c>.bib</c>) that consists of bibliography entries like this:
     </p>
 
     <program language="bibtex">
@@ -1335,8 +1447,23 @@ knitr::kable(
       A bibliography entry starts with <c>@type{</c>, where <c>type</c> may be
       <c>article</c>, <c>book</c>, <c>manual</c>, and so on<fn>The type name is
       case-insensitive, so it does not matter if it is <c>manual</c>,
-      <c>Manual</c>, or <c>MANUAL</c>.</fn>. To cite an entry, use
-      <c>@key</c> or <c>[@key]</c>.
+      <c>Manual</c>, or <c>MANUAL</c>.</fn>. Then there is a citation key, like
+      <c>R-base</c> in the above example. To cite an entry, use <c>@key</c> or
+      <c>[@key]</c> (the latter puts the citation in braces), e.g.,
+      <c>@R-base</c> is rendered as <c>@R-base</c>, and <c>[@R-base]</c>
+      generates <c>[@R-base]</c>. A note can be included within the square
+      brackets, e.g., <c>[a note about, @R-base]</c> will be rendered as
+      <c>[a note about, @R-base]</c>. If you are familiar with the
+      <c>natbib</c> package in LaTeX, <c>@key</c> is basically
+      <c>\citet{key}</c>, and <c>[@key]</c> is equivalent to
+      <c>\citep{key}</c>.
+    </p>
+
+    <p>
+      There are a number of fields in a bibliography entry, such as
+      <c>title</c>, <c>author</c>, and <c>year</c>, etc. You may see
+      <url href="https://en.wikipedia.org/wiki/BibTeX"/> for possible types of
+      entries and fields in BibTeX.
     </p>
 
     <p>
@@ -1354,7 +1481,9 @@ knitr::write_bib(c('knitr', 'stringr'), '', width = 60)
     <p>
       Once you have one or multiple <c>.bib</c> files, you may use the field
       <c>bibliography</c> in the YAML metadata of your first R Markdown
-      document.
+      document (which is typically <c>index.Rmd</c>), and you can also specify
+      the bibliography style via <c>biblio-style</c> (this only applies to PDF
+      output), e.g.,
     </p>
 
     <program language="yaml">
@@ -1366,14 +1495,27 @@ link-citations: true
     </program>
 
     <p>
-      For non-LaTeX output, you can add an empty chapter as the last chapter of
-      your book. For example, if your last chapter is <c>06-references.Rmd</c>,
-      its content can be an inline R expression:
+      The field <c>link-citations</c> can be used to add internal links from
+      the citation text of the author-year style to the bibliography entry in
+      the HTML output.
+    </p>
+
+    <p>
+      When the output format is LaTeX, the list of references will be
+      automatically put in a chapter or section at the end of the document. For
+      non-LaTeX output, you can add an empty chapter as the last chapter of your
+      book. For example, if your last chapter is the Rmd file
+      <c>06-references.Rmd</c>, its content can be an inline R expression:
     </p>
 
     <program language="markdown">
       <input>`r if (knitr::is_html_output()) '# References {-}'`</input>
     </program>
+
+    <p>
+      For more detailed instructions and further examples on how to use
+      citations, please see the “Citations” section of the Pandoc manual.
+    </p>
   </section>
 
   <section xml:id="latex-index">
