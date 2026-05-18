@@ -1322,7 +1322,7 @@ knitr::kable(
     <p>
       If you want to put multiple tables in a single table environment, wrap
       the data objects (usually data frames) into a list.
-      See <c>\@ref(tab:table-multi)</c> for an example. Please note that
+      See <xref ref = "fig-tale-two"/> for an example. Please note that
       this feature is only available in HTML and PDF output.
     </p>
 
