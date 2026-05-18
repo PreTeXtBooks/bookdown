@@ -188,7 +188,8 @@
 
       <p>
         To sum it up, this book is a comprehensive reference of the
-        <em>bookdown</em> package. You can follow the 80/20 rule when reading
+        <em>bookdown</em> package. You can follow the <url href = "https://en.wikipedia.org/wiki/Pareto_principle">
+        80/20</url> rule when reading
         it: some sections are there for the sake of completeness, and not all
         sections are equally useful to every book project.
       </p>
