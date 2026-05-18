@@ -1283,7 +1283,7 @@ knitr::kable(
 
     <p>
       When a referenced label cannot be found, you will see two question marks
-      like <c>\@ref(fig:does-not-exist)</c>, as well as a warning message in
+      like <c>??</c>, as well as a warning message in
       the R console when rendering the book.
     </p>
 
@@ -1350,9 +1350,8 @@ knitr::kable(
       (<xref ref="rmarkdown2020-reference"/>) for instructions.
     </p>
      <p>
-       The
-      <xref ref="bs4-book"/> output format includes styling for selected custom
-      blocks.
+       The <c>bs4_book()</c> output format includes styling for selected custom
+      blocks; See <xref ref="bs4-book"/>.
     </p>
   </section>
 
@@ -1378,9 +1377,9 @@ knitr::kable(
       <li>
         <p>
           Users may also choose to use either
-          <url href="https://ctan.org/pkg/natbib"><c>natbib</c></url>
+          <url href="https://ctan.org/pkg/natbib">natbib</url>
           (based on <c>bibtex</c>) or
-          <url href="https://ctan.org/pkg/biblatex"><c>biblatex</c></url> as a
+          <url href="https://ctan.org/pkg/biblatex">biblatex</url> as a
           “citation package”. In this case, the bibliographic data files need
           to be in the <c>bibtex</c> or <c>biblatex</c> format, and the
           document output format is limited to PDF. Again, various
@@ -1449,11 +1448,9 @@ knitr::kable(
       case-insensitive, so it does not matter if it is <c>manual</c>,
       <c>Manual</c>, or <c>MANUAL</c>.</fn>. Then there is a citation key, like
       <c>R-base</c> in the above example. To cite an entry, use <c>@key</c> or
-      <c>[@key]</c> (the latter puts the citation in braces), e.g.,
-      <c>@R-base</c> is rendered as <c>@R-base</c>, and <c>[@R-base]</c>
-      generates <c>[@R-base]</c>. A note can be included within the square
-      brackets, e.g., <c>[a note about, @R-base]</c> will be rendered as
-      <c>[a note about, @R-base]</c>. If you are familiar with the
+      <c>[@key]</c> (the latter puts the citation in braces). A note can be
+      included within the square
+      brackets, e.g., <c>[a note about, @R-base]</c>. If you are familiar with the
       <c>natbib</c> package in LaTeX, <c>@key</c> is basically
       <c>\citet{key}</c>, and <c>[@key]</c> is equivalent to
       <c>\citep{key}</c>.
@@ -1472,11 +1469,57 @@ knitr::kable(
     </p>
 
     <program language="r">
-      <input>```{r write-bib, comment='', warning=FALSE}
+      <input>
 # the second argument can be a .bib file
-knitr::write_bib(c('knitr', 'stringr'), '', width = 60)
-```</input>
+knitr::write_bib(c("knitr", "stringr"), "", width = 60)
+      </input>
     </program>
+
+   <console>
+    <output>
+     @Manual{R-knitr,
+  title = {knitr: A General-Purpose Package for Dynamic
+    Report Generation in R},
+  author = {Yihui Xie},
+  year = {2025},
+  note = {R package version 1.51},
+  url = {https://yihui.org/knitr/},
+}
+
+@Manual{R-stringr,
+  title = {stringr: Simple, Consistent Wrappers for Common
+    String Operations},
+  author = {Hadley Wickham},
+  year = {2025},
+  note = {R package version 1.6.0},
+  url = {https://stringr.tidyverse.org},
+}
+
+@Book{knitr2015,
+  title = {Dynamic Documents with {R} and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {https://yihui.org/knitr/},
+}
+
+@InCollection{knitr2014,
+  booktitle = {Implementing Reproducible Computational
+    Research},
+  editor = {Victoria Stodden and Friedrich Leisch and Roger
+    D. Peng},
+  title = {knitr: A Comprehensive Tool for Reproducible
+    Research in {R}},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  year = {2014},
+  note = {ISBN 978-1466561595},
+}   
+    </output>
+  </console>
 
     <p>
       Once you have one or multiple <c>.bib</c> files, you may use the field
