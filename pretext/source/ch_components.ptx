@@ -986,10 +986,10 @@ plot(dist ~ speed, cars)  # a scatterplot
     </p>
 
     <program language="r">
-      <input>```{r pressure-plot, fig.asp=.7, fig.width=6, fig.cap='A figure example with the specified aspect ratio, width, and alignment.', fig.align='center', out.width='90%'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, pch = 19, type = 'b')
-```</input>
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+     </input>
     </program>
 
     <figure xml:id="fig-pressure-plot">
@@ -1016,10 +1016,10 @@ plot(pressure, pch = 19, type = 'b')
     </p>
 
     <program language="r">
-      <input>```{r cars-plot, out.width='70%', fig.cap='A figure example with a relative width 70\\%.'}
-par(mar = c(4, 4, .1, .1))
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
 plot(cars, pch = 19)
-```</input>
+      </input>
     </program>
 
     <figure xml:id="fig-cars-plot-pretext">
@@ -1043,11 +1043,11 @@ plot(cars, pch = 19)
     </p>
 
     <program language="r">
-      <input>```{r multi-plots, out.width='50%', fig.show='hold', fig.cap='Two plots placed side by side.'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, pch = 19, type = 'b')
+      <input>
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
 plot(cars, pch = 19)
-```</input>
+      </input>
     </program>
 
     <figure xml:id="fig-multi-plots-pretext">
@@ -1077,9 +1077,9 @@ plot(cars, pch = 19)
     </p>
 
     <program language="r">
-      <input>```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
+      <input>
 knitr::include_graphics(rep('images/knit-logo.png', 3))
-```</input>
+      </input>
     </program>
 
     <figure xml:id="fig-knitr-logo-pretext">
